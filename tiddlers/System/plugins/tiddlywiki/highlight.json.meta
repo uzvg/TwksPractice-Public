@@ -1,0 +1,14 @@
+author: Joao Bolila
+created: 20241213051412045
+creator: uzvg
+dependents: 
+description: Highlight.js syntax highlighting
+list: readme usage license
+modified: 20250317081611067
+modifier: uzvg
+name: Highlight
+plugin-type: plugin
+stability: STABILITY_2_STABLE
+title: $:/plugins/tiddlywiki/highlight
+type: application/json
+version: 5.3.6

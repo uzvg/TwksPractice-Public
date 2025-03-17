@@ -1,0 +1,80 @@
+caption: X Post
+created: 20241214123110685
+creator: uzvg
+modified: 20250317081611099
+modifier: uzvg
+regexp-pattern: ^(https?:\/\/x\.com\/)
+tags: $:/tags/Initializer
+title: $:/uzvg/Initializer/Panels/X
+type: text/vnd.tiddlywiki
+
+\import [prefix[$:/uzvg/Initializer/Procedures/]]
+
+<!-- ====================== Create Button actions  ====================== -->
+\procedure initializer-create-actions()
+<% if [<currentTiddler>!has[caption]] %>
+	<<check-mandatory-notifier fieldsList:"caption">>
+<% else %>
+	<$action-setfield year={{{ [<currentTiddler>get[year]!is[blank]else<now YYYY-0MM-0DD>] }}} />
+	<$wikify
+		name="clean-url"
+		text="""<$transclude $variable="clean-url" tiddler=<<currentTiddler>> field="text" />""">
+		<$action-setfield url={{{ [<currentTiddler>get[url]!is[blank]else<clean-url>] }}} />
+	</$wikify>
+	<$action-createtiddler
+		$basetitle={{{ [<currentTiddler>get[caption]addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+		$template="$:/uzvg/Initializer/Templates/Youtube" >
+		<$transclude
+			$variable="sync-fields"
+			sourceTiddler=<<currentTiddler>>
+			destTiddler=<<createTiddler-title>> />
+		<<finish-creation-actions>>
+		<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+<% endif %>
+\end
+
+<!-- ====================== Initializer Table ====================== -->
+\procedure initializer-table()
+|tc-max-width tc-edit-max-width initializer-box|k
+|!Caption |<$edit-text  field="caption" placeholder="Mandatory" tag="input"/>|
+|!Authors |<<authors-picker>>|
+|!Year |<$edit-text default="" field="year" tag="input" placeholder=<<now YYYY-0MM-0DD>>/>|
+|!Description |<$edit-text default="" placeholder="Optional" field="description"/>|
+|!Links |<$edit-text default="" placeholder={{{ [<storyTiddler>get[text]trim[]] }}} field="url"/>|
+|!Visibility |<<visibility-selector>> |
+\end
+
+<!-- ====================== Youtube Initializer Panel ====================== -->
+\procedure initializer-panel()
+	<$transclude $variable="initializer-table" $mode="block"/>
+	<<initializer-btn-box btnList:"initializer-cancel-btn initializer-create-btn">>
+\end
+
+\procedure initializer-description()
+
+<<twks-tip text:"""
+This is the initializer panel for creating a youtube LiteratureNotes tiddler. To use it:
+
+# Paste the youtube-video's ''URL'' into your tiddlywiki
+# Click the "Untitled/text" link to navigat to the tiddler and access the Youbube initialization panel.""">>
+
+!! Steps:
+
+* Fill in the table. The ''caption'' field is mandatroy.
+* Click the ''Cancel'' button to delete the imported tiddler.
+* Click the ''Create'' button to initialize the tiddler as a Youtube tiddler.
+\end
+
+<!-- ====================== Main Programm  ====================== -->
+<% if [get[url]match{!!text}] %>
+	<$transclude
+		$variable="navigate-to-existing-tiddler"
+		message="""The video already exists in your wikispace. Please 👉&nbsp;"""
+		tiddler={{{ [tag[LiteratureNotes]has[url]contains:url{!!text}] }}}
+		btnTitle="Navigate To The Existing Video" />
+<% elseif [[$:/uzvg/Initializer/Panels/X]is[current]] %>
+	<$transclude $variable="initializer-description" $mode="block"/>
+<% else %>
+	<<initializer-panel>>
+<% endif %>

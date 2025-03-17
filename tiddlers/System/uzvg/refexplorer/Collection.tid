@@ -1,0 +1,16 @@
+caption: Collection
+condition: [all[tiddlers]contains:authors<storyTiddler>]
+created: 20241023042028899
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 2
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/Collection
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Notes Collection Of The Author)"
+	filter={{$:/uzvg/refexplorer/Collection!!condition}}
+/>

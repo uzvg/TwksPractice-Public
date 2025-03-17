@@ -1,0 +1,16 @@
+caption: Journals
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[Journal]sort[]]
+created: 20241021061159493
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 2
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/Journals
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Journals)"
+	filter={{$:/uzvg/refexplorer/Journals!!condition}}
+/>

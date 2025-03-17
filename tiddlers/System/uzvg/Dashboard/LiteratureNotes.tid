@@ -1,0 +1,94 @@
+caption: LiteratureNotes
+condition: [all[tiddlers]!is[system]!is[draft]tag[LiteratureNotes]]
+created: 20250228101412694
+modified: 20250317081611075
+modifier: uzvg
+note-type: LiteratureNotes
+order: 1
+tags: $:/tags/Dashboard
+title: $:/uzvg/Dashboard/LiteratureNotes
+type: text/vnd.tiddlywiki
+
+\import [[$:/uzvg/Dashboard/Procedures/General]]
+
+\procedure reset-btn()
+\whitespace trim
+<$button
+	tooltip="Reset Sort"
+	actions="""
+	<$action-setfield
+		$tiddler=<<stateTiddler>>
+		progress=""
+		rating=""
+		visibility=""
+		sort-filter="sort[]"/>
+	""">
+reset
+</$button>
+\end
+
+<!-- LiteratureNotes Filters:
+* Progress
+* Rating
+* Medium 👉 Medium selector Here is unnecessary.
+* Visiblility
+-->
+\procedure select-container()
+<span class="select-container">
+	<span>
+		<label>Progress:</label>
+			<$transclude
+				$variable="properties-selector"
+				tiddler=<<stateTiddler>>
+				type={{{ [<currentTab>get[note-type]] }}}
+				property="progress"
+				width="7em"/>
+	</span>
+	<span>
+		<label>Rating:</label>
+			<$transclude
+				$variable="properties-selector"
+				tiddler=<<stateTiddler>>
+				type={{{ [<currentTab>get[note-type]] }}}
+				property="rating"
+				width="7em"/>
+	</span>
+	<span>
+		<label>Sort by:</label>
+		<$transclude $variable="sortFitler-selector"
+			tiddler=<<stateTiddler>>
+			placeHolder="Sortby"
+			width="8em"/>
+	</span>
+	<span>
+		<label>Visibility:</label>
+			<$transclude
+				$variable="properties-selector"
+				tiddler=<<stateTiddler>>
+				type={{{ [<currentTab>get[note-type]] }}}
+				property="visibility"
+				width="7em"/>
+	</span>
+	<<reset-btn>>
+</span>
+\end
+
+<$qualify title="$:/temp/Dashboard/storeTiddler" name="stateTiddler">
+	<$wikify name="table-filter" text="""
+	<$transclude
+		$variable="table-filter-constructor"
+		stateTiddler=<<stateTiddler>>
+		fieldsList="progress rating visibility"
+		filterPrefix="all[tiddlers]!is[system]tag[LiteratureNotes]"
+		sortFilter={{{ [<stateTiddler>get[sort-filter]] }}} />
+	""">
+
+		<$transclude
+			$variable="dashboard-table"
+			caption="LiteratureNotes Dashboard"
+			filter=<<table-filter>>
+			selectBox=<<select-container>>
+			stateTiddler=<<stateTiddler>>
+			note-type={{{ [<currentTab>get[note-type]] }}} />
+	</$wikify>
+</$qualify>

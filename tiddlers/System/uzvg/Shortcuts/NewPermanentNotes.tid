@@ -1,0 +1,18 @@
+created: 20241104030910871
+creator: uzvg
+description: Press alt + shit + p to create a permanentNotes
+key: ((New-PermanentNotes))
+modified: 20250317081611110
+modifier: uzvg
+tags: $:/tags/KeyboardShortcut
+title: $:/uzvg/Shortcuts/NewPermanentNotes
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\procedure New-PermanentNotes()
+<$action-sendmessage $message="tm-new-tiddler" title="New PermanentNotes" tags="PermanentNotes"/>
+\end
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<<New-PermanentNotes>>
+</$navigator>

@@ -1,0 +1,59 @@
+created: 20240919073457355
+creator: soren
+modified: 20250317081611096
+modifier: uzvg
+tags: $:/tags/ViewTemplate
+title: $:/uzvg/Initializer/Initializer
+type: text/vnd.tiddlywiki
+
+\procedure untitled-initializer()
+<$let
+	get-valid-tabs="[<storyTiddler>get[text]regexp{!!regexp-pattern}]"
+	tabList="[tag[$:/tags/Initializer]!is[draft]filter<get-valid-tabs>]"
+	myDefaultTab={{{ [subfilter<tabList>first[]] }}}
+>
+<% if [<tabList>!is[blank]] %>
+
+<$macrocall
+	$name="tabs"
+	tabsList=<<tabList>>
+	default=<<myDefaultTab>> />
+
+<% endif %>
+</$let>
+\end
+
+\procedure missing-initializer()
+<$let
+	tabList="[tag[$:/tags/Initialization]prefix[$:/uzvg/Initialize/Missing]!is[draft]]"
+	myDefaultTab={{{ [subfilter<tabList>first[]] }}}
+>
+<% if [<tabList>!is[blank]] %>
+
+!! Initialize As:
+<$macrocall
+	$name="tabs"
+	tabsList=<<tabList>>
+	default=<<myDefaultTab>>
+/>
+
+<% endif %>
+</$let>
+\end
+
+<$list filter="[all[current]prefix[Untitled]]">
+	<<untitled-initializer>>
+</$list>
+
+<!--
+<$list filter="[all[current]!is[shadow]is[missing]]">
+	<<missing-initializer>>
+</$list>
+-->
+
+
+<!--
+💡 Here is an another way to get the valid tabs, I learned it from the Soren Bjornstad's tzk, although I don't use it here, but I think it still has reference value.
+
+tabList={{{ [tag[$:/tags/Initialization]!is[draft]] :reduce[<storyTiddler>subfilter{!!condition}then<currentTiddler>addprefix[ ]addprefix<accumulator>] }}}
+-->

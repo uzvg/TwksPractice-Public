@@ -1,0 +1,33 @@
+caption: FleetingNotes FrontMatter
+condition: [tag[FleetingNotes]]
+created: 20241226052944278
+creator: uzvg
+modified: 20250317081611081
+modifier: uzvg
+tags: $:/tags/FrontMatter
+title: $:/uzvg/FrontMatter/Templates/FleetingNotes
+type: text/vnd.tiddlywiki
+
+<!-- The PermanentNotes should show these properties:
+* progress
+-->
+
+<$twks.details summary="FleetingNotes Info:" state="$:/state/detail">
+<table class="tc-table-no-border tc-max-width table-FrontMatter">
+	<tr>
+			<th>Progress</th>
+			<td><<properties-selector type:"FleetingNotes" property:"progress">></td>
+	</tr>
+	<tr>
+			<th>Visibility</th>
+			<td><<visibility-selector>></td>
+	</tr>
+		<tr>
+			<th>Descrkption</th>
+			<td>
+				<$view tiddler=<<storyTiddler>> field="description"/>
+			</td>
+	</tr>
+
+</table>
+</$twks.details>

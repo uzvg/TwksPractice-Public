@@ -1,0 +1,7 @@
+created: 20240816075340089
+creator: uzvg
+list: $:/core/ui/Buttons/more-tiddler-actions $:/core/ui/Buttons/info $:/core/ui/Buttons/new-here $:/core/ui/Buttons/new-journal-here $:/core/ui/Buttons/clone $:/core/ui/Buttons/export-tiddler $:/uzvg/Buttons/NewLiteratureNotesFromSource $:/uzvg/Derivator/Button $:/uzvg/Buttons/new-literature-here $:/core/ui/Buttons/edit $:/core/ui/Buttons/delete $:/core/ui/Buttons/permalink $:/core/ui/Buttons/permaview $:/core/ui/Buttons/open-window $:/core/ui/Buttons/close-others $:/plugins/linonetwo/markdown-transformer/ViewToolbarButton $:/core/ui/Buttons/close $:/core/ui/Buttons/fold-others $:/core/ui/Buttons/fold $:/core/ui/Buttons/fold-bar $:/uzvg/Buttons/Subtiddler
+modified: 20250317081611068
+modifier: uzvg
+title: $:/tags/ViewToolbar
+type: text/vnd.tiddlywiki

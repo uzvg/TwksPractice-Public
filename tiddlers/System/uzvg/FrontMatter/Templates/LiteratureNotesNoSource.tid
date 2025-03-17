@@ -1,0 +1,51 @@
+caption: LiteratureNotes FrontMatter
+condition: [tag[LiteratureNotes]!has[source]]
+created: 20241215042854728
+modified: 20250317081611082
+modifier: uzvg
+tags: $:/tags/FrontMatter
+title: $:/uzvg/FrontMatter/Templates/LiteratureNotesNoSource
+type: text/vnd.tiddlywiki
+
+<$twks.details summary="Literature Info:" state="$:/state/detail">
+<table class="tc-table-no-border tc-max-width table-FrontMatter">
+	<tr>
+		<th>Caption</th>
+		<td><$view tiddler=<<storyTiddler>> field="caption"/></td>
+	</tr>
+	<tr>
+		<th>Literature Authors</th>
+		<td><<authors-list>></td>
+	</tr>
+	<% if [<storyTiddler>has[url]] %>
+		<tr>
+			<th>Literature Link</th>
+			<td><$wikify name="link" text={{{ [<storyTiddler>get[url]] }}}><<link>></$wikify></td>
+		</tr>
+	<% endif %>
+	<tr>
+		<th>Publish Year</th>
+		<td><$edit-text tiddler=<<storyTiddler>> field="year" tag="input" type="month"/></td>
+	</tr>
+	<tr>
+			<th>Description</th>
+			<td><$view tiddler=<<storyTiddler>> field="description"/></td>
+	</tr>
+	<tr>
+			<th>Literature Medium</th>
+			<td><<medium-selector>></td>
+	</tr>
+	<tr>
+			<th>Progress</th>
+			<td><<properties-selector type:"LiteratureNotes" property:"progress">></td>
+	</tr>
+	<tr>
+			<th>Rating</th>
+			<td><<properties-selector type:"LiteratureNotes" property:"rating">></td>
+	</tr>
+	<tr>
+			<th>Visibility</th>
+			<td><<visibility-selector>></td>
+	</tr>
+</table>
+</$twks.details>

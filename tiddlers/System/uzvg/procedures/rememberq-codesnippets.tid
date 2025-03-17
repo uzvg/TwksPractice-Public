@@ -1,0 +1,42 @@
+caption: 
+created: 20241026084616281
+creator: uzvg
+modified: 20250317081611106
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/procedures/rememberq-codesnippets
+type: text/vnd.tiddlywiki
+
+\procedure rememberCodeQ(id, prompt, code, reference:"", sched:"", class:"")
+  <$let
+		trimmedQ={{{ [<prompt>trim[]] }}}
+		trimmedA={{{ [<code>trim[]] }}}
+    QuestionCode=`<$codeblock code="""$(trimmedQ)$"""/>`
+    AnswerCode=`<$codeblock code="""$(trimmedA)$"""/>`
+    >
+      <$macrocall
+        $name="rememberq"
+        id=<<id>>
+        question=<<QuestionCode>>
+        answer=<<AnswerCode>>
+        reference=<<reference>>
+        sched=<<sched>>
+        class=<<class>>
+      />
+  </$let>
+\end
+
+\procedure rememberCodecz(id, text, mode: "block", reference: "", sched: "", class: "")
+<$let
+	textCode=`<$codeblock code="""$(text)$"""/>`>
+	<$macrocall
+		$name="remembercz"
+    id=<<id>>
+    text=<<textCode>>
+    mode=<<mode>>
+    reference=<<reference>>
+    sched=<<sched>>
+    class=<<class>>
+    />
+</$let>
+\end

@@ -1,0 +1,14 @@
+caption: archlinux
+created: 20250221161002698
+description: Archlinux Icon
+modified: 20250317081611084
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/ArchLinux
+type: text/vnd.tiddlywiki
+
+<$parameters size="22pt" color=<<color foreground>>>
+	<svg class="tc-image-archlinux tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+  <path d="M373 324c36 31 95 63 146 82-44-32-87-67-131-114 36-77 79-184 124-292 73 185 208 464 389 795-49-27-94-42-140-54 15 9 51 28 74 44 37 25 70 52 102 78 29 52 57 106 86 160-144-84-285-151-400-172 38-209-110-332-193-199-32 51-41 135-26 198 -145 28-288 107-405 174 136-247 274-497 373-700z" fill=<<color>>/>
+	</svg>
+</$parameters>

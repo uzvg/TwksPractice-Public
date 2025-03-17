@@ -1,0 +1,33 @@
+caption: Switch
+created: 20250303133136303
+creator: uzvg
+description: Switch Theme
+modified: 20250317081611071
+modifier: uzvg
+tags: $:/tags/PageControls
+title: $:/uzvg/Buttons/Switcher
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\procedure switch-theme-actions()
+<$action-setfield
+	$tiddler="$:/palette"
+	text={{{ [[$:/palette]get[text]get[color-scheme]match[dark]]
+	:then[[$:/uzvg/config/ThemeIndex]getindex[light]]
+	:else[[$:/uzvg/config/ThemeIndex]getindex[dark]] }}} />
+\end
+
+<$button
+	actions=<<switch-theme-actions>>
+	tooltip="Theme Switcher"
+	aria-label="theme-switcher"
+	class=<<tv-config-toolbar-class>>>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+	{{$:/uzvg/images/ThemeSwitcher}}
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
+	<span class="tc-btn-text">
+		<$text text="switch theme"/>
+	</span>
+<%endif%>
+</$button>

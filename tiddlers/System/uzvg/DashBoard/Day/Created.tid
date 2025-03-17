@@ -1,0 +1,43 @@
+caption: Created
+created: 20241212140152483
+creator: uzvg
+modified: 20250317081611073
+modifier: uzvg
+tags: 
+title: $:/uzvg/DashBoard/Day/Created
+type: text/vnd.tiddlywiki
+
+<table style="width:100%">
+	<tr>
+		<th style="width:30%">All Notes</th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]prefix<now YYYY0MM0DD>]">></td>
+	</tr>
+	<tr>
+		<th>FleetingNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[created]prefix<now YYYY0MM0DD>tag[FleetingNotes]]">></td>
+	</tr>
+	<tr>
+		<th>LiteratureNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[created]prefix<now YYYY0MM0DD>tag[LiteratureNotes]]">></td>
+	</tr>
+	<tr>
+		<th>PermanentNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[created]prefix<now YYYY0MM0DD>tag[PermanentNotes]]">></td>
+	</tr>
+	<tr>
+		<th>ProjectNotes</th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[created]prefix<now YYYY0MM0DD>tag[ProjectNotes]]">></td>
+	</tr>
+	<tr>
+		<th>System Tiddlers</th>
+		<td><<show-filter-count filter:"[all[tiddlers]is[system]prefix[$:/uzvg/]] :filter[get[created]prefix<now YYYY0MM0DD>]">></td>
+	</tr>
+	<tr>
+		<th>Images</th>
+		<td><<show-filter-count filter:"[all[tiddlers]is[image]] :filter[get[created]prefix<now YYYY0MM0DD>]">></td>
+	</tr>
+	<tr>
+		<th>Books</th>
+		<td><<show-filter-count filter:"[all[tiddlers]tag[Book]] :filter[get[created]prefix<now YYYY0MM0DD>]">></td>
+	</tr>
+</table>

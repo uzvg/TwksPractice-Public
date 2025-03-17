@@ -1,0 +1,16 @@
+caption: Projects
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[ProjectNotes]sort[]]
+created: 20240928140530227
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 10
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/ProjectNotes
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Project Notes)"
+	filter={{$:/uzvg/refexplorer/ProjectNotes!!condition}}
+/>

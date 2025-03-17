@@ -1,0 +1,13 @@
+[
+    {
+        "created": "20241212140106101",
+        "text": "<table style=\"width:100%\">\n\t<tr>\n\t\t<th style=\"width:30%\">All Notes</th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]!is[system]] :filter[get[modified]format:date[YYYY0MM0DD0hh0mm0ss0XXX]prefix<now YYYY0MM0DD>]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>FleetingNotes </th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]!is[system]] :filter[get[modified]prefix<now YYYY0MM0DD>tag[FleetingNotes]]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>LiteratureNotes </th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]!is[system]] :filter[get[modified]prefix<now YYYY0MM0DD>tag[LiteratureNotes]]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>PermanentNotes </th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]!is[system]] :filter[get[modified]prefix<now YYYY0MM0DD>tag[PermanentNotes]]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>ProjectNotes</th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]!is[system]] :filter[get[modified]prefix<now YYYY0MM0DD>tag[ProjectNotes]]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>System Tiddlers</th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]is[system]prefix[$:/uzvg/]] :filter[get[modified]prefix<now YYYY0MM0DD>]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>Images</th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]is[image]] :filter[get[modified]prefix<now YYYY0MM0DD>]\">></td>\n\t</tr>\n\t<tr>\n\t\t<th>Books</th>\n\t\t<td><<show-filter-count filter:\"[all[tiddlers]tag[Book]] :filter[get[modified]prefix<now YYYY0MM0DD>]\">></td>\n\t</tr>\n</table>",
+        "creator": "uzvg",
+        "title": "$:/uzvg/DashBoard/Day/Modified",
+        "modified": "20250317081611074",
+        "tags": "",
+        "type": "text/vnd.tiddlywiki",
+        "modifier": "uzvg",
+        "caption": "Modified "
+    }
+]

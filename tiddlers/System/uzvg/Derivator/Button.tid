@@ -1,0 +1,28 @@
+caption: Derivator
+created: 20250218091313194
+description: Derive a new tiddler from the current tiddler
+icon: $:/uzvg/images/Derivator
+modified: 20250317081611079
+modifier: uzvg
+tags: $:/tags/ViewToolbar
+title: $:/uzvg/Derivator/Button
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$list filter="[!is[draft]tag[$:/tags/DerivatorActions]] :filter[<storyTiddler>subfilter{!!condition}] +[first[]get[text]]" variable="actions">
+	<$button
+		actions=<<actions>>
+		tooltip="Derivate new tiddler from current"
+		aria-label={{$:/language/Buttons/Derivator/Hint}}
+		class=<<tv-config-toolbar-class>>
+	>
+		<%if [<tv-config-toolbar-icons>match[yes]] %>
+			{{$:/uzvg/images/Derivator}}
+		<%endif%>
+		<%if [<tv-config-toolbar-text>match[yes]] %>
+			<span class="tc-btn-text">
+				<$text text="Derive new tiddler here"/>
+			</span>
+		<%endif%>
+	</$button>
+</$list>

@@ -1,0 +1,10 @@
+caption: Insert a basic image
+created: 20240718083503793
+creator: uzvg
+modified: 20250317081611110
+modifier: uzvg
+tags: $:/tags/TextEditor/Snippet
+title: $:/uzvg/Snippets/BasicImage
+type: text/vnd.tiddlywiki
+
+<<image-basic >>

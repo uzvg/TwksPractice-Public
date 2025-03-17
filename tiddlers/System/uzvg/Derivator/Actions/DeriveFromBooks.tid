@@ -1,0 +1,20 @@
+caption: Books Derivation
+condition: [!is[system]!is[draft]tag[Books]]
+created: 20250228132706720
+description: Derivate A New LiteratureNotes From The Current Book Tiddler
+modified: 20250317081611079
+modifier: uzvg
+tags: $:/tags/DerivatorActions
+title: $:/uzvg/Derivator/Actions/DeriveFromBooks
+type: text/vnd.tiddlywiki
+
+<!-- If CurrentTiddler is a source tiddler, then:
+* create a new LiteratureNotes
+* Copy authors, year, url these field values of the source tiddler.
+* Set the bibliography as the source tiddler.
+-->
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	$param="$:/uzvg/Initializer/Templates/SourceNotes"
+	title="NewLiteratureNotesFromTheBook"
+	source=<<storyTiddler>> />

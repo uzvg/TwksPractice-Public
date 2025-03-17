@@ -1,0 +1,167 @@
+caption: General Initialization Procedures
+created: 20241212111847526
+creator: uzvg
+description: Encapsulate some general procedures to initialize the Untitled tiddlers.
+modified: 20250317081611100
+modifier: uzvg
+regexp-pattern: ^(978|979)[0-9]{10}
+tags: 
+title: $:/uzvg/Initializer/Procedures/General
+type: text/vnd.tiddlywiki
+
+<!-- ====================== Navigate to the existing Tiddler ======================
+	If the note already existed in the wikispace:
+	1. navigate to the existed tiddler
+	2. close the "$:/Import" tiddler
+	3. close the current Tiddler
+	4. delete the current Tiddler
+	5. delete the $:/Import Tiddler
+-->
+
+<!-- ====================== Get Image Type  ====================== -->
+\function image-type(urlField:"text")
+[<storyTiddler>get<urlField>trim[]split[.]last[]]
+-[[jpg]] +[else[image/jpeg]]
+-[[webp]] +[else[image/jpeg]]
+-[[jpeg]] +[else[image/jpeg]]
+-[[png]] +[else[image/png]]
+-[[gif]] +[else[image/gif]]
+-[[ico]] +[else[image/x-icon]]
+-[[svg]] +[else[image/svg+xml]]
+\end
+
+\procedure navigate-to-existing-tiddler(message,tiddler,btnTitle)
+<$transclude $variable="twks-warning" text="""<<message>>&nbsp;&nbsp;&nbsp;
+<$button>
+	<$action-navigate $to=<<tiddler>>/>
+	<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import" />
+	<$action-sendmessage $message="tm-close-tiddler" $param=<<currentTiddler>> />
+	<$action-deletetiddler $tiddler=<<currentTiddler>> />
+	<$action-deletetiddler $tiddler="$:/Import"/>
+	<<btnTitle>>
+</$button>
+"""/>
+\end
+
+<!-- ====================== Pick authors like picking tag ====================== -->
+\procedure authors-picker()
+	<$vars
+		tagField="authors"
+		tagListFilter= "[get[authors]unique[]enlist-input[]unique[]]">
+		{{||$:/uzvg/Initializer/Procedures/tags-editor}}
+	</$vars>
+\end
+
+<!-- ====================== Cancel Importion Actions  ====================== -->
+\procedure initializer-cancel-actions()
+	<$action-deletetiddler $tiddler=<<currentTiddler>> />
+	<$action-deletetiddler $tiddler="$:/Import" />
+	<$action-sendmessage $message="tm-close-tiddler" param=<<currentTiddler>> />
+	<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import" />
+\end
+
+<!-- ====================== Check-mandatory-notifier  ====================== -->
+\procedure check-mandatory-notifier(tiddler,fieldsList)
+	<$let
+		tiddler={{{ [<tiddler>!is[blank]else<currentTiddler>] }}}
+		mandatory-fields={{{ [enlist<fieldsList>] :filter[<tiddler>!has<currentTiddler>] +[join[,]] }}} >
+		<$action-sendmessage
+			$message="tm-notify"
+			$param="$:/uzvg/Initializer/Notifications/lack-mandatory-warning"
+			mandatory-fields=<<mandatory-fields>> />
+	</$let>
+\end
+
+<!-- ====================== Sync-fields  ====================== -->
+\procedure sync-fields(sourceTiddler,destTiddler)
+	<$list
+		filter="[<sourceTiddler>fields:exclude[title text bag tags created modified modifier type]] :intersection[<destTiddler>fields:exclude[title text bag tags created modified modifier type]] +[enlist-input[]]"
+		variable="field" >
+		<% if [<sourceTiddler>has<field>] %>
+			<$action-setfield
+				$tiddler=<<destTiddler>>
+				$field=<<field>>
+				$value={{{ [<sourceTiddler>get<field>] }}} />
+		<% endif %>
+	</$list>
+\end
+
+<!-- ====================== finish-creation-actions  ====================== -->
+\procedure finish-creation-actions()
+	<$action-deletetiddler $tiddler=<<currentTiddler>> />
+	<$action-deletetiddler $tiddler="$:/Import" />
+	<$action-sendmessage $message="tm-close-tiddler" param=<<currentTiddler>> />
+	<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import" />
+	<$action-navigate $to=<<createTiddler-title>>/>
+\end
+
+<!-- ====================== Initializer buttons ====================== -->
+\procedure initializer-cancel-btn()
+	<$button actions=<<initializer-cancel-actions>>>
+	Cancel
+	</$button>
+\end
+
+\procedure initializer-create-btn()
+	<$button actions=<<initializer-create-actions>>>
+	Create
+	</$button>
+\end
+
+<!-- ====================== Initializer buttons box ====================== -->
+\procedure initializer-btn-box(btnList)
+\whitespace trim
+<div class="initializer-btn-container">
+	<$list filter="[enlist<btnList>]" variable="btnName">
+		<$transclude $variable=<<btnName>>/>
+	</$list>
+\end
+
+\procedure initializer-general-procedures-description()
+!! Initialize Steps:
+
+When initializing an "Untitled" tiddler, follow these steps to ensure proper setup:
+
+# Fill the `initializer table` in the `initializer panel`.
+#* The values entered here will be saved to the current "Untitled" tiddler.
+# Check for existing tiddlers.
+#* Ensure the tiddler you want to initialize does not already exist in your wiki.
+#* Check if the tiddler you want to initializer was already exist in your wikispace.
+#* For example, when initializing a book tiddler, verify that the book is not already present by checking if a tiddler with the same isbn field value exists in your wikispace.
+# Validate mandatory fields.
+#* Confirm that required fields, such as caption, are filled.
+#* In the wikispace, the title of a book tiddler is typically composed of the book's caption and its isbn identifier. Therefore, the caption field must be completed before proceeding.
+# Set default field values.
+#* If certain fields (e.g., year) are empty, assign default values to them.
+# Create a new tiddler from a template.
+#* Use a specified template to generate the new tiddler.
+# Sync fields from the current tiddler.
+#* Transfer field values from the "Untitled" tiddler to the newly created tiddler.
+# Generate the title of the new book tiddler.
+# Clean up unnecessary tiddlers.
+#* Delete irrelevant or temporary tiddlers and navigate to the newly created tiddler.
+
+!! General Initialize Procedures:
+
+|tc-max-width|k
+|''Usual Procedures For Initializing Tiddlers.''|c
+| !Procedure | !Parameters | !Description | !Example |
+|`authors-picker` | (Empty) |Enables author selection in the initialization panel, similar to a tag-picker. |`<<authors-picker>>` |
+|`navigate-to-existing-tiddler` |<<li "`message`(Displayed message if an existing tiddler is found.)">> <<li `tiddler`(Existing tiddler to navigate to.)>> <<li `btnTitle`(Button title)]] >>|Displays a message and navigation button if the specified tiddler already exists |`<$transclude $variable="navigate-to-existing-tiddler"	message="⚠️ The book already existed in the system." tiddler={{{ [tag[Book]has[isbn]contains:isbn{!!text}] }}} btnTitle="Navigate To The Existing." />` |
+|`check-mandatory-notifier` |▪ `tiddler`(Tiddler to check) <br> ▪ `fieldsList`(List of mandatory fields to validate.) |Checks if the specified tiddler contains all mandatory fields. If not, a warning notification appears. |`<<check-mandatory-notifier "Untitled" "caption authors">>`(Ensures the "Untitled" tiddler contains `caption` and `authors`.) |
+|`initializer-cancel-actions` | (Empty) |Performs cleanup actions (e.g., deleting temporary tiddlers) when the "Cancel" button is clicked.) |`<$button actions=<<initializer-cancel-actions>>>Cancel<$button>`(Perform the cancel actions once you click the ''Cancel'' button.) |
+|`sync-fields` |▪ `sourceTiddler`(Tiddler to sync from.)<br> ▪ `destTiddler`(Tiddler to sync to.) |Synchronizes fields between the source and destination tiddlers, excluding certain fields like `title`, `text`, `tags`, etc. |`<$button actions=<<sync-fields sourceTiddler:"Untitled" destTiddler:"New Book">>>Sync<$button>`(Sync the fields from `Untitled` tiddler to `New Book` tiddler once you click the ''Sync'' button.) |
+|`finish-creation-actions` | (Empty) |Final actions after synchronization, such as deleting unused tiddlers. |`<<finish-creation-actions>>` |
+|`initializer-btn-box` |`btnList`(List of buttons to include in the initializer box.) |Arranges buttons in a flexbox layout with space-between alignment. |`<<initializer-btn-box btnList:"initializer-cancel-btn create-new-book-btn">>`(Adds "Cancel" and "Create New Book" buttons to the box.) |
+
+!! Code Instance:
+
+<$twks.details summary="Example code for initializing a book tiddler" state="$:/state/detail" open="false">
+<$codeblock code={{$:/uzvg/Initializer/Panels/Book}} />
+</$twks.details>
+
+\end
+
+<% if [[$:/uzvg/Initializer/Procedures/General]is[current]] %>
+	<$transclude $variable="initializer-general-procedures-description" $mode="block" />
+<% endif %>

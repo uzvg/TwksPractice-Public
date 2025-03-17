@@ -1,0 +1,61 @@
+caption: Youtube Video
+created: 20241214045506367
+creator: uzvg
+modified: 20250317081611100
+modifier: uzvg
+regexp-pattern: ^https:\/\/youtu\.be\/.{11}(?:\t=\d+)?|^(http/s:\/\/youtu\.be\/.{11})\?si=.*$
+tags: $:/tags/Initializer
+title: $:/uzvg/Initializer/Panels/Youtube
+type: text/vnd.tiddlywiki
+
+\import [prefix[$:/uzvg/Initializer/Procedures/]]
+
+<!-- ====================== Create Button actions  ====================== -->
+\procedure initializer-create-actions()
+<% if [<currentTiddler>!has[caption]] %>
+	<<check-mandatory-notifier fieldsList:"caption">>
+<% else %>
+	<$action-setfield url={{{ [<currentTiddler>get[url]!is[blank]] :else[<storyTiddler>get[text]trim[]] }}} />
+	<$action-setfield medium="Video" />
+	<$action-createtiddler
+		$basetitle={{{ [<currentTiddler>get[caption]addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+		$template="$:/uzvg/Initializer/Templates/VideoNotes" >
+		<$transclude
+			$variable="sync-fields"
+			sourceTiddler=<<currentTiddler>>
+			destTiddler=<<createTiddler-title>> />
+		<<finish-creation-actions>>
+		<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+<% endif %>
+\end
+
+<!-- ====================== Initializer Table ====================== -->
+\procedure initializer-table()
+|tc-max-width tc-edit-max-width initializer-box|k
+|!Caption |<$edit-text  field="caption" placeholder="Mandatory" tag="input"/>  |
+|!Authors |<<authors-picker>> |
+|!Year |<$edit-text default="" field="year" tag="input" type="month"/> |
+|!Description |<$edit-text default="" placeholder="Optional" field="description" tag="input"/> |
+|!Links |<$edit-text default="" placeholder={{{ [<storyTiddler>get[text]trim[]] }}} field="url" /> |
+|!Visibility |<<visibility-selector>> |
+\end
+
+<!-- ====================== Youtube Initializer Panel ====================== -->
+\procedure initializer-panel()
+	<$transclude $variable="initializer-table" $mode="block"/>
+	<<initializer-btn-box btnList:"initializer-cancel-btn initializer-create-btn">>
+\end
+
+<!-- ====================== Main Programm  ====================== -->
+<% if [get[url]match{!!text}] %>
+	<$transclude
+		$variable="navigate-to-existing-tiddler"
+		message="""The video already exists in your wikispace. Please 👉&nbsp;"""
+		tiddler={{{ [all[tiddlers]!is[system]tag[LiteratureNotes]has[url]contains:url{!!text}] }}}
+		btnTitle="Navigate To The Existing Video" />
+<% elseif [[$:/uzvg/Initializer/Panels/Youtube]is[current]] %>
+	<<twks-tip "Hi, Here is the Youtube Video initializer Panel.">>
+<% else %>
+	<<initializer-panel>>
+<% endif %>

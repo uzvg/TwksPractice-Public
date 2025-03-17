@@ -1,0 +1,80 @@
+created: 20241215225021414
+modified: 20250317081611069
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/Alerter/Alerter
+type: text/vnd.tiddlywiki
+
+\procedure twks-alerter(icon,iconSize,title,text,class)
+\function twks-selector-switcher(selector)
+	[[$:/palette]get[text]]
+	+[get[color-scheme]match[dark]addprefix[-]addprefix<selector>]
+	:else[<selector>]
+\end twks-selector-switcher
+
+\function twks-alerter-class()
+	[[twks-alerter]]
+	[<class>!is[blank]function[twks-selector-switcher],<class>]
+	+[join[ ]]
+\end twks-alerter-class
+
+<div class=<<twks-alerter-class>>>
+	<div class="twks-alerter-icon">
+		<$transclude $tiddler=<<icon>> size=<<iconSize>>/>
+	</div>
+  <div class="twks-alerter-title"><<title>></div>
+  <div class="twks-alerter-content">
+		<$transclude $variable="text" $mode="block"/>
+	</div>
+</div>
+\end
+
+\procedure twks-warning(text)
+<$transclude
+	$variable="twks-alerter"
+	icon="$:/core/images/warning"
+	iconSize="1.5rem"
+	title="Warning:"
+	text=<<text>>
+	class="twks-alerter-warning"/>
+\end
+
+\procedure twks-caution(text)
+<$transclude
+	$variable="twks-alerter"
+	icon="$:/core/images/warning"
+	iconSize="1.5rem"
+	title="Caution:"
+	text=<<text>>
+	class="twks-alerter-caution"/>
+\end
+
+\procedure twks-note(text)
+<$transclude
+	$variable="twks-alerter"
+	icon="$:/core/images/info-button"
+	iconSize="1.5rem"
+	title="Note:"
+	text=<<text>>
+	class="twks-alerter-note"/>
+\end
+
+\procedure twks-tip(text)
+<$transclude
+	$variable="twks-alerter"
+	icon="$:/core/images/tip"
+	iconSize="1.5rem"
+	title="Tip:"
+	text=<<text>>
+	class="twks-alerter-tip"/>
+\end
+
+\procedure twks-important(text)
+<$transclude
+	$variable="twks-alerter"
+	icon="$:/core/images/info-button"
+	iconSize="1.5em"
+	title="Important:"
+	text=<<text>>
+	class="twks-alerter-important"/>
+\end

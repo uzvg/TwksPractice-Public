@@ -1,0 +1,14 @@
+caption: Add a new icon
+created: 20240811075215272
+creator: uzvg
+modified: 20250317081611110
+modifier: uzvg
+tags: $:/tags/TextEditor/Snippet
+title: $:/uzvg/Snippets/NewIcon
+type: text/vnd.tiddlywiki
+
+\parameters (size:"22pt")
+	<svg class="tc-image-NewIcon tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+	<!--Here you can paste the svg code!-->
+		
+	</svg>

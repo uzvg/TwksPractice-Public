@@ -1,0 +1,12 @@
+created: 20240906004317750
+creator: uzvg
+modified: 20250317081611093
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/permanent-notes
+type: text/vnd.tiddlywiki
+
+\parameters (size:"22pt")
+	<svg class="tc-image-NewIcon tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+	<!--Here you can paste the svg code!-->
+		<path d="M281.6 236.8a25.6 25.6 0 0 0 25.6-25.6v-128a25.6 25.6 0 1 0-51.2 0v128a25.6 25.6 0 0 0 25.6 25.6zM742.4 236.8a25.6 25.6 0 0 0 25.6-25.6v-128a25.6 25.6 0 1 0-51.2 0v128a25.6 25.6 0 0 0 25.6 25.6z" p-id="7627"></path><path d="M972.8 147.2h-166.4v64a64 64 0 0 1-128 0v-64H345.6v64a64 64 0 0 1-128 0v-64H51.2a25.6 25.6 0 0 0-25.6 25.6v139.072h972.8V172.8a25.6 25.6 0 0 0-25.6-25.6zM25.6 940.8a25.6 25.6 0 0 0 25.6 25.6h921.6a25.6 25.6 0 0 0 25.6-25.6V363.072H25.6V940.8z m717.824-201.088a25.6 25.6 0 0 1-25.6 25.6h-512a25.6 25.6 0 1 1 0-51.2h512a25.6 25.6 0 0 1 25.6 25.6zM205.888 518.4h256a25.6 25.6 0 1 1 0 51.2h-256a25.6 25.6 0 1 1 0-51.2z" p-id="7628"></path></svg>

@@ -1,0 +1,39 @@
+caption: ProjectNotes FrontMatter
+condition: [tag[$:/twks/Documents]]
+created: 20250306173336740
+modified: 20250317081611083
+modifier: uzvg
+tags: $:/tags/FrontMatter
+title: $:/uzvg/FrontMatter/Templates/TWKS-Docs
+type: text/vnd.tiddlywiki
+
+<!--  should show these properties:
+* progress
+* caption
+* description
+-->
+
+<$twks.details summary="Document Info:" state="$:/state/detail">
+<table class="tc-table-no-border tc-max-width table-FrontMatter">
+	<tr>
+			<th>Progress</th>
+			<td><<properties-selector type:"twks-docs" property:"progress">></td>
+	</tr>
+	<tr>
+			<th>Visibility</th>
+			<td><<visibility-selector>></td>
+	</tr>
+	<tr>
+			<th>Caption</th>
+			<td>
+				<$edit-text tiddler=<<storyTiddler>> field="caption" tag="input" autoHeight="yes" rows="1" size="50"/>
+			</td>
+	</tr>
+	<tr>
+			<th>Description</th>
+			<td>
+				<$edit-text tiddler=<<storyTiddler>> field="description" tag="input" autoHeight="yes" rows="2" size="50"/>
+			</td>
+	</tr>
+</table>
+</$twks.details>

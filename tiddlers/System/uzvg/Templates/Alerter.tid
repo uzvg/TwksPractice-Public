@@ -1,0 +1,10 @@
+created: 20250306123126706
+modified: 20250317081611112
+modifier: uzvg
+tags: $:/tags/ViewTemplate
+title: $:/uzvg/Templates/Alerter
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]!is[system]!is[draft]tag[AI-Generated]]">
+	<<twks-caution "请注意，本文内容整理自作者本人与人工智能的谈话内容。文中信息基于大模型现有数据和训练模型，可能存在局限性或偏见。建议读者自行验证关键事实，并结合实际情况判断其适用性。">>
+</$list>

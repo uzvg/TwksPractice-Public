@@ -1,0 +1,14 @@
+created: 20241213051412045
+creator: uzvg
+dependents: 
+description: Close tags automatically for CodeMirror
+list: readme
+modified: 20250317081611067
+modifier: uzvg
+name: CodeMirror Close Tag
+parent-plugin: $:/plugins/tiddlywiki/codemirror
+plugin-type: plugin
+stability: STABILITY_2_STABLE
+title: $:/plugins/tiddlywiki/codemirror-closetag
+type: application/json
+version: 5.3.6

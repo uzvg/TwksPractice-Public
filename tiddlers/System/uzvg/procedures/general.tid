@@ -1,0 +1,53 @@
+created: 20240918125702871
+creator: uzvg
+modified: 20250317081611104
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/procedures/general
+type: text/vnd.tiddlywiki
+
+\procedure list-seperator(list,seperator:",")
+\whitespace trim
+	<$list filter="[<list>enlist-input[]butlast[]]">
+		<$link to=<<currentTiddler>>/><<seperator>>
+	</$list>
+	{{{ [<list>enlist-input[]last[]] }}}
+\end
+
+\procedure authors-list(tiddler)
+	<$transclude
+		$variable="list-seperator"
+		list={{{ [<tiddler>!is[blank]else<storyTiddler>get[authors]] }}}
+		seperator="、" />
+\end
+
+\procedure debug-notifier()
+<$action-sendmessage $message="tm-notify" $param="$:/uzvg/notification/debug-notification"/>
+\end
+
+\procedure clarify() <div style="clear:both;"/>
+
+\procedure isbn-link()
+<$parameters isbn={{!!isbn}}>
+<a href=`https://search.douban.com/book/subject_search?search_text=$(isbn)$` class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><<isbn>></a>
+</$parameters>
+\end
+
+<!-- Used for type list in table cell easily -->
+\procedure li(_)
+<li><<_>></li>
+\end
+
+\procedure rlink()
+\whitespace trim
+<$parameters
+	title
+	url={{{ [<url>!is[blank]] :else[<storyTiddler>get[url]] }}}>
+	<a href=<<url>>
+		class="tc-tiddlylink-external"
+		target="_blank"
+		rel="noopener noreferrer">
+		<<title>>
+	</a>
+</$parameters>
+\end

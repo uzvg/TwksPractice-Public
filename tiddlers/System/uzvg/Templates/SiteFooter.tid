@@ -1,0 +1,27 @@
+created: 20250227164952952
+modified: 20250317081611113
+modifier: uzvg
+tags: $:/tags/BelowStory
+title: $:/uzvg/Templates/SiteFooter
+type: text/vnd.tiddlywiki
+
+<div class="twks-site-footer">
+Copyright © 2024--<<now YYYY-0MM-0DD>> UZVG. See the [[Copyright Notice|$:/uzvg/TWKS/CopyrightNotice]] for details.
+</div>
+
+<div class="twks-site-footer">
+uzvg's wikispace ▪ [[uzvg]] ▪ Powered by [[Tiddlywiki🐈‍⬛|https://tidddlywiki.com]]
+</div>
+
+<style>
+div.twks-site-footer {
+	color: <<color muted-foreground>>;
+	text-align: center;
+}
+
+div.twks-site-footer a.tc-tiddlylink,
+div.twks-site-footer a.tc-tiddlylink-external {
+	color: <<color muted-foreground>>;
+	text-decoration: underline;
+}
+</style>

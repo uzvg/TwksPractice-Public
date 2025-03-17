@@ -1,0 +1,2 @@
+<!-- Add "$:/tags/RawMarkup" tag to the current tiddler if you want to use this font -->
+<link rel='stylesheet' href='https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css' />

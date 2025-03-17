@@ -1,0 +1,89 @@
+caption: Book ISBN
+created: 20241206090706270
+creator: uzvg
+modified: 20250317081611097
+modifier: uzvg
+regexp-pattern: ^(978|979)[0-9]{10}
+tags: $:/tags/Initializer
+title: $:/uzvg/Initializer/Panels/Book
+type: text/vnd.tiddlywiki
+
+\import [prefix[$:/uzvg/Initializer/Procedures/]]
+
+<!-- 𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊 Steps to create a new book tiddler 𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊𝪊
+	Once we click the "Create Book" Button, the following steps will be performed:
+	1. Check if the mandatory fields of the tiddler was filled in ? ✅
+		Procedure prototype: <<check-mandatory-notifier tiddler filedsList>>
+	1. Get default values for current tiddler(year). ✅
+	1. Create an empty book tiddler from the book template. ✅
+	2. Sync the fields from the current tiddler to the new book tiddler.
+		Procedure prototype: <<sync-fields SourceTiddler DestTiddler filelds(list)>> ✅
+	3. Generate the title of the new book tiddler.
+	4. Clean unuseful tiddlers, and navigate to the book tiddler.
+		Procedure prototype: <<finish-creation-actioins>>
+-->
+
+<!-- ====================== Create new book actions  ====================== -->
+\procedure initializer-create-actions()
+<% if [<currentTiddler>!has[caption]] %>
+	<<check-mandatory-notifier fieldsList:"caption">>
+<% else %>
+	<$action-setfield year={{{ [<currentTiddler>get[year]!is[blank]else<now YYYY-0MM-0DD>] }}} />
+	<$action-setfield isbn={{!!text}} />
+	<$action-createtiddler
+		$basetitle={{{ [<currentTiddler>get[caption]addsuffix[(]addsuffix{!!text}addsuffix[)]] }}}
+		$template="$:/uzvg/Initializer/Templates/Book" >
+		<$transclude
+			$variable="sync-fields"
+			sourceTiddler=<<currentTiddler>>
+			destTiddler=<<createTiddler-title>> />
+		<<finish-creation-actions>>
+		<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+<% endif %>
+\end
+
+<!-- ====================== Book Initializer Table ====================== -->
+\procedure initializer-table()
+|tc-max-width tc-edit-max-width initializer-box|k
+|!Book Title |<$edit-text  field="caption" placeholder="Mandatory" tag="input"/>  |
+|!Authors |<<authors-picker>> |
+|!Publisher |<$edit-text field="publisher" placeholder="Optional" tag="input"/> |
+|!Publish Year |<$edit-text field="year" tag="input" type="date" placeholder=<<now YYYY-0MM-0DD>>/> |
+|!ISBN |<$edit-text field="isbn" placeholder={{!!text}} disabled="yes" tag="input"/>  |
+|!Description |<$edit-text field="description" placeholder="Optional" tag="input"/> |
+|!Reading link |<$edit-text field="url" placeholder="Optional" tag="input"/> |
+|!Visibility |<<visibility-selector>> |
+\end
+
+<!-- ====================== Book Initializer Panel ====================== -->
+\procedure initializer-panel()
+	<$transclude $variable="initializer-table" $mode="block"/>
+	<<initializer-btn-box btnList:"initializer-cancel-btn initializer-create-btn">>
+\end
+
+\procedure initializer-description()
+This is the initializer panel for creating a book tiddler. To use it:
+
+# Paste the book's ''ISBN'' text into your tiddlywiki
+# Click the "Untitled/text" link to navigat to the tiddler and access the book initialization panel.
+
+!! Steps:
+
+* Fill in the table. The ''caption'' field is mandatroy.
+* Click the ''Cancel'' button to delete the imported tiddler.
+* Click the ''Create'' button to initialize the tiddler as a book tiddler.
+\end
+
+<!-- ====================== Main Programm  ====================== -->
+<% if [get[isbn]match{!!text}] %>
+	<$transclude
+		$variable="navigate-to-existing-tiddler"
+		message="""⚠️ The book already existed in the wikispace. Please 👉&nbsp;"""
+		tiddler={{{ [tag[Books]has[isbn]contains:isbn{!!text}] }}}
+		btnTitle="Navigate To The Existing Book." />
+<% elseif [[$:/uzvg/Initializer/Panels/Book]is[current]] %>
+	<$transclude $variable="initializer-description" $mode="block"/>
+<% else %>
+	<<initializer-panel>>
+<% endif %>

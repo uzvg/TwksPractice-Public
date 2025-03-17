@@ -1,0 +1,48 @@
+created: 20250307131342908
+list: TWKS笔记进度/Books
+modified: 20250317081611106
+modifier: uzvg
+title: $:/uzvg/Procedures/tabsReorder
+type: text/vnd.tiddlywiki
+
+<label>''Tab Fiilter:''</label>
+<$edit-text tiddler="$:/temp/tabs-reorder/list" field="text" tag="input" rows-2 class="tab-reorder-input"/> &nbsp;&nbsp;&nbsp; ➥
+<$button>
+<!--
+<$action-setfield $tiddler="$:/temp/tabs-reorcer/list" list={{{ [subfilter{$:/temp/tabs-reorder/list}] +[join[]] }}} />
+-->
+
+<$action-setfield list={{{ [subfilter{$:/temp/tabs-reorder/list}] }}} />
+Start Reorder
+</$button>
+
+<ol>
+<$list filter={{{ [[$:/temp/tabs-reorder/list]get[text]] }}} >
+<$list-empty>
+	<<twks-tip "Your filter doesn't filter any tiddlers.">>
+</$list-empty>
+
+<$list-template>
+	<li>
+		<$link to=<<currentTiddler>>/>&nbsp;-&nbsp;<$text text={{{ [<currentTiddler>get[description]] }}}/>
+	</li>
+</$list-template>
+</$list>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+input.tab-reorder-input {
+	width: 30em;
+}
+</style>

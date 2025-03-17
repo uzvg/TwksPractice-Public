@@ -1,0 +1,18 @@
+created: 20240909050311343
+creator: uzvg
+modified: 20250317081611112
+modifier: uzvg
+tags: $:/tags/ViewTemplate
+title: $:/uzvg/Templates/JournalNavigation
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Journal]]">
+<div class="JournalNav">
+    <%if [tag[Journal]sort[created]before<currentTiddler>] %>
+    	<span class="PreviousDay">⮜ Previous: <$button to=<<condition>> class="tc-btn-invisible tc-tiddlylink"><<condition>></$button></span>
+		<% endif %>
+    <% if [tag[Journal]sort[created]after<currentTiddler>] %>
+    	<span class="NextDay">Next: <$button to=<<condition>> class="tc-btn-invisible tc-tiddlylink"><<condition>></$button> ⮞</span>
+    <% endif %>
+</div>
+</$list>

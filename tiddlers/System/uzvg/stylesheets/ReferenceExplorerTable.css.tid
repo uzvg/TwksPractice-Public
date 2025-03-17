@@ -1,0 +1,44 @@
+created: 20210721020857476
+creator: uzvg
+modified: 20250317081611111
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/stylesheets/ReferenceExplorerTable.css
+type: text/vnd.tiddlywiki
+
+table.refexplorer-table {
+	width: 100%;
+	caption-side: top;
+}
+
+table.refexplorer-table th,
+table.refexplorer-table td {
+	border: 0;
+	border-right: 1px solid <<color table-border>>;
+	border-left: 1px solid <<color table-border>>;
+}
+
+table.refexplorer-table th {
+	background: <<color code-background>>;
+	border-top: 1px solid <<color table-border>>;
+}
+
+table.refexplorer-table
+tr:last-child {
+	border-bottom: 1px solid <<color table-border>>;
+}
+
+.refexplorer-table-caption {
+    text-align: center;
+  	font-weight: bold;
+}
+
+table.refexplorer-table
+tr:nth-child(even) {
+	background-color: <<color page-background>>;
+}
+
+table.refexplorer-table td:first-child,
+table.refexplorer-table th:first-child {
+    width: 30%;
+}

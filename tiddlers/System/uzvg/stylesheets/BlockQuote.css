@@ -1,0 +1,16 @@
+/* 引用块中使用有衬线字体*/
+blockquote > div {
+	font-family: "阿里妈妈东方大楷 Regular",Serif,"Noto Serif CJK SC","宋体";
+}
+
+.tc-quote .tc-big-quote {
+	font-family: "阿里妈妈东方大楷 Regular",Serif,"Noto Serif CJK SC","宋体";
+}
+
+/*blockquote > cite {
+	font-style: normal;
+}*/
+
+blockquote > p {
+	font-family: "阿里妈妈东方大楷 Regular",Serif,"Noto Serif CJK SC","宋体";
+}

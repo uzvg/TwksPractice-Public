@@ -1,0 +1,15 @@
+caption: LiteratureNotes Derivation
+condition: [!is[system]!is[draft]tag[LiteratureNotes]!tag[Source]]
+created: 20250228132215722
+description: Derivate New PermanentNotes From Current
+modified: 20250317081611079
+modifier: uzvg
+tags: $:/tags/DerivatorActions
+title: $:/uzvg/Derivator/Actions/DeriveFromLiteratureNotes
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	$param="$:/uzvg/Initializer/Templates/PermanentNotes"
+	title="NewPermanentNotesFromTheCurrent"
+	source=<<storyTiddler>> />

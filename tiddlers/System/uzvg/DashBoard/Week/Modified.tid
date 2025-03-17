@@ -1,0 +1,43 @@
+caption: Modified
+created: 20241212143712836
+creator: uzvg
+modified: 20250317081611078
+modifier: uzvg
+tags: 
+title: $:/uzvg/DashBoard/Week/Modified
+type: text/vnd.tiddlywiki
+
+<table style="width:100%">
+	<tr>
+		<th style="width:30%">All Notes</th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>FleetingNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]tag[FleetingNotes]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>LiteratureNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]tag[LiteratureNotes]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>PermanentNotes </th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]tag[PermanentNotes]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>ProjectNotes</th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]tag[ProjectNotes]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>System Tiddlers</th>
+		<td><<show-filter-count filter:"[all[tiddlers]is[system]prefix[$:/uzvg/]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>Images</th>
+		<td><<show-filter-count filter:"[all[tiddlers]is[image]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+	<tr>
+		<th>Books</th>
+		<td><<show-filter-count filter:"[all[tiddlers]!is[system]tag[Book]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]]">></td>
+	</tr>
+</table>

@@ -1,0 +1,29 @@
+caption: Sync Tiddlers From The Source
+created: 20241221114913484
+modified: 20250317081611112
+modifier: uzvg
+title: $:/uzvg/Synchronizer/Source
+type: text/vnd.tiddlywiki
+
+<!-- ====================== WorkFlow ======================
+source tiddler 与其子tiddler应该有如下field 是一致的：
+* source tiddler的标题应该与subtiddler的caption的字段相一致
+* source tiddler的authors、year应该与subtiddler的保持一致
+
+1. 根据命名规则找到不符合的tiddler
+2. 查看它们的caption是否与标签匹配
+3. 查看它们的作者、日期是否匹配
+-->
+
+\procedure sync-fields(sourceTiddler,)
+
+
+
+\procedure rename-source-actions(sourceName,destName)
+
+
+\end
+
+!! Source Rename
+
+

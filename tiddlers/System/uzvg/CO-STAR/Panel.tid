@@ -1,0 +1,120 @@
+created: 20250222064341957
+modified: 20250317081611071
+modifier: uzvg
+tags: 
+title: $:/uzvg/CO-STAR/Panel
+type: text/vnd.tiddlywiki
+
+\procedure co-star-clean-btn()
+<$button actions="<$action-deletetiddler $tiddler='$:/temp/co-star'/>">
+Clean
+</$button>
+\end
+
+\procedure co-star-save-btn()
+<$button>
+	<$action-sendmessage
+		$message="tm-new-tiddler"
+		$param="$:/temp/co-star"
+		title="New CO-STAR Prompt"
+		tags="Prompts CO-STAR"/>
+Save
+</$button>
+
+\end
+
+<table class="tc-max-width co-star-panel">
+	<tr>
+		<th>Element</th>
+		<th>Description</th>
+		<th>Edit</th>
+	</tr>
+	<tr>
+		<td><b>Context</b></td>
+		<td>我在哪干活？（场景）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="context"
+				rows="2"
+				tag="textarea"
+				placeholder="e.g：初二学生对AI技术好奇但缺乏编程基础。"/>
+		</td>
+	</tr>
+	<tr>
+		<td><b>Objective</b></td>
+		<td>我要干啥？（目标）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="objective"
+				tag="textarea"
+				rows="2"
+				placeholder="e.g：生成一份提升初中生文言文阅读能力的教学大纲。"/>
+		</td>
+	</tr>
+	<tr>
+		<td><b>Style</b></td>
+		<td>用啥风格？（形式）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="style"
+				tag="textarea"
+				rows="2"
+				placeholder="如：技术文档风格、代码注释风格、教程风格、会议纪要风格、技术博客风格。"/>
+		</td>
+	</tr>
+	<tr>
+		<td><b>Tone</b></td>
+		<td>啥语气？（态度）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="tone"
+				tag="textarea"
+				rows="2"
+				placeholder="如：专业严谨、简洁中性、鼓励性、幽默轻松。"/>
+		</td>
+	</tr>
+	<tr>
+		<td><b>Audience</b></td>
+		<td>给谁看？（受众）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="audience"
+				tag="textarea"
+				rows="2"
+				placeholder="如：技术团队、开源社区贡献者、非技术管理者、初学者。"/>
+		</td>
+	</tr>
+	<tr>
+		<td><b>Response</b></td>
+		<td>要啥结果？（格式）</td>
+		<td>
+			<$edit-text
+				tiddler="$:/temp/co-star"
+				field="response"
+				tag="textarea"
+				rows="2"
+				placeholder="如：markdown格式、表格对比、流程图、Checklist、JSON/XML。"/>
+		</td>
+	</tr>
+</table>
+
+<div class="initializer-btn-container">
+<<co-star-clean-btn>>
+<<co-star-save-btn>>
+</div>
+
+!! Prompt Preview:
+
+<$tiddler tiddler="$:/temp/co-star">
+<$macrocall
+	$name="copy-to-clipboard"
+	src={{{ [[$:/uzvg/CO-STAR/Template]get[text]substitute[]] }}}
+	style="float:right"/>
+<<clarify>>
+<$codeblock code={{{ [[$:/uzvg/CO-STAR/Template]get[text]substitute[]] }}} />
+</$tiddler>

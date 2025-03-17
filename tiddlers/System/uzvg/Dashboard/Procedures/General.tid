@@ -1,0 +1,87 @@
+created: 20250217120601995
+modified: 20250317081611076
+modifier: uzvg
+tags: 
+title: $:/uzvg/Dashboard/Procedures/General
+type: text/vnd.tiddlywiki
+
+\procedure editTiddler-btn(tiddler)
+\whitespace trim
+<$button
+	message="tm-edit-tiddler"
+	tooltip="Edit this tiddler"
+	aria-label={{$:/language/Buttons/Edit/Hint}}
+	class="tc-btn-invisible"
+	param=<<tiddler>> >
+	{{$:/core/images/edit-button}}
+</$button>
+\end
+
+<!-- 完整的筛选器由以下几个部分组成：
+1. filterPrefix，如"all[tiddlers]!is[system]!is[draft]tag[FleetingNotes]"(用于初步筛选出所有的FleetingNotes)
+2. fieldsList，用于组成由属性列表构成的子筛选器，如"progress[Capturing]rating[plain]"(用于根据属性列表进行更进一步的筛选)
+3. sortFilter，用于选择用于排序的子表达式，如"nsort[modified]reverse[]"(根据tiddler的修改时间逆序排序)
+3. filterSuffix，一般用于最后的筛选。
+-->
+
+\procedure table-filter-constructor(stateTiddler, fieldsList, filterPrefix, filterSuffix, sortFilter)
+<$let
+	filterTemplate="$(currentTiddler)$[${ [<stateTiddler>get<currentTiddler>] }$]"
+	fieldsSubfilter={{{ [enlist<fieldsList>] :filter[<stateTiddler>has<currentTiddler>] :map[<filterTemplate>substitute[]] +[join[]] }}} >
+	<$text text=```[$(filterPrefix)$$(fieldsSubfilter)$$(filterSuffix)$$(sortFilter)$]```/>
+</$let>
+\end
+
+\procedure dashboard-table(caption, filter, selectBox, stateTiddler, note-type)
+<!-- Debug Info:
+* note-type: <<note-type>>
+* filter: <<filter>>
+* stateTiddler: <<stateTiddler>>
+-->
+
+<<selectBox>>
+<table class="tc-max-width">
+	<caption><<caption>></caption>
+	<tr>
+		<th>Caption</th>
+		<th>Tags</th>
+		<th>Progress</th>
+		<th>Visibility</th>
+		<th>Edit</th>
+		<th>Modified</th>
+	</tr>
+	<$list filter=<<filter>> variable="item">
+		<tr>
+			<td>
+				<$link to=<<item>>>
+					<$view tiddler=<<item>> field={{{ [<item>has[caption]then[caption]else[title]] }}} />
+				</$link>
+			</td>
+			<td>
+				<$list filter="[<item>tags[]]" variable="currentTag">
+					<$macrocall $name="tag" tag=<<currentTag>>/>
+				</$list>
+			</td>
+			<td>
+				<$transclude
+					$variable="properties-selector"
+					tiddler=<<item>>
+					property="progress"
+					type=<<note-type>>
+					width="7em"/>
+			</td>
+			<td>
+				<$transclude
+					$variable="visibility-checkbox"
+					tiddler=<<item>> />
+			</td>
+			<td>
+				<$transclude $variable="editTiddler-btn" tiddler=<<item>> />
+			</td>
+			<td>
+				<$view tiddler=<<item>> field="modified" format="relativedate"/>
+			</td>
+		</tr>
+	</$list>
+</table>
+\end

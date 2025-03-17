@@ -1,0 +1,14 @@
+caption: Week
+created: 20241212141217530
+creator: uzvg
+modified: 20250317081611077
+modifier: uzvg
+tags: 
+title: $:/uzvg/DashBoard/Week
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="tabs"
+	tabsList="[prefix[$:/uzvg/DashBoard/Week/]]"
+	default="$:/uzvg/DashBoard/Week/Created"
+	class="tc-vertical"/>

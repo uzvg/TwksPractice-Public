@@ -1,0 +1,32 @@
+created: 20240904052626160
+creator: uzvg
+modified: 20250317081611066
+modifier: uzvg
+title: $:/core/ui/EditorToolbar/stamp-dropdown
+type: text/vnd.tiddlywiki
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/TextEditor/Snippet" subFilter="!is[draft]" itemTemplate="$:/core/ui/EditorToolbar/StampDropdown/ItemTemplate"/>
+
+----
+
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	title="$:/uzvg/Snippets/"
+	tags="$:/tags/TextEditor/Snippet"
+	caption={{$:/language/Buttons/Stamp/New/Title}}
+	text={{$:/language/Buttons/Stamp/New/Text}}
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<em>
+
+<$text text={{$:/language/Buttons/Stamp/Caption/New}}/>
+
+</em>
+
+</$button>

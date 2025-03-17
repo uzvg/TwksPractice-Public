@@ -1,0 +1,18 @@
+created: 20250306161302200
+creator: uzvg
+modified: 20250317081611111
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/stylesheets/SiteGeneral.css
+type: text/vnd.tiddlywiki
+
+<!--Let the long string such as url which has no whitespaceto to be wrapped in TOC preview
+.tc-tabbed-table-of-contents-content code {
+	overflow-wrap: anywhere;
+}
+-->
+
+.tc-title-bar, h2.tc-title {
+	font-family: serif, "思源宋体", "宋体";
+	font-weight: 600;
+}

@@ -1,0 +1,14 @@
+caption: WorkBench
+created: 20240816082557649
+creator: uzvg
+modified: 20250317081611118
+modifier: uzvg
+tags: $:/tags/SideBar
+title: $:/uzvg/ui/SideBar/WorkBench
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<div class={{{ [{$:/config/ui/SideBar/More/horizontal}match[yes]then[tc-sidebar-tabs]else[tc-more-sidebar]] }}}>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/WorkBench]!has[draft.of]]" default={{$:/config/DefaultMoreSidebarTab}} state="$:/state/tab/moresidebar" class={{{ [{$:/config/ui/SideBar/More/horizontal}match[yes]then[tc-sidebar-tabs-more]else[tc-vertical tc-sidebar-tabs-more]] }}} explicitState="$:/state/tab/moresidebar-1850697562"/>
+</div>

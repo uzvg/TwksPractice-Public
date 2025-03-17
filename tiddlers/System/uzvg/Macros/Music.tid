@@ -1,0 +1,14 @@
+created: 20240110065340537
+creator: uzvg
+modified: 20250317081611103
+modifier: uzvg
+tags: $:/tags/Macro
+title: $:/uzvg/Macros/Music
+type: text/vnd.tiddlywiki
+
+\define music(songId autoplay=1 width=80%)
+<div align="center"; >
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=$width$ height=86 src="//music.163.com/outchain/player?type=2&id=$songId$&auto=$autoplay$&height=66"></iframe>
+</div>
+
+\end

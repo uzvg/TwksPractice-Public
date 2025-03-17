@@ -1,0 +1,16 @@
+caption: Questions
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[QuestionNotes]sort[]]
+created: 20240928140416421
+creator: uzvg
+modified: 20250317081611108
+modifier: uzvg
+order: 16
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/QuestionNotes
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Question Notes)"
+	filter={{$:/uzvg/refexplorer/QuestionNotes!!condition}}
+/>

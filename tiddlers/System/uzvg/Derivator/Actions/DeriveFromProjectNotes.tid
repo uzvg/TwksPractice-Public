@@ -1,0 +1,14 @@
+caption: ProejectNotes Derivation
+condition: [!is[system]!is[draft]tag[ProjectNotes]]
+created: 20250228151405761
+description: Derivate New PermanentNotes From Current
+modified: 20250317081611079
+modifier: uzvg
+tags: $:/tags/DerivatorActions
+title: $:/uzvg/Derivator/Actions/DeriveFromProjectNotes
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	$param="$:/uzvg/Initializer/Templates/PermanentNotes"
+	title="NewPermanentNotesFromTheCurrent" />

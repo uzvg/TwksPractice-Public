@@ -1,0 +1,13 @@
+created: 20241212065809793
+creator: uzvg
+modified: 20250317081611102
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/Initializer/Stylesheets/initializer-btn-container
+type: text/vnd.tiddlywiki
+
+.initializer-btn-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}

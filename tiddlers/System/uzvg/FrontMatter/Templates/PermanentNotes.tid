@@ -1,0 +1,35 @@
+caption: PermanentNotes FrontMatter
+condition: [tag[PermanentNotes]]
+created: 20241215140308100
+modified: 20250317081611083
+modifier: uzvg
+tags: $:/tags/FrontMatter
+title: $:/uzvg/FrontMatter/Templates/PermanentNotes
+type: text/vnd.tiddlywiki
+
+<!-- The PermanentNotes should show these properties:
+* progress
+* rating
+* description
+-->
+
+<$twks.details summary="PermanentNotes Info:" state="$:/state/detail">
+<table class="tc-table-no-border tc-max-width table-FrontMatter">
+	<tr>
+			<th>Progress</th>
+			<td><<properties-selector type:"PermanentNotes" property:"progress">></td>
+	</tr>
+	<tr>
+			<th>Rating</th>
+			<td><<properties-selector type:"PermanentNotes" property:"rating">></td>
+	</tr>
+	<tr>
+			<th>Visibility</th>
+			<td><<visibility-selector>></td>
+	</tr>
+	<tr>
+			<th>Description</th>
+			<td><$view tiddler=<<storyTiddler>> field="description"/></td>
+	</tr>
+</table>
+</$twks.details>

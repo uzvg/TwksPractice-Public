@@ -1,0 +1,12 @@
+caption: Dashboard
+created: 20250217064705098
+modified: 20250317081611076
+modifier: uzvg
+tags: 
+title: $:/uzvg/Dashboard/Panel
+type: text/vnd.tiddlywiki
+
+<$macrocall
+	$name="tabs"
+	tabsList="[tag[$:/tags/Dashboard]!is[draft]sort[order]]"
+	default={{{ [tag[$:/tags/Dashboard]sort[order]first[]] }}} />

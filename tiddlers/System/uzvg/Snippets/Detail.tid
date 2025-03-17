@@ -1,0 +1,14 @@
+caption: Add simple detail Macro.
+created: 20240904051454303
+creator: uzvg
+modified: 20250317081611110
+modifier: uzvg
+tags: $:/tags/TextEditor/Snippet
+title: $:/uzvg/Snippets/Detail
+type: text/vnd.tiddlywiki
+
+<$details summary="" open="yes">
+
+
+
+</$details>

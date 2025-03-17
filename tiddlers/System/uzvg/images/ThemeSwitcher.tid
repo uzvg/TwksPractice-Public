@@ -1,0 +1,14 @@
+caption: 
+created: 20250303132358071
+description: 
+modified: 20250317081611095
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/ThemeSwitcher
+type: text/vnd.tiddlywiki
+
+\parameters (size:"22pt")
+	<svg class="tc-image-NewIcon tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+	<!--Here you can paste the svg code!-->
+		<path d="M512 0C227.84 0 0 227.84 0 512s227.84 512 512 512 512-227.84 512-512S796.16 0 512 0z m0 977.408V46.592c256 0 465.408 209.408 465.408 465.408S768 977.408 512 977.408z" p-id="7139"></path>
+	</svg>

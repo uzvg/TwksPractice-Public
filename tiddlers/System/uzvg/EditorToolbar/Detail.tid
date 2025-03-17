@@ -1,0 +1,18 @@
+caption: AddDetailWidget
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20240918024602414
+creator: uzvg
+description: Insert a twks.detail widget at the current position
+modified: 20250317081611080
+modifier: uzvg
+shortcuts: ((Insert-Detail))
+tags: $:/tags/EditorToolbar
+title: $:/uzvg/EditorToolbar/Detail
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="""<$twks.details summary="" state="$:/state/detail">"""
+	suffix="</$twks.details>"
+/>

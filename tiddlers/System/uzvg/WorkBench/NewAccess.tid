@@ -1,0 +1,31 @@
+caption: NewAccess
+created: 20250214042339778
+modified: 20250317081611119
+modifier: uzvg
+tags: $:/tags/WorkBench
+title: $:/uzvg/WorkBench/NewAccess
+type: text/vnd.tiddlywiki
+
+\procedure AddAccess-btn()
+\whitespace trim
+<$button>
+	<$action-sendmessage
+		$message="tm-new-tiddler"
+		title="$:/uzvg/WorkBench/"
+		tags="$:/tags/WorkBench"
+		caption=""
+		text='<<tree "$:/uzvg/">>'/>
+	Add New Access
+</$button>
+\end
+
+; Add New Access To The WorkBench:
+
+<<AddAccess-btn>>
+
+; Rearrange The Accesses Order:
+
+<$button to=<<currentTab>>>👉 TWKS Files</$button>
+<<twks-tip
+	"""Rearranging the workbench access order through the order list of the above tiddler's tag.
+""">>

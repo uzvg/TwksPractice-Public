@@ -1,0 +1,17 @@
+.JournalNav {
+ 	display: flex; /* 使用 flexbox 布局 */
+	justify-content: space-between; /* 使两个元素分开 */
+	width: 100%; /* 设置容器宽度 */
+}
+
+.PreviousDay {
+	flex: 1;
+	text-align: left;
+	margin-left: 2em;
+}
+
+.NextDay {
+	flex: 1;
+	text-align: right;
+	margin-right: 2em;
+}

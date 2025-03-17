@@ -1,0 +1,93 @@
+created: 20241214123237073
+modified: 20250317085751464
+modifier: uzvg
+sort-filter: get[text]split[]count[]nsort[]reverse[]
+tags: $:/tags/Global
+title: $:/uzvg/Selector/Selector
+type: text/vnd.tiddlywiki
+
+<!--========================== TWKS Visibility Selectors ==========================-->
+\procedure twks-selector(tiddler,field,list,filter,placeHolder,width)
+<$select style.width=<<width>>
+	tiddler=<<tiddler>>
+	field=<<field>>
+	default=<<placeHolder>>>
+	<option disabled><<placeHolder>></option>
+	<option value="">NULL</option>
+	<%if [<list>!is[blank]] %>
+		<$list filter="[<list>enlist-input[]unique[]]" variable="option">
+			<option><<option>></option>
+		</$list>
+	<% endif %>
+	<% if [<filter>!is[blank]] %>
+		<$list filter="[subfilter<filter>enlist-input[]unique[]]" variable="option">
+			<option><<option>></option>
+		</$list>
+	<% endif %>
+</$select>
+\end
+
+<!--==========================Notes Properties Selectors ==========================-->
+\procedure properties-selector(tiddler,type,property,width)
+<$transclude
+	$variable="twks-selector"
+	tiddler={{{ [<tiddler>!is[blank]else<storyTiddler>] }}}
+	field=<<property>>
+	filter="[tag[$:/tags/Options]field:note-type<type>get<property>]"
+	placeHolder={{{ [[Choose]addsuffix[ ]addsuffix<property>] }}}
+	width={{{ [<width>!is[blank]else[10em]] }}} />
+\end
+
+<!--========================== TWKS Visibility Selectors ==========================-->
+\procedure visibility-selector(tiddler,field:"visibility")
+\whitespace trim
+	<$radio tiddler={{{ [<tiddler>!is[blank]else<storyTiddler>] }}} field=<<field>> value="Public">&nbsp;Public</$radio>&nbsp;&nbsp;
+	<$radio tiddler={{{ [<tiddler>!is[blank]else<storyTiddler>] }}} field=<<field>> value="Private">&nbsp;Private</$radio>
+\end
+
+<!--========================== TWKS Visibility Checkbox ==========================-->
+\procedure visibility-checkbox(tiddler)
+\whitespace trim
+	<$checkbox
+		tiddler={{{ [<tiddler>!is[blank]else<storyTiddler>] }}}
+		field="visibility"
+		checked="Public"
+		unchecked="Private">
+		<$text text={{{ [<tiddler>has[visibility]get[visibility]] }}} />
+	</$checkbox>
+\end
+
+<!--========================== TWKS Medium Selectors ==========================-->
+\procedure medium-selector()
+<$transclude
+	$variable="twks-selector"
+	tiddler=<<storyTiddler>>
+	field="medium"
+	filter="[all[tiddlers]!is[system]has[medium]get[medium]unique[]]"
+	placeHolder="Choose Medium"
+	width="10em" />
+\end
+
+\procedure sortFitler-selector(tiddler,field,placeHolder,width)
+<$select style.width=<<width>>
+	tiddler={{{ [<tiddler>!is[blank]else<storyTiddler>] }}}
+	field={{{ [<field>!is[blank]else[sort-filter]] }}}
+	default=<<placeHolder>>
+	width={{{ [<width>!is[blank]else[10em]] }}} >
+		<option disabled><<placeHolder>></option>
+		<option value="sort[]">Title ↓</option>
+		<option value="!sort[]">Title ↑</option>
+		<option value="nsort[modified]reverse[]">Modified ↓</option>
+		<option value="nsort[modified]">Modified ↑</option>
+		<option value="nsort[created]reverse[]">Created ↓</option>
+		<option value="nsort[created]">Created ↑</option>
+</$select>
+\end
+
+<!-- Selector Test
+<<medium-selector>>
+<<properties-selector tiddler:"" type:"Books" property:"progress" width:"">>
+<<general-properties-selector tiddler:"$:/uzvg/TodoList" type:"LiteratureNotes" property:"progress" width:"5em">>
+-->
+
+<<sortFitler-selector placeHolder:"sort">>

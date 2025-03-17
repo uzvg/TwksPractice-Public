@@ -1,0 +1,23 @@
+<context>
+	${ [<currentTiddler>get[context]] }$
+</context>
+
+<objective>
+	${ [<currentTiddler>get[objective]] }$
+</objective>
+
+<style>
+	${ [<currentTiddler>get[style]] }$
+</style>
+
+<tone>
+${ [<currentTiddler>get[tone]] }$
+</tone>
+
+<audience>
+	${ [<currentTiddler>get[audience]] }$
+</audience>
+
+<response>
+	${ [<currentTiddler>get[response]] }$
+</response>

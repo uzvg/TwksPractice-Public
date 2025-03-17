@@ -1,0 +1,74 @@
+created: 20250214033050210
+creator: uzvg
+description: General Procedures For Library
+modified: 20250317081611103
+modifier: uzvg
+tags: 
+title: $:/uzvg/Library/Procedures/General
+type: text/vnd.tiddlywiki
+
+\procedure editBookTiddler-btn(book)
+\whitespace trim
+<$button
+	message="tm-edit-tiddler"
+	tooltip="Edit this book tiddler"
+	aria-label={{$:/language/Buttons/Edit/Hint}}
+	class="tc-btn-invisible"
+	param=<<book>> >
+	{{$:/core/images/edit-button}}
+</$button>
+\end
+
+\procedure library-table(booksFilter)
+<table class="tc-max-width">
+	<tr>
+		<th>Title</th>
+		<th>ISBN</th>
+		<th>Authors</th>
+		<th>Rating</th>
+		<th>Progress</th>
+		<th>Visibility</th>
+		<th>Edit</th>
+	</tr>
+<!--
+	<$list filter="[all[tiddlers]tag[Books]!is[system]!is[draft]]" variable="currentBook">
+-->
+	<$list filter=<<booksFilter>> variable="currentBook">
+			<tr>
+				<td>
+					<$link to=<<currentBook>>>
+						<$text text={{{ [<currentBook>get[caption]] }}} />
+					</$link>
+				</td>
+				<td>
+					<$transclude
+						$variable="isbn-link"
+						isbn={{{ [<currentBook>has[isbn]get[isbn]] }}} />
+				</td>
+				<td> <$transclude $variable="authors-list" tiddler=<<currentBook>>/> </td>
+				<td>
+					<$transclude
+						$variable="properties-selector"
+						type="Books"
+						tiddler=<<currentBook>>
+						property="rating"
+						width="5em" />
+				</td>
+				<td>
+					<$transclude
+						$variable="properties-selector"
+						type="Books"
+						tiddler=<<currentBook>>
+						property="progress"
+						width="5em" />
+				</td>
+				<td>
+					<$transclude $variable="visibility-checkbox" tiddler=<<currentBook>> />
+				</td>
+				<td>
+					<$transclude $variable="editBookTiddler-btn" book=<<currentBook>>/>
+				</td>
+			</tr>
+	</$list>
+</table>
+\end

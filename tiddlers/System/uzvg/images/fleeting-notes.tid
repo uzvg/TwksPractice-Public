@@ -1,0 +1,12 @@
+created: 20240902181213739
+creator: uzvg
+modified: 20250317081611087
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/fleeting-notes
+type: text/vnd.tiddlywiki
+
+\parameters (size:"22pt")
+	<svg class="tc-image-fleeting tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+	<!--Here you can paste the svg code!-->
+		<path d="M968.64 635.392l-301.696 301.696-169.728 56.576 56.576-169.728 301.696-301.696a80 80 0 1 1 113.152 113.152z" fill=<<foreground>> opacity=".1" p-id="1682"></path><path d="M991.232 499.584a112.192 112.192 0 0 0-158.4 0L531.2 801.28l-7.744 12.8-56.256 169.408 40.128 40.512 169.728-56.576 12.48-7.424 301.696-301.696a112.064 112.064 0 0 0 0-158.72z m-341.568 409.6l-8 2.624-62.592-62.528 2.688-8 296.384-296.32a48 48 0 0 1 67.84 67.84z" fill=<<foreground>> p-id="1683"></path><path d="M736 416l-512 512H128l224-384H128l256-448h344.768L448 416z" fill=<<foreground>> opacity=".1" p-id="1684"></path><path d="M736 384H518.4l234.176-266.88-23.808-53.12H384l-27.776 16.128-256 448L128 576h168.32l-195.968 335.872L128 960h96l22.656-9.344 512-512z m-525.248 512h-27.008l195.904-335.872L352 512H183.168L402.56 128h255.552L423.936 394.88 448 448h210.752z" fill=<<foreground>> p-id="1685"></path></svg>

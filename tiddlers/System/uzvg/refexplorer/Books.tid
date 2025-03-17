@@ -1,0 +1,20 @@
+caption: Books
+condition: [<storyTiddler>tag[PAO]] +[all[tiddlers]contains:authors<storyTiddler>tag[Book]]
+created: 20241021062418244
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 12
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/Books
+type: text/vnd.tiddlywiki
+
+<!--
+If you want to show the all notes comes from the book,
+tag current tiddler with `$:/tags/ReferenceExplorerTab`
+-->
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Books written by the author)"
+	filter={{$:/uzvg/refexplorer/Books!!condition}}
+/>

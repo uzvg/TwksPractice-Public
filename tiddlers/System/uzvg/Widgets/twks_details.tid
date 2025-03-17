@@ -1,0 +1,25 @@
+created: 20241016171224437
+creator: uzvg
+modified: 20250317081611118
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/Widgets/twks_details
+type: text/vnd.tiddlywiki
+
+\widget $twks.details(summary:"Summary:",default:"hide",state:"$:/state/detail")
+<$qualify name="detail-state-tiddler" title=<<state>>>
+<$reveal type="match" default=<<default>> state=<<detail-state-tiddler>> text="hide">
+	<$button set=<<detail-state-tiddler>> setTo="show" class="twks-btn-details">
+		&nbsp;&nbsp;{{$:/core/images/right-arrow}} <<summary>>
+	</$button>
+</$reveal>
+<$reveal type="match" default=<<default>> state=<<detail-state-tiddler>> text="show">
+	<$button set=<<detail-state-tiddler>> setTo="hide" class="twks-btn-details">
+		&nbsp;&nbsp;{{$:/core/images/down-arrow}} <<summary>>
+	</$button>
+<div class="twks-details">
+	<$slot $name="ts-raw" />
+</div>
+</$reveal>
+</$qualify>
+\end

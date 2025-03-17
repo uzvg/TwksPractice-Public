@@ -1,0 +1,14 @@
+<!-- Tag this tiddler with $:/tags/RawMarkup if you want to use this font in your tiddlywiki. -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-alimama-dong-fang-da-kai-regular/font.css" />
+
+<!--
+@font-face {
+  font-family: "阿里妈妈东方大楷 Regular";
+	font-weight: 400;
+	src: url("https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaDongFangDaKai/AlimamaDongFangDaKai-Regular/AlimamaDongFangDaKai-Regular.ttf") format("ttf"),
+	url("https://at.alicdn.com/wf/webfont/VvjGZNKfhXbG/r5DexMWZwsE3.woff2") format("woff2"),
+  url("https://at.alicdn.com/wf/webfont/VvjGZNKfhXbG/4wxRqf5oOzNy.woff") format("woff");
+  font-display: swap;
+}
+-->

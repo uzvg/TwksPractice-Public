@@ -1,0 +1,2 @@
+<!-- Add "$:/tags/RawMarkup" tag to the current tiddler if you want to use this font -->
+<link rel='stylesheet' href='https://zsftcdn-cn.zeoseven.com/cn/69/main/result.css' />

@@ -1,0 +1,13 @@
+author: Soren Bjornstad
+core-version: >=5.1.21
+created: 20250317081611067
+dependents: 
+description: TiddlyRemember: Embed Anki notes in your TiddlyWiki
+list: readme license
+modified: 20250317081611067
+modifier: uzvg
+plugin-type: plugin
+source: https://github.com/sobjornstad/TiddlyRemember
+title: $:/plugins/sobjornstad/TiddlyRemember
+type: application/json
+version: 1.3.6

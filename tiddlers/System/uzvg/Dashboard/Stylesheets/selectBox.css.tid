@@ -1,0 +1,11 @@
+created: 20250217121018320
+modified: 20250317081611077
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/Dashboard/Stylesheets/selectBox.css
+type: text/vnd.tiddlywiki
+
+.select-container {
+	display: flex;
+	justify-content: space-between;
+}

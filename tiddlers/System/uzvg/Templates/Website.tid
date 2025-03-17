@@ -1,0 +1,32 @@
+created: 20240905133659734
+creator: uzvg
+modified: 20250317081611113
+modifier: uzvg
+tags: $:/tags/ViewTemplate
+title: $:/uzvg/Templates/Website
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Website(网址)]]" >
+<table class="tc-max-width website">
+	<tr>
+		<th>Caption</th>
+		<td>{{!!caption}}</td>
+	</tr>
+	<% if [all[current]has[url]] %>
+		<tr>
+			<th>Link</th>
+			<td>{{!!url}}</td>
+		</tr>
+	<% endif %>
+	<% if [all[current]has[repository]] %>
+		<tr>
+			<th>Repository</th>
+			<td>{{!!repository}}</td>
+		</tr>
+	<% endif %>
+	<tr>
+		<th>Description</th>
+		<td>{{!!description}}</td>
+	</tr>
+</table>
+</$list>

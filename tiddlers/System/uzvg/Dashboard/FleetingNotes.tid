@@ -1,0 +1,79 @@
+caption: FleetingNotes
+condition: [all[tiddlers]!is[system]!is[draft]tag[FleetingNotes]]
+created: 20250217064733273
+modified: 20250317081611074
+modifier: uzvg
+note-type: FleetingNotes
+order: 1
+progress: Capturing
+tags: $:/tags/Dashboard
+title: $:/uzvg/Dashboard/FleetingNotes
+type: text/vnd.tiddlywiki
+
+\import [[$:/uzvg/Dashboard/Procedures/General]]
+
+\procedure reset-btn()
+\whitespace trim
+<$button
+	tooltip="Reset Sort"
+	actions="""
+	<$action-setfield
+		$tiddler=<<stateTiddler>>
+		progress=""
+		visibility=""
+		sort-filter="sort[]"/>
+	""">
+reset
+</$button>
+\end
+
+\procedure select-container()
+<span class="select-container">
+	<span>
+		<label>progress:</label>
+			<$transclude
+				$variable="properties-selector"
+				tiddler=<<stateTiddler>>
+				type={{{ [<currentTab>get[note-type]] }}}
+				property="progress"
+				width="7em"/>
+	</span>
+	<span>
+		<label>Sort by:</label>
+		<$transclude $variable="sortFitler-selector"
+			tiddler=<<stateTiddler>>
+			placeHolder="Sortby"
+			width="8em"/>
+	</span>
+	<span>
+		<label>Visibility:</label>
+			<$transclude
+				$variable="properties-selector"
+				tiddler=<<stateTiddler>>
+				type={{{ [<currentTab>get[note-type]] }}}
+				property="visibility"
+				width="7em"/>
+	</span>
+	<<reset-btn>>
+</span>
+\end
+
+<$qualify title="$:/temp/Dashboard/storeTiddler" name="stateTiddler">
+	<$wikify name="table-filter" text="""
+	<$transclude
+		$variable="table-filter-constructor"
+		stateTiddler=<<stateTiddler>>
+		fieldsList="progress visibility"
+		filterPrefix="all[tiddlers]!is[system]tag[FleetingNotes]"
+		sortFilter={{{ [<stateTiddler>get[sort-filter]] }}} />
+	""">
+
+		<$transclude
+			$variable="dashboard-table"
+			caption="FleetingNotes Dashboard"
+			filter=<<table-filter>>
+			selectBox=<<select-container>>
+			stateTiddler=<<stateTiddler>>
+			note-type={{{ [<currentTab>get[note-type]] }}} />
+	</$wikify>
+</$qualify>

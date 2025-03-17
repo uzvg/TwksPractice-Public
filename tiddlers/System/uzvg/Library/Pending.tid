@@ -1,0 +1,17 @@
+caption: Pending
+condition: [all[tiddlers]tag[Books]!is[system]!is[draft]progress[Pending]]
+created: 20250214060808185
+creator: uzvg
+modified: 20250317081611103
+modifier: uzvg
+order: 5
+tags: $:/tags/Library
+title: $:/uzvg/Library/Pending
+type: text/vnd.tiddlywiki
+
+\import $:/uzvg/Library/Procedures/General
+
+<$transclude
+	$variable="library-table"
+	booksFilter={{{ [<currentTab>get[condition]] }}}
+/>

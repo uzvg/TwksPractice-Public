@@ -1,0 +1,97 @@
+caption: 
+created: 20241013175852009
+creator: uzvg
+modified: 20250317081611105
+modifier: uzvg
+tags: 
+title: $:/uzvg/procedures/missing-initialize-procedures
+type: text/vnd.tiddlywiki
+
+<!-- After import the following procedures, The following variable is needed:
+	1. <clear-url>: The final url which will be saved in the note.
+	2. <literature-title>: The final literatureNotes tiddler title which was used for navigataion.
+	3. <mandatory-field>: Checking if the mandatory field was not filled.
+	4. <medium>: Source medium.
+-->
+
+\procedure show-lack-notification(field)
+<$action-sendmessage
+		$message="tm-notify"
+		$param="$:/uzvg/notification/lack-mandatory-field"
+		mandatory-field=<<field>>
+	/>
+\end
+
+\procedure set-properties()
+	<$action-setfield description={{{ [all[current]has[description]get[description]else[]] }}} />
+	<$action-setfield year={{{ [all[current]has[year]get[year]else<now YYYY/0MM/0DD>] }}} />
+	<$action-setfield caption=<<caption>> />
+	<$action-setfield authors={{{ [all[current]has[authors]get[authors]else[]] }}} />
+	<$action-setfield progress={{{ [all[current]has[progress]get[progress]else[]] }}} />
+	<$action-setfield visibility={{{ [all[current]has[visibility]get[visibility]else[private]] }}} />
+	<$action-setfield tags="LiteratureNotes" />
+	<$action-setfield url={{{ [all[current]has[url]get[url]else[]] }}} />
+	<$action-setfield medium=<<medium>> />
+	<$action-setfield text=""/>
+	<$action-setfield type=""/>
+\end
+
+\procedure finish-creation()
+	<$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to=<<literature-title>> />
+	<$action-sendmessage $message="tm-relink-tiddler" from=<<storyTiddler>> to=<<literature-title>> />
+	<$action-navigate $to=<<literature-title>> />
+<!--
+	<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import" />
+	<$action-deletetiddler $tiddler="$:/Import" />
+-->
+
+\end
+
+\procedure cancel-creation-btn()
+\procedure cancel-creation()
+<$action-deletetiddler $tiddler=<<currentTiddler>> />
+<$action-deletetiddler $tiddler="$:/Import" />
+<$action-sendmessage $message="tm-close-tiddler" param=<<currentTiddler>> />
+<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import" />
+\end cancel-creation
+<$button style.float="left" actions=<<cancel-creation>>>
+Cancel
+</$button>
+\end
+
+\procedure create-literature-btn()
+\procedure create-new-literature()
+<!-- Check the mandatory field. If the mandatory field was not filled, the notification will be poped.
+<% if [all[current]!has<mandatory-field>] %>
+	<$transclude $variable="show-lack-notification" field=<<mandatory-field>>/>
+<% else %>
+-->
+		<<set-properties>>
+		<<finish-creation>>
+<!--
+<%endif%>
+-->
+
+\end create-new-literature
+<$button style.float="right" actions=<<create-new-literature>>>
+Create New Literature
+</$button>
+\end
+
+\procedure initialize-btn()
+<<cancel-creation-btn>>
+<<create-literature-btn>>
+<<clarify>>
+\end
+
+\procedure initialize-panel()
+|tc-max-width tc-edit-max-width initialization-box|k
+|!Caption |<$edit-text field="caption" placeholder=<<caption>> tag="input"/>  |
+|!Authors |<$vars tagField="authors" tagListFilter="[get[authors]unique[]enlist-input[]unique[]] -[all[current]get[authors]enlist-input[]]">{{||$:/uzvg/Initializer/Procedures/tags-editor}}</$vars> |
+|!Links |<$edit-text field="url" placeholder="" tag="input"/>  |
+|!Publish Year |<$edit-text field="year" tag="input" placeholder=<<now YYYY/0MM/0DD>>/> |
+|!Description |<$edit-text placeholder="Optional" field="description" tag="input"/> |
+|!Visibility |<div class="tb-visibility"><$radio field="visibility" value="public"> Public</$radio>&nbsp;&nbsp;&nbsp; <$radio field="visibility" value="private"> Private</$radio></div> |
+|!Progress |<$edit-text placeholder="Optional" field="progress" tag="input"/> |
+<!-- |!Literature Title |<<literature-title>>  | -->
+\end

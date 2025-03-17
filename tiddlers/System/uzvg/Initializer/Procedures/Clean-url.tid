@@ -1,0 +1,46 @@
+caption: Clean Url
+created: 20241214075110227
+creator: uzvg
+description: Generate a clean url from a dirty url.
+modified: 20250317081611100
+modifier: uzvg
+tags: 
+title: $:/uzvg/Initializer/Procedures/Clean-url
+type: text/vnd.tiddlywiki
+
+<!-- ====================== Clean-url ====================== -->
+\procedure get-clean-url(urlText)
+\whitespace trim
+<!-- Process zhihu links： -->
+<% if [<urlText>regexp[https:\/\/www\.zhihu\.com]] %>
+	{{{ [<urlText>search-replace::regexp[^.*\n(https:\/\/www\.zhihu\.com.*)],[$1]] }}}
+<!-- Process 3 kinds of Bilibili links： -->
+<% elseif [<urlText>regexp[^https:\/\/www.bilibili.com/video\/.*\?t=.*]] %>
+	<<urlText>>
+<% elseif [<urlText>regexp[^https:\/\/www.bilibili.com/video\/.{12}\/\?spm_id_from=.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^(https:\/\/www\.bilibili\.com.*?)\/\?spm_id_from=.*$],[$1]] }}}
+<% elseif [<urlText>regexp[^.*\shttps:\/\/www\.bilibili\.com.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^.*\s(https:\/\/www\.bilibili\.com.*?)\/\?.*$],[$1]] }}}
+<!-- Process 3 kinds of youtube links： -->
+<% elseif [<urlText>regexp[^(https:\/\/youtu\.be\/.{11})\?si=.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^(https:\/\/youtu\.be\/.{11})\?si=.*$],[$1]] }}}
+<% elseif [<urlText>regexp[^https:\/\/youtu\.be\/.{11}(?:\t=\d+)?]] %>
+	<<urlText>>
+<% elseif [<urlText>regexp[^(https:\/\/www\.reddit\.com.*?)\/\?.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^(https:\/\/www\.reddit\.com\/.*?)\/\?.*$],[$1]] }}}
+<% endif %>
+\end
+
+\procedure clean-url()
+\whitespace trim
+<$parameters
+	tiddler={{{ [<tiddler>!is[blank]else<currentTiddler>] }}}
+	field={{{ [<field>!is[blank]else[url]] }}} >
+	<$transclude $variable="get-clean-url" urlText={{{ [<tiddler>get<field>] }}} />
+</$parameters>
+\end
+
+
+<!--
+<$transclude $variable="get-clean-url" urlText={{!!url}} />
+-->

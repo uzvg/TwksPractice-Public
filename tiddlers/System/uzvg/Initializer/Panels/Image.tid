@@ -1,0 +1,100 @@
+caption: Image
+created: 20250212153207040
+creator: uzvg
+modified: 20250317081611098
+modifier: uzvg
+regexp-pattern: ^https?:\/\/[^\s]+?\.(jpg|jpeg|png|heic|gif|ico|webp)(\s|$)
+tags: $:/tags/Initializer
+title: $:/uzvg/Initializer/Panels/Image
+type: text/vnd.tiddlywiki
+
+\import [prefix[$:/uzvg/Initializer/Procedures/]]
+
+<!-- ====================== Create new image actions  ====================== -->
+\procedure initializer-create-actions()
+<$action-setfield _canonical_uri={{{ [<currentTiddler>get[text]trim[]] }}} />
+<$action-setfield visibility={{{ [<currentTiddler>get[visibility]!is[blank]else[public]] }}} />
+<$action-createtiddler
+	$basetitle={{{ [[$:/temp/initializer/image-title]get[text]!is[blank]] :else[<currentTiddler>get[text]trim[]split[/]last[]] }}}
+	$template="$:/uzvg/Initializer/Templates/Image"
+	type=<<image-type>> >
+	<$transclude
+		$variable="sync-fields"
+		sourceTiddler=<<currentTiddler>>
+		destTiddler=<<createTiddler-title>> />
+	<<finish-creation-actions>>
+	<$action-deletetiddler $tiddler="$:/temp/initializer/image-title"/>
+</$action-createtiddler>
+\end
+
+<!-- ====================== Image Initializer Table ====================== -->
+\procedure initializer-table()
+<table class="tc-max-width tc-edit-max-width initializer-box">
+	<tr>
+		<th>Image Title</th>
+		<td><$edit-text tiddler="$:/temp/initializer/image-title" placeholder=`Default Title:${ [<currentTiddler>get[text]split[/]last[]] }$` tag="input"/></td>
+	</tr>
+	<tr>
+		<th>Image Caption</th>
+		<td><$edit-text field="caption" placeholder="Input your image caption (optional)" tag="input"/></td>
+	</tr>
+	<tr>
+		<th>Image Description</th>
+		<td><$edit-text field="description" placeholder="Input your image description (optional)" tag="input"/></td>
+	</tr>
+	<tr>
+		<th>Image Visibility</th>
+		<td><<visibility-selector>></td>
+	</tr>
+	<tr>
+		<th>Image type</th>
+		<td><<image-type urlField:"text">></td>
+	</tr>
+</table>
+\end
+
+<!-- ====================== Image Preview ====================== -->
+\procedure initializer-image-preview()
+!! Image Preview:
+
+<$transclude $variable="twks-image"
+	img={{{ [<currentTiddler>get[text]trim[]] }}}
+	align="center"
+	width="80%"
+	caption="Preview of the inserted image."/>
+\end
+
+<!-- ====================== Image Initializer Panel ====================== -->
+\procedure initializer-panel()
+	<$transclude $variable="initializer-table" $mode="block"/>
+	<<initializer-btn-box btnList:"initializer-cancel-btn initializer-create-btn">>
+\end
+
+<!-- ====================== Image Initializer Description ====================== -->
+
+\procedure initializer-description()
+This is the initializer panel for creating a book tiddler. To use it:
+
+# Paste the book's ''ISBN'' text into your tiddlywiki
+# Click the "Untitled/text" link to navigat to the tiddler and access the book initialization panel.
+
+!! Steps:
+
+* Fill in the table. The ''caption'' field is mandatroy.
+* Click the ''Cancel'' button to delete the imported tiddler.
+* Click the ''Create'' button to initialize the tiddler as a book tiddler.
+\end
+
+<!-- ====================== Main Programm  ====================== -->
+<% if [all[tiddlers]tag[Image]contains:_canonical_uri{!!text}] %>
+	<$transclude
+		$variable="navigate-to-existing-tiddler"
+		message="""⚠️ The Image already existed in the wikispace. Please 👉&nbsp;"""
+		tiddler={{{ [all[tiddlers]tag[Image]contains:_canonical_uri{!!text}] }}}
+		btnTitle="Navigate To The Existing Image." />
+<% elseif [[$:/uzvg/Initializer/Panels/Image]is[current]] %>
+	<$transclude $variable="initializer-description" $mode="block"/>
+<% else %>
+	<<initializer-panel>>
+	<$transclude $variable="initializer-image-preview" $mode="block"/>
+<% endif %>

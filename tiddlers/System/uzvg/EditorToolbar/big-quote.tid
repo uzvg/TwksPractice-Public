@@ -1,0 +1,19 @@
+caption: big-quote
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20240812080215298
+creator: uzvg
+description: Apply big-quoted text formatting to lines containing selection
+modified: 20250317081611079
+modifier: uzvg
+shortcuts: ((big-quote))
+tags: $:/tags/EditorToolbar
+title: $:/uzvg/EditorToolbar/big-quote
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="
+<<<.tc-big-quote"
+	suffix="<<<"
+/>

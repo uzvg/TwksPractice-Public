@@ -1,0 +1,22 @@
+created: 20231223062717847
+creator: uzvg
+modified: 20250317081611111
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/stylesheets/GradientHeading.css
+type: text/vnd.tiddlywiki
+
+.tc-tiddler-body :is(h1, h2, h3)
+{
+	clear: both;
+	font-weight: bold;
+	font-family: serif, "思源宋体", "宋体";
+  border-style: solid;
+	border-width: 0 0 1px 0;
+	border-image: linear-gradient(to right, <<color muted-foreground>>, transparent) 0.5 / 1;
+}
+
+.tc-tiddler-plugin-info :is(h1, h2, h3),
+h2.twks-caption {
+	border: none;
+}

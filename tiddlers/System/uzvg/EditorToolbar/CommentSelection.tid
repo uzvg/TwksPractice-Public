@@ -1,0 +1,19 @@
+caption: CommentSelection
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20240915061845785
+creator: uzvg
+description: Apply comment formatting to selection
+icon: $:/uzvg/images/attention
+modified: 20250317081611080
+modifier: uzvg
+shortcuts: ((CommentSelection))
+tags: $:/tags/EditorToolbar
+title: $:/uzvg/EditorToolbar/CommentSelection
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="<!-- "
+	suffix=" -->"
+/>

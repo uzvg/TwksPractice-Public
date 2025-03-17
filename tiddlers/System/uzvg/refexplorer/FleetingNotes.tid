@@ -1,0 +1,16 @@
+caption: Permanent Notes
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[FleetingNotes]sort[]]
+created: 20241021060936014
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 3
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/FleetingNotes
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Fleeting Notes)"
+	filter={{$:/uzvg/refexplorer/FleetingNotes!!condition}}
+/>

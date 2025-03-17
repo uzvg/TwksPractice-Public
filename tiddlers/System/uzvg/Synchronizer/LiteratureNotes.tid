@@ -1,0 +1,67 @@
+caption: Sync LiteratureNotes
+created: 20241215142810269
+modified: 20250317081611111
+modifier: uzvg
+title: $:/uzvg/Synchronizer/LiteratureNotes
+type: text/vnd.tiddlywiki
+
+\procedure sync-single-actions(title)
+<$action-setfield $tiddler=<<title>> caption=<<title>>/>
+<$let
+	timestamp={{{ [<title>get[created]format:date[TIMESTAMP]] }}}
+	validTitle={{{ [<title>addsuffix[(]addsuffix<timestamp>addsuffix[)]] }}} >
+	<$action-sendmessage $message="tm-rename-tiddler" from=<<title>> to=<<validTitle>> />
+</$let>
+\end
+
+\procedure sync-all-actions()
+<$list
+	filter="[all[tiddlers]!is[system]tag[LiteratureNotes]!regexp[^.+(\(\d{13}\))$]]"
+	variable="currentLiterature">
+	<$transclude $variable="sync-single-actions" title=<<currentLiterature>>/>
+</$list>
+\end
+
+\procedure sync-single-btn()
+<$button>
+ <$transclude $variable="sync-single-actions" title=<<currentLiterature>>/>
+	{{$:/core/images/refresh-button}} Sync
+</$button>
+\end
+
+\procedure sync-all-btn()
+<$button actions=<<sync-all-actions>> style="float:right;">
+	{{$:/core/images/refresh-button}} SYNC ALL
+</$button>
+\end
+
+\procedure synchronizer-panel()
+<<sync-all-btn>>
+!! The following LiteraNotes don't match our name convention:
+
+<table class="tc-max-width">
+<caption>The LiteratureNotes Title Synchronizer.</caption>
+<tr>
+	<th>Origin Title</th>
+	<th>After Sync</th>
+	<th>Sync</th>
+</tr>
+<$list
+	filter="[all[tiddlers]!is[system]tag[LiteratureNotes]!regexp[^.+(\(\d{13}\))$]]"
+	variable="currentLiterature" >
+	<tr>
+		<td> <$link to=<<currentLiterature>>/> </td>
+		<td> <$text text={{{ [<currentLiterature>get[created]format:date[TIMESTAMP]addprefix[(]addprefix<currentLiterature>addsuffix[)]] }}}/> </td>
+		<td> <<sync-single-btn>> </td>
+	</tr>
+</$list>
+</table>
+\end
+
+<% if [all[tiddlers]!is[system]tag[LiteratureNotes]!regexp[^.+(\(\d{13}\))$]] %>
+	<$transclude $variable="synchronizer-panel" $mode="block"/>
+<% else %>
+	<<twks-tip """
+		Your Wikispace don't have any LiteratureNotes to sync.
+	""">>
+<% endif %>

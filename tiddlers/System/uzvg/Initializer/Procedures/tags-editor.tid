@@ -1,0 +1,38 @@
+created: 20241013161943510
+creator: uzvg
+modified: 20250317081611101
+modifier: uzvg
+tags: 
+title: $:/uzvg/Initializer/Procedures/tags-editor
+type: text/vnd.tiddlywiki
+
+\import [[$:/core/ui/EditTemplate/tags]]
+
+\procedure edit-tags-template()
+<$parameters
+	saveTiddler=<<currentTiddler>>
+	tagField="tags"
+	tagListFilter=""
+>
+<div class="tc-edit-tags">
+	<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+		<$macrocall $name="tag-body"
+			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+			palette={{$:/palette}}
+			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+			tagField=<<tagField>>
+		/>
+	</$list>
+	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
+		<$macrocall $name="tag-picker" tagField=<<tagField>> tagListFilter=<<tagListFilter>>/>
+	</$let>
+</div>
+</$parameters>
+\end
+
+<$macrocall
+	$name="edit-tags-template"
+	saveTiddler=<<saveTiddler>>
+	tagField=<<tagField>>
+	tagListFilter=<<tagListFilter>>
+/>

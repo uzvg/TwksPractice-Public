@@ -1,0 +1,45 @@
+caption: New Literature Notes
+created: 20240918034514260
+creator: uzvg
+description: New Literature Notes From Here
+modified: 20250317081611070
+modifier: uzvg
+tags: $:/tags/ViewToolbar
+title: $:/uzvg/Buttons/new-literature-here
+type: text/vnd.tiddlywiki
+
+\procedure new-literature()
+<$let baseTitle="New Literature Note">
+<$action-sendmessage $message="tm-new-tiddler"
+	$param={{{ [<baseTitle>addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+	tags={{{ [<currentTiddler>addsuffix[ ]addsuffix[LiteratureNotes]] }}}
+	source={{!!title}}
+	authors={{!!authors}}
+	year={{!!year}}
+	medium="Book"
+	caption=""
+	description=""
+	visibility="private"
+	progress=""
+/>
+</$let>
+\end
+
+\whitespace trim
+<$list filter="[all[current]tags[]match[Book]]" variable="_">
+<$button
+	class=<<tv-config-toolbar-class>>
+	selectedClass="tc-selected"
+	tooltip={{!!caption}}
+	actions=<<new-literature>>
+>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/uzvg/images/literature-notes}}
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text={{$:/uzvg/Buttons/new-literature-here!!caption}}/>
+		</span>
+	<% endif %>
+</$button>
+</$list>

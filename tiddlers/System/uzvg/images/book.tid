@@ -1,0 +1,22 @@
+created: 20240811085637602
+creator: uzvg
+modified: 20250317081611085
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/book
+type: text/vnd.tiddlywiki
+
+\parameters (size:"22pt")
+	<svg class="tc-image-book tc-image-button" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+  <!-- Left book - modified path but same appearance -->
+  <path d="M32 160c0-18 14-32 32-32h160c18 0 32 14 32 32v672c0 18-14 32-32 32H64c-18 0-32-14-32-32V160zm160 96H64v64h128v-64z" fill=<<foreground>>/>
+
+  <!-- Middle book - altered coordinates, same shape -->
+  <path d="M352 128c-18 0-32 14.4-32 32v704c0 17.6 14.4 32 32 32h192c17.6 0 32-14.4 32-32V160c0-17.6-14.4-32-32-32H352zm160 192H384v-64h128v64z" fill=<<foreground>>/>
+
+  <!-- Tilted book - redrawn with different curve control points -->
+  <path d="M770 178l-177 88c-15 8-20 28-12 43l285 570c8 15 27 20 42 12l177-88c15-8 20-28 12-43L812 190c-8-15-27-20-42-12z" fill=<<foreground>>/>
+
+  <!-- Circle decoration - using circle element instead of path -->
+  <circle cx="896" cy="864" r="32" fill=<<foreground>>/>
+	</svg>

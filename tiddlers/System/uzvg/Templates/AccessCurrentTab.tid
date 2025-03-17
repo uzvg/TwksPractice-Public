@@ -1,0 +1,12 @@
+caption: Access CurrentTab Of The WorkBench
+created: 20250214045105837
+creator: uzvg
+modified: 20250317081611112
+modifier: uzvg
+tags: 
+title: $:/uzvg/Templates/AccessCurrentTab
+type: text/vnd.tiddlywiki
+
+<$list filter="[<currentTab>!is[blank]tag[$:/tags/WorkBench]]" >
+	<$button to=<<currentTab>>>Navigate To The CurrentTab</$button>
+</$list>

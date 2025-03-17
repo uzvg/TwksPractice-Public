@@ -1,0 +1,34 @@
+created: 20241016014005093
+creator: uzvg
+modified: 20250317081611104
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/procedures/image
+type: text/vnd.tiddlywiki
+
+\procedure image(img,caption,tooltip,alt,linkto,width:"80%",align:"center")
+\whitespace trim
+<$vars
+	caption={{{ [<caption>!match[]] :else[<img>get[caption]] }}}
+	tooltip={{{ [<tooltip>!match[]] :else[<img>get[description]] }}}
+	alt={{{ [<alt>!match[]] :else[<img>get[description]] }}}
+	linkto={{{ [<linkto>!match[]] :else[<img>get[url]] }}}
+>
+
+<figure style=`width:$(width)$;` class=`twks-image-container container-float-$(align)$`>
+	<$link to=<<img>>>
+  	<$image source=<<img>> tooltip=<<tooltip>> alt=<<alt>> />
+  </$link>
+	<figcaption class="twks-image-caption">
+		<% if [<linkto>!match[]] %>
+			<a href=<<linkto>> title=<<tooltip>> target="_blank" rel="noopener noreferrer" class="tc-tiddlylink-external">
+				<<caption>>
+			</a>
+		<% else %>
+				<<caption>>
+		<% endif %>
+	</figcaption>
+</figure>
+</$vars>
+
+\end

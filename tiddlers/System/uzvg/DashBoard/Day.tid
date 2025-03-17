@@ -1,0 +1,14 @@
+caption: Day
+created: 20241212112512900
+creator: uzvg
+modified: 20250317081611073
+modifier: uzvg
+tags: 
+title: $:/uzvg/DashBoard/Day
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="tabs"
+	tabsList="[prefix[$:/uzvg/DashBoard/Day/]]"
+	default="$:/uzvg/DashBoard/Day/Created"
+	class="tc-vertical"/>

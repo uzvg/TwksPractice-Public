@@ -1,0 +1,30 @@
+caption: Dashboard
+created: 20241104113506594
+creator: uzvg
+description: Open Dashboard
+icon: $:/uzvg/images/Dashboard
+modified: 20250317081611070
+modifier: uzvg
+tags: $:/tags/PageControls
+title: $:/uzvg/Buttons/Dashboard
+type: text/vnd.tiddlywiki
+
+\procedure open-dashboard-btn()
+\whitespace trim
+<$button
+	tooltip={{$:/uzvg/Buttons/Dashboard!!description}}
+	aria-label="Dashboard"
+	class=<<tv-config-toolbar-class>>
+	actions="""<$action-navigate $to="$:/uzvg/Dashboard/Panel"/>""">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+	{{$:/uzvg/images/Dashboard}}
+<% endif %>
+<% if [<tv-config-toolbar-text>match[yes]] %>
+	<span class="tc-btn-text">
+		<$text text="Dashboard"/>
+	</span>
+<% endif %>
+</$button>
+\end
+
+<<open-dashboard-btn>>

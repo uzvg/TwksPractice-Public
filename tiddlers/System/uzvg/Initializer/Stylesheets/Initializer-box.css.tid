@@ -1,0 +1,22 @@
+created: 20240923061212775
+creator: uzvg
+description: The stylesheet setting of initialization table.
+modified: 20250317081611102
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/Initializer/Stylesheets/Initializer-box.css
+type: text/vnd.tiddlywiki
+
+.initializer-box {
+	overflow: hidden;
+	border:2px dashed <<color primary>>;
+	padding: 0 1em 0;
+}
+.initializer-box th {
+	width: 30%;
+	text-align: left;
+	padding: 0 1em 0;
+}
+.initializer-box input[type="radio"] {
+	width: unset;
+}

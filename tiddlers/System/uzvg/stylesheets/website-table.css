@@ -1,0 +1,12 @@
+table.website {
+	font-size: .875rem;
+}
+table.website th {
+	text-align: left;
+	width: 25%;
+	text-indent: 1em;
+}
+
+table.website-table th, table.website-table td {
+    word-break: break-word;
+}

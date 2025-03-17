@@ -1,0 +1,21 @@
+created: 20250223040238380
+modified: 20250317081611073
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/CO-STAR/Stylesheets/co-star-panel.css
+type: text/vnd.tiddlywiki
+
+table.co-star-panel tr th:nth-child(1),
+table.co-star-panel tr td:nth-child(1) {
+	width: 8em;
+}
+
+table.co-star-panel tr th:nth-child(2),
+table.co-star-panel tr td:nth-child(2) {
+	width: 15em;
+}
+
+table.co-star-panel textarea {
+	width: -webkit-fill-available;
+	max-height: fit-content;
+}

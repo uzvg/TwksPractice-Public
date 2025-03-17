@@ -1,0 +1,7 @@
+created: 20240815115939443
+creator: uzvg
+list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/subtitle $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/uzvg/Templates/JournalNavigation $:/uzvg/FrontMatter/FrontMatter $:/uzvg/Templates/Alerter $:/uzvg/Templates/Website $:/uzvg/Initializer/Initializer $:/uzvg/Templates/Prompts/copy-to-clipboard $:/core/ui/ViewTemplate/body $:/uzvg/refexplorer/ReferenceExplorer $:/uzvg/Templates/clarify $:/core/ui/ViewTemplate/lazy-loading
+modified: 20250317081611068
+modifier: uzvg
+title: $:/tags/ViewTemplate
+type: text/vnd.tiddlywiki

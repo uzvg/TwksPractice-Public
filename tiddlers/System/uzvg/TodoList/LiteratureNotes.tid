@@ -1,0 +1,10 @@
+created: 20241226005908095
+modified: 20250317081611114
+modifier: uzvg
+tags: $:/tags/TodoTab
+title: $:/uzvg/TodoList/LiteratureNotes
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[tiddlers]!is[system]tag[LiteratureNotes]!tag[Source]filed:progress[Unread]]">
+	<$link to=<<currentTiddler>>/>
+</$list>

@@ -1,0 +1,15 @@
+caption: {{$:/language/SideBar/Recent/Caption}}
+created: 20240816133502662
+creator: uzvg
+modified: 20250317081611066
+modifier: uzvg
+tags: $:/tags/SideBar
+title: $:/core/ui/SideBar/Recent
+type: text/vnd.tiddlywiki
+
+<!--
+<$macrocall $name="timeline" subfilter="!tag[$:/tags/Image]] +[!tag[Image]] +[" format={{$:/language/RecentChanges/DateFormat}}/>
+-->
+
+<$macrocall $name="timeline" subfilter="!tag[$:/tags/Image]!tag[Image]" format={{$:/language/RecentChanges/DateFormat}}/>
+

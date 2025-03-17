@@ -1,0 +1,10 @@
+created: 20241213051412042
+creator: uzvg
+modified: 20250317081611065
+modifier: uzvg
+title: $:/config/uzvg/publishFilter
+type: text/vnd.tiddlywiki
+
+\define publishFilter()
+-[prefix[$:/plugins]] -[publish[false]]
+\end

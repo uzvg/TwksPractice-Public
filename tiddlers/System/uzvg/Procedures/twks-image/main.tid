@@ -1,0 +1,77 @@
+created: 20241218012710955
+modified: 20250317081611106
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/Procedures/twks-image/main
+type: text/vnd.tiddlywiki
+
+<!-- ===================== twks-image requirements =====================
+; Parameters:
+	* img: link or image tiddler
+	* caption: Specified in the macro > get from the image tiddler > None
+		** If caption is none, then don't show the caption element.
+	* description: Specified in the macro > get from the image tiddlr > None
+	* width: Specified in the macro > 62%
+	* float: Specified in the macro > "none"
+-->
+
+\procedure twks-image(img,caption,description,width:"62%",align:"center")
+
+\procedure image-container(img)
+<!-- If Here is an image link, Don't jump to the missing tiddler. -->
+<% if [<img>regexp[^https:\/\/.*(?:jpg|png|gif|jpeg|svg)$]] %>
+	<div class="image-container">
+		<$image source=<<img>> tooltip=<<description>> alt=<<alt>> loading="lazy"/>
+	</div>
+<!-- else jump to the img tiddler if img is a tiddler. -->
+<% elseif [<img>is[tiddler]] %>
+	<$link to=<<img>>>
+		<div class="image-container">
+			<$image source=<<img>> tooltip=<<description>> alt=<<alt>> loading="lazy"/>
+		</div>
+	</$link>
+<% endif %>
+\end image-container
+
+<$let
+	caption={{{ [<caption>!is[blank]] :else[<img>get[caption]] }}}
+	description={{{ [<description>!is[blank]] :else[<img>get[description]] }}}
+	alt={{{ [<alt>!is[blank]] :else[Image Content: ]addsuffix<description>] }}} >
+
+	<div class=`twks-image-card twks-block-align-$(align)$` style=`width:$(width)$;`>
+		<figure>
+			<$transclude $variable="image-container" img=<<img>>/>
+			<% if [<caption>!is[blank]] %>
+				<figcaption><$transclude $variable="caption" $mode="inline"/></figcaption>
+			<% endif %>
+		</figure>
+	</div>
+</$let>
+\end
+
+\procedure procedure-description()
+!! The `twks-image` procedure has following parameters:
+
+| !Parameter | !Description | !Value |
+| `img` |The url `link` to the image or the `title` of the image tiddler. If `img` is a image tiddler, click it and you will be navigated to the image tiddler itself, or `img` is a link of the image then nothing will be happened. |Image link or Title of the image tiddler. |
+| `caption` |The caption the image, which will be displayed below the image. |`caption was passed to the proceudre directly` > `capion field vlaue of the image tiddler` |
+
+
+	* img: The title of the image or the url link to the image.
+	* caption: The caption of the image, and has the following priorities:
+		** If caption is none, then don't show the caption element.
+	* description: The description of the image, which will be displayed when you hover the pointer on the image.
+		** `description was specified in the macro` > `description field value get from the image tiddler`.
+	* width: `Specified in the macro` > `62%`
+	* align: The alignment of the imgage in the tiddler, such as: `right`, `center`, `left`.
+		** `Specified in the macro` > `none`
+
+!! Usage Example:
+
+<<twks-image "wallhaven-qzxgmr.png">>
+
+\end
+
+<% if [[$:/uzvg/Procedures/twks-image/main]is[current]] %>
+	<$transclude $variable="procedure-description" $mode="block"/>
+<% endif %>

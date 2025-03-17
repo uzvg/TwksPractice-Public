@@ -1,0 +1,14 @@
+created: 20240811094023461
+creator: uzvg
+modified: 20250317081611095
+modifier: uzvg
+tags: $:/tags/Image
+title: $:/uzvg/images/subtiddler
+type: text/vnd.tiddlywiki
+
+<!--Set the fill color: <<foreground>> -->
+<$parameters size="22pt">
+	<svg class="tc-image-subtiddler tc-image-button" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width=<<size>> height=<<size>>>
+	<path d="M316.8 784h377.6v140.8c0 42.24-34.56 76.8-76.8 76.8h-518.4c-42.24 0-76.8-34.56-76.8-76.8v-518.4c0-42.24 34.56-76.8 76.8-76.8h140.8v377.6c0 42.24 34.56 76.8 76.8 76.8z" fill=<<foreground>> p-id="5936"></path><path d="M1008 105.6v518.4c0 42.24-34.56 76.8-76.8 76.8h-518.4c-42.24 0-76.8-34.56-76.8-76.8v-518.4c0-42.24 34.56-76.8 76.8-76.8h518.4c42.24 0 76.8 34.56 76.8 76.8z" fill=<<foreground>> p-id="5937"></path>
+	</svg>
+</$parameters>

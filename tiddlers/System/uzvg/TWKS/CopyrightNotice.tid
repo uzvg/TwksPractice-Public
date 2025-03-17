@@ -1,0 +1,54 @@
+caption: wikispace版权说明
+created: 20250227170643068
+modified: 20250317081611116
+modifier: uzvg
+tags: $:/twks/Documents
+title: $:/uzvg/TWKS/CopyrightNotice
+type: text/vnd.tiddlywiki
+
+!! 文件类别：
+
+`Tiddlywiki WikiSpace` 中的文件，可以被分为三类：tiddlywiki自身的tiddler内容，前缀为`$:/uzvg`的系统级tiddler，以及除此之外的所有原创文章、图片、视频等非系统tiddler文件，其中：
+
+; 1. 所有原创文章、图片、视频等非系统文件内容：创作者版权4.0
+* 采用[[创作者版权词说明4.0|https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans]]协议。
+* 授权条款：
+** 署名要求：转载或引用时需在显著位置标注原作者名称及原文链接（推荐超链接形式）。
+** 非商业性使用：禁止将内容用于商业目的（如广告、付费阅读、书籍出版等）。
+** 禁止演绎：禁止对原文进行修改、节选、混编后发布衍生作品。
+** 例外说明：若需改编或商业合作，需通过指定联系方式（如邮件、留言）获得书面授权。
+
+; 2. 所有`$:/uzvg/`下的系统tiddler：MIT协议
+* 授权条款：
+** 自由使用：允许任何人自由复制、修改、分发系统文件，包括商业用途。
+** 版权声明保留：使用者需在源代码或文档中完整保留以下原始版权声明和MIT许可证文本。
+
+```
+MIT License
+Applies to SYSTEM TIDDLERS ONLY, as defined above!
+Does NOT apply to the text of notes in this wiki.
+
+Copyright © 2020–2025 [UZVG].
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+; 3. 其他属于tiddlywiki的文件版权：
+
+* 👉 [[tiddlywiki版权说明|https://github.com/TiddlyWiki/TiddlyWiki5?tab=License-1-ov-file#readme]]。

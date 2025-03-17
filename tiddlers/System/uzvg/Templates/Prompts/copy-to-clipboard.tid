@@ -1,0 +1,34 @@
+created: 20241210152513145
+creator: uzvg
+modified: 20250317081611112
+modifier: uzvg
+tags: $:/tags/ViewTemplate
+title: $:/uzvg/Templates/Prompts/copy-to-clipboard
+type: text/vnd.tiddlywiki
+
+\procedure co-star-table()
+|tc-max-width|k
+|!Context（上下文） |<$view tiddler=<<storyTiddler>> field="context"/> |
+|!Objective（目标） |<$view tiddler=<<storyTiddler>> field="objective"/> |
+|!Style（风格） |<$view tiddler=<<storyTiddler>> field="style"/> |
+|!Tone（语气） |<$view tiddler=<<storyTiddler>> field="tone"/> |
+|!Audience（受众） |<$view tiddler=<<storyTiddler>> field="audience"/> |
+|!Response（格式、结构） |<$view tiddler=<<storyTiddler>> field="response"/> |
+\end
+
+<$list filter="[all[current]!is[system]!is[draft]tag[Prompts]!tag[CO-STAR]]">
+	<$transclude
+		$variable="copy-to-clipboard-above-right"
+		src={{{ [<currentTiddler>get[text]] }}} />
+</$list>
+
+<$list filter="[all[current]!is[system]!is[draft]tag[Prompts]tag[CO-STAR]]">
+	<$tiddler tiddler=<<storyTiddler>>>
+		<$transclude
+			$variable="copy-to-clipboard-above-right"
+			src={{{ [[$:/uzvg/CO-STAR/Template]get[text]substitute[]] }}} />
+	</$tiddler>
+	<$transclude
+		$variable="co-star-table"
+		$mode="block"/>
+</$list>

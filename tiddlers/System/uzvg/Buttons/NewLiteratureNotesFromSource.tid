@@ -1,0 +1,37 @@
+created: 20241221075346421
+modified: 20250317081611071
+modifier: uzvg
+tags: $:/tags/ViewToolbar
+title: $:/uzvg/Buttons/NewLiteratureNotesFromSource
+type: text/vnd.tiddlywiki
+
+\procedure new-sourceNote-actions()
+<$action-createtiddler
+	$basetitle={{{ [[(1729491445088)(1729491445088)]addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+	$template="$:/uzvg/Initializer/Templates/WebPage"
+	tags="LiteratureNotes"
+	source={{{ [<storyTiddler>get[title]] }}}
+	authors={{{ [<storyTiddler>get[authors]] }}}
+	year={{{ [<storyTiddler>get[year]] }}} >
+	<$action-navigate $to=<<createTiddler-title>>/>
+	<$action-sendmessage $message="tm-edit-tiddler" $param=<<createTiddler-title>>/>
+</$action-createtiddler>
+\end
+
+\whitespace trim
+<$list filter="[all[current]tag[Source]]" variable="_">
+<$button
+	class=<<tv-config-toolbar-class>>
+	selectedClass="tc-selected"
+	tooltip="New LiteratureNote From The Current Source"
+	actions=<<new-sourceNote-actions>>>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/uzvg/images/AddNoteFromSource}}
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text="New LiteratureNote From The Current Source"/>
+		</span>
+	<% endif %>
+</$button>
+</$list>

@@ -1,0 +1,15 @@
+.table-FrontMatter {
+		font-size: .875rem;
+		line-height: 1.25rem;
+		overflow-wrap: anywhere;
+}
+
+.table-FrontMatter th {
+		width: 30%;
+		padding-left: 5%;
+		text-align: left;
+}
+
+.table-FrontMatter td {
+		padding-left: 1em;
+}

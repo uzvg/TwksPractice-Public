@@ -1,0 +1,17 @@
+created: 20240811123122099
+creator: uzvg
+key: ((new-fleetingNotes))
+modified: 20250317081611109
+modifier: uzvg
+tags: $:/tags/KeyboardShortcut
+title: $:/uzvg/Shortcuts/NewFleetingNotes
+type: text/vnd.tiddlywiki
+
+\procedure new-fleetingNotes()
+<$action-sendmessage $message="tm-new-tiddler" $param="$:/uzvg/Shortcuts/Templates/NewFleetingNotes" title="NewFleetingNotes"/>
+\end
+
+\whitespace trim
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<<new-fleetingNotes>>
+</$navigator>

@@ -1,0 +1,36 @@
+caption: Library
+created: 20250214061218668
+creator: uzvg
+description: Open Library
+modified: 20250317081611070
+modifier: uzvg
+tags: $:/tags/PageControls
+title: $:/uzvg/Buttons/Library
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure navigate-library-btn()
+<$button
+	tooltip={{$:/uzvg/Buttons/Library!!description}}
+	aria-label="Library"
+	class=<<tv-config-toolbar-class>>
+	actions="""<$action-navigate $to="$:/uzvg/Library/Panel"/>""">
+
+<%if [<tv-config-toolbar-icons>match[yes]] %>
+	{{$:/uzvg/images/book}}
+<% endif %>
+
+<% if [<tv-config-toolbar-text>match[yes]] %>
+	<span class="tc-btn-text">
+		<$text text={{$:/uzvg/Buttons/Library!!caption}} />
+	</span>
+<% endif %>
+</$button>
+\end
+
+<<navigate-library-btn>>
+
+<!-- How to create new toolbar buttons:
+	👉 https://tiddlywiki.com/#Creating%20new%20toolbar%20buttons
+-->

@@ -1,0 +1,100 @@
+created: 20241216060319995
+modified: 20250317081611069
+modifier: uzvg
+tags: $:/tags/Stylesheet
+title: $:/uzvg/Alerter/Stylesheets/AlertType.css
+type: text/vnd.tiddlywiki
+
+.twks-alerter {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: auto 1fr;
+	gap: 0 1rem;
+	padding: 0.8rem;
+	align-items: start;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin: .8em 2em;
+}
+
+.twks-alerter-icon {
+	grid-row: 1;
+	grid-column: 1;
+	fill: currentColor;
+}
+
+.twks-alerter-title {
+	grid-row: 1;
+	grid-column: 2;
+	font-weight: bold;
+}
+
+.twks-alerter-content {
+	grid-row: 2;
+	grid-column: 1 / span 2;
+}
+
+.twks-alerter-content > * {
+	margin:0;
+}
+<!-- ========================== Alert types ========================== -->
+
+.twks-alerter-warning {
+	background-color: rgba(255, 243, 224, 1); /* Soft amber for warning */
+	border-left: 5px solid rgba(255, 171, 64, 1); /* Amber */
+	color: rgba(102, 60, 0, 1); /* Dark amber for text */
+}
+
+.twks-alerter-caution {
+	background-color: rgba(255, 235, 238, 1); /* Soft red */
+	border-left: 5px solid rgba(229, 115, 115, 1); /* Red */
+	color: rgba(95, 33, 32, 1); /* Dark red for text */
+}
+
+.twks-alerter-tip {
+	background-color: rgba(232, 245, 233, 1); /* Soft green */
+	border-left: 5px solid rgba(129, 199, 132, 1); /* Green */
+	color: rgba(27, 94, 32, 1); /* Dark green for text */
+}
+
+.twks-alerter-note {
+	background-color: rgba(227, 242, 253, 1); /* Soft blue */
+	border-left: 5px solid rgba(100, 181, 246, 1); /* Blue */
+	color: rgba(13, 71, 161, 1); /* Dark blue for text */
+}
+
+.twks-alerter-important {
+	background-color: rgba(243, 229, 245, 1); /* Soft purple */
+	border-left: 5px solid rgba(149, 117, 205, 1); /* Purple */
+	color: rgba(49, 27, 146, 1); /* Dark purple for text */
+}
+<!-- ========================== Alert Dark types ========================== -->
+
+.twks-alerter-warning-dark {
+	background-color: rgba(78, 52, 46, 0.2); /* Muted brown for warning */
+	border-left: 5px solid rgba(255, 171, 64, 1); /* Amber */
+	color: rgba(255, 204, 128, 1); /* Lighter amber for text */
+}
+
+.twks-alerter-caution-dark {
+	background-color: rgba(183, 28, 28, .2); /* Deep red */
+	border-left: 5px solid rgba(229, 115, 115, 1); /* Soft red */
+	color: rgba(255, 205, 210, 1); /* Lighter red for text */
+}
+
+.twks-alerter-tip-dark {
+	background-color: rgba(46, 125, 50, .2); /* Deep green */
+	border-left: 5px solid rgba(129, 199, 132, 1); /* Soft green */
+	color: rgba(200, 230, 201, 1); /* Lighter green for text */
+}
+
+.twks-alerter-note-dark {
+	background-color: rgba(21, 101, 192, .2); /* Deep blue */
+	border-left: 5px solid rgba(100, 181, 246, 1); /* Soft blue */
+	color: rgba(187, 222, 251, 1); /* Lighter blue for text */
+}
+
+.twks-alerter-important-dark {
+	background-color: rgba(69, 39, 160, .2); /* Deep purple */
+	border-left: 5px solid rgba(149, 117, 205, 1); /* Soft purple */
+	color: rgba(209, 196, 233, 1); /* Lighter purple for text */
+}

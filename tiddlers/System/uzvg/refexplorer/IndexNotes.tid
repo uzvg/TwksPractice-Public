@@ -1,0 +1,16 @@
+caption: Index Notes
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[IndexNotes]sort[]]
+created: 20240928140316888
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 13
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/IndexNotes
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Index Notes)"
+	filter={{$:/uzvg/refexplorer/IndexNotes!!condition}}
+/>

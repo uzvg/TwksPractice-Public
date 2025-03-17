@@ -1,0 +1,20 @@
+caption: Book Notes
+condition: [<storyTiddler>tag[Book]] +[all[tiddlers]contains:source<storyTiddler>]
+created: 20241021061450847
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 9
+tags: 
+title: $:/uzvg/refexplorer/BookNotes
+type: text/vnd.tiddlywiki
+
+<!--
+If you want to show the all notes comes from the book,
+tag current tiddler with `$:/tags/ReferenceExplorerTab`
+-->
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Notes from The Book)"
+	filter={{$:/uzvg/refexplorer/BookNotes!!condition}}
+/>

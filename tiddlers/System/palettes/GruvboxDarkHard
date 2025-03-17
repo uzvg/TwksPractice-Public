@@ -1,0 +1,116 @@
+alert-background: #fabd2f
+alert-border: #d79921
+alert-highlight: #cc241d
+alert-muted-foreground: #fb4934
+background: #282828
+blockquote-bar: rgba(215, 153, 33, 0.7)
+button-background: #3c3836
+button-border: #504945
+button-foreground: #ebdbb2
+code-background: rgba(40, 40, 40, 0.03)
+code-border: rgba(40, 40, 40, 0.08)
+code-foreground: #fb4934
+diff-delete-background: #cc241d
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #98971a
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #fb4934
+download-background: #98971a
+download-foreground: #282828
+dragger-background: #ebdbb2
+dragger-foreground: #282828
+dropdown-background: #282828
+dropdown-border: #ebdbb2
+dropdown-tab-background: rgba(60, 56, 54, 0.5)
+dropdown-tab-background-selected: #ebdbb2
+dropzone-background: #8ec07c
+external-link-background: inherit
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-foreground: #83a598
+external-link-foreground-hover: #8ec07c
+external-link-foreground-visited: #458588
+footnote-target-background: <<colour tag-foreground>>
+foreground: #ebdbb2
+highlight-background: #fabd2f
+highlight-foreground: #282828
+message-background: <<colour tag-foreground>>
+message-border: #458588
+message-foreground: <<colour tag-background>>
+modal-backdrop: #504945
+modal-background: #282828
+modal-border: #3c3836
+modal-footer-background: #3c3836
+modal-footer-border: #504945
+modal-header-border: #3c3836
+muted-foreground: #bdae93
+notification-background: <<colour tag-foreground>>
+notification-border: <<colour tag-background>>
+page-background: #1d2021
+pre-background: #1d2021
+pre-border: #3c3836
+primary: #d79921
+select-tag-background: 
+select-tag-foreground: 
+sidebar-button-foreground: #ebdbb2
+sidebar-controls-foreground: #a89984
+sidebar-controls-foreground-hover: <<colour tiddler-controls-foreground-hover>>
+sidebar-foreground: #a89984
+sidebar-foreground-shadow: transparent
+sidebar-muted-foreground: #504945
+sidebar-muted-foreground-hover: #a89984
+sidebar-tab-background: #3c3836
+sidebar-tab-background-selected: #282828
+sidebar-tab-border: #504945
+sidebar-tab-border-selected: #d79921
+sidebar-tab-divider: #504945
+sidebar-tab-foreground: #ebdbb2
+sidebar-tab-foreground-selected: #fbf1c7
+sidebar-tiddler-link-foreground: #ebdbb2
+sidebar-tiddler-link-foreground-hover: #bdae93
+site-title-foreground: #d79921
+static-alert-foreground: #665c54
+tab-background: #3c3836
+tab-background-selected: #282828
+tab-border: #d79921
+tab-border-selected: #d79921
+tab-divider: #d79921
+tab-foreground: #ebdbb2
+tab-foreground-selected: #fbf1c7
+table-border: rgba(235, 219, 178, 0.3)
+table-footer-background: rgba(60, 56, 54, 0.5)
+table-header-background: rgba(60, 56, 54, 0.2)
+tag-background: #d79921
+tag-foreground: #282828
+tiddler-background: #282828
+tiddler-border: rgba(215, 153, 33, 0.7)
+tiddler-controls-foreground: #665c54
+tiddler-controls-foreground-hover: #bdae93
+tiddler-controls-foreground-selected: #ebdbb2
+tiddler-editor-background: #1d2021
+tiddler-editor-border: #3c3836
+tiddler-editor-border-image: #1d2021
+tiddler-editor-fields-even: #1d2021
+tiddler-editor-fields-odd: #1d2021
+tiddler-info-background: #3c3836
+tiddler-info-border: #1d2021
+tiddler-info-tab-background: #3c3836
+tiddler-link-background: #282828
+tiddler-link-foreground: #83a598
+tiddler-subtitle-foreground: #fbf1c7
+tiddler-title-foreground: #d79921
+toolbar-cancel-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-done-button: 
+toolbar-edit-button: 
+toolbar-info-button: 
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+untagged-background: #ebdbb2
+very-muted-foreground: rgba(215, 153, 33, 0.7)

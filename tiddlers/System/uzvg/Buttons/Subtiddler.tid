@@ -1,0 +1,25 @@
+caption: new subtiddler here
+created: 20250217124550639
+description: Create a new tiddler on the basis of current tiddler
+modified: 20250317081611071
+modifier: uzvg
+tags: $:/tags/ViewToolbar
+title: $:/uzvg/Buttons/Subtiddler
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$button message="tm-new-tiddler"
+	param={{{ [<currentTiddler>addsuffix[/]] }}}
+	tooltip={{!!description}}
+	aria-label={{$:/language/Buttons/Clone/Hint}}
+	class=<<tv-config-toolbar-class>>
+>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/uzvg/images/subtiddler}}
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text="new subtiddler here"/>
+		</span>
+	<%endif%>
+</$button>

@@ -1,0 +1,13 @@
+created: 20250228062957617
+modified: 20250317081611077
+modifier: uzvg
+title: $:/uzvg/Dashboard/Template/FilterConstructor
+type: text/vnd.tiddlywiki
+
+<$let
+	filterPrefix="all[tiddlers]!is[draft]!is[system]"
+	sortFilter="sort[created]">
+
+<$text text=`[$(filterPrefix)$$(sortFilter)$]`/>
+
+</$let>

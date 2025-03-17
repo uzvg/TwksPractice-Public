@@ -1,0 +1,82 @@
+caption: ChatGpt Conversation
+created: 20241220144716671
+creator: uzvg
+modified: 20250317081611098
+modifier: uzvg
+regexp-pattern: (?m)^#+\s.*\n
+tags: $:/tags/Initializer
+title: $:/uzvg/Initializer/Panels/ChatGpt
+type: text/vnd.tiddlywiki
+
+<!-- Transform the chatgpt conversation which was write in markdown format into the wikitext format.
+* The note will be initialized as a Fleeting Note
+* Taged with LiteratureNotes and AI-Generated
+* Authors field will be set as ChatGpt
+* Links field are optional
+* Year will be auto-generated
+* Caption Field are mandatory
+-->
+
+\import [prefix[$:/uzvg/Initializer/Procedures/]]
+
+<!-- ====================== Create Button actions  ====================== -->
+\procedure initializer-create-actions()
+<% if [<currentTiddler>!has[caption]] %>
+	<<check-mandatory-notifier fieldsList:"caption">>
+<% else %>
+	<$action-setfield type="text/markdown"/>
+	<$action-sendmessage $message="tm-md-tiddler-to-tid" $param=<<storyTiddler>> />
+	<$action-setfield year={{{ [<currentTiddler>get[year]!is[blank]else<now YYYY-0MM-0DD>] }}} />
+	<$action-createtiddler
+		$basetitle={{{ [<currentTiddler>get[caption]addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+		$template="$:/uzvg/Initializer/Templates/ChatGpt" >
+		<$transclude
+			$variable="sync-fields"
+			sourceTiddler=<<storyTiddler>>
+			destTiddler=<<createTiddler-title>> />
+		<$action-setfield $tiddler=<<storyTiddler>> text={{{ [<storyTiddler>get[text]] }}}
+		<$action-deletetiddler $tiddler=<<storyTiddler>>/>"
+		<<finish-creation-actions>>
+		<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+<% endif %>
+
+\end
+
+<!-- ====================== Initializer Table ====================== -->
+\procedure initializer-table()
+|tc-max-width tc-edit-max-width initializer-box|k
+|!Caption |<$edit-text  field="caption" placeholder="Mandatory" tag="input"/>  |
+|!Year |<$edit-text default="" field="year" tag="input" placeholder=<<now YYYY-0MM-0DD>>/> |
+|!Description |<$edit-text default="" placeholder="Optional" field="description" tag="input"/> |
+|!Links |<$edit-text default="" placeholder="Optional" field="url" tag="input"/> |
+|!Visibility |<<visibility-selector>> |
+\end
+
+<!-- ====================== Initializer Panel ====================== -->
+\procedure initializer-panel()
+	<$transclude $variable="initializer-table" $mode="block"/>
+	<<initializer-btn-box btnList:"initializer-cancel-btn initializer-create-btn">>
+\end
+
+\procedure initializer-description()
+
+<<twks-tip text:"""
+This is the initializer panel for creating a ChatGpt conversation tiddler. To use it:
+
+# Paste the Conversation's ''URL'' into your tiddlywiki
+# Click the "Untitled/text" link to navigat to the tiddler and access the WebPage initialization panel.""">>
+
+!! Steps:
+
+* Fill in the table. The ''caption'' field is mandatroy.
+* Click the ''Cancel'' button to delete the imported tiddler.
+* Click the ''Create'' button to initialize the tiddler as a WebPage LiteratureNotes tiddler.
+\end
+
+<!-- ====================== Main Programm  ====================== -->
+<% if [[$:/uzvg/Initializer/Panels/ChatGpt]is[current]] %>
+	<$transclude $variable="initializer-description" $mode="block"/>
+<% else %>
+	<<initializer-panel>>
+<% endif %>

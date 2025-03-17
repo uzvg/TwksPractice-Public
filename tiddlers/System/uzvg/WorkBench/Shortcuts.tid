@@ -1,0 +1,13 @@
+caption: Shortcuts
+created: 20250216151349365
+modified: 20250317081611119
+modifier: uzvg
+tags: $:/tags/WorkBench
+title: $:/uzvg/WorkBench/Shortcuts
+type: text/vnd.tiddlywiki
+
+<<tree "$:/uzvg/Shortcuts/">>
+
+---
+
+<<tree "$:/config/ShortcutInfo/">>

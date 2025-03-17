@@ -1,0 +1,16 @@
+caption: Literature Notes
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>tag[LiteratureNotes]sort[]]
+created: 20240928140116254
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 7
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/LiteratureNotes
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (Literature Notes)"
+	filter={{$:/uzvg/refexplorer/LiteratureNotes!!condition}}
+/>

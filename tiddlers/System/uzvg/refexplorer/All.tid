@@ -1,0 +1,16 @@
+caption: All
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>sort[]]
+created: 20240924081555412
+creator: uzvg
+modified: 20250317081611107
+modifier: uzvg
+order: 1
+tags: $:/tags/ReferenceExplorerTab
+title: $:/uzvg/refexplorer/All
+type: text/vnd.tiddlywiki
+
+<$transclude
+	$variable="reference-explorer"
+	caption="Reference Explorer (all types)"
+	filter={{$:/uzvg/refexplorer/All!!condition}}
+/>

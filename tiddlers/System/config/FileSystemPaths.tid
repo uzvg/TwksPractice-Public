@@ -1,0 +1,12 @@
+created: 20250317081102046
+modified: 20250317090249462
+modifier: uzvg
+tags: 
+title: $:/config/FileSystemPaths
+type: text/vnd.tiddlywiki
+
+[visibility[Private]addprefix[Private/]]
+[tag[Journal]addprefix[Journal/]]
+[visibility[Public]addprefix[Public/]]
+[is[system]removeprefix[$:/]addprefix[System/]]
+[tag[Image]addprefix[Images/]]

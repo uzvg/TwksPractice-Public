@@ -1,0 +1,31 @@
+caption: Literature Note
+created: 20241013175630671
+creator: uzvg
+modified: 20250317081611096
+modifier: uzvg
+regexp-pattern: ^(https:\/\/)
+tags: $:/tags/Initialization
+title: $:/uzvg/Initializer/Missing/literature-note
+type: text/vnd.tiddlywiki
+
+\import [[$:/uzvg/procedures/missing-initialize-procedures]]
+
+<$let
+	currentTiddler=<<qualify "$:/temp/missing-literature-note">>
+	mandatory-field="caption"
+	medium="Website"
+>
+	<$transclude $variable="initialize-panel" $mode="block"/>
+<$let
+	missing-tiddler-title={{{ [<storyTiddler>get[title]] }}}
+	caption={{{ [all[current]has[caption]get[caption]else<storyTiddler>] }}}
+	literature-title={{{ [<caption>addsuffix[(]addsuffix<now TIMESTAMP>addsuffix[)]] }}}
+>
+	<<initialize-btn>>
+</$let>
+</$let>
+
+<!--
+	caption={{{ [all[current]has[caption]get[caption]else<missing-tiddler-title>] }}}
+	caption={{{ [<currentTiddler>get[title]] }}}
+-->

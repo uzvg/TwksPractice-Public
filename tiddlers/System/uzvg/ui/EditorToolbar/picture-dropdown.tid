@@ -1,0 +1,58 @@
+created: 20240809080136689
+creator: uzvg
+image: kazetachinu026.jpg
+modified: 20250317081611117
+modifier: uzvg
+tags: 
+title: $:/uzvg/ui/EditorToolbar/picture-dropdown
+type: text/vnd.tiddlywiki
+
+\define replacement-text()
+<<image "$(imageTitle)$">>
+\end
+
+\procedure insert-image-actions()
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text=<<replacement-text>>
+/>
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+\end
+
+\procedure insert-cover-actions()
+<$action-setfield
+$tiddler=<<storyTiddler>>
+image=<<imageTitle>>/>
+<$action-deletetiddler
+$tiddler=<<dropdown-state>>
+/>
+\end
+
+<!--
+''{{$:/language/Buttons/Picture/Hint}}''
+-->
+
+
+<$twks.details
+	default="show"
+	summary="Pictures Was Created Recently:"
+	state="$:/state/detail/pictures-created-recently" >
+	<$macrocall $name="image-picker" subfilter="nsort[created]last[8]" actions=<<insert-image-actions>> />
+</$twks.details>
+
+<$twks.details
+	default="show"
+	summary="Pictures Was Modified Recently:"
+	state="$:/state/detail/pictures-modified-recently">
+	<$macrocall $name="image-picker" subfilter="nsort[modified]last[8]" actions=<<insert-image-actions>> />
+</$twks.details>
+
+<$twks.details
+	default="hide"
+	summary="Insert cover image:"
+	state="$:/state/detail/insert-cover">
+	<$macrocall $name="image-picker" subfilter="nsort[modified]last[10]" actions=<<insert-cover-actions>> />
+</$twks.details>

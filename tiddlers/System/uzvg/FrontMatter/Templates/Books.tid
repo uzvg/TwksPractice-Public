@@ -1,0 +1,30 @@
+caption: Books FrontMatter
+condition: [tag[Books]]
+created: 20241215061059016
+modified: 20250317081611080
+modifier: uzvg
+tags: $:/tags/FrontMatter
+title: $:/uzvg/FrontMatter/Templates/Books
+type: text/vnd.tiddlywiki
+year: 2025-02
+
+<$twks.details summary="Literature Info:" state="$:/state/detail/literature">
+
+|tc-max-width tc-table-no-border table-FrontMatter|k
+|!Book Title |<$view tiddler=<<storyTiddler>> field="caption"/> |
+|!Authors |<<authors-list>> |
+|!Publisher |<$link to={{{ [<storyTiddler>get[publisher]] }}} /> |
+|!ISBN |<$transclude $variable="isbn-link" isbn={{{ [<storyTiddler>get[isbn]] }}} /> |
+|!Publish Year |<$edit-text tiddler=<<storyTiddler>> field="year" tag="input" type="month"/> |
+|!Reading Link |<$wikify name="link" text={{{ [<storyTiddler>get[url]] }}} > <<link>></$wikify> |
+|!Description |<$view tiddler=<<storyTiddler>> field="description"/> |
+|!Rating |<<properties-selector type:"Books" property:"rating">> |
+|!Progress |<<properties-selector type:"Books" property:"progress">> |
+|!Visibility |<<visibility-selector>> |
+
+</$twks.details>
+
+<!-- we don't need medium property here.
+|!Medium |{{!!medium}} |
+|!Publish Year |<$view tiddler=<<storyTiddler>> field="year"/> |
+-->

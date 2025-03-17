@@ -1,0 +1,12 @@
+created: 20250307122547595
+modified: 20250317081611104
+modifier: uzvg
+tags: $:/tags/Global
+title: $:/uzvg/Procedures/icon
+type: text/vnd.tiddlywiki
+
+\procedure icon(name,size,color)
+<$transclude $tiddler={{{ [tag[$:/tags/Image]prefix[$:/uzvg/images]caption<name>] }}}
+	size={{{ [<size>!is[blank]] :else[[$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize]get[text]trim[]] }}}
+	color=<<color>> }}} />
+\end

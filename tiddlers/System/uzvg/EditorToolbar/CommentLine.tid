@@ -1,0 +1,19 @@
+caption: CommentCurrentLine
+condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+created: 20240915064413572
+creator: uzvg
+description: Apply comment formatting to the current line
+icon: $:/uzvg/images/attention
+modified: 20250317081611079
+modifier: uzvg
+shortcuts: ((CommentLine))
+tags: $:/tags/EditorToolbar
+title: $:/uzvg/EditorToolbar/CommentLine
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="<!--"
+	suffix="-->"
+/>

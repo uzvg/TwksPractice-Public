@@ -1,0 +1,17 @@
+caption: All Books
+condition: [all[tiddlers]tag[Books]!is[system]!is[draft]]
+created: 20241105061745381
+creator: uzvg
+modified: 20250317081611102
+modifier: uzvg
+order: 999
+tags: $:/tags/Library
+title: $:/uzvg/Library/All
+type: text/vnd.tiddlywiki
+
+\import $:/uzvg/Library/Procedures/General
+
+<$transclude
+	$variable="library-table"
+	booksFilter={{{ [<currentTab>get[condition]] }}}
+/>

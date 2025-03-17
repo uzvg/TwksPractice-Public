@@ -1,0 +1,109 @@
+primary: #A97E50
+alert-background: #e28a49
+alert-border: #ebf7d1
+alert-highlight: #ad064d
+alert-muted-foreground: #234537
+background: #2D3325
+blockquote-bar: <<colour pre-background>>
+button-background: 
+button-foreground: <<colour very-muted-foreground>>
+button-border: 
+code-background: #EAEBE91A
+code-border: <<colour code-background>>
+code-foreground: <<colour foreground>>
+dirty-indicator: #ffd000
+download-background: <<colour primary>>
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour dropdown-background>>
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: <<colour tab-background>>
+dropzone-background: #70867D
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: #67972e
+external-link-foreground-visited: #a3b6ac
+external-link-foreground: #9daf69
+foreground: #F9EDCF
+highlight-background: #429743
+highlight-foreground: <<colour foreground>>
+message-background: <<colour tiddler-editor-background>>
+message-border: <<colour table-border>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour tiddler-background>>
+modal-border: <<colour modal-background>>
+modal-footer-background: <<colour table-header-background>>
+modal-footer-border: <<colour modal-header-border>>
+modal-header-border: <<colour table-border>>
+muted-foreground: #958D4F
+notification-background: #1D2013
+notification-border: <<colour primary>>
+page-background: #234537
+pre-background: <<colour table-header-background>>
+pre-border: <<colour pre-background>>
+selection-background: 
+selection-foreground: 
+select-tag-background: <<colour tiddler-editor-background>>
+select-tag-foreground: <<colour button-foreground>>
+sidebar-button-foreground: <<colour button-foreground>>
+sidebar-controls-foreground-hover: #39584B
+sidebar-controls-foreground: #193027
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #c7bc8d
+sidebar-muted-foreground-hover: #eee2c0
+sidebar-muted-foreground: #aba16a
+sidebar-tab-background-selected: transparent
+sidebar-tab-background: transparent
+sidebar-tab-border-selected: transparent
+sidebar-tab-border: transparent
+sidebar-tab-divider: #2E4E41
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: <<colour very-muted-foreground>>
+sidebar-tiddler-link-foreground-hover: #70867D
+sidebar-tiddler-link-foreground: <<colour tiddler-link-foreground>>
+site-title-foreground: <<colour foreground>>
+static-alert-foreground: <<colour muted-foreground>>
+tab-background-selected: <<colour tiddler-background>>
+tab-background: <<colour table-header-background>>
+tab-border-selected: <<colour tab-border>>
+tab-border: <<colour table-border>>
+tab-divider: <<colour table-footer-background>>
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: <<colour foreground>>
+table-border: #575C51
+table-footer-background: #42473B
+table-header-background: #383D30
+tag-background: #866440
+tag-foreground: <<colour foreground>>
+tiddler-background: #2D3325
+tiddler-border: <<colour tiddler-background>>
+tiddler-controls-foreground-hover: #62665C
+tiddler-controls-foreground-selected: #777A71
+tiddler-controls-foreground: #1D2013
+tiddler-editor-background: #2B3023
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-border: <<colour table-header-background>>
+tiddler-editor-fields-even: <<colour table-header-background>>
+tiddler-editor-fields-odd: 
+tiddler-info-background: <<colour tiddler-editor-background>>
+tiddler-info-border: <<colour tiddler-info-background>>
+tiddler-info-tab-background: <<colour tiddler-info-background>>
+tiddler-link-background: transparent
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: <<colour muted-foreground>>
+tiddler-title-foreground: <<colour foreground>>
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #424242
+very-muted-foreground: #C4AF7A
