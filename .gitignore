@@ -1,2 +1,4 @@
 tiddlers/Journal/*
 tiddlers/Private/*
+*.bak
+*.default
