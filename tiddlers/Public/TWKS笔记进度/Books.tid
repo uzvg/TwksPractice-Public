@@ -1,0 +1,19 @@
+caption: Books
+created: 20241128070316635
+creator: uzvg
+description: TWKS笔记管理中书籍进度的说明
+modified: 20250317090326798
+modifier: uzvg
+progress: Completed
+tags: $:/twks/Documents
+title: TWKS笔记进度/Books
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+| !进度 | !说明 |
+|`Pending` |书籍被纳入待读列表，但还未开始阅读。 |
+|`Reading` |书籍正在阅读中。 |
+|`Paused`|阅读被暂时中止，可能是因为缺乏时间或其他优先级更高的书籍。 |
+|`Completed` |已读完该书的内容。 |
+|`Archived` |书籍归档，放弃阅读。被纳入笔记系统，但被认为现阶段没有阅读价值的书，被归档处理。 |

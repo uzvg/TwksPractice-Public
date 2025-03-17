@@ -1,0 +1,15 @@
+created: 20250218165011035
+creator: uzvg
+modified: 20250317090326816
+modifier: uzvg
+progress: Capturing
+tags: FleetingNotes
+title: 建立符合tiddlywiki特性的子章节功能
+type: text/vnd.tiddlywiki
+visibility: Public
+
+因为tiddlywiki本身的特性，它是没有像类似的博客文章那样，具有章节功能的。
+
+如何利用tiddlywiki现有的特性，如`tabs`macro，来实现一个类似的功能？
+
+发现一个非常好看的字体，可惜没有字体版本。

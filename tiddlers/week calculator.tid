@@ -1,0 +1,10 @@
+created: 20241212141744368
+creator: uzvg
+modified: 20250317081611184
+modifier: uzvg
+title: week calculator
+type: text/vnd.tiddlywiki
+
+604800000
+
+{{{ [all[tiddlers]!is[system]] :filter[get[modified]format:date[TIMESTAMP]subtract<now TIMESTAMP>compare:integer:gt[-604800000]] }}}

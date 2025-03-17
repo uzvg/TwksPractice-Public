@@ -1,0 +1,21 @@
+caption: PermanentNotes
+created: 20241127124828287
+creator: uzvg
+description: TWKS的PermanentNotes的笔记进度管理说明
+modified: 20250317090326798
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: $:/twks/Documents
+title: TWKS笔记进度/PermanentNotes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+| !进度 | !说明 |
+|`Pending` |表示该笔记被录入系统，但尚未开始处理。|
+|`Building` |表示该笔记正在处理中。 |
+|`Paused` |表示该笔记因各种原因，被暂停处理。 |
+|`Completed` |表示该笔记已完成处理。 |
+|`Archived` |观点被认为过时，不重要，价值不高，但又可能会在未来有用的笔记，被归档处理。 |
+|`Rethinking` |对已完成，已归档的笔记重新思考，修改、整理其笔记内容。 |

@@ -1,0 +1,26 @@
+created: 20241013165040580
+creator: uzvg
+modified: 20250317090326794
+modifier: uzvg
+progress: Rethinking
+rating: Plain
+tags: PermanentNotes tiddlywiki
+title: TiddlywikiCommand/save
+type: text/vnd.tiddlywiki
+visibility: Public
+
+使用tiddlywiki `save` command保存系统文件：
+
+```
+tiddlywiki --output "twks" --save "[is[system]prefix[$:/uzvg]]"
+```
+
+将所有以`$:/uzvg`为首的系统tiddler导出到当前文件夹下`output`文件夹中的`twks`文件夹中，方便进行版本管理。
+
+⚠️ 需要注意的是，`--output`参数需要在`--save`参数之前指定，如果在其后指定，则不会起作用，如下：
+
+```
+tiddlywiki --save "[is[system]prefix[$:/uzvg]]" --output "./twks"
+```
+
+该命令只会将tiddler导出到默认文件夹中，也就是说`--output`参数并未起作用。

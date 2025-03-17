@@ -1,0 +1,128 @@
+created: 20250221080607848
+description: age加密工具的使用教程，详细记录了age加密工具的加解密过程。
+modified: 20250317090326810
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes age加密 Encrypt(加密)
+title: 使用age加密工具
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+在了解chezmoi的加密功能时发现了age这个加密工具，它提供了比传统工具（如 GPG）更简洁的体验，同时保持高安全性。而且chezmoi自身内置了age加密的支持，如果在`$PATH`中找不到`age`命令，则会自动使用chezmoi自带的`age`特性。
+
+在进入age的具体操作流程之前，推荐先了解age加密中的一些基本术语，如：
+
+* [[什么是identity和recipient？]]
+* [[age --armor选项的作用]]
+
+!! 选项说明：
+
+age是一个非常简洁的加密工具，选项也非常简单，主要有如下选项：
+
+|tc-max-width|k
+| !选项                          | !描述                                      |
+|`-e`, `--encrypt`                 |加密输入到输出。省略时为默认选项。       |
+|`-d`, `--decrypt`                 |解密输入到输出。                          |
+|`-o`, `--output` OUTPUT           |将结果写入指定路径的文件OUTPUT。         |
+|`-a`, `--armor`                   |加密为PEM编码格式。                      |
+|`-p`, `--passphrase`              |使用密码短语进行加密。                    |
+|`-r`, `--recipient` RECIPIENT     |加密到指定的接收者RECIPIENT。可重复使用。 |
+|`-R`, `--recipients-file` PATH    |加密到在PATH中列出的接收者。可重复使用。 |
+|`-i`, `--identity` PATH           |使用在PATH中的身份文件。可重复使用。     |
+
+!! 操作说明：
+
+; age支持两种加密模式：
+* 对称加密，使用密码（passphrase）进行加密和解密
+* 非对称加密，使用公钥加密，私钥解密。
+
+!!! 对称加密：
+
+```
+$ age --passphrase --output animals.age animals.txt
+$ age --passphrase --armor --output animals.age animals.txt
+```
+
+* 输入命令后，会提示输入密码。
+* 第一行，生成二进制的`X25519 recipient`格式的加密文件。
+* 第二行带`armor`选项，会生成ASCII文本的加密文件。
+
+```
+$ age --decrypt animals.age -o <fileName>.text
+```
+
+* 直接使用`-d`或者`--decrypt`可以直接解密被加密的文件，使用`-o`参数用于保存解密后的文件。
+
+!!! 非对称加密：
+
+; 生成加密秘钥对：
+
+```bash
+$ age-keygen
+```
+直接使用`age-keygen`密钥对，将会输出如下内容：
+
+```
+# created: 2025-02-21T17:35:58+08:00
+# public key: age1u3m78kxvka8u0w2wzuk4aly9k37qcxshejs9h7dvrkzrj8z6ra4qld3vjv
+AGE-SECRET-KEY-1XN4YADCN9L5MMNCNYEKV9LC72M66YMCG6E42W9USQVPPFKZFUSPQVKFXN3
+```
+
+* 第一行，public key，指的就是公钥，在age中，也被称之为`recipient`，公钥用于加密文件。
+* 第二行，是生成的私钥，在age中，也被称之为`identity`，私钥用于解密文件。
+
+```
+$ age-keygen -o encrypt_id.txt
+Public key: age12qngcew5ty9wv4rwly2pret3ege7y8kp7w29yewsu7l40rxr2ulq9f8rsv
+```
+
+* 使用`-o`参数，可以把以上生成的密钥保存的指定的文件中，同时在标准输出中只输出''公钥''。
+
+在只有密钥文件的情况下，可以使用`-y`参数来查看该密钥文件所对应的`公钥`：
+
+```bash
+$ age-keygen -y encrypt_id.txt
+age12qngcew5ty9wv4rwly2pret3ege7y8kp7w29yewsu7l40rxr2ulq9f8rsv
+```
+
+; 使用公钥加密：
+
+```
+age --encrypt --recipiend <public-key> --output file.age file.txt
+```
+
+* `-e`或`--encrypt`：表示加密操作。
+* `-r`或`--recipient`：指定接收者的公钥。
+
+除此之外，age可以针对同一文件，指定多个`recipient`，方法如下：
+
+```
+$ age -o example.jpg.age -r age1ql3z7hjy54pw3hyww5ayyfg7zqgvc7w3j2elw8zmrj2kg5sfn9aqmcac8p \
+    -r age1lggyhqrw2nlhcxprm67z43rta597azn8gknawjehu9d9dl0jq3yqqvfafg example.jpg
+```
+
+* 多次使用`-r`参数，可以同时指定多个`recipient`，针对`example.jpg`文件进行加密，加密后的文件，可以由这些指定的`recipient`所对应的`ideitify`解密。
+
+当`recipient`的数量过多时，我们可以将`recipient`保存在一个文件中，然后使用`-R`参数，可以批量对文件中`recipient`进行加密：
+
+```
+age --encrypt -R </path/to/public-key> --output file.age file.txt
+```
+
+; 使用私钥解密：
+
+每一个加密的公钥，都对应着一个能够解密的私钥，我们可以使用`-i`或`--identify`参数来指定私钥文件，对加密文件进行解密：
+
+```
+age -d -i key.txt -o file.txt file.age
+```
+
+* `-d`或者`--decrypt`：表示解密操作。
+* `-i`或者`--identify`：指定私钥所在文件。
+
+!! 拓展：
+
+* [[age使用ssh秘钥]]

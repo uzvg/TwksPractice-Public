@@ -1,0 +1,27 @@
+created: 20240818061441426
+creator: uzvg
+description: tiddlywiki中import pragma的作用跟用法
+modified: 20250317090326784
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki PermanentNotes
+title: Pragma/import
+type: text/vnd.tiddlywiki
+visibility: Public
+
+格式：`import <filter>`
+
+作用：在`<filter>`中选中的tiddler中所定义的宏、变量，引入当前tiddler，是`importvariables`组件的快捷书写方式。
+
+`\import [tag[mySpecialMacros]]`作用跟下面的表达式相同。
+
+```
+<$importvariables filter="[tag[mySpecialMacros]]">
+All the macros defined in tiddlers with the tag "mySpecialMacros" are available here
+</$importvariables>
+```
+
+<<rememberq "20240818110742777"
+	"import pragma的作用是什么？"
+	"`import <filter>`用于将选中的tiddler中的定义导入到当前tiddler中。">>

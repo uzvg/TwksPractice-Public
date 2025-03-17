@@ -1,0 +1,25 @@
+authors: unknown
+caption: Linux下steam客户端字体太小
+created: 20241118113332172
+creator: uzvg
+description: 通过设置环境来解决于steam客户端在Linux高分屏下的缩放问题。
+medium: Website
+modified: 20250317090326782
+modifier: uzvg
+progress: Archived
+tags: LiteratureNotes Linux Steam
+title: Linux下steam客户端字体太小(1731943041975)
+type: text/vnd.tiddlywiki
+url: https://github.com/ValveSoftware/steam-for-linux/issues/9209
+visibility: Public
+year: 2024/11/18
+
+!! 解决方案：
+
+在自己的Linux桌面环境下，通过`STEAM_FORCE_DESKTOPUI_SCALING`变量来控制steam客户端的缩放倍数。
+
+如果用的是flatpak版本的Steam客户端，可以安装flatseal软件包，添加如下环境变量：
+
+```
+STEAM_FORCE_DESKTOPUI_SCALING=1.25
+```

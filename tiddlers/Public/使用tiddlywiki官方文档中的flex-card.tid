@@ -1,0 +1,18 @@
+created: 20241113025101458
+creator: uzvg
+medium: Website
+modified: 20250317090326811
+modifier: uzvg
+progress: Archived
+tags: tiddlywiki FleetingNotes
+title: 使用tiddlywiki官方文档中的flex-card
+type: text/vnd.tiddlywiki
+visibility: Public
+
+打开筛选器，找到所有以`$:/card`为前缀的tiddler：
+
+```
+[prefix[$:/cards]]
+```
+
+导入到自己的tiddlywiki中。

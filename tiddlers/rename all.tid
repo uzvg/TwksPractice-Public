@@ -1,0 +1,22 @@
+created: 20250317081405887
+modified: 20250317090324762
+modifier: uzvg
+tags: 
+title: rename all
+type: text/vnd.tiddlywiki
+
+<$button>
+	<$list filter="[visibility[Private]]">
+	<$action-setfield $tiddler=<<currentTiddler>> visibility="Private"/>
+	</$list>
+	<$list filter="[visibility[Public]]">
+	<$action-setfield $tiddler=<<currentTiddler>> visibility="Public"/>
+	</$list>
+	<$list filter="[tag[Journal]]">
+	<$action-setfield $tiddler=<<currentTiddler>> modifier="uzvg"/>
+	</$list>
+	<$list filter="[tag[Image]]">
+	<$action-setfield $tiddler=<<currentTiddler>> modifier="uzvg"/>
+	</$list>
+	set modifier
+</$button>

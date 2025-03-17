@@ -1,0 +1,13 @@
+created: 20241109114216840
+creator: uzvg
+modified: 20250317081611141
+modifier: uzvg
+tags: Linux fontconfig
+title: fontconfig字体配置
+type: text/vnd.tiddlywiki
+
+!! 三个目录的作用
+
+/usr/share/fontconfig/conf.avail 提供了默认的配置文件
+/usr/share/fontconfig/conf.default 和 /etc/fonts/config.d 则用于系统管理员和用户根据自己的需要进行自定义配置。
+

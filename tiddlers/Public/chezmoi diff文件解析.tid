@@ -1,0 +1,41 @@
+created: 20250219110555354
+description: chezmoi中三种不同状态的文件
+modified: 20250317090326765
+modifier: uzvg
+progress: Completed
+rating: Promising
+tags: PermanentNotes chezmoi
+title: chezmoi diff文件解析
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 文件状态：
+
+在使用chezmoi merge差异时，有如下三种文件状态，它们各向代表的作用如下：
+
+在 chezmoi 里，`merge.args` 用于定义合并（merge）策略，其中 `.Destination`、`.Source` 和 `.Target` 分别代表不同的文件状态：
+
+|!状态|!说明|
+|`.Destination` |目标系统上的''现有文件''（即你机器上的当前文件）。 |
+|`.Source` |chezmoi ''源目录''中的模板文件（`~/.local/share/chezmoi` 里的文件）。 |
+|`.Target` |chezmoi 生成的''目标文件''（通常是由 `chezmoi apply` 生成的最终版本）。 |
+
+!! 关系说明：
+
+* `.Destination` 代表的是''用户当前的配置文件''，如果文件不存在，则为空。
+* `.Source` 代表 chezmoi ''管理的模板文件''，它用于生成 `.Target` 文件。
+* `.Target` 代表 chezmoi ''准备要应用的版本''，通常是从 `.Source` 经过渲染生成的最终版本。
+
+!! 使用示例：
+
+使用`neovim`作为`chezmoi`的diff及merge工具，可在配置文件中做如下配置：
+
+```toml
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
+[diff]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
+
+```

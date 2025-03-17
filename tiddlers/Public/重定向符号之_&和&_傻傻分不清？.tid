@@ -1,0 +1,59 @@
+created: 20250226040308158
+modified: 20250317090326824
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: PermanentNotes Linux Shell 重定向
+title: 重定向符号之>&和&>傻傻分不清？
+type: text/vnd.tiddlywiki
+visibility: Public
+
+学习Linux重定向的相关内容时，发现有如下两个符号总是让人分不清：`>&` 和 `&>`。
+
+!! 合并输出符号：
+
+合并输出符号`&>`的作用是合并输出，将`stdout`和`stderr`同时写入文件，等价于`>file 2>&1`，有如下例子：
+
+```bash
+$ ls -al test test2 test3 badtest &> test7
+$ cat test7
+ls: cannot access test: No such file or directory
+ls: cannot access badtest: No such file or directory
+-rw-rw-r-- 1 rich rich 158 2014-10-16 11:32 test2
+-rw-rw-r-- 1 rich rich
+0 2014-10-16 11:33 test3
+$
+```
+
+* 当使用`&>`符号时，命令生成的所有输出都会发送到同一位置，包括数据和错误。你会注意到其中一条错误消息出现的位置和预想中的不一样。`badtest`文件（列出的最后一个文件）的这条错误消息出现在输出文件中的第二行。
+
+* <<twks-warning "为了避免错误信息散落在输出文件中，相较于标准输出，bash在脚本中重定向输出shell自动赋予了错误消息更高的优先级。">>
+
+!! 文件描述符复制符号：
+
+`>&`用于合并输出流或复制文件描述符，具体行为取决于其右侧参数的类型：
+
+|!右侧参数类型|!行为|!示例|
+|文件名 |合并 `stdout` 和 `stderr` 到文件 |`cmd >& file` |
+|文件描述符数字 |复制文件描述符（重定向流到另一个流） |`cmd >output 2>&1` |
+
+* 当右侧参数类型为`文件`时， 其作用跟`&>`一样，用于合并`stdout`和`stderror`到指定文件
+* 当右侧参数类型为`文件描述符`时，其作用符合以下规范：
+** `n>&m`，其中，`n`和`m`都指的是文件描述符，意思是，将一个输出流`n`重定向到另一个描述符`m`的位置。
+** `m`是一个数字，不加引号时，指的是''文件描述符''，加引号时，指的是''文件名''。
+
+; 关键规则：
+* 粘连性要求：`>&` 必须与右侧参数紧密相连，不可插入空格。
+* 数字歧义：若文件名是纯数字（如 `>&1`），Bash会优先解析为描述符操作。
+* 文件描述符必须提前打开。
+
+```bash
+# 正确写法：先重定向 stdout，再复制 stderr
+cmd >file 2>&1
+
+# 错误写法：此时 stderr 仍指向原位置
+cmd 2>&1 >file
+```
+
+; 助记口诀：
+* 先定向，再复制；文件数字需辨清，粘连空格是大忌。

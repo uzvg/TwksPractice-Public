@@ -1,0 +1,58 @@
+created: 20240707171516991
+creator: uzvg
+modified: 20250317081611222
+modifier: uzvg
+tags: tiddlywiki PermanentNotes
+title: 自定义tiddlywiki构建方案
+type: text/vnd.tiddlywiki
+
+!! 什么是构建方案？
+
+在了解过tiddlywiki的命令后，就可以自定义tiddlywiki构建方案。
+
+所谓的构建方案，无非就是把在命令行依次执行的命令，保存在`json`格式的`tiddlywiki.info`文件中，这样每当我们执行简单的构建命令，tiddlywiki就从提前编辑好的`tiddlywiki.info`文件，读取命令参数并依次执行。
+
+!! 需求示例：
+
+假设我们使用tiddlywiki记录我们生活中的任何笔记，这些笔记中包括：
+
+* 用于提高我们使用体验的各种插件，这些插件通常以`$:/plugins/<PluginAuthor>/`开头。
+* 被打上`Public`标签的可公开，可发布的笔记，可用于生成公开的个人wikispace。
+* 被打上`workNotes`标签的，用于同事沟通分享的工作笔记。
+* 其他笔记。
+
+所有这些笔记都被保存在同一个tiddlywiki工作目录中，而我们的需求如下：
+
+* 为了防止别人篡改笔记，所有生成的`index.html`都是只读模式。
+* tiddlywiki生成的网页是一个静态网页，为了缩小生成的`index.html`的文件大小，精简一切在阅读模式下非必要的插件。
+* 使用不同的筛选器，生成不同版本的html文件：
+** 将所有`public`标签的tiddler导出为`public/index.html`，用以发布静态博客
+** 将所有`worknotes`标签的tiddler，导出到`work/index.html`中，用以跟同事分享工作笔记
+* 最后，以上这些改动均不会影响我们的工作环境。也就是说，构建方案不影响我们正常的工作模式，比如插件能正常开启并加载。
+
+!! 方案示例：
+
+明确了工作环境跟使用需求之后，先来解释一下每个要求的准备工作和实现原理：
+
+* [[生成只读版本的tiddlywiki]]
+* 过滤掉所有插件，筛选所有`public`标签的tiddler以生成index.html，并将其保存在`public`文件夹中
+
+```
+tiddlywiki --output public --render  '.' 'index.html' 'text/plain' '$:/plugins/tiddlywiki/tiddlyweb/save/offline' 'publishFilter' '-[prefix[$:/plugins/]] -[is[tiddler]!is[system]] [tag[public]]'
+```
+
+!! 最终生成的构建方案：
+
+```
+    "build": {
+        "index": [
+            "--setfield","[[$:/config/uzvg/theme/normal]]","text","$:/theme","text/plain",
+            "--setfield","[[$:/theme]]","text","$:/config/uzvg/theme/readonly","text/plain",
+            "--output", "public",
+            "--render",".","index.html","text/plain","$:/plugins/tiddlywiki/tiddlyweb/save/offline","publishFilter","-[prefix[$:/plugins]] -[is[tiddler]!is[system]] [tag[public]]",
+            "--output", "test",
+            "--render",".","index.html","text/plain","$:/plugins/tiddlywiki/tiddlyweb/save/offline","publishFilter","-[prefix[$:/plugins]] -[is[tiddler]!is[system]] [tag[test]]",
+            "--setfield","[[$:/theme]]","text","$:/config/uzvg/theme/normal","text/plain",
+            "--output", "output"
+        ],
+```

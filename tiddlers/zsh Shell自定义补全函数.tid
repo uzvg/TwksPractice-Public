@@ -1,0 +1,66 @@
+created: 20240805160445021
+creator: uzvg
+modified: 20250317081611189
+modifier: uzvg
+tags: zsh
+title: zsh Shell自定义补全函数
+type: text/vnd.tiddlywiki
+
+在 Zsh Shell 中，编写自定义补全函数可以让我们为自己的命令或脚本实现更精准、更智能的参数补全。以下是一些步骤和示例：
+
+!!! 1. 了解补全函数的基本结构：
+
+* 自定义补全函数通常以 `_` (下划线) 开头，后面跟着命令名称。
+* 函数体内部使用 `compadd` 函数将匹配的选项添加到补全列表中。
+
+!!! 2.  一个简单的示例：
+
+假设我们有一个名为 `mycommand` 的命令，它接受一个参数，参数值为 `option1`,  `option2` 或 `option3`。我们可以编写以下补全函数：
+
+```bash
+# 定义补全函数，函数名为 _mycommand
+_mycommand() {
+  # 使用 compadd 添加可选项
+  compadd option1 option2 option3
+}
+
+# 将补全函数与 mycommand 命令关联
+compdef _mycommand mycommand 
+```
+
+!!! 3.  解释：
+
+* `_mycommand()`： 定义了名为 `_mycommand` 的函数，这是我们自定义的补全函数。
+* `compadd option1 option2 option3`：`compadd` 函数将 `option1`,  `option2` 和 `option3` 添加到可补全的选项列表中。
+* `compdef _mycommand mycommand` :  将 `_mycommand` 补全函数与 `mycommand` 命令关联起来，这样当你对 `mycommand` 命令进行补全时，Zsh 就会调用 `_mycommand` 函数来生成补全列表。
+
+!!! 4. 更复杂的逻辑：
+
+* 你可以使用任何 Zsh 语法和函数来生成补全列表，例如读取文件、执行命令、进行条件判断等。
+* `$words` 数组包含了当前命令行的所有单词，你可以使用它来获取已输入的参数。
+* `$cur`  变量包含了当前光标位置的单词。
+
+!!! 5. 示例 - 根据文件内容补全：
+
+假设我们有一个命令 `usecolor`，它接受一个颜色名作为参数，而颜色名存储在文件 `colors.txt` 中，每行一个颜色名。
+
+```zsh
+_usecolor() {
+  # 读取 colors.txt 文件，将每一行作为一个可选项
+  compadd $(cat colors.txt)
+}
+
+compdef _usecolor usecolor
+```
+
+!!! 6.  更高级的技巧：
+
+* 你可以使用 [[arguments函数]]来定义更复杂的参数解析逻辑，例如支持短选项、长选项、选项参数等。
+*  Zsh 提供了许多内置的补全函数和工具，可以帮助你更轻松地编写自定义补全函数，例如 `_describe`, `_files`, `_path_files` 等。
+
+!!! 7. 调试：
+
+* 使用 `compdebug` 命令可以调试你的补全函数。
+
+
+编写自定义补全函数需要一定的 Zsh 脚本编写经验，但它可以极大地提高你在终端中的工作效率。建议参考 Zsh 官方文档和现有的补全脚本进行学习和实践。

@@ -1,0 +1,28 @@
+authors: [[Ilya Kantor]]
+caption: TheModernMode
+created: 20241025104442853
+creator: uzvg
+description: javaScript代码中常用的use stict是什么意思？有什么用？
+medium: Website
+modified: 20250317090326793
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: TheModernMode(1730183122444)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/strict-mode
+visibility: Public
+year: 2024/10/25
+
+; 在javaScript代码中常见的`"use strict";`有什么用？
+: 在2009年，ecmascript成立后，为javaScript添加了许多新的特性，但与此同时，为了使旧的代码也能正常运行，这些新的特性是默认关闭的，所以需要用`use strict;`该语句来开启新特性。
+
+; `use strict;`该语句应该写在什么位置？
+# 可以放在的整个脚本的前面，使其在脚本全局有效。
+# 可以放在函数体内的最前面，使其在函数内有效，如下：
+# ⚠️ 需要注意的是，只能放在前面，放在其他地方可以失效。
+# 一旦开启，无法关闭。
+
+<<rememberq "20241029054326418"
+	"如何开启javaScript的现代功能？"
+	"在代码或者函数开头添加`'use strict';`语句">>

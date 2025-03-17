@@ -1,0 +1,77 @@
+created: 20241116025459828
+creator: uzvg
+modified: 20250317090326782
+modifier: uzvg
+progress: Rethinking
+rating: Doubtful
+tags: Linux PermanentNotes
+title: Linux下的可执行二进制文件应该保存在哪里？
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+Linux下有很多个二进制文件的保存目录，这些不同但又看起来很相似的目录，往往令初学者迷惑，我曾经从事过一段时间的无人驾驶调试工作，很多Linux初学者的二进制文件被保存在各种奇奇怪怪的位置，造成一定程度上的维护的困难，本文帮大家了解Linux下每个二进制目录的具体用处跟具体应用场景，看完后不要再把自己二进制文件到处乱放了。
+
+!! 传统的Linux二进制文件目录：
+
+先来了解一下''传统''的Linux二进制文件目录(主流的Linux桌面已经开始合并各种`bin`目录)，大体上遵循以下几个规则：
+
+| !关键字 | !含义 |
+| `bin` |保存普通用户使用的可执行文件 |
+| `sbin` |保存管理员使用的可执行文件 |
+| `local` |保存本地安装的可执行文件，主要是用户手动编译安装的可执行文件，更通俗地说，就是没有通过Linux发行版的软件包管理工具，如apt，pacman，yum安装的可执行文件。 |
+| `.local` |保存只供单个用户而非所在系统的所有用户使用的可执行文件 |
+
+<$twks.details summary="传统Linux二进制文件目录具体作用：" state="$:/state/detail">
+
+| !目录 | !作用 | !特点 | !应用场景 |
+|`/bin` |存放系统基本命令的二进制可执行文件。 |包含系统启动时和单用户维护模式下需要使用的基本命令（例如：`ls`, `cp`, `mv`, `rm`, `cat`, `echo`, `bash` 等）。|这些命令通常是所有用户（包括普通用户和管理员）都能访问的。当系统处于维护模式或启动过程中，`/bin` 中的命令是可用的。这些命令是最基础的工具，即使没有挂载 `/usr` 分区，依然可以使用。 |
+|`/sbin` |存放系统管理相关的二进制文件，通常是系统管理员（`root` 用户）使用的命令。 |包含与系统启动、修复、恢复、和系统配置相关的命令（例如：`fsck`, `reboot`, `shutdown`, `ifconfig`, `iptables` 等）。<br>这些命令对普通用户通常不可用，仅限于管理员权限（`root` 用户）。 |当系统需要启动、维护或紧急修复时使用。`/sbin` 中的工具是操作系统核心管理工具。 |
+|`/usr/bin` |存放系统用户级别的二进制可执行文件。 |包含普通用户可以使用的大多数应用程序和工具（例如：`gcc`, `git`, `python`, `vim`, `nano` 等）。<br>这些命令不是系统启动所必需的，而是用户日常操作所需要的工具。 |一般用户和开发者在使用 Linux 系统时，通常会用到 `/usr/bin` 中的工具。它包含了更丰富的软件包，而不仅仅是系统基础命令。 |
+|`/usr/sbin` |存放系统管理相关的二进制文件，但这些文件并不是系统启动所必需的。 |包含对系统配置和管理有帮助的命令（例如：`apachectl`, `nginx`, `useradd`, `groupadd`, `service` 等）。<br>这些工具通常需要管理员权限才能运行。 |系统管理员需要安装、配置和管理服务器应用时会用到这些命令。普通用户通常没有权限执行这些命令。 |
+|`/usr/local/bin` |存放本地用户自行安装的非系统默认的二进制可执行文件。 |这里的程序通常由系统管理员手动安装，可能是通过源码编译而来，或者不是系统包管理器（如 `apt`, `yum`）安装的。<br>通常优先级高于 `/usr/bin`，因为 `/usr/local/bin` 在 `PATH` 中往往排在 `/usr/bin` 之前。 |当你安装某些软件包时，如果不希望影响系统默认的软件包，可以将其安装在 `/usr/local/bin`。这有助于与系统自带的命令区分开。 |
+|`/usr/local/sbin` |存放本地用户自行安装的、系统管理员使用的管理命令。 |包含系统管理员安装的、非系统默认的管理工具。<br>仅 `root` 用户或具有管理员权限的用户可以访问。 |当系统管理员安装额外的管理工具，而这些工具又不希望与系统默认的工具冲突时，通常会将其放在 `/usr/local/sbin` 中。 |
+
+</$twks.details>
+
+!! 现代 Linux 系统中目录结构的变化
+
+许多现代 Linux 发行版（如 Ubuntu、Debian、Arch 等）已经开始采用 `/usr` 合并策略（`/usr merge`），即将 `/bin`, `/sbin`, `/lib` 等目录合并到 `/usr/bin`, `/usr/sbin`, `/usr/lib` 中。这意味着：
+
+* `/bin` 实际上会是 `/usr/bin` 的符号链接（symlink）。
+* `/sbin` 会是 `/usr/sbin` 的符号链接。
+
+我们可以用以下命令来查看各个目录具体的链接情况：
+
+```shell
+$ realpath /bin /sbin /usr/sbin /lib
+/usr/bin
+/usr/bin
+/usr/bin
+/usr/lib
+
+# 再比如：
+$ ls -ld /bin /sbin
+lrwxrwxrwx 1 root root 7 Nov 16 09:00 /bin -> usr/bin
+lrwxrwxrwx 1 root root 8 Nov 16 09:00 /sbin -> usr/sbin
+```
+
+也可以直接通过查看环境变量的方式来确定自己使用的Linux发行版是否采用了`/usr`merge策略：
+
+```shell
+$ echo $PATH
+/usr/local/bin:/usr/bin:/usr/local/sbin:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/uzvg/.local/bin:/home/uzvg/.cargo/bin
+
+$ su - root
+
+ArchLinux# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/bin
+```
+
+可以看到，采用了`/usr`merge的Linux发行版的`PATH`环境变量中，已经不再添加`/bin`，`/sbin`等路径。
+
+!! ⚠️注意：
+
+export path的优先级
+

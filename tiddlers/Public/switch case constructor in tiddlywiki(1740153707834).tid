@@ -1,0 +1,18 @@
+authors: Mohammad
+caption: switch case constructor in tiddlywiki
+created: 20250221160147835
+creator: uzvg
+description: 使用tiddlywiki的现有语法模拟switch-case语句
+medium: Website
+modified: 20250317090326787
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: LiteratureNotes tiddlywiki TiddlywikiCommand
+title: switch case constructor in tiddlywiki(1740153707834)
+type: text/vnd.tiddlywiki
+url: https://talk.tiddlywiki.org/t/switch-case-construct/2234
+visibility: Public
+year: 2025-01-22
+
+tiddlywiki中缺乏像其他语言中的switch-case语句，这是社区用户提出的一种模拟switch-case的方法，可以实现类似的用法。以后可能用得到。

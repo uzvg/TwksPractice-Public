@@ -1,0 +1,84 @@
+created: 20240711163307550
+creator: uzvg
+modified: 20250317081611172
+modifier: uzvg
+tags: tiddlywiki PermanentNotes TiddlywikiCommand
+title: tiddlywiki render命令解析
+type: text/vnd.tiddlywiki
+
+!! 命令作用：
+Render individual tiddlers identified by a filter and save the results to the specified files.
+
+Optionally, the title of a template tiddler can be specified. In this case, instead of directly rendering each tiddler, the template tiddler is rendered with the "currentTiddler" variable set to the title of the tiddler that is being rendered.
+
+A name and value for an additional variable may optionally also be specified.
+
+!! 命令格式：
+
+```
+tiddlywiki --render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* `tiddler-filter`: A filter identifying the tiddler(s) to be rendered
+* `filename-filter`: Optional filter transforming tiddler titles into pathnames. If omitted, defaults to [is[tiddler]addsuffix[.html]], which uses the unchanged tiddler title as the filename
+* render-type: Optional render type: `text/html` (the default) returns the full HTML text and `text/plain` just returns the text content (ie it ignores HTML tags and other unprintable material)
+* template: Optional template through which each tiddler is rendered（用于筛选哪些tiddler会被渲染）
+* name: Name of optional variables（变量名）
+* value: Value of optional variables（变量值）
+
+By default, the filename is resolved relative to the output subdirectory of the edition directory. The --output command can be used to direct output to a different directory.
+
+!! 注意事项：
+
+* The output directory is not cleared of any existing files（不清除任何已有文件）
+* Any missing directories in the path to the filename are automatically created.（缺失的文件路径自动创建）
+* When referring to a tiddler with spaces in its title, take care to use both the quotes required by your shell and also TiddlyWiki's double square brackets: --render `"[[Motovun Jack.jpg]]"`（标题中有空格，记得用双引号）
+* The filename filter is evaluated with the selected items being set to the title of the tiddler currently being rendered, allowing the title to be used as the basis for computing the filename.（tiddler的标题名，会被当做最终产生的文件名的计算基础）
+** For example [encodeuricomponent[]addprefix[static/]] applies URI encoding to each title, and then adds the prefix `static/`
+* Multiple name/value pairs can be used to pass more than one variable（可传递多个变量值对）
+* The --render command is a more flexible replacement for both the --rendertiddler and --rendertiddlers commands, which are deprecated（取代了以前使用的`rendertiddler`和`rendertiddlers`指令）
+
+!! 使用示例：
+
+```
+tiddlywiki --render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'
+```
+
+* Renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML（将所有的非系统tiddler以`html`的格式保存到wikifolder的`tiddlers`子文件夹中，文件名在原tiddler标题的基础上，通过uri格式化生成。
+
+---
+
+```
+tiddlywiki --render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'
+```
+
+* Render the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"
+
+---
+
+```
+tiddlywiki --render  '.' 'index.html' 'text/plain' '$:/plugins/tiddlywiki/tiddlyweb/save/offline' 'publishFilter' '-[prefix[$:/plugins]]'
+```
+
+* 读取`$:/plugins/tiddlywiki/tiddlyweb/save/offline`模板，通过定义`publishFilter`变量的值，筛选出所有不以`$:/prefix`为前缀的tiddler，最后生成index.html文件
+
+---
+
+```
+tiddlywiki --render,"[tag[external-text]]","[encodeuricomponent[]addprefix[text/]addsuffix[.tid]]","text/plain","$:/core/templates/tid-tiddler"
+```
+
+* 将所有标签为`external-text`的tiddler，导出为`text`文件夹下的`.tid`文件。
+
+---
+
+```
+--render,"$:/core/save/all","index.html","text/plain"
+```
+
+* 按照标题为`$:/core/save/all`中的筛选器，生成纯文本格式的`index.html`文件
+** 来源：👉[[tw5.com的构建方案|https://github.com/Jermolene/TiddlyWiki5/blob/eeeb9f97a9b517f5ed76267bb50d4d141c72c251/editions/tw5.com/tiddlywiki.info#L35]]
+
+!! 在这之后：
+
+学习完`render`指令及其他tiddlywiki的命令之后，我们就可以用它们生成[[我们自己的构建方案|自定义tiddlywiki构建方案]]，它能显著提高我们对tiddlywiki的使用效率。

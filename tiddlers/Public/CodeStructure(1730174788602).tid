@@ -1,0 +1,29 @@
+authors: [[Ilya Kantor]]
+caption: CodeStructure
+created: 20241025103503600
+creator: uzvg
+description: javaScript的代码结构
+medium: Website
+modified: 20250317090326767
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes
+title: CodeStructure(1730174788602)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/structure
+visibility: Public
+year: 2024/10/25
+
+; javaScript中的声明
+# javaScript中的声明可以用`;`分开，如：`alert('Hello'); alert('World');`
+# 大多数情况下，javaScript会在换行之后自动插入`;`号，但并不代表全部。
+# 推荐的做法是：无论能否自动插入`;`号，在每个换行后，都写上`;`。
+
+; javaScript中的注释：
+# 单行使用`//`
+# 多行使用`/**/`
+# 不支持嵌套注释，如：`/* here are /*make some test*/ some text */`，这样的注释不被支持。
+
+<<rememberq "20241025104327921"
+	"在javaScript中写多行注释时，需要注意什么？"
+	"不可嵌套注释">>

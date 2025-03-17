@@ -1,0 +1,39 @@
+authors: [[Ilya Kantor]]
+caption: Comparisons
+created: 20241025095846897
+creator: uzvg
+description: javaScript中的比较
+medium: Website
+modified: 20250317090326767
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: Comparisons(1730174420240)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/comparison
+visibility: Public
+year: 2024/10/25
+
+!! 字符串的比较
+
+[[unicode字符列表|https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8]]
+大写字母的ascii代码小于小写字好，这是一个比较反直觉的知识，比如小写字母`a`的十进制ascii码是
+
+!! 不同类型的数据的比较
+
+<<rememberq "20241026092816717"
+	"javaScript是如何进行不同类型的数值的比较的？(==)"
+	"会先将其转化为数字(number)，再进行比较。">>
+
+<<rememberq "20241026092956128"
+	"举一个一般相等的例子："
+	"""let a = 0;
+	alert( Boolean(a) ); false
+	let b = "0";
+	alert( Boolean(b) );
+	true alert(a == b); true!"""
+>>
+
+<<rememberq "20241026093219562"
+	"什么是严格相等？(===)"
+	"就是不进行任何类型转化的相等判断。">>

@@ -1,0 +1,18 @@
+color: #f6d32d
+created: 20240905145256237
+creator: uzvg
+icon: $:/uzvg/images/fleeting-notes
+modified: 20250317081611141
+modifier: uzvg
+title: FleetingNotes
+type: text/vnd.tiddlywiki
+
+\procedure fleeting-table()
+<table>
+	<tr>
+		<th>
+			<td></td>
+		</th>
+	</tr>
+</table>
+\end

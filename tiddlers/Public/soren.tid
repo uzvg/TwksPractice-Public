@@ -1,0 +1,30 @@
+created: 20240816065504947
+creator: uzvg
+modified: 20250317090326786
+modifier: uzvg
+progress: Capturing
+tags: PAO FleetingNotes
+title: soren
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Introduce：
+
+* Full name is [[Soren Bjornstad|https://zettelkasten.sorenbjornstad.com/#WhoIAmWhatIThink]]
+* The author of [[Mosaic Muse|https://zettelkasten.sorenbjornstad.com/#PublicHomepage]]
+* The author of [[groktiddlywiki|https://groktiddlywiki.com]] which I believe is the best tutorial of tiddlywiki.
+who developed a series of high quality tiddlywiki plugins such as [[TiddlyRemember|https://github.com/sobjornstad/TiddlyRemember]], which can make tiddlywiki communicate seamlessly with anki.
+
+* The author of project [[tzk]]
+*> tzk (TiddlyZettelKasten) is a TiddlyWiki edition and associated CLI for maintaining personal notes in something approaching the Zettelkasten method. It’s updated periodically from whatever tooling I’m currently using in my own thinking workspace. As such, it’s currently considered alpha-quality; while it ought to be very stable and there’s no meaningful risk of data loss, updating to a newer version might be difficult and I’m unlikely to accept patches unless they’re something I want for myself. This is intended primarily as a nice starting platform on which to build your own tooling.
+
+!! © Copyright:
+
+The workflow of this wikispace mainly comes from [[tzk]], It almost meets all of my needs of note-taking system, So I take some tiddlers from [[tzk]].
+
+In this wikispace, Follow tiddlers are comes from soren:
+
+* All tiddlers which username is [[soren]] comes from soren.
+* All system tiddlers of this wikispace prefixed with `$:/sib`.
+* SomeTimes I will make some tiny modifications with those tiddlers to meet my needs.
+* The detail of copyright will be affilated in those tiddlers.

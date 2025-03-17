@@ -1,0 +1,20 @@
+authors: [[Lun Dev]]
+caption: Flexbox or Grid in CSS
+created: 20241110032954954
+creator: uzvg
+description: 应该使用flexbox布局还是grid布局？
+medium: Website
+modified: 20250317090326771
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes
+title: Flexbox or Grid in CSS(1731209394954)
+type: text/vnd.tiddlywiki
+url: https://www.youtube.com/watch?v=41ZBkZUVApc
+visibility: Public
+year: 2024/6
+
+''flexbox''布局用于一维布局
+
+''grid''布局用于二维布局。
+

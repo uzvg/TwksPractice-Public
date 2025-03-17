@@ -1,0 +1,40 @@
+created: 20240715203842902
+creator: uzvg
+modified: 20250317081611161
+modifier: uzvg
+tags: Python PermanentNotes
+title: Python控制流工具/match
+type: text/vnd.tiddlywiki
+
+!! 作用：
+
+虽然表面上像C语言中的switch语句，但其实它更像模式匹配。
+只有第一个匹配的模式会被执行，这里的模式，可以是值的组成部分（序列元素），也可以是对象的属性。
+
+!! 格式：
+
+1. 常规模式
+
+```
+match <variable>:
+	case <value>:
+		return ""
+	case _:
+		return "something default"
+```
+
+其中，`_`
+
+2. 组合多个字面值的模式：
+
+3. 解包赋值的模式：
+
+[[解包赋值]]
+
+!! 解包赋值：
+
+	在match语句中，有一种特殊的类似解包赋值的语法，可以同时为多个变量赋值，如下：
+
+
+```
+!! 特点：

@@ -1,0 +1,74 @@
+created: 20240912110155739
+creator: uzvg
+modified: 20250317090326795
+modifier: uzvg
+progress: Rethinking
+rating: Plain
+tags: test tiddlywiki PermanentNotes
+title: TiddlywikiWidgets/ActionSetFieldWidget
+type: text/vnd.tiddlywiki
+visibility: Public
+
+\define set-widget-test(filter)
+<$button><$action-setfield $tiddler="$:/temp/set-field-test" $value="""$filter$"""/> set widget test with $value</$button>
+<$button><$action-setfield $tiddler="$:/temp/set-field-test" text="""$filter$"""/> set widget test with attribute</$button>
+\end
+
+!! 前言：
+
+在查看`action-setfield`的文档时，有如下说明：
+
+|The table comes from tiddlywiki official document of ActionSetFieldWidget.|c
+|!Attribute |!Description |
+|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]]) |
+|$field |Optional name of a field to be assigned the $value attribute |
+|$index |Optional index of a property in a [[data tiddler|DataTiddlers]] to be assigned the $value attribute|
+|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field. If no value is specified, $field or $index will be deleted.|
+|$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
+|//{any attributes not starting with $}// |Each attribute name specifies a field to be modified with the attribute value providing the value to assign to the field  |
+
+!! 疑问：
+
+里面让我比较疑惑的是`$value`跟如果可以用`<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>`的形式，那`$value`参数的作用是什么？
+
+更何况我在[[$:/core/ui/ControlPanel/Basics]]中也同时看到了这两种使用方式，如下：
+
+```
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" $value="""$filter$"""/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" $value="""$filter$"""/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+<$action-setfield $tiddler="$:/state/tab--1498284803" $value="$:/core/ui/AdvancedSearch/Filter"/>
+</$button>
+```
+
+这段代码中`$value`用于指定`$:/temp/advancedsearch`跟`$:/temp/advancedsearch/input`的`text`字段值，跟直接使用`text="""$filter$"""`有什么区别吗？
+
+下面就来测试一下：
+
+```
+\define set-widget-test(filter)
+<$button><$action-setfield $tiddler="$:/temp/set-field-test" $value="""$filter$"""/> set widget test with $value</$button>
+<$button><$action-setfield $tiddler="$:/temp/set-field-test" text="""$filter$"""/> set widget test with attribute</$button>
+\end
+
+<<set-widget-test "[![tag[PermanentNotes]]">>
+```
+
+
+<<set-widget-test "[![tag[PermanentNotes]]">>
+
+to check the result of: [[$:/temp/set-field-test]]
+
+从结果上来看，两者的作用是一致的，也许在某些特殊的地方有用吧。
+
+该组件有一个很坑的地方，即组件的属性不能使用`transclude`语法，在我实现[[CreateShortcuts/new-book]]的时候，有如下代码：
+
+```
+<$button>
+<$action-setfield $tiddler="make" $field="tags" $value={{$:/uzvg/config/NewBook/Tags}}/>
+Set tags for make
+</$button>
+```
+
+即，如果该属性表达式中有`transclude`语法，就要用`$value`的方式。

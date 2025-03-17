@@ -1,0 +1,54 @@
+created: 20250305155232243
+creator: uzvg
+modified: 20250317081611163
+modifier: uzvg
+tags: PermanentNotes Shell zsh
+title: Shell中的while循环
+type: text/vnd.tiddlywiki
+
+!! 引言：
+
+读课本上的Shell的while循环的相关部分的内容时，常被提到，while循环的语法结构是：
+
+```bash
+while [条件命令]; do
+  [循环体]
+done
+```
+
+* 循环会持续执行，直到条件命令返回非零状态（失败）
+* 每次迭代会执行条件命令并检查其返回值
+
+看起来跟其他编程语言的循环语法没有什么不同，但在实际应用中，我们却常看到如下反直觉的语法结构：
+
+```
+while IFS=$'\t' read -rA fields; do
+	printf "%-12s %-10s %-5s %-10s %-30s\n" "${fields[@]}"
+done <<< "${tsv_data}"
+```
+
+* `IFS=$'\t'`：设置字段分隔符为制表符（Tab）
+* `-r`：禁用反斜杠转义处理
+* `-A fields`：将读取结果存入数组变量fields
+* 每行数据会按制表符分割为多个字段，存入数组元素
+* Here-string 重定向
+```zsh
+done <<< ${tsv_data}
+```
+* `<<<` 称为 `here-string` 操作符
+* 将变量内容作为标准输入传递给前面的命令
+* 对比 [[here-document|Heredoc语法]] (`<<EOF`)：
+* here-document 用于多行输入
+* here-string 用于单字符串输入
+
+
+本例将 TSV 格式数据 ${tsv_data} 作为 while 循环的输入源
+完整流程：
+
+${tsv_data} 变量保存 TSV 格式数据（多行文本）
+<<< 将数据作为标准输入传给 while 循环
+每次循环用制表符分割行数据到数组 fields
+printf 按固定列宽格式化输出数组内容
+
+!! Shell中的while循环：
+

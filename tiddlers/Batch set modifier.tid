@@ -1,0 +1,21 @@
+created: 20241213051140106
+creator: uzvg
+modified: 20250317081611132
+modifier: uzvg
+tags: TWKS $:/twks/Tools
+title: Batch set modifier
+type: text/vnd.tiddlywiki
+
+<$button>
+<$list filter="[all[tiddlers]![system]!has[modifier]]">
+	<$action-setfield modifier="uzvg"/>
+</$list>
+Set all non-system modifier as uzvg
+</$button>
+
+<$button>
+<$list filter="[all[tiddlers][system]prefix[$:/uzvg]]">
+	<$action-setfield modifier="uzvg"/>
+</$list>
+Set all twks modifier as uzvg
+</$button>

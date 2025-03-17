@@ -1,0 +1,60 @@
+created: 20250221192624321
+description: 使用ssh -vT git@github.com命令测试主机与github的ssh连接
+modified: 20250317090326811
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: PermanentNotes SSH Github
+title: 使用ssh -vT调试GitHub SSH连接
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+经常用`ssh -vT git@github.com`来测试主机与github的ssh连接。
+
+!! 命令分解
+
+* ''`ssh`'': Secure Shell 客户端命令，用于通过 SSH 协议远程连接服务器或执行命令。
+* ''`-v`'': Verbose（详细模式），输出连接和认证的调试信息，用于诊断问题。
+* ''`-T`'': Test（测试模式），不分配交互式终端，仅测试连接和认证。
+* ''`git@github.com`'': 目标地址，连接 GitHub 的 SSH 服务器（`git` 是用户名，`github.com` 是域名）。
+
+!! 作用
+
+# ''测试 SSH 认证'':
+#* 验证本地 SSH 密钥（如 `~/.ssh/id_ed25519`）是否能通过 GitHub 认证。
+#* 成功时返回：`Hi username! You've successfully authenticated, but GitHub does not provide shell access.`
+# ''调试连接问题'':
+# 通过详细日志定位网络、密钥或配置问题。
+# ''验证 Git 配置'':
+#* 确认 SSH 设置是否支持 Git 操作（如 `git clone`、`git push`）。
+
+!! 用法
+
+!!! 基本用法
+
+```bash
+ssh -vT git@github.com
+```
+
+* ''输出'':
+** 成功：认证通过，返回欢迎信息。
+** 失败：结合调试信息显示错误原因。
+
+!!! 调试模式示例
+
+```bash
+# 示例输出
+debug1: Connecting to github.com [192.30.252.131] port 22.
+debug1: Connection established.
+debug1: identity file /home/user/.ssh/id_ed25519 type 3
+debug1: Authentication succeeded (publickey).
+Hi username! You've successfully authenticated...
+```
+
+* ''解读'':
+** `Connecting to`: 连接的目标 IP 和端口。
+** `identity file`: 加载的密钥文件。
+** `Authentication succeeded`: 认证成功。
+

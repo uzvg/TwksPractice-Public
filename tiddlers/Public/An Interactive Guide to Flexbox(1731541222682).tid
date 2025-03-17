@@ -1,0 +1,94 @@
+authors: [[Josh WComeau]]
+caption: An Interactive Guide to Flexbox
+created: 20241108055700773
+creator: uzvg
+description: 2022/11/22
+medium: Website
+modified: 20250317090326762
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes CSS flex
+title: An Interactive Guide to Flexbox(1731541222682)
+type: text/vnd.tiddlywiki
+url: https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/
+visibility: Public
+year: 2024/11/08
+
+这是我在搜索flexbox相关文章的时候发现了一篇博客文章，让人印象深刻。能够可视化学习flexbox布局，文章本身也写得非常好。
+
+!! layout algorithm
+
+css中有很多种布局算法，每种布局算法都相当是css中一个子语言，每种layout都被设计来解决特定的问题。
+
+一般来说，默认的layout为`flow`布局，即`流动`布局，这其实是microsoft word使用的布局方式，用于处理数码文档的排版。
+
+❓ <<rememberq "20241113144813200"
+	"flexbox布局解决的是什么问题？"
+	"flexbox">>
+
+!! flex direction
+
+<<rememberq "20241113145151462"
+	"flexbox中的一切元素，都是基于什么进行排列的？"
+	"都是基于主轴(primary axis)跟纵轴(cross axis)进行排列的。">>
+
+<<rememberq "20241113145305782"
+	"flex-direction的作用是什么？"
+	"flex-direction有两种值，row跟column，代表了主轴的方向。">>
+
+!! alignment
+
+<<rememberq "20241113145800167"
+	"justify-content的作用是什么？"
+	"更改flexbox容器中的子项(们)在主轴上的排列方式">>
+
+flex-start center flex-end space-between space-around space-evenly
+
+<<rememberq "20241113145949498"
+	"如何更改flexbox容器内的子项在纵轴上的排列方式？"
+	"使用align-items">>
+
+<<rememberq "20241113150040102"
+	"align-items是容器属性，还是容器内的子项的属性？"
+	"align-items是容器属性">>
+
+!!! Content vs items
+
+为什么flexox有`justify-content`
+. Why is it justify-content and align-items, and not justify-items, or align-content?
+<<rememberq "20241113150143823"
+	""
+	"A">>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+什么时候该用flexbox布局，什么时候该用grid布局？
+
+flexbox布局能向右对齐吗？
+
+不能直接实现，需要在外面再包裹一层。

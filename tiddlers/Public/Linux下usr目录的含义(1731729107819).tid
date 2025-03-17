@@ -1,0 +1,35 @@
+authors: unknown
+caption: Linux下usr目录的含义
+created: 20241116030416853
+creator: uzvg
+description: 
+medium: Post
+modified: 20250317090326782
+modifier: uzvg
+progress: Archived
+tags: LiteratureNotes
+title: Linux下usr目录的含义(1731729107819)
+type: text/vnd.tiddlywiki
+url: https://www.quora.com/What-is-the-exact-answer-for-the-meaning-of-the-usr-directory-Is-it-Unix-System-Resources-or-USeR/answer/Jim-Finnis
+visibility: Public
+year: 2020
+
+在我刚开始学习Linux下的文件结构的时候，对Linux下`usr`目录的作用很疑惑。
+
+从字面意思来看，如果`usr`指的就是`user`的意思，那它跟`/home/<username>`目录的作用岂不是重叠了？但从保存的数据来看，`/usr` 目录又常用于存放用户程序和数据，它包含了系统中大多数用户级的只读的应用程序和文件，比如：
+
+* `/usr/bin`：存放用户级的可执行文件（程序），这些程序是普通用户可以运行的。
+* `/usr/sbin`：存放系统管理用的可执行文件，这些程序通常需要超级用户（root）权限来运行。
+* `/usr/lib`：存放程序所需的库文件。
+* `/usr/share`：存放共享数据，如文档、图标、帮助文件等。
+* `/usr/include`：存放 C 语言的头文件，供编译器使用。
+
+这篇来自quora的帖子，答主从1987年开始使用Linux，从其回答中我们可以得到，这其实是一个历史惯例：
+
+> In the original Bell Labs UNIX system, there were two disks - one had the operating system on it and was mounted at `/`, while the other had home directories under `/usr`. We can definitely say it stands for “user”.
+
+> Later on, home directories got moved elsewhere and /usr got filled with stuff that users (rather than the operating system) used. Later still, many non-core OS things got put there too. For that reason, people have started saying it stands for Unix System Resources - although this is the first I’ve heard of it, and I’ve been using UNIX since 1987!
+
+在最开始的贝尔实验室开发的unix系统下，有两块磁盘，其中一块保存操作系统数据，被挂载在`/`下，另一块用于保存用户数据，被挂载在`/usr`下，现在为我们所熟知的`home`文件夹，当时其实位于`/usr`目录下，只不过后来被转移到了现有的`/home`下。也就是说，`usr`目录的含义，其实就是`user`，只不过，随着后来越来越多的`用户级`的工具跟文件，照例被保存到了`/usr`目录下，就我们我们现在正在使用的Linux文件系统结构惯例。
+
+另见：[[Linux下的可执行二进制文件应该保存在哪里？]]。

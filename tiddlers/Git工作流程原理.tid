@@ -1,0 +1,37 @@
+created: 20241222043206515
+creator: uzvg
+modified: 20250317081611144
+modifier: uzvg
+tags: Git PermanentNotes
+title: Git工作流程原理
+type: text/vnd.tiddlywiki
+
+!! ''1. 理解Git的核心概念''
+
+在学习任何工具前，理解其基础原理和核心概念非常重要：
+
+!!! ''Git的四个核心区域''：
+
+# ''工作区（Working Directory）''：
+# * 你当前正在编辑的文件。
+# ''暂存区（Staging Area / Index）''：
+# * 使用`git add`命令将改动放入暂存区，准备提交。
+# ''本地仓库（Local Repository）''：
+# * 使用`git commit`将暂存区的文件保存到本地仓库。
+# ''远程仓库（Remote Repository）''：
+# * 使用`git push`将本地仓库的提交同步到远程。
+
+!!! ''Git的核心思想''：
+
+* Git是一个''内容地址管理系统''，一切基于快照（snapshot）和哈希值（SHA-1）。
+* Git的分支是轻量的、可快速切换的，学习分支管理是使用Git的核心技能。
+
+!! Git的四个核心操作：
+
+* 撤销操作
+** 在不同commit中的撤销
+* 合并操作
+** 合并来自本地仓库的不同分支
+** 合并远程仓库的分支
+
+理解这些概念后，再学习命令会更加顺畅。

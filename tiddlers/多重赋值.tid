@@ -1,0 +1,31 @@
+created: 20240715194014594
+creator: uzvg
+modified: 20250317081611209
+modifier: uzvg
+tags: Python
+title: 多重赋值
+type: text/vnd.tiddlywiki
+
+!! 例子：斐波那契数列
+
+```
+# Fibonacci series:
+# the sum of two elements defines the next
+a, b = 0, 1
+while a < 10:
+    print(a)
+    a, b = b, a+b
+
+0
+1
+1
+2
+3
+5
+8
+```
+
+!! 语法解析：
+
+* 等号右边所有表达式的值，都是在它对任何变量赋值之前求出来的。（在赋值操作前，右边表达式的值，已经全部被计算好了）
+* 等号右边表达式的求值顺序为：从左到右依次计算。

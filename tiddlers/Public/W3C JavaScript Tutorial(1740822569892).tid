@@ -1,0 +1,32 @@
+authors: unknown
+caption: W3C JavaScript Tutorial
+created: 20250301094929892
+creator: uzvg
+description: W3School的JavaScript教程
+medium: Website
+modified: 20250317090326799
+modifier: uzvg
+progress: 
+tags: LiteratureNotes Source JavaScript
+title: W3C JavaScript Tutorial(1740822569892)
+type: text/vnd.tiddlywiki
+url: https://www.w3schools.com/js
+visibility: Public
+year: 2025-03-01
+
+1. JavaScript中没有定义前后顺序，script可以先在button中调用，再在后面的`script`标签中加载。
+
+```JavaScript
+<h2>Demo JavaScript in Body</h2>
+
+<p id="demo">A Paragraph</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Paragraph changed.";
+}
+</script>
+```
+

@@ -1,0 +1,30 @@
+created: 20241220172359765
+creator: uzvg
+description: 高度有用，但需要学习JavaScript
+modified: 20250317090326783
+modifier: uzvg
+progress: Archive
+tags: FleetingNotes TWKS
+title: mardown to wikitext transformer
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 背景：
+
+* markdown已经成为事实上的人工智能的输出文本格式。
+* 每次将其导入到tiddlywiki中时，总是需要手动转换一下格式，如何让其自动完成？
+
+!! 实现原理：
+
+* `markdown`➡`HTML`➡`wikitext`。
+* 使用markdown-it先将markdown转换为HTML。
+* 再将HTML成转换为wikitext。
+
+!! 准备工作:
+
+* JavaScript
+
+!! Draft:
+twks-md-transformer(tiddler,filter,text)
+
+可以将指定的文本内容、tiddler内容、以及指定的filter所选中的markdown格式的文本内容，转换为tiddlywiki。

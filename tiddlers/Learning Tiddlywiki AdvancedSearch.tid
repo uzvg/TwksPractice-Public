@@ -1,0 +1,108 @@
+caption: Learning Tiddlywiki Standard SearchBox
+created: 20240917132420760
+creator: uzvg
+modified: 20250317081611154
+modifier: uzvg
+tags: ProjectNotes tiddlywiki
+title: Learning Tiddlywiki AdvancedSearch
+type: text/vnd.tiddlywiki
+
+<!-- 以下代码是tiddlywiki中标准搜索框的实现，源代码可以在"$:/core/ui/AdvancedSearch/Standard" 中查看 -->
+
+<!-- 输入的tiddler不等于被选中的tiddler，则：
+有如下定义：
+	tiddler="$:/temp/advancedsearch/input"，输入框的即时文本，包括选中
+	storeTitle="$:/temp/advancedsearch"，只包含输入的文本，不包括选中的
+	refreshTitle="$:/temp/advancedsearch/refresh" 只要这个指定的tiddler中的内容一变，输入框中的内容就会更新。
+		// An optional tiddler title that makes the input field update whenever the specified tiddler changes
+	selectionStateTitle="$:/temp/advancedsearch/selected-item"
+
+具体功能如下：
+* 如果一致，则直接清空
+* 如果不一致，则逐步清空
+** 先把输入框的内容设置为打字输入的内容
+** 再把refreshTitle的内容设置为yes,使输入框的内容更新。
+
+-->
+
+\define cancel-search-actions()
+<$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]"
+emptyMessage="<$action-deletetiddler $filter='[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]' />">
+	<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/>
+	<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+</$list>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
+\end
+
+<!--
+* 如果将$:/config/Search/NavigateOnEnter/enable设置为yes，当搜索的tiddler并不存在的时候，按回车，可以直接跳转该tiddler。
+* 如果$:/config/Search/NavigateOnEnter/enable不存在，则会检查是否有符合搜索条件的正常tiddler跟shadow tiddler。
+* 需要注意的是，如果是shadow tiddler的话，即使看不到，按回车，也能跳转到该tiddler。
+-->
+
+\define input-accept-actions()
+<$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
+emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'>
+<$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>">
+<$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+\end
+
+<!--
+* 如果将$:/config/Search/NavigateOnEnter/enable设置为yes：
+* 按下ctrl+enter，无论该tiddler是否存在，直接跳转到该tiddler，并编辑它
+* 如果没有设置为yes（正常情况下），则：只有当tiddler为正常tiddler或shadow tiddler的情况下，按ctrl+enter才会编辑该tiddler。
+-->
+
+\define input-accept-variant-actions()
+<$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
+emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'>
+	<$list filter='[<__tiddler__>get[text]minlength[1]]'>
+		<$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<__tiddler__>get[text]] }}}/>
+	</$list>
+</$list>">
+	<$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+\end
+
+\whitespace trim
+
+<div class="tc-search">
+
+<$macrocall $name="keyboard-driven-input"
+	tiddler="$:/temp/advancedsearch/input"
+	storeTitle="$:/temp/advancedsearch"
+	refreshTitle="$:/temp/advancedsearch/refresh"
+	selectionStateTitle="$:/temp/advancedsearch/selected-item"
+	type="search"
+	tag="input"
+	focus={{$:/config/Search/AutoFocus}}
+	inputCancelActions=<<cancel-search-actions>>
+	inputAcceptActions=<<input-accept-actions>>
+	inputAcceptVariantActions=<<input-accept-variant-actions>>
+	configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"
+	filterMinLength={{$:/config/Search/MinLength}}/>
+
+
+<!-- 输入字符非空则显示删除按钮 -->
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$button class="tc-btn-invisible">
+<<cancel-search-actions>>
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</div>
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
+<!-- 输入字符过短则显示过短提示 -->
+<$list
+	filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]"
+	emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>"
+	variable="listItem">
+<$vars
+	userInput={{{ [[$:/temp/advancedsearch]get[text]] }}}
+	configTiddler={{{ [[$:/state/advancedsearch/standard/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
+	searchListState="$:/temp/advancedsearch/selected-item">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"><$transclude mode="block"/></$list>
+</$vars>
+</$list>
+</$reveal>

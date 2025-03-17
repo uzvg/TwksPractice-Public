@@ -1,0 +1,90 @@
+created: 20241116145115717
+creator: uzvg
+modified: 20250317081611197
+modifier: uzvg
+tags: Linux ArchLinux boot-loader PermanentNotes
+title: 什么是boot-loader？
+type: text/vnd.tiddlywiki
+
+以UEFI固件为例，我们常说的引导加载程序（boot loader），通常是指存储在EFI系统分区（ESP），即`/boot`文件夹中的`PE/COFF`格式的可执行文件，以下是详细解释。
+
+!! PE/COFF格式
+
+PE（Portable Executable）是Windows和UEFI系统中使用的一种可执行文件格式，而COFF（Common Object File Format）是其基础。UEFI固件能够识别和执行这种格式的文件。以ArchLinux下使用systemd-boot为例：
+
+
+1. 查找`/boot`目录下以efi结尾的文件
+
+```shell
+fd --extension=efi --full-path /boot/
+EFI/BOOT/BOOTX64.EFI
+EFI/Linux/arch-linux-fallback.efi
+EFI/Linux/arch-linux-zen-fallback.efi
+EFI/Linux/arch-linux-zen.efi
+EFI/Linux/arch-linux.efi
+EFI/Microsoft/Boot/SecureBootRecovery.efi
+EFI/Microsoft/Boot/bootmgfw.efi
+EFI/Microsoft/Boot/bootmgr.efi
+EFI/Microsoft/Boot/memtest.efi
+EFI/systemd/systemd-bootx64.efi
+```
+
+2. 查看`efi`文件类型
+
+```shell
+$ file /boot/EFI/BOOT/BOOTX64.EFI
+EFI/BOOT/BOOTX64.EFI: PE32+ executable (EFI application) x86-64 (stripped to external PDB), for MS Windows, 7 sections
+/boot ❯❯❯ file EFI/Linux/arch-linux-fallback.efi
+EFI/Linux/arch-linux-fallback.efi: PE32+ executable (EFI application) x86-64 (stripped to external PDB), for MS Windows, 11 sections
+```
+
+我们常说的`boot-loader`程序，其实就是`/boot`目录，即`esp`分区下的`efi`文件。
+
+!! EFI系统分区（ESP）
+
+这是一个特殊的分区，通常格式化为''FAT32''文件系统，用于存储UEFI固件和引导加载程序。ESP分区中包含的EFI文件可以是引导加载程序（如GRUB、systemd-boot等），也可以是其他相关的工具和驱动程序。
+
+我们可以使用`dust --no-percent-bars -r --depth=3`命令，看到`/boot`目录下的文件结构：
+
+<$twks.details summary="dust --no-percent-bars -r --depth=3" state="$:/state/detail">
+
+```shell
+612M └─┬ .
+585M   ├─┬ EFI
+558M   │ ├─┬ Linux
+153M   │ │ ├── arch-linux-zen-fallback.efi
+151M   │ │ ├── arch-linux-fallback.efi
+127M   │ │ ├── arch-linux-zen.efi
+126M   │ │ └── arch-linux.efi
+ 26M   │ ├─┬ Microsoft
+ 26M   │ │ ├── Boot
+ 56K   │ │ └── Recovery
+108K   │ ├─┬ systemd
+104K   │ │ └── systemd-bootx64.efi
+108K   │ └─┬ BOOT
+104K   │   └── BOOTX64.EFI
+ 13M   ├── vmlinuz-linux-zen
+ 12M   ├── vmlinuz-linux
+ 80K   ├── amd-ucode.img
+ 20K   ├─┬ loader
+4.0K   │ ├── random-seed
+4.0K   │ ├── loader.conf
+4.0K   │ ├── entries.srel
+4.0K   │ └── entries
+4.0K   └── System Volume Information
+```
+
+</$twks.details>
+
+
+!! 引导过程：
+
+当计算机启动时，UEFI固件会查找ESP分区中的EFI文件，并执行其中的引导加载程序。这些引导加载程序负责加载操作系统内核并启动系统。
+
+!! grub & systemd-boot
+
+; 我们常用的`grub`跟`systemd-boot`，到底是`boot-loader`本身，还是只是一个`boot-loader`管理器？
+* 它既可以是`boot-loader`本身，也可以是一个`boot-loader`管理器。
+
+!! boot-loader的作用：
+

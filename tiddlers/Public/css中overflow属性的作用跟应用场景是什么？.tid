@@ -1,0 +1,38 @@
+created: 20240910225451075
+creator: uzvg
+modified: 20250317090326768
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: CSS AI-Generated PermanentNotes
+title: css中overflow属性的作用跟应用场景是什么？
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! overflow
+
+`overflow` 是一个非常重要的 CSS 属性，它用于控制元素的内容溢出时的行为。溢出是指元素的内容超过了其自身的宽度或高度时发生的现象。
+
+!!! overflow 属性值
+
+* ''visible'':这是默认值，表示元素的内容溢出时，仍然可见。
+* ''hidden'':表示元素的内容溢出时，会被隐藏。
+* ''scroll'':表示元素的内容溢出时，会显示滚动条。
+* ''auto'':表示元素的内容溢出时，会根据需要显示滚动条。
+* ''inherit'':表示元素的内容溢出时，会继承父元素的 `overflow` 属性值。
+
+!!! overflow 属性的常用应用情景
+
+* 隐藏溢出的内容：当你不想让元素的内容溢出时，可以使用 `overflow: hidden` 来隐藏溢出的内容。
+* 显示滚动条：当你想让元素的内容溢出时显示滚动条，可以使用 `overflow: scroll` 或 `overflow: auto` 来实现。
+* 创建弹出菜单：可以使用 `overflow: hidden` 来创建弹出菜单，当鼠标悬停在元素上时，菜单内容会显示出来。
+* 实现响应式设计：可以使用 `overflow` 属性来实现响应式设计，当屏幕大小变化时，元素的内容会自动调整。
+* 防止元素溢出：可以使用 `overflow` 属性来防止元素溢出，例如在表格或列表中，使用 `overflow: hidden` 来防止内容溢出。
+
+在你的例子中，使用 `overflow: hidden` 来隐藏内部 div 元素的 margin 是一个很好的应用场景，因为它可以防止 margin 溢出并影响布局。
+
+总的来说，`overflow` 属性是一个非常有用的工具，可以帮助你控制元素的内容溢出时的行为，实现更好的布局和设计。
+
+!! 拓展问题：
+
+* [[如何控制元素的内容溢出？]]

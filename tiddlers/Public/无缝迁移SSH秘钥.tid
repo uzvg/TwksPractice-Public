@@ -1,0 +1,48 @@
+created: 20250221193344726
+description: 将本地ssh秘钥对无缝迁移到另一台主机上
+modified: 20250317090326818
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes SSH chezmoi
+title: 无缝迁移SSH秘钥
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 引言：
+
+一般情况下，假如我们需要在不同的机器上克隆我们自己在github的仓库，常见做法是在新机器上生成新的ssh密钥对，并且将新主机上的ssh公钥重新粘贴到github，以使得github能和新主机建立新的ssh秘钥通信。但这个过程涉及到很多的手动操作，是一个非常麻烦的事。
+
+其实，我们需要的只是把自己在原先主机上的ssh秘钥对，复制到新主机上就可以，而且使用chezmoi的加密功能，我们甚至可以直接把加密后的ssh秘钥对，跟dotfiles一起，保存到我们的github的公开仓库中。
+
+但在迁移ssh秘钥的过程中，有很多值得注意的地方。
+
+!! 注意事项：
+
+; 确保文件位置一致：
+* 秘钥对被保存在`$HOME/.ssh`文件夹下。
+
+; 确保秘钥ownership正常：
+* 直接把ssh秘钥从旧主机复制成新主机，新主机的用户名跟旧主机的用户名可能不一样，第一步，确保ssh秘钥的owner跟主机保持一致。
+
+```
+# 查看新主机的用户名跟组名
+$ id
+# 把秘钥所有者改成与新主机一致
+$ chown <user>:<group> path/to/file_or_directory
+```
+
+; 确保秘钥权限符合要求：
+* 私钥权限`600`，公钥权限`644`
+
+```
+chmod 600 <secret>
+chmod 644 <secret>.pub
+
+# 如果用cp指令复制的话，记得加`-p`参数
+cp -p
+```
+
+; 确保网络正常：
+* 配置完成后，[[使用ssh -vT调试GitHub SSH连接]]，检查网络连接。
+* 当简单却最重要的一步，就是在初次克隆github仓库的时候，如果有代理软件的话，记得`关闭代理软件`。

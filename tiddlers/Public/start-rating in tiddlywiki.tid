@@ -1,0 +1,52 @@
+created: 20241105025719891
+creator: uzvg
+description: 使用星星数量为笔记打分，满分五星
+modified: 20250317090326786
+modifier: uzvg
+progress: Completed
+tags: tiddlywiki ProjectNotes
+title: start-rating in tiddlywiki
+type: text/vnd.tiddlywiki
+visibility: Public
+
+\procedure star-rating(stars)
+\whitespace trim
+<$list filter="[range<stars>]" variable=_>
+	{{$:/uzvg/images/full-star}}
+</$list>
+<$let remainder={{{ [[5]subtract<stars>] }}}>
+	<$list filter="[range<remainder>]" variable=_>
+		{{$:/uzvg/images/open-star}}
+	</$list>
+</$let>
+\end
+
+!! 使用星星数量为笔记打分：
+
+```
+\procedure star-rating(stars)
+\whitespace trim
+<$list filter="[range<stars>]" variable=_>
+	{{$:/uzvg/images/full-star}}
+</$list>
+<$let remainder={{{ [[5]subtract<stars>] }}}>
+	<$list filter="[range<remainder>]" variable=_>
+		{{$:/uzvg/images/open-star}}
+	</$list>
+</$let>
+\end
+```
+
+!! 效果演示：
+
+```
+<<star-rating 1>>
+<<star-rating 3>>
+<<star-rating 5>>
+```
+
+效果分别是：
+
+* <<star-rating 1>>
+* <<star-rating 3>>
+* <<star-rating 5>>

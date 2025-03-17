@@ -1,0 +1,15 @@
+created: 20250222050508786
+description: git reset命令的三种模式解析
+modified: 20250317090326772
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes Git
+title: Git Reset 命令解析
+type: text/vnd.tiddlywiki
+visibility: Public
+
+| !Mode | !作用 | !形象类比 |
+|`soft` |<<li "将 HEAD 指针移动到目标提交（移动分支引用）">> <<li "保留工作目录（Working Directory）和暂存区（Staging Area）的当前状态">> <<li "原 HEAD 与目标提交之间的差异会被保留在暂存区中（相当于自动执行了 git add）">> |<<li "把架子上的commit取下来">> <<li "把取下来的commit放回到盒子里">> <<li "桌子上的东西保持不变">> |
+|`mixed` |<<li "将 HEAD 指针移动到目标提交（移动分支引用）">> <<li "重置暂存区到目标提交的状态（清空暂存区）">> <<li "原 HEAD 与目标提交之间的差异会保留在工作目录中（修改存在但未暂存）">> |<<li "把架子上跟盒子里的commit，全都取出来，放到桌子上">> |
+|`hard` |<<li "将 HEAD 指针移动到目标提交（移动分支引用）">> <<li "同时重置暂存区和工作目录到目标提交的状态">> <<li "丢弃所有未提交的修改（包括暂存区和工作目录的变更），文件内容完全与目标提交一致">> |<<li "架子上，盒子里，桌子上的commit，全部删除！">> |

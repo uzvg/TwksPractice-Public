@@ -1,0 +1,20 @@
+caption: ProjectNotes
+created: 20241128065538046
+creator: uzvg
+description: TWKS中的ProjectNotes进度管理说明
+modified: 20250317090326798
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: $:/twks/Documents
+title: TWKS笔记进度/ProjectNotes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+| !进度 | !说明 |
+|`Pending` |项目具有可行性，在未来可能被实施，但现在并未进行。 |
+|`Researching` |研究项目实施需要的前提条件，知识储备。 |
+|`WIP` |项目正在进行中。 |
+|`Completed` |项目已完成。 |
+|`Archived` |因各种原因，暂时不具有实施价值，但在未来会有用的项目，被归档处理。 |

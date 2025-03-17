@@ -1,0 +1,24 @@
+created: 20240730135626727
+creator: uzvg
+modified: 20250317090326810
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: Shell cat Linux PermanentNotes
+title: 从命令行写入文件的内容
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在命令行中边创建文件，边写入文件的内容，用于编写一些临时脚本
+
+```bash
+❯❯❯ cat <<EOF > test
+heredoc> this is a nother test
+heredoc> 让我们看一下效果
+heredoc> EOF
+❯❯❯ cat test
+this is a nother test
+让我们看一下效果
+```
+
+这是`cat`命令用到的是[[herdoc语法]]

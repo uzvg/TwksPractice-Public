@@ -1,0 +1,26 @@
+created: 20241025093745008
+creator: uzvg
+modified: 20250317090326816
+modifier: uzvg
+progress: Pending
+tags: ProjectNotes Learning ProgramLanguage ProgramLanguage(编程语言)
+title: 快速学习javaScript
+type: text/vnd.tiddlywiki
+visibility: Public
+
+因为我想为tiddlywiki实现一个简单的插件，但我又不了解javaScript，我的最终目标是能使用javaScript快速为tiddlywiki开发出一个插件，以下我是需要了解的javaScript的基础知识：
+
+!!! 语法和结构：
+
+* 了解基本语法：变量声明、数据类型（字符串、数组、对象）、运算符。
+* 学习如何定义和调用函数（包括箭头函数）。
+* 控制结构：学习条件语句（`if`、`else`、`switch`）和循环（`for`、`while`）。
+* 重点学习对象和数组：理解如何创建和操作对象和数组，这是开发插件时非常常见的需求。
+* 类的相关操作
+
+!!! 学习常用的 JavaScript 概念
+
+* ''DOM 操作''：了解如何使用 JavaScript 操作文档对象模型（DOM），这是在浏览器中动态更新页面的关键。
+* 事件处理：学习如何监听和响应用户的操作，比如点击事件。
+
+!!! 其他

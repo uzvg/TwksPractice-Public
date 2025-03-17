@@ -1,0 +1,39 @@
+created: 20250221080715898
+creator: uzvg
+description: age加密术语中的identity和recipient的含义
+modified: 20250317090326809
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes age加密 Encrypt(加密)
+title: 什么是identity和recipient？
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+阅读age加密的文档时，经常遇到两个词👉`identity`和`recipient`，用以指代私钥和公钥，问题是，这两个词的意思，如`identity`的英文意思是`身份id`，而`recipient`意为`接收者`，它们为什么会对应私钥和公钥的意思？这其中有什么渊源吗？
+
+!! 为什么？
+
+这个命名方式确实有一定的逻辑和背景，需要结合密码学和一般语言使用习惯来理解其背后的命名思路。
+
+; 传统命名方式
+|tc-max-width|k
+| !传统密码学概念 | !作用 | !典型术语 |
+| 私钥 | 解密/签名 | `Private Key` |
+| 公钥 | 加密/验证 | `Public Key` |
+
+; age 的命名方式
+|tc-max-width|k
+| !age 术语 | !作用 | !直觉含义 |
+| identity（身份） |''解密''（相当于私钥） | 你自己唯一的身份 |
+| recipient（接收者） |''加密目标''（相当于公钥） | 你想加密给谁 |
+
+其实就是age采用了一种更直观的方式来让人更好地明白`公钥`和`私钥`的作用，其中：
+
+* `identity`（身份） = `私钥`：因为私钥是唯一的，能代表解密者的身份。
+* `recipient`（接收者） = `公钥`：因为公钥代表了加密目标，你想把目标''加密给谁''。
+* 这种命名方式让用户在使用 age 时不需要过多理解公钥/私钥的复杂概念，而是直接从“加密给谁”“谁能解密”的角度出发，降低使用门槛。
+
+对应现实生活中的逻辑，就是，当我们想要加密一个文件时，需要用公钥来指定加密给谁，所以用`recipient`来指代公钥；而当我们想要解密一个文件时，需要用私钥来证明自己是谁，所以用`identity`来指代私钥。

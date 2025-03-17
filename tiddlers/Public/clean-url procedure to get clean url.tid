@@ -1,0 +1,20 @@
+created: 20250216160248300
+creator: uzvg
+modified: 20250317090326766
+modifier: uzvg
+progress: Archive
+tags: FleetingNotes
+title: clean-url procedure to get clean url
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Background:
+
+* Get clean url from the pasted text.
+* 可以自定义rules
+
+!! My Thoughts:
+
+* 可以了解一下类似icon和color中的cascade筛选器的用法
+* 可以方便快捷地测试、补充新的替换rules
+* 现有的一些规则，被保存在[[Generate clean url from dirty url]]

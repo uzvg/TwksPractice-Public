@@ -1,0 +1,45 @@
+authors: [[Ilya Kantor]]
+caption: DebuggingInTheBrowser
+created: 20241028021840142
+creator: uzvg
+description: Debugging javaScript in the browser
+medium: Website
+modified: 20250317090326770
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes CodeQuality
+title: DebuggingInTheBrowser(1730174540427)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/debugging-chrome
+visibility: Public
+year: 2024/10/28
+
+!! Breakpoint
+
+<<rememberq "20241028021958461"
+	"在javaScript中的设置breakpoint有几种方式？"
+	"两种。一种是点击行号，设置breakpoint；另一种是在命令行中输入debugger;命令设置breakpoint。">>
+
+<<rememberq "20241028022119390"
+	"在代码设置debugger命令，在devtools工具关闭的情况下，会发生什么？"
+	"会被自动忽略。">>
+
+<<rememberq "20241028022318848"
+	"如何设置条件断点？"
+	"右击行号，创建条件断点。">>
+
+<<rememberq "20241028022053475"
+	"resume的作用是什么？"
+	"从当前断点执行到下一个断点；如果后面没有断点的话，就执行到代码结束。">>
+
+<<rememberq "20241028023828880"
+	"step over的作用是什么？"
+	"单步执行，跳过函数。">>
+
+<<rememberq "20241028024339861"
+	"step in的作用是什么？"
+	"单步执行，进入函数。">>
+
+<<rememberq "20241028024404427"
+	"step out的作用是什么？"
+	"从当前函数跳出，回到调用该函数的地方。">>

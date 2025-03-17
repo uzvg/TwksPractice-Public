@@ -1,0 +1,93 @@
+caption: subfilter Operator
+created: 20240818170553318
+creator: uzvg
+description: tiddlywiki中subfilter可以让我们在一个过滤器中嵌套另一个过滤器，这可以让我们将多个复杂的过滤器组合都是，创建更复杂的过滤器。
+modified: 20250317090326771
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki PermanentNotes FilterOperators
+title: FilterOperators/subfilter
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 作用：
+
+在TiddlyWiki中，子过滤器（subfilter）运算符的作用是允许你在一个过滤器中嵌套另一个过滤器。它的主要用途是：
+
+* 将多个过滤器组合起来，创建更复杂的过滤条件
+* 允许你在一个过滤器中引用另一个过滤器的结果
+
+通过使用子过滤器运算符，你可以创建更灵活和更强大的过滤器，来筛选和处理TiddlyWiki中的数据。
+
+{{{ [[20240718162127.png]] }}}
+!! 使用：
+
+1. 以变量的方式定义子过滤器：
+
+subfilter是一个构造器筛选器，如下：
+
+* [[202409121237585.jpg]]
+* [[2024-07-1113-20-21.png]]
+
+{{{ [is[missing]] }}}
+
+!! Subfilter as constructor
+
+<$set name="myvar" value="[[one]] [[two]] [[three]] ">
+<$list filter="[[again]subfilter<myvar>]">
+<$link to=<<currentTiddler>>/>
+</$list>
+</$set>
+
+!! subfilter filter as modifier
+
+<$set name="exp" value="[links[]] [backlinks[]] [[three]] -[all[missing]] -[tag[Image]]">
+{{{ [<currentTiddler>subfilter<exp>] }}}
+</$set>
+
+!! Questions:
+
+* `all`filter operator在这里扮演的是一个`constructor`
+* 如果`subfitler`中有多个运行时，是先执行多个运行，得出结果，再跟`subfilter`结合，还是参数中的每个运行先跟`subfilter`所传递的输入tiddler结合，再将执行`subfilter`之后多个`filter run`结合起来？
+** 做如下测试：
+
+```
+<$set name="exp" value="[links[]] [backlinks[]] [tags[]] -[tag[Image]]">
+{{{ [<currentTiddler>subfilter<exp>] }}}
+</$set>
+```
+
+结果如下：
+
+<$set name="exp" value="[links[]] [backlinks[]] [tags[]] -[tag[Image]]">
+{{{ [<currentTiddler>subfilter<exp>] }}}
+</$set>
+
+```
+<$set name="exp" value="[links[]] [backlinks[]] [tags[]]">
+{{{ [<currentTiddler>subfilter<exp>] -[tag[Image]] }}}
+</$set>
+```
+
+结果如下：
+
+<$set name="exp" value="[links[]] [backlinks[]] [tags[]]">
+{{{ [<currentTiddler>subfilter<exp>] -[tag[Image]] }}}
+</$set>
+
+要是再给其中添加一个图片tiddler，会发生什么？
+
+<$set name="exp" value="[links[]] [backlinks[]] [tags[]] [[Pastedimage202403.png]] -[tag[Image]]">
+{{{ [<currentTiddler>subfilter<exp>] }}}
+</$set>
+
+** `subfilter`中的多个运行，首先做的是跟输入的tiddler做结合，然后再
+
+<$set name="exp" value="[links[]] -[tag[Image]]">
+{{{ [[2024-07-1113-20-21.png]subfilter<exp>] }}}
+</$set>
+
+---
+
+{{{ [<storyTiddler>backlinks[]] [<storyTiddler>links[]!is[image]] [<storyTiddler>tagging[]] [<storyTiddler>has[authors]get[authors]enlist-input[]] [<storyTiddler>has[source]get[source]enlist-input[]] [all[tiddlers]contains:authors<storyTiddler>] [all[tiddlers]contains:source<storyTiddler>] +[!title<storyTiddler>sort[]] }}}

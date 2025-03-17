@@ -1,0 +1,32 @@
+created: 20240905145227051
+creator: uzvg
+description: 使用模板初始化missing tiddler
+modified: 20250317090326781
+modifier: uzvg
+progress: Processing
+tags: tiddlywiki FleetingNotes
+title: Initialize missing tiddler and untitled tiddler
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Description:
+
+{{!!description}}
+
+!! Untitled tiddlers:
+
+* [[Initialize an image link to an image tiddler]]
+
+
+
+!!! Missing tiddler
+
+* create fleeting notes
+** Add FleetintgNotes tag
+** Add progress field value
+** 
+
+刚才发现，tiddlywiki中的搜索功能居然也是用tiddlywiki写的，太厉害了
+[[$:/uzvg/SideBarSegments/search]]
+
+{{{ [[wallhaven-x6m79l.png]has[text]] }}}

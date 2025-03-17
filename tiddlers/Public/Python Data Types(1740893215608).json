@@ -1,0 +1,20 @@
+[
+    {
+        "created": "20250302052655608",
+        "text": "Python has the following data types built-in by default, in these categories:\nText Type: \tstr\nNumeric Types: \tint, float, complex\nSequence Types: \tlist, tuple, range\nMapping Type: \tdict\nSet Types: \tset, frozenset\nBoolean Type: \tbool\nBinary Types: \tbytes, bytearray, memoryview\nNone Type: \tNoneType\n\n; Getting the data type:\n\n```\nx = 5\nprint(type(x))\n\n\n<class 'int'>\n```\n\n; List data type:\n\n```\nx = [\"apple\", \"banana\", \"cherry\"]\n```\n\n; Tupe data type:\n\n```\nx = (\"apple\", \"banana\", \"cherry\")\n```\n\n; Range data type:\n\n```\nx = range(6)\n\n#display x:\nprint(x)\n\n#display the data type of x:\nprint(type(x))\n\nrange(0, 6)\n<class 'range'>\n```\n\n; Dict:\n\n```\nx = {\"name\" : \"John\", \"age\" : 36}\n```\n\n",
+        "title": "Python Data Types(1740893215608)",
+        "creator": "uzvg",
+        "modified": "20250317090326785",
+        "modifier": "uzvg",
+        "tags": "LiteratureNotes Python",
+        "type": "text/vnd.tiddlywiki",
+        "authors": "w3schools",
+        "caption": "Python Data Types",
+        "description": "Python Data Types ",
+        "medium": "Website",
+        "progress": "",
+        "url": "https://www.w3schools.com/python/python_datatypes.asp",
+        "visibility": "Public",
+        "year": "2025-03-02"
+    }
+]

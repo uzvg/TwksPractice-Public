@@ -1,0 +1,71 @@
+caption: System tags in tiddlywiki
+created: 20130822080600000
+creator: uzvg
+medium: Wiki
+modified: 20250317090326787
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki LiteratureNotes
+title: System tags in tiddlywiki(1729588843127)
+type: text/vnd.tiddlywiki
+url: https://tiddlywiki.com/static/SystemTags.html
+visibility: Public
+
+!! 系统标签
+
+|<<tag "$:/tags/AboveStory">> |元素被放置在故事河的顶端 |
+|<<tag "$:/tags/AdvancedSearch">> |用作搜索元素 |
+|<<tag "$:/tags/AdvancedSearch/FilterButton">> |用作搜索过滤器按钮 |
+|<<tag "$:/tags/Alert">> |用作警报 |
+|<<tag "$:/tags/BelowStory">> |元素被放置在故事河的底部 |
+|<<tag "$:/tags/ControlPanel">> |用作控制面板选项卡 |
+|<<tag "$:/tags/ControlPanel/Advanced">> |用作控制面板高级选项卡 |
+|<<tag "$:/tags/ControlPanel/Appearance">> |用作控制面板外观选项卡 |
+|<<tag "$:/tags/ControlPanel/Info">> |用作控制面板信息选项卡 |
+|<<tag "$:/tags/ControlPanel/Saving">> |用作保存配置 |
+|<<tag "$:/tags/ControlPanel/Settings">> |用作控制面板设置选项卡 |
+|<<tag "$:/tags/ControlPanel/Toolbars">> |用作控制面板工具栏自定义选项卡 |
+|<<tag "$:/tags/EditorToolbar">> |用作编辑器工具栏按钮 |
+|<<tag "$:/tags/EditPreview">> |用作自定义预览窗格 |
+|<<tag "$:/tags/EditTemplate">> |用编辑模板 |
+|<<tag "$:/tags/EditToolbar">> |用作编辑模式下条目工具栏 |
+|<<tag "$:/tags/Exporter">> |用作导出器 |
+|<<tag "$:/tags/Filter">> |用作高级搜索样板过滤器下拉框中的过滤器 |
+|<<tag "$:/tags/Image">> |用作（核心）图像 |
+|<<tag "$:/tags/Manager/ItemMain">> |用作条目管理器 $:/Manager |
+|<<tag "$:/tags/Manager/ItemSidebar">> |用作条目管理器 |
+|<<tag "$:/tags/Macro">> |用作全局宏 |
+|<<tag "$:/tags/MoreSideBar">> |用作边栏中“更多”选项卡的标签 |
+|<<tag "$:/tags/MoreSideBar/Plugins">> |用作工具栏：更多：插件选项卡 |
+|<<tag "$:/tags/PageControls">> |用作侧栏中的页面控制工具 |
+|<<tag "$:/tags/PageTemplate">> |用作主页面元素模板 |
+|<<tag "$:/tags/Palette">> |用作调色板 |
+|<<tag "$:/tags/PluginLibrary">> |用作插件库 |
+|<<tag "$:/tags/RawMarkup">> |将原始标记包含在生成的HTML文件中。 要激活标签，TiddlyWiki需要重新加载 |
+|<<tag "$:/tags/RawMarkupWikified">> |将原始标记包含在生成的HTML文件中。 要激活标签，TiddlyWiki需要重新加载 |
+|<<tag "$:/tags/RawStaticContent">> |用作将“原始”内容保存到TW代码中。 小心！ |
+|<<tag "$:/tags/RemoteAssetInfo">> |用作插件导入处理 |
+|<<tag "$:/tags/SearchResults">> |用作定制的搜索结果 |
+|<<tag "$:/tags/ServerConnection">> |用作插件导入处理 |
+|<<tag "$:/tags/SideBar">> |用作边栏选项卡 |
+|<<tag "$:/tags/Stylesheet">> |指明一个条目应该被用作CSS样式表 |
+|<<tag "$:/tags/TagDropdown">> |用作下拉式排序标签 |
+|<<tag "$:/tags/Texteditor/Snippet">> |用作文本编辑图章功能的文本片段 |
+|<<tag "$:/tags/TiddlerInfo">> |用作条目信息面板选项卡 |
+|<<tag "$:/tags/TiddlerInfo/Advanced">> |用作高级条目选项卡下的标签 |
+|<<tag "$:/tags/ToolbarButtonStyle">> |用作工具栏按钮的样式 |
+|<<tag "$:/tags/TopLeftBar">> |用作左上角的工具栏 |
+|<<tag "$:/tags/TopRightBar">> |用作右上角的工具栏 |
+|<<tag "$:/tags/ViewTemplate">> |用作视图模板 |
+|<<tag "$:/tags/ViewToolbar">> |用作视图模式下条目的工具栏 |
+
+!! ~TiddlyWiki 插件
+
+|<<tag "$:/tags/HelpPanel">> |可在[[tiddlywiki预发布|https://tiddlywiki.com/prerelease/]]看到，参看：top left page control bubble（左上角控制泡泡）|
+|<<tag "$:/tags/HelpPanel/Videos">> |帮助面板“视频”选项卡 |
+|<<tag "$:/tags/MakeQR">> |可在[[tiddlywiki预发布|https://tiddlywiki.com/prerelease/]]看到，参看：Tiddler toolbar（条目工具栏） |
+|<<tag "$:/tags/TranslationGroup">> |由[[译者版|https://tiddlywiki.com/editions/translators/]]使用 |
+|<<tag "$:/tags/TwitterUsage">> |twitter插件 |
+|<<tag "$:/tags/ViewToolbarButton/QRcode">> |参见[[tiddlywiki预发布|https://tiddlywiki.com/prerelease/]] |
+|<<tag "$:/tags/test-spec">> |tiddlywiki测试套件 |

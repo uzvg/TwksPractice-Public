@@ -1,0 +1,50 @@
+created: 20250223170157164
+description: 如何为chezmoi配置文件中的{{符号转义
+modified: 20250317090326766
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes chezmoi TroubleShooting
+title: chezmoi 配置模板文件转义
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 引言：
+
+在使用`chezmoi init`时，发生如下报错：
+
+```
+chezmoi: template: chezmoi.toml:9:22: executing "chezmoi.toml" at <.Destination>: map has no entry for key "Destination"
+```
+
+!! 原因：
+
+通过`chezmoi apply`本应生成如下配置文件：
+
+```toml
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
+[diff]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
+```
+
+* 这是chezmoi最终要得到的配置文件，而非配置文件本身。
+* 换句话，需要使用模板文件，生成以上配置文件。
+* 没有使用模板，导致直接进行了值替换，需要用到go 模板中的转义：
+
+!! 解决方案：
+
+为了生成最终的配置文件，需要在 `.chezmoi.toml.tmpl` 中转义这些模板变量，使 Chezmoi 在渲染时将它们作为普通文本输出，而不是试图解析它们。Chezmoi 使用 Go 的模板语法，支持通过 `{{ "{{ " }}` 和 `{{ " }}" }}` 来转义大括号。
+
+
+```toml
+[merge]
+    command = "nvim"
+    args = ["-d", "{{"{{"}} .Destination {{"}}"}}", "{{"{{"}} .Source {{"}}"}}", "{{"{{"}} .Target {{"}}"}}"]
+[diff]
+    command = "nvim"
+    args = ["-d", "{{"{{"}} .Destination {{"}}"}}", "{{"{{"}} .Target {{"}}"}}"]
+```
+

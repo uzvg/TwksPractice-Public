@@ -1,0 +1,75 @@
+created: 20240808044745982
+creator: uzvg
+modified: 20250317081611142
+modifier: uzvg
+tags: zsh
+title: funcstack内置数组
+type: text/vnd.tiddlywiki
+
+我在`gh completion -s zsh`命令的输出中，在函数补全代码的最后，遇见了如下写法：
+
+```bash
+# don't run the completion function when being source-ed or eval-ed
+if [ "$funcstack[1]" = "_gh" ]; then
+    _gh
+fi
+```
+
+
+`funcstack` 是 `zsh` 中的一个内置数组，用于跟踪当前函数调用的堆栈信息。它提供了有关当前执行上下文的详细信息，特别是在涉及函数调用时。以下是对 `funcstack` 的详细说明：
+
+### 1. 基本概念
+
+- **函数调用堆栈**：在程序执行过程中，函数调用会形成一个堆栈结构。每当一个函数被调用时，它会被推入堆栈，返回时则从堆栈中弹出。`funcstack` 数组记录了这个堆栈的状态。
+
+### 2. 数组结构
+
+- `funcstack` 是一个一维数组，其中每个元素代表一个函数调用。数组的索引从 1 开始（与许多其他编程语言不同，`zsh` 的数组索引从 1 开始）。
+
+- `funcstack[n]` 表示当前调用堆栈中第 n 个函数的名称。`funcstack[1]` 是当前正在执行的函数，`funcstack[2]` 是调用当前函数的函数，以此类推。
+
+### 3. 使用场景
+
+- **调试**：在调试脚本时，可以使用 `funcstack` 来查看当前的函数调用路径。这对于理解代码的执行流程非常有帮助。
+
+- **条件执行**：可以根据调用上下文决定是否执行某些代码。例如，在补全函数中，可以检查 `funcstack` 来确定是否在补全上下文中执行特定逻辑。
+
+### 4. 示例
+
+以下是一个简单的示例，展示如何使用 `funcstack`：
+
+```zsh
+function foo() {
+    echo "In function foo"
+    bar
+}
+
+function bar() {
+    echo "In function bar"
+    echo "Current function stack: ${funcstack[@]}"
+}
+
+foo
+```
+
+#### 输出：
+
+```
+In function foo
+In function bar
+Current function stack: bar foo
+```
+
+在这个示例中：
+- 当调用 `foo` 函数时，它会调用 `bar` 函数。
+- 在 `bar` 函数中，`funcstack` 数组显示了当前的函数调用堆栈，表明 `bar` 是在 `foo` 中被调用的。
+
+### 5. 注意事项
+
+- **性能**：虽然 `funcstack` 是一个强大的工具，但在性能敏感的代码中频繁访问它可能会影响性能，尤其是在深层嵌套的函数调用中。
+
+- **上下文**：`funcstack` 只在函数上下文中有效。在脚本的顶层（即没有函数调用的情况下），`funcstack` 可能不会提供有用的信息。
+
+### 总结
+
+`funcstack` 是 `zsh` 中一个非常有用的内置数组，能够帮助开发者跟踪函数调用的堆栈信息。它在调试、条件执行和理解代码执行流程方面具有重要作用。通过合理使用 `funcstack`，可以提高脚本的灵活性和可维护性。

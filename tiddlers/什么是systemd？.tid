@@ -1,0 +1,206 @@
+created: 20241217103556875
+modified: 20250317081611198
+modifier: uzvg
+title: 什么是systemd？
+type: text/vnd.tiddlywiki
+
+!! 定义：
+
+`systemd` 是一种现代化的 Linux 初始化系统（init system），用于管理系统的启动过程以及运行时的服务和资源。它是 SysVinit 和 Upstart 的继任者，现已成为大多数 Linux 发行版的默认初始化系统。
+
+!! systemd的核心特性：
+
+|tc-max-width|k
+| !功能分类 | !具体功能描述 |
+|!服务管理 |管理系统服务（启动、停止、重启、自动重启等）|
+|!并行化启动 |支持服务的并行启动以加速系统启动时间|
+|!依赖关系管理 |自动处理服务之间的依赖关系|
+|!统一日志 |通过 `journald` 提供集中化的日志管理|
+|!设备和挂载点管理 |管理硬件设备、挂载点和自动挂载|
+|!定时任务 |替代 `cron` 来执行时间触发的任务|
+|!资源限制 |通过 `cgroups` 控制服务的资源使用（CPU、内存等）|
+|!Socket 激活 |在客户端请求到达时按需启动服务|
+
+资源建筑和socket的作用是什么？无法理解
+
+
+
+### **基本概念和术语**
+1. **Unit 文件：**
+   - `systemd` 使用 Unit 文件来描述服务、设备、挂载点等。
+   - 每个 Unit 文件通常以 `.service`、`.socket`、`.mount` 等为后缀。
+   - Unit 文件通常存储在以下路径：
+     - `/etc/systemd/system/`：用户定义的 Unit 文件。
+     - `/lib/systemd/system/`：系统安装的 Unit 文件。
+     - `/run/systemd/system/`：运行时生成的 Unit 文件。
+
+2. **Unit 类型：**
+   - **Service (`.service`)：** 管理系统服务。
+   - **Target (`.target`)：** 一组 Unit 的逻辑集合，用于分组启动。
+   - **Socket (`.socket`)：** 描述网络或 IPC 套接字。
+   - **Timer (`.timer`)：** 替代 `cron`，用于定时启动任务。
+   - **Mount (`.mount`)：** 描述文件系统挂载点。
+   - **Device (`.device`)：** 描述硬件设备。
+   - **Path (`.path`)：** 描述文件或目录的监控。
+
+3. **状态管理命令：**
+   - `systemctl` 是管理 `systemd` 的核心命令。
+   - 常用命令：
+     - `systemctl start <unit>`：启动一个服务。
+     - `systemctl stop <unit>`：停止一个服务。
+     - `systemctl restart <unit>`：重启一个服务。
+     - `systemctl status <unit>`：查看服务状态。
+     - `systemctl enable <unit>`：设置服务开机启动。
+     - `systemctl disable <unit>`：禁用服务开机启动。
+
+4. **Target：**
+   - `systemd` 的 Target 类似于传统的运行级别（runlevel）。
+   - 常见 Target：
+     - `multi-user.target`：多用户模式（无图形界面）。
+     - `graphical.target`：带图形界面的多用户模式。
+     - `rescue.target`：单用户模式，用于系统维护。
+
+---
+
+### **如何学习并掌握 `systemd`？**
+
+#### **1. 学习基础命令**
+从最常用的命令开始，逐渐了解其功能：
+- 查看当前运行的所有服务：
+  ```bash
+  systemctl list-units --type=service
+  ```
+- 查看服务的启动日志：
+  ```bash
+  journalctl -u <service_name>
+  ```
+- 查看开机启动的服务：
+  ```bash
+  systemctl list-unit-files --type=service
+  ```
+
+#### **2. 理解 Unit 文件**
+- 查看服务的 Unit 文件内容：
+  ```bash
+  systemctl cat <service_name>
+  ```
+- 编辑或创建自定义服务：
+  - 在 `/etc/systemd/system/` 目录下创建自定义 `.service` 文件。
+  - 示例：
+    ```ini
+    [Unit]
+    Description=My Custom Service
+    After=network.target
+
+    [Service]
+    ExecStart=/usr/bin/my-program
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+- 保存后重新加载：
+  ```bash
+  sudo systemctl daemon-reload
+  sudo systemctl start my-custom.service
+  sudo systemctl enable my-custom.service
+  ```
+
+#### **3. 掌握依赖关系**
+`systemd` 使用依赖关系确保服务按正确顺序启动/停止：
+- 查看依赖树：
+  ```bash
+  systemctl list-dependencies <unit>
+  ```
+- 定义依赖关系：
+  - 使用 `[Unit]` 部分的 `After=` 和 `Requires=` 指定服务依赖。
+
+#### **4. 学习日志与排查问题**
+- **检查服务状态：**
+  ```bash
+  systemctl status <service_name>
+  ```
+- **查看错误日志：**
+  ```bash
+  journalctl -u <service_name> -p err
+  ```
+- **实时监控服务日志：**
+  ```bash
+  journalctl -f -u <service_name>
+  ```
+
+#### **5. 定时任务和自动化**
+- 学习 `systemd.timer` 替代 `cron`：
+  - 定义定时任务：
+    ```ini
+    [Unit]
+    Description=Run my task every 5 minutes
+
+    [Timer]
+    OnBootSec=5min
+    OnUnitActiveSec=5min
+
+    [Install]
+    WantedBy=timers.target
+    ```
+  - 激活定时器：
+    ```bash
+    sudo systemctl enable my-task.timer
+    sudo systemctl start my-task.timer
+    ```
+
+#### **6. 学习资源限制**
+- 通过 `cgroups` 设置资源限制：
+  - 示例：限制服务的内存使用：
+    ```ini
+    [Service]
+    MemoryMax=500M
+    ```
+
+#### **7. 学习 `target`**
+- 切换系统目标：
+  ```bash
+  sudo systemctl isolate multi-user.target
+  ```
+- 设置默认目标：
+  ```bash
+  sudo systemctl set-default graphical.target
+  ```
+
+---
+
+### **实际应用建议**
+
+1. **系统优化：**
+   - 禁用不需要的服务以减少启动时间：
+     ```bash
+     systemctl disable <unnecessary_service>
+     ```
+   - 使用 `systemd-analyze` 分析启动性能：
+     ```bash
+     systemd-analyze blame
+     ```
+
+2. **定制化管理：**
+   - 创建自定义服务来运行脚本或守护进程。
+   - 使用 `systemd.timer` 管理定时任务。
+
+3. **排查问题：**
+   - 遇到服务启动失败，结合 `systemctl status` 和 `journalctl` 查看详细日志。
+   - 利用依赖树 (`systemctl list-dependencies`) 理解服务启动顺序。
+
+---
+
+### **推荐学习资源**
+1. `systemd` 官方文档：
+   [https://www.freedesktop.org/wiki/Software/systemd/](https://www.freedesktop.org/wiki/Software/systemd/)
+2. 图书推荐：
+   - 《Mastering systemd》—— 适合深入学习。
+   - 《Linux System Programming》—— 适合理解底层机制。
+3. 在线资源：
+   - 各大 Linux 社区（如 Arch Wiki）提供丰富的 `systemd` 实践案例。
+
+---
+
+通过系统化的学习和实践，`systemd` 可以帮助你更高效地管理 Linux 系统，逐步掌握从服务管理到资源优化的全面技能！

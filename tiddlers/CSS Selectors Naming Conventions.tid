@@ -1,0 +1,83 @@
+created: 20241216062213982
+modified: 20250317081611137
+modifier: uzvg
+tags: CSS FleetingNotes
+title: CSS Selectors Naming Conventions
+type: text/vnd.tiddlywiki
+
+在项目中为 CSS 选择器命名时，最好遵循一种一致的命名规范，以提高代码的可读性、可维护性和可扩展性。在你的项目 `twks` 中，可以基于以下建议来命名这些类。
+
+---
+
+### **1. 命名建议**
+为了明确这些样式属于 `twks` 项目，并减少样式冲突，可以采用以下命名方式：
+
+#### **使用命名空间**
+将项目名称或缩写作为命名空间前缀，例如 `twks-`，后面跟具体的功能描述。这样可以避免与其他全局样式冲突。
+
+- **`.twks-alert`**: 通用警告卡片样式。
+- **`.twks-alert-warning`**: 警告卡片。
+- **`.twks-alert-important`**: 重要信息卡片。
+- **`.twks-alert-tip`**: 提示卡片。
+- **`.twks-alert-note`**: 备注卡片。
+- **`.twks-alert-icon`**: 图标部分。
+- **`.twks-alert-content`**: 内容部分。
+
+例如：
+```html
+<div class="twks-alert twks-alert-warning">
+    <div class="twks-alert-icon">⚠️</div>
+    <div class="twks-alert-content">...</div>
+</div>
+```
+
+---
+
+### **2. 项目中 CSS 命名规范**
+#### **（1）BEM 方法**
+BEM (Block, Element, Modifier) 是一种广泛使用的 CSS 命名方法：
+- **Block**: 独立模块的名称（如 `.alert`）。
+- **Element**: 模块内部的子元素，用双下划线连接（如 `.alert__icon`）。
+- **Modifier**: 模块或子元素的状态或特性，用双连字符连接（如 `.alert--warning`）。
+
+在你的项目中可以应用 BEM：
+- `.twks-alert`：Block 表示警告卡片组件。
+- `.twks-alert__icon`：Element 表示卡片的图标。
+- `.twks-alert__content`：Element 表示卡片的内容。
+- `.twks-alert--warning`：Modifier 表示卡片的类型为警告。
+
+使用示例：
+```html
+<div class="twks-alert twks-alert--warning">
+    <div class="twks-alert__icon">⚠️</div>
+    <div class="twks-alert__content">...</div>
+</div>
+```
+
+---
+
+#### **（2）使用功能或模块名称前缀**
+如果项目采用模块化开发（例如按功能划分组件），可以将模块名称作为前缀：
+- `.alert-warning` -> `.twks-ui-alert-warning` （模块 `ui` 的警告卡片）
+- `.alert-content` -> `.twks-ui-alert-content`
+
+---
+
+#### **（3）其他命名规范补充**
+- **避免过于具体的命名**：
+  命名中不要使用过度描述性的词汇（例如 `.red-box`），这样当样式发生变化时无需大规模重命名。
+  
+- **以语义为主导**：
+  命名应描述元素的功能，而非样式。例如使用 `.alert-icon` 而非 `.icon-small`.
+
+- **保持一致性**：
+  不要混用命名风格。例如，如果使用了 `twks-alert__icon`，不要在另一个地方使用 `twks-alert-icon`。
+
+---
+
+### **3. 总结：推荐命名**
+- **通用组件类**：`twks-alert`, `twks-alert-warning`, `twks-alert-content`, etc.
+- **BEM 风格**：`twks-alert`, `twks-alert__icon`, `twks-alert--warning`.
+- **模块化命名**：`twks-ui-alert-warning`.
+
+选择一种适合你项目的命名方式，并始终保持一致性！

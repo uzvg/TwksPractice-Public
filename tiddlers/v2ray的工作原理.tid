@@ -1,0 +1,67 @@
+created: 20240710122828361
+creator: uzvg
+modified: 20250317081611182
+modifier: uzvg
+tags: 网络基础 proxy v2ray
+title: v2ray的工作原理
+type: text/vnd.tiddlywiki
+
+配置代理服务器的时候，老是要配置inbounds参数和outbound参数，以下是我结合自己之前的网络知识对v2ray代理服务的理解：
+
+!! 什么是v2ray？
+
+V2Ray 是 Project V 下的一个工具。Project V 是一个包含一系列构建特定网络环境工具的项目，而 V2Ray 属于最核心的一个。
+
+其中v2ray-core，即V2Ray 内核提供了一个平台，支持必要的网络代理功能，在其之上可以进二次开发，以提供更好的用户体验。
+
+也就是说，我们常说的v2ray指的是在v2ray-core的基础上开发的一系列前端工具。
+
+!! v2ray的架构
+
+<<image-basic [[v2ray_arch.svg]]>>
+
+!! 原理简析
+
+<<image-basic [[202407121351804.png]]>>
+
+无论是客户端还是服务端，v2ray的配置文件都由两部分组成，即inbound和outbound，换句话说，我们可以把每个v2ray理解为一个节点。
+
+其中，inbound是关于跟上一个节点通信的配置，比如跟浏览器的通信，将inbound的`listen port`设置为`2080`，同时在浏览器中使用switchOmega插件将一部分需要科学上网的网站数据转发至`2080`端口，于是，这些网站的数据会通过v2ray的inbound协议接收。
+
+通过inbound协议接收数据后，这些数据会被交给分发器（dispatcher）进行分发。分发器将数据通过一定的规则，将数据通过outbound协议将数据发给服务器，比如另一台主机上的v2ray。
+
+可以看到数据包的流向是：
+
+```
+{浏览器} <--(socks)--> {V2Ray 客户端 inbound <-> V2Ray 客户端 outbound} <--(VMess)-->  {V2Ray 服务器 inbound <-> V2Ray 服务器 outbound} <--(Freedom)--> {目标网站}
+```
+
+[[最常见的配置|vmess协议配置示例]]是，客户端方面至少要有一个inbound和一个outbound，其中：
+
+* inbound主要配置好如下参数：
+** 需要监听的本地端口号，如1080
+** 入站协议，如“socks”
+
+* outbound中主要配置好如下参数；
+** 出口协议，如"vmess"
+** 代理服务器网址或ip地址
+** 代理服务器的端口
+
+而服务器端通常只需要配置好inbound协议，主要包括如下参数：
+
+* 相关验证信息
+* 入站协议，跟客户端的出站协议保持一致。
+* 入站端口，跟客户端的出站端口保持一致。
+
+
+⚠️ 通过以上过程，我们了解到，v2ray的实现原理中，上一个节点的出站端口，是下一个节点的入站端口，对应到客户端跟服务器，就是客户端的出站端口，是服务端的入站端口，而在服务端没有配置outbound端口的情况下，客户端请求的数据是怎么返回的呢？如果不指定返回端口，那v2ray又是如何鉴别出由目标服务器返回的数据呢❓
+
+这个应该跟具体使用的加密协议有关，比如[[vmess协议]]。根据[[原理简析|https://guide.v2fly.org/basics/vmess.html#%E5%8E%9F%E7%90%86%E7%AE%80%E6%9E%90]]，从应用层上，我们可以认为数据包是原路返回，从传输层上，因为使用的是tcp协议，传输层数据协议，
+
+后续猜测：因为[[vmess协议]]是一个基于tcp的协议，数据也都是使用tcp传输，所以相当于vmess提供了一个数据的加密功能，用于客户端和服务器之间建立安全的数据传输，所以我暂且将其划分到属于应用层的协议。
+
+!! 参考链接：
+
+*  [[v2ray的核心设计|https://www.v2ray.com/developer/intro/design.html]]
+* 👉 [[官网：v2ray的工作机制|https://www.v2ray.com/chapter_00/workflow.html]]
+* 👉 [[原理简析|https://guide.v2fly.org/basics/vmess.html#%E5%8E%9F%E7%90%86%E7%AE%80%E6%9E%90]]

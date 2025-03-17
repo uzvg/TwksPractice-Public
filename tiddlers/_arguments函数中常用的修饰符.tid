@@ -1,0 +1,57 @@
+created: 20240805163437965
+creator: uzvg
+modified: 20250317081611062
+modifier: uzvg
+tags: zsh
+title: _arguments函数中常用的修饰符
+type: text/vnd.tiddlywiki
+
+除了 `:archive:`  之外，`_arguments`  函数中还有许多常用的修饰符，它们能够帮助你更精准地控制参数补全的行为。以下是几个常见的修饰符以及它们的含义：
+
+1. **`:file:`**:  用于限定补全结果为文件，包括普通文件和目录。
+
+2. **`:filename:`**: 用于限定补全结果为普通文件，不包含目录。
+
+3. **`:directory:`**: 用于限定补全结果为目录。
+
+4. **`:executable:`**: 用于限定补全结果为可执行文件。
+
+5. **`:user:`**:  用于限定补全结果为用户账号名称。
+
+6. **`:group:`**:  用于限定补全结果为用户组名称。
+
+7. **`:hostname:`**:  用于限定补全结果为主机名。
+
+8. **`:path:`**:  用于限定补全结果为路径，包括文件和目录。
+
+9. **`:wordlist:`**:  用于限定补全结果为一个预定义的词语列表，列表中的词语可以通过 `compadd` 函数添加。
+
+10. **`:function:`**: 用于限定补全结果为一个函数的返回值，该函数可以根据上下文动态生成补全选项。
+
+**举个例子:**
+
+```zsh
+_mycommand() {
+  local context state state_descr line
+
+  _arguments \
+    '--file[指定要处理的文件]:filename:_files' \
+    '--output[指定输出目录]:directory:_files' \
+    '--user[指定用户]:user' \
+    '--group[指定用户组]:group' \
+    '--hostname[指定主机名]:hostname'
+}
+
+compdef _mycommand mycommand
+```
+
+这段代码定义了几个 `_arguments` 规范说明符，分别使用 `:filename:`、`:directory:`、`:user:`、`:group:` 和 `:hostname:`  修饰符来限定补全结果的类型。
+
+**注意:**
+
+*  `_arguments` 函数的修饰符可以根据实际需要灵活地组合使用，例如 `:directory:filename:_files`  可以用来限定补全结果为目录下的文件。
+*  一些修饰符可能需要配合特定函数或命令使用，例如  `:function:`  需要与一个自定义函数一起使用。
+
+希望这些解释能够帮助你更好地理解 `_arguments` 函数中常用的修饰符，并编写更强大的参数补全功能。 
+
+

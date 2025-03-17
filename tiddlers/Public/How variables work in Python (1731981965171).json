@@ -1,0 +1,20 @@
+[
+    {
+        "created": "20241119012345488",
+        "creator": "uzvg",
+        "text": "C语言中的变量就像一个容器，容器的大小受到变量类型的限制，变量值则被装在变量这个容器中。变量类型跟变量是绑定在一起的。\n\n而在Python中，一切皆对象，我们无需为变量指定类型，\n\n动态变量类型，是说，运行时的对象具有数据类型，\n静态变量类型，是说，运行时的变量具有数据类型。\n\nPython中的变量，而非容器，而是name bindings，容器上的标签\n\n使用del x删除变量，并不意味着具体的对象就被删除了，应该是说，对象身上的标签被删除了，对象本身事实上还存在\n\n",
+        "title": "How variables work in Python (1731981965171)",
+        "type": "text/vnd.tiddlywiki",
+        "modified": "20250317090326780",
+        "tags": "LiteratureNotes",
+        "modifier": "uzvg",
+        "caption": "How variables work in Python ",
+        "authors": "unknown",
+        "year": "2021",
+        "visibility": "Public",
+        "description": "",
+        "url": "https://www.youtube.com/watch?v=Bz3ir-vKqkk",
+        "medium": "Video",
+        "progress": "Pending"
+    }
+]

@@ -1,0 +1,9 @@
+created: 20240101152459320
+creator: uzvg
+modified: 20250317081611183
+modifier: uzvg
+tags: widget
+title: view widget practice
+type: text/vnd.tiddlywiki
+
+Created: <$view field="created" format="date" template={{$:/language/Tiddler/DateFormat}}/>

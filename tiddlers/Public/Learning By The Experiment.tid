@@ -1,0 +1,20 @@
+created: 20250220044622990
+creator: uzvg
+description: Learn By The Experiment
+modified: 20250317090326782
+modifier: uzvg
+progress: Rethinking
+rating: Brilliant
+tags: Learning PermanentNotes 失败(Failure)
+title: Learning By The Experiment
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在工程实践中的很多问题是没有明确的答案的，不能指望文档、手册处理所有情况，要通过实验、快速试错来学习。
+
+即使是一门成熟的工程技艺，有着明确的操作手册，也会发生超出手册之外的情况。
+
+手册也是人写的，不可能面面俱到，把所有可能的情况都写进去。
+
+* 以tiddlywiki的文档为例，tiddlywiki的文档在我看来，经过几十年的发展，已经很成熟，很完善了，但在我自己用的过程中，因为tiddlywiki是可以跟html高度互动的，有的HTML方面的知识，tiddlywiki的文档虽然没有写，但却可以直接用，比如将`input type='month'`就很好地帮我解决了在tiddlywiki中选择日期的问题，而且不用安装任何插件。所以说，再完善的文档，也不会告诉我们所有东西。
+* 这还是文档比较完善的情况下，chezmoi的文档真的很难懂，它在一些基础方面的描述说得很好，但在一些脚本使用，比如`modify_`脚本的使用方面，写得实在是看不懂。结合AI跟实验，以及实际例子，才能大致搞清楚是怎么回事。

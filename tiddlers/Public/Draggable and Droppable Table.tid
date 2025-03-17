@@ -1,0 +1,58 @@
+created: 20250216105944600
+description: 使用tiddlywiki中的可拖拽功能
+modified: 20250317090326770
+modifier: uzvg
+progress: Researching
+tags: ProjectNotes TWKS
+title: Draggable and Droppable Table
+type: text/vnd.tiddlywiki
+visibility: Public
+
+\procedure thTemplate()
+<tr>
+	<th>Title</th>
+	<th>Caption</th>
+	<th>Description</th>
+</tr>
+\end
+
+\procedure trTemplate()
+	<$draggable tiddler=<<currentTiddler>> tag="tr">
+		<td><$link/></td>
+		<td><$text text={{{ [<currentTiddler>get[caption]] }}} /></td>
+		<td><$text text={{{ [<currentTiddler>get[description]] }}} /></td>
+	</$draggable>
+<!--
+	<tr class="tc-droppable-placeholder"/>
+-->
+\end
+
+
+\procedure table-draggable(filter,caption,actions,thTemplate,trTemplate,tfTemplate)
+<table>
+	<caption><<caption>></caption>
+	<thead>
+		<$transclude $variable="thTemplate"/>
+	</thead>
+	<tbody>
+		<$list filter=<<filter>>>
+			<tr class="tc-droppable-placeholder">
+				<$transclude $variable="trTemplate">
+					<$link/>
+				</$transclude>
+			</tr>
+		</$list>
+	</tbody>
+	<tfoot>
+		<$transclude $variable="tfTemplate"/>
+	</tfoot>
+</table>
+\end
+
+<$transclude
+	$variable="table-draggable"
+	caption="The caption of the table"
+	filter="[all[tiddlers]tag[Books]progress[Reading]]"
+	thTemplate=<<thTemplate>>
+	trTemplate=<<trTemplate>>
+/>

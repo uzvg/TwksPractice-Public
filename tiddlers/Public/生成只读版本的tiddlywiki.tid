@@ -1,0 +1,53 @@
+created: 20240715084421557
+creator: uzvg
+description: 使用tiddlywiki的现有方案，生成只读版本的tiddlywiki
+modified: 20250317090326820
+modifier: uzvg
+progress: Archived
+rating: Valuable
+tags: tiddlywiki PermanentNotes
+title: 生成只读版本的tiddlywiki
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 实现原理：
+
+原理非常简单，是使用tiddlywiki命令行应用tiddlywiki自带的readonly(只读)主题。在tiddlywiki中，主题由`$:/theme`的值决定，通过命令行，我们将保存在`$:/config/uzvg/theme/readonly`tiddler中的内容，也就是`$:themes/tiddlywiki/readonly`，设定为`$:/theme`的值，从而实现了在命令行切换主题，具体命令如下：
+
+```
+tiddlywiki --setfield "[[$:/theme]]" "text" "$:/config/uzvg/theme/readonly" "text/plain"
+```
+
+其中，`$:/config/uzvg/theme/readonly`tiddler中的内容为：
+
+```
+$:/themes/tiddlywiki/readonly
+```
+
+!! 准备工作：
+
+1. 开启tiddlywiki自带的`readonly`主题。修改`tiddlywiki.info`文件：
+
+```
+    "themes": [
+        "tiddlywiki/vanilla",
+        "tiddlywiki/snowwhite",
+        "tiddlywiki/readonly"
+    ],
+```
+
+2. 创建`$:/theme`tiddler
+
+`$:/theme`tiddler不会自动创建，只有切换主题的时候会自动创建，这里要么需要手动切换一次主题，要么直接手动创建也可以。
+
+3. 创建保存`$:/theme`tiddler内容的tiddler，该案例下，我将其保存在`$:/config/uzvg/theme/readonly`tiddler中，内容如下：
+
+```
+$:/themes/tiddlywiki/readonly
+```
+
+4. 执行如下命令：
+
+```
+tiddlywiki --setfield "[[$:/theme]]" "text" "$:/config/uzvg/theme/readonly" "text/plain"
+```

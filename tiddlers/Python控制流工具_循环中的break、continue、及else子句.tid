@@ -1,0 +1,71 @@
+created: 20240716074638823
+creator: uzvg
+modified: 20250317081611161
+modifier: uzvg
+tags: Python
+title: Python控制流工具/循环中的break、continue、及else子句
+type: text/vnd.tiddlywiki
+
+!! break
+
+作用：跳出最近一层的for或while循环
+
+!! else子句
+
+* else子句是Python中比较特殊的一种语法结构，它跟例如C语言或者C++中else语句都不一样。
+* for 或 while 循环可以包括 else 子句。
+** 这里需要注意的是，当while/for语句跟if语句混合在一起时，要搞清楚else子句是谁的子句。
+** 在 for 循环中，else 子句会在循环成功结束最后一次迭代之后执行。
+** 在 while 循环中，它会在循环条件变为假值后执行。
+** 无论哪种循环，如果因为break而结束，那么else子句就不会执行。
+
+!! 例子：
+
+1. 找质数
+
+```
+>>> for n in range(2,10):
+...     for x in range(2,n):
+...             if n % x == 0:
+...                     print(n,'=',x,'*',n//x)
+...                     break
+...     else:
+...             print(n,'is a prime number')
+... 
+2 is a prime number
+3 is a prime number
+4 = 2 * 2
+5 is a prime number
+6 = 2 * 3
+7 is a prime number
+8 = 2 * 4
+9 = 3 * 3
+
+```
+
+!! continue语句：
+
+continue 语句的作用是让循环跳过当前迭代中剩余的代码，继续执行循环的下一次迭代。当你在循环体内部执行到 continue 语句时，它会立即结束当前循环的剩余部分，并开始下一次循环的迭代。
+
+具体来说，如果在一个 for 或 while 循环中使用 continue，那么不管循环体中 continue 语句之后还有哪些代码，都不会被执行。程序会直接跳到循环的开始，重新评估循环条件，并继续执行下一次循环。
+
+例子：
+
+```
+>>> for num in range(2, 10):
+...     if num % 2 == 0:
+...         print("Found an even number", num)
+...         continue
+...     print("Found an odd number", num)
+...
+
+```python
+Found an even number 2
+Found an odd number 3
+Found an even number 4
+Found an odd number 5
+Found an even number 6
+Found an odd number 7
+Found an even number 8
+Found an odd number 9
+```

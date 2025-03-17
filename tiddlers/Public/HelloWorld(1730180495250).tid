@@ -1,0 +1,52 @@
+authors: [[Ilya Kantor]]
+caption: HelloWorld
+created: 20241025101349556
+creator: uzvg
+description: 
+medium: Website
+modified: 20250317090326773
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: HelloWorld(1730180495250)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/hello-world
+visibility: Public
+year: 2024/10/25
+
+; `<script>`可以被写在什么地方？
+: `<script>`可以写在html文档的任何地方。
+
+; `<script>`标签中的代码会在什么时候执行？
+: 会在浏览器处理到该标签的时候自动执行
+
+; 在现代浏览器中，有哪些`<script>`的属性已经不被使用？
+# `type`属性不被使用，如：`type="text/javascript"`，这个在现代的javaScript中已经被弃用。
+# `language`不被使用，language属性表示使用的是什么脚本语言，但现在已经全部都是`javaScript`了，所以不再使用。
+
+; 如何使用外部javaScript代码？
+# 使用`src`属性，我们可以通过`<script src="/path/to/script.js"></script>`的方式来引用外部javaScript代码。
+# 也可以使用从url引用外部url代码，如`<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>`
+
+; 使用外部javaScript代码的好处有哪些？
+# 完善代码组织结构。可以把大段的javaScript代码保存在好几个小文件，便于阅读跟管理。
+# 减少代码加载时间。浏览器会自动把javaScript代码保存在本地cache中，如果该代码在其他地方被引用，就不用重新下载该javaScript代码，缩短了代码下载时间，减少了代码加载时间。
+
+; 使用src属性时有什么注意事项？
+: 使用`src`属性，同一`<script>`标签内的代码会自动失效。
+: 如果需要的话，需要在另一个`<script>`内另写，如下：
+
+```
+<script src="file.js"></script>
+<script>
+  alert(1);
+</script>
+```
+
+<<rememberq "20241025103034055"
+	"`<script>`标签可以写在html文档中的什么地方？"
+	"可以写在html中的任何地方">>
+
+<<rememberq "20241025103139052"
+	"`<script>`标签中的代码会在什么地方执行？"
+	"在浏览器处理到`<script>标签时自动执行。`">>

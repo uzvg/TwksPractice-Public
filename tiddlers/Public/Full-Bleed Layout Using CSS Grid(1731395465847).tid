@@ -1,0 +1,21 @@
+authors: [[Josh WComeau]]
+caption: Full-Bleed Layout Using CSS Grid
+created: 20241112054641950
+creator: uzvg
+description: An elegant solution to a tricky modern layout
+medium: Website
+modified: 20250317090326772
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes
+title: Full-Bleed Layout Using CSS Grid(1731395465847)
+type: text/vnd.tiddlywiki
+url: https://www.joshwcomeau.com/css/full-bleed/
+visibility: Public
+year: 2024/9/13
+
+!! Question:
+
+breaks free of constraints.
+
+选择性地限制一部分元素的宽度，

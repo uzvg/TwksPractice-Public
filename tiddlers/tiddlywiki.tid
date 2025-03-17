@@ -1,0 +1,15 @@
+color: #62a0ea
+created: 20240705113138405
+creator: uzvg
+icon: $:/uzvg/images/tiddlywiki
+modified: 20250317081611172
+modifier: uzvg
+tags: IndexNotes
+title: tiddlywiki
+type: text/vnd.tiddlywiki
+
+<$twks.details summary="ProjectNotes of tiddlywiki" state="$:/state/detail">
+<<list-links "[tag[ProjectNotes]tag[tiddlywiki]]">>
+</$twks.details>
+
+<<list-links filter:"[all[tiddlers]!is[sytem]tag[tiddlywiki]]">>

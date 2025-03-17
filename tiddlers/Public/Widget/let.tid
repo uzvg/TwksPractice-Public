@@ -1,0 +1,57 @@
+caption: LetWidget
+created: 20240818124213811
+creator: uzvg
+description: LetWidget用于同时定义多个变量，相比于使用SetWidget，定义多个变量的方式更简洁，且变量之间可以相互引用，后定义的变量可以引用先前定义的变量值，反过来，先定义的变量的值，也能反过来影响引用它的变量值。
+modified: 20250317090326800
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki PermanentNotes
+title: Widget/let
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!!! 作用：
+
+同时定义多个变量。比`$set`的方式更方便
+
+!!! 特点：
+
+> It differs from the $vars widget in that variables you're defining may depend on earlier variables defined within the same $let.
+
+* 同一let widget中，之前定义的变量，可以被之后定义的变量调用。
+
+!!! 示例：
+
+```
+<$let target="MyTiddler" currentTiddler={{{ [<target>prefix[$:/settings/for/]] }}} settings={{!!text}} currentTiddler=<<target>> >
+  The settings for <<currentTiddler>> are: <<settings>>
+</$let>
+```
+
+而在[[$set|widget/set]]组件中，实现同样的效果，就麻烦得多，如下：
+
+```
+<$set name="target" value="MyTiddler" >
+<$set name="currentTiddler" value={{{ [<target>prefix[$:/settings/for/]] }}} >
+<$set name="settings" value={{!!text}} >
+<$set name="currentTiddler" value=<<target>> >
+  The settings for <<currentTiddler>> are: <<settings>>
+</$set>
+</$set>
+</$set>
+</$set>
+```
+
+* 保存当前tiddler
+* 再将`<currentTiddler>`定义为`$:/settings/for/MyTiddler`
+* 再将其`text`中的内容保存到`settings`中
+* 恢复`<currentTiddler>`的值
+
+<<rememberq "20240818125343072"
+	"let widget的作用是什么？"
+	"用比set widget更简洁的方式，同时定义多个变量">>
+
+<<rememberq "20240818125420639"
+	"let widget在定义的时候，有什么特点？"
+	"即使在同一let widget的定义中，之前定义的变量，可以被之后定义的变量所调用，相当于set widget中的不断嵌套">>

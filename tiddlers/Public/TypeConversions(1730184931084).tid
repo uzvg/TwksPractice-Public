@@ -1,0 +1,85 @@
+authors: [[Ilya Kantor]]
+caption: TypeConversions
+created: 20241026005553150
+creator: uzvg
+description: javaScript中的数据类型转换
+medium: Website
+modified: 20250317090326798
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: TypeConversions(1730184931084)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/type-conversions
+visibility: Public
+year: 2024/10/26
+
+大多数情况下，javaScript中的值会自动转换类型，但有的时候，我们需要显式转化值的类型，主要有以下三种：
+
+!! String(字符串转换)
+
+`String(value)`函数，将值转化为字符串类型。
+
+!! Number(数字转换)
+
+数字转换经常出现在一些数学操作中，用法是`Number(value)`，值得注意的是，在进行数字转换的时候，需要遵循以下规则：
+
+|tc-max-width tc-first-col-min-width tc-center|k
+| !Value | !转换后的值 |
+|`undefined` |`NaN` |
+|`null` |`0` |
+|`true/false` |`1/0` |
+|`string` |字符串为`空`为0，`非空`为1 |
+
+!! Boolean(布尔转换)
+
+布尔转换比较简单，只有两条规则，很符合直觉：
+
+|tc-max-width tc-first-col-no-wrap tc-center|k
+|!Value |!Becomes… |
+|`0`, `null`, `undefined`, `NaN`, `""` |`false` |
+|any other value|true |
+
+<<rememberq "20241026023408964"
+	"`undefined`转换成数字后，值是什么？"
+	"`NaN`">>
+
+<<rememberq "20241026070953085"
+	"`null`转换成数字后的值是什么？"
+	"`0`">>
+
+<<rememberq "20241026071033551"
+	"`true`and`false`转换成数字后的值是什么？"
+	"`1`and`0`">>
+
+<<rememberq "20241026071344658"
+	"在把`string`类型的value强制转换成`number`时，结果是什么？"
+	"如果`string`只包括`空格、制表符、换行符`，那转换后的结果为`0`，如果除此之外包括任意除数字以外的字符，结果将是`NaN`。">>
+
+<<rememberq "20241026071656581"
+	"布尔转换为false的有哪些？"
+	""" `0`,`NaN`,`null`,`undefined`,以及`""` """>>
+
+<<rememberq "20241029064820507"
+	"""`" "`进行布尔转换的结果是什么？"""
+	"true">>
+
+<<rememberq "20241029064841956"
+	""" `"0"`进行布尔转换的结果是什么？"""
+	"true">>
+
+<<rememberq "20241029064941449"
+	"` 234343w `进行数字转换的结果是什么？"
+	"NaN">>
+
+<<rememberq "20241029065015375"
+	"` 343434 `进行数值转换的结果是什么？"
+	"343434">>
+
+<<rememberq "20241026072107710"
+	"在把`string`类型的字符串转换成布尔类型的值时，有什么需要注意的？"
+	"只有空字符串才能被转换为`false`，除此以外的所有`非空字符串`都将被转换为`true`，`0`字符串也将被转换为`true`。">>
+
+<<rememberq "20241026072357580"
+	"仅包括一个`空格`或者`\t`或者`\n`的字符串，被强制转换为布尔类型的值后，其结果是什么？"
+	"`true`，除非字符串为空，否则其他任意内容、长度的`非空`字符串，被转换为布尔类型值后，结果都为`true`。">>

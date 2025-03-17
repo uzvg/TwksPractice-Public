@@ -1,0 +1,28 @@
+caption: TWKS笔记进度
+created: 20241205045936272
+creator: uzvg
+description: TWKS中的各类笔记进度汇总表
+modified: 20250317090326798
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: $:/twks/Documents
+title: TWKS笔记进度
+type: text/vnd.tiddlywiki
+visibility: Public
+
+TWKS中每类笔记都对应不同的进度阶段，以下是它们的说明：
+
+<$let
+	tabsList="[all[tiddlers]!is[system]!is[draft]prefix[TWKS笔记进度/]]"
+	myDefaultTab={{{ [subfilter<tabsList>first[]] }}}
+>
+	<$macrocall
+		$name="tabs"
+		tabsList=<<tabsList>>
+		default=<<myDefaultTab>>
+		class="tc-vertical"
+	/>
+</$let>
+
+<<twks-tip "👉 具体笔记流程可能会因现实需要而不断调整，因此文档说明可能落后于实际的进度设计，如有不同，请以实际的进度管理为准。">>

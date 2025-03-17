@@ -1,0 +1,22 @@
+created: 20241210150351531
+creator: uzvg
+modified: 20250317081611204
+modifier: uzvg
+tags: tiddlywiki FleetingNotes
+title: 写一个可以批量操作标签的插件
+type: text/vnd.tiddlywiki
+
+<table>
+<tr>
+	<th> Filter:</th>
+	<td><$edit-text tiddler=<<currentTiddler>> field="caption" focus="yes" focusSelectFromStart="5" /></td>
+</tr>
+<tr>
+	<th>Source Value:</th>
+	<td><$edit-text tiddler=<<currentTiddler>> field="caption" focus="yes" focusSelectFromStart="5" /></td>
+</tr>
+<tr>
+	<th>Destination Value:</th>
+	<td><$edit-text tiddler=<<currentTiddler>> field="caption" focus="yes" focusSelectFromStart="5" /></td>
+</tr>
+</table>

@@ -1,0 +1,18 @@
+caption: TWKS笔记类型
+created: 20240903070038048
+creator: uzvg
+description: 根据zettelkasten笔记管理方法为TWKS中的笔记分类。
+modified: 20250317090326797
+modifier: uzvg
+progress: Completed
+tags: $:/twks/Documents
+title: TWKS笔记类型
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|!笔记类型|!说明|
+|FleetingNotes |脑海中一闪而过的想法。在1-2天内回顾并决定是否转化为其他类型的笔记或被归档。|
+|LiteratureNotes |用于总结别人的观点或看法。来自于阅读的文献，如书籍、文章、论文、视频，主要用于客观准确阐述作者的观点。 |
+|PermanentNotes |用于保存自己的看法。独立于原始资料，是我们个人知识体系的一部分，主要阐述自己的理解、思考。 |
+|ProjectNotes |用于管理和跟踪特定项目的信息和进展。记录项目执行过程，遇到的问题，并由此发展出PermanentNotes。 |
+|IndexNotes |用于检索入口。帮助快速导航到某个主题的相关笔记。|

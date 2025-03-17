@@ -1,0 +1,49 @@
+authors: [[Bro Code]]
+caption: Python Course String  methods
+created: 20241221030808766
+creator: uzvg
+description: 
+medium: Video
+modified: 20250317090326784
+modifier: uzvg
+progress: 
+tags: LiteratureNotes
+title: Python Course String  methods(1734750488766)
+type: text/vnd.tiddlywiki
+url: https://youtu.be/XKHEtdqhLK8?list=PLZPZq0r_RZON03iKBjYOsOKr1-TD7z2lH&t=1239
+visibility: Public
+year: 2024-12-21
+
+len bro code 8
+
+find
+
+name.find("B") 找到B的位置 从0 开始
+
+capitalize() 首字母大写
+
+upper() uppercase 全部大写
+
+lower() lowecase 全部大写
+name.lower()
+
+name.isdigit() 是否是数字，并不是判断变量是否是一个数学变量，而是说字符串中是否是数字字符
+
+
+isalpha()是否是字母，有空格 error
+count("o") 计算其中o字符的数量
+
+replace("o", "a")替换
+
+* 3
+
+print(name*3)显示name三次
+
+
+
+
+
+
+
+
+

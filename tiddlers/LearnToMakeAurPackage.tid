@@ -1,0 +1,26 @@
+created: 20240801033600655
+creator: uzvg
+modified: 20250317081611155
+modifier: uzvg
+tags: ArchLinux aur
+title: LearnToMakeAurPackage
+type: text/vnd.tiddlywiki
+
+首先来看一下[[chrome浏览器在ArchLinux下的pkgbuild文件|PkgbuildFileOfGoogleChrome]]的核心部分的代码：
+
+!!! 先来了解一下aur软件打包的过程：
+
+* prepare() 函数：准备构建环境，例如解压缩源代码、应用补丁等。
+* build() 函数：编译软件包。
+* package() 函数：将软件包安装到虚拟的根目录中。
+* .install 文件：执行 post-installation 任务，例如创建配置文件、设置权限等。
+
+!!! ⚠️ 注意：
+
+* 在aur软件打包的过程中，以上顺序是固定的，Arch Linux 的 makepkg 工具会按照这个顺序执行 PKGBUILD 文件中的函数和脚本。
+
+* 如果被打包的`source`文件是一个`.deb`文件，那么，在
+
+需要注意的是，在 package() 函数中，软件包已经被安装到虚拟的根目录中，但还没有被压缩成一个软件包文件。在 .install 文件执行完毕后，软件包才会被压缩成一个软件包文件，准备好供用户安装。
+
+

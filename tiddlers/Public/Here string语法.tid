@@ -1,0 +1,134 @@
+created: 20250305163452470
+creator: uzvg
+description: 使用here string语法替代 echo "text" | command 的写法，减少进程创建
+modified: 20250317090326773
+modifier: uzvg
+progress: Completed
+rating: Promising
+tags: PermanentNotes [[here string]] Shell zsh
+title: Here string语法
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 历史背景：
+
+Here String（写作 `<<<`）最早出现于 1988 年的 KornShell（ksh），后被 Bash（自 2.05b 版本）、Zsh 等主流 Shell 实现继承。其核心设计目标为：
+
+* ''精简输入处理''：简化单行文本的输入重定向操作
+* ''避免管道开销''：替代 `echo "text" | command` 的写法，减少进程创建
+* ''增强语法表达力''：在命令行场景提升代码紧凑性
+
+相比 heredoc 的多行处理能力，here string具有如下核心优势：
+
+* ''即时输入传递''：将字符串直接传递给命令的标准输入
+* ''变量扩展支持''：完整支持 Shell 的变量替换和命令替换
+* ''单行操作优化''：特别适合处理单行文本的场景
+
+!! 语法结构：
+
+; 基础语法结构：
+
+```bash
+command <<< "text content"
+```
+
+; 语法元素解析：
+
+|!元素|!说明|
+|`<<<` |固定语法符号 |
+|文本内容 |支持双引号/单引号包裹（影响变量扩展行为） |
+|变量与命令替换 |与 heredoc 行为一致，受引号规则控制 |
+
+; 高级用法：
+
+```bash
+# 变量扩展（双引号行为）
+cmd <<< "$(date +%F) log entry"
+
+# 禁止扩展（单引号行为）
+cmd <<< '$USER@${HOSTNAME}'
+
+# 命令替换嵌套
+grep "error" <<< $(tail /var/log/syslog)
+```
+
+!! 应用案例：
+
+; 1：数学计算：
+
+```bash
+# 计算圆周率（保留5位小数）
+bc -l <<< "scale=5; 4*a(1)"
+# 输出：3.14159
+
+# 十六进制转十进制
+echo $(( 16#$(hexdump -n 2 -e '"%04X"' /dev/urandom) ))  # 传统写法
+bc <<< "ibase=16; $(hexdump -n 2 -e '"%04X"' /dev/urandom)"  # here string 写法
+```
+
+; 2：文本过滤：
+
+```bash
+# 统计特定词频
+tr ' ' '\n' <<< "apple banana orange apple apple" | sort | uniq -c
+
+# JSON 数据提取
+jq '.name' <<< '{"id": 42, "name": "Alice"}'
+```
+
+; 3：密码安全处理：
+
+```bash
+# 避免密码出现在进程列表
+openssl passwd -1 <<< "mypassword:$RANDOM"  # 自动添加换行符
+
+# 安全版（禁止命令历史记录）
+set -o histexpand
+openssl passwd -1 <<<!"secret123"  # ! 禁用历史扩展
+```
+
+!! 注意事项：
+
+; 1. 隐式换行符：
+
+```bash
+# here string 会自动在末尾追加换行符
+wc -c <<< "test"  # 输出 5（4字节内容 + 1字节换行）
+
+# 消除换行符技巧
+printf "%s" "text" | cmd       # 管道写法
+cmd <<< "${text%$'\n'}"        # 字符串处理写法
+```
+
+; 2. 性能陷阱：
+
+```bash
+# 多次调用 here string 会产生多个临时文件
+for i in {1..1000}; do
+    md5sum <<< "$i"  # 低效写法（每秒约 200 次操作）
+done
+
+# 优化方案（提升 10 倍性能）
+while read -r i; do
+    md5sum <<< "$i"
+done <<(seq 1 1000)
+```
+
+; 3. 特殊字符处理：
+
+```bash
+# 错误示例（未转义特殊符号）
+cut -d: -f1 <<< "root:x:0:0"  # 输出空（冒号作为分隔符）
+
+# 正确处理（显式声明分隔符）
+cut -d':' -f1 <<< "root:x:0:0"
+```
+
+; 4. Shell 兼容性：
+
+|!Shell|!支持版本|!特殊行为|
+| Bash        | ≥2.05b         | 默认创建临时文件                  |
+| Zsh         | 全部版本       | 优先使用管道                      |
+| Dash        | 不支持         | 需使用 `printf "%s" "text" \|`   |
+
+> 最佳实践建议：在需要传递动态生成的单行文本时优先使用 here string，注意通过 `<<<"$var"`（引号包裹）避免单词分割问题。对性能敏感的场景建议对比测试 here string 与管道的实际表现。

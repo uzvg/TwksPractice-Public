@@ -1,0 +1,46 @@
+created: 20240805112624299
+creator: uzvg
+modified: 20250317081611190
+modifier: uzvg
+tags: zsh
+title: zsh中的内置关联数组
+type: text/vnd.tiddlywiki
+
+在 Zsh 中，`commands` 是一个内置的关联数组，它用于存储当前 shell 环境中可用的命令。这个数组是 Zsh 自动管理的，用户不需要手动创建或初始化它。
+
+### `commands` 关联数组的特点
+
+1. **自动填充**：
+   - `commands` 数组会自动填充当前 shell 中可用的命令，包括内置命令、可执行文件和脚本。每当你在 shell 中运行命令时，Zsh 会更新这个数组。
+
+2. **键值对**：
+   - 在 `commands` 数组中，键是命令的名称（字符串），值是命令的路径（如果是可执行文件）或其他相关信息。
+
+3. **检查命令的存在性**：
+   - 通过使用 `${+commands[command_name]}` 语法，可以检查特定命令是否存在。如果命令存在，返回真（非零），否则返回假（零）。
+
+### 示例
+以下是如何使用 `commands` 关联数组的示例：
+```zsh
+# 检查 'ls' 命令是否存在
+if [[ ${+commands[ls]} ]]; then
+    echo "'ls' command is available."
+else
+    echo "'ls' command is not available."
+fi
+
+# 检查 'nonexistent_command' 是否存在
+if [[ ${+commands[nonexistent_command]} ]]; then
+    echo "'nonexistent_command' is available."
+else
+    echo "'nonexistent_command' is not available."
+fi
+```
+
+### 其他内置关联数组
+除了 `commands`，Zsh 还提供了一些其他内置的关联数组和变量，例如：
+- `functions`：存储当前 shell 中定义的函数。
+- `aliases`：存储当前 shell 中定义的别名。
+
+### 总结
+`commands` 是 Zsh 中的一个内置关联数组，自动管理并提供当前可用命令的信息。它使得脚本能够方便地检查命令的存在性，从而提高了脚本的灵活性和健壮性。由于是内置的，用户无需手动创建或管理这个数组。

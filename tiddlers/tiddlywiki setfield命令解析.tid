@@ -1,0 +1,27 @@
+created: 20240715084858205
+creator: uzvg
+modified: 20250317081611173
+modifier: uzvg
+status: pending
+tags: tiddlywiki
+title: tiddlywiki setfield命令解析
+type: text/vnd.tiddlywiki
+
+ote that this command is experimental and may change or be replaced before being finalised
+
+!! 命令作用：
+
+将一组tiddler的指定字段（field）值设定为将指定模板[[wikify|tiddlywiki wikification]]的结果，在wikify的过程中，`currentTiddler`变量，指的是通过筛选的当前tiddler。
+
+Sets the specified field of a group of tiddlers to the result of wikifying a template tiddler with the currentTiddler variable set to the tiddler.
+
+!! 命令格式：
+
+```
+tiddlywiki --setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+* filter - filter identifying the tiddlers to be affected（想要修改的tiddler）
+* fieldname - the field to modify (defaults to "text")（想要修改的字段）
+* templatetitle - the tiddler to wikify into the specified field. If blank or missing then the specified field is deleted（模板tiddler，如果为空，则指定的字段值将会被删除）
+* rendertype - the text type to render (defaults to "text/plain"; "text/html" can be used to include HTML tags)

@@ -1,0 +1,23 @@
+created: 20240728125709196
+creator: uzvg
+modified: 20250317081611183
+modifier: uzvg
+refexplorer-hide: true
+tags: IndexNotes
+title: Website(网址)
+type: text/vnd.tiddlywiki
+
+<table class="tc-max-width website-table">
+	<tr>
+		<th>Caption</th>
+    <th>Links</th>
+		<th>Description</th>
+  </tr>
+<$list filter="[tag<currentTiddler>]">
+    <tr>
+        <td><$link to=<<currentTiddler>>/></td>
+        <td>{{!!url}}</td>
+				<td>{{!!description}}</td>
+    </tr>
+	</$list>
+</table>

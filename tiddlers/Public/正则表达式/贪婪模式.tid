@@ -1,0 +1,24 @@
+caption: 贪婪模式
+created: 20240820065049827
+creator: uzvg
+description: 正则表达式中的贪婪模式跟非贪婪模式
+modified: 20250317090326819
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: PermanentNotes 正则表达式
+title: 正则表达式/贪婪模式
+type: text/vnd.tiddlywiki
+visibility: Public
+
+1. 贪婪模式：尽可能多地匹配相符内容。
+
+    比如： `a.*a`，`a`代表首字母，`.`点字符表示除回车跟换行符的任意单个字符，`*`代表对之前`.`的贪婪模式匹配，即尽可能多地匹配任意多个单个字符，直到遇见下一个字母`a`，效果如下：
+
+<<image-basic "Pastedimage20240314194706.png">>
+
+2. 非贪婪模式：与贪婪模式相反，仅匹配最少量的必要相符内容。
+
+    比如：`r\w*?`，`r`表示首字母，`\w`在正则表达式中代表字母、数字或下划线，后面的`*?`表示针对`\w`的非贪婪模式匹配，所以最终效果就是，匹配以`r`为首的，后续为字母、数字、下划线字符模式中的`r`,具体效果如下：
+
+<<image-basic "Pastedimage20240314194636.png">>

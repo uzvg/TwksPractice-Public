@@ -1,0 +1,13 @@
+created: 20240711072953477
+creator: uzvg
+modified: 20250317081611166
+modifier: uzvg
+tags: TCP 网络基础
+title: TCP/IP协议中网络包层层嵌套的涵义
+type: text/vnd.tiddlywiki
+
+这个也是一个讲的很好的关于计算机网络五层模型的原理应用，相当于是一个非常简洁清晰的理论知识。
+
+再搭配上👉[[网络通信的基本过程]]的具体实践，可以很容易地搞清楚计算机五层模型的工作原理。
+
+https://youtu.be/3pnTsaLTSwc

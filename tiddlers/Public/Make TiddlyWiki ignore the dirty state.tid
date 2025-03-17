@@ -1,0 +1,15 @@
+created: 20240707170758580
+creator: uzvg
+modified: 20250317090326783
+modifier: uzvg
+progress: Capturing
+tags: tiddlywiki FleetingNotes
+title: Make TiddlyWiki ignore the dirty state
+type: text/vnd.tiddlywiki
+url: https://talk.tiddlywiki.org/t/make-tiddlywiki-ignore-the-dirty-state/664
+visibility: Public
+
+disable the "leave site" notification when close tab
+
+{{!!url}}
+

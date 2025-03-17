@@ -1,0 +1,11 @@
+created: 20240914235816803
+creator: uzvg
+modified: 20250317081611211
+modifier: uzvg
+tags: FleetingNotes tiddlywiki
+title: 实现几个在tiddlywiki中常用的宏
+type: text/vnd.tiddlywiki
+
+在[[CreateShortcuts/new-book]]这个项目中，如果有如下宏的话，实现起来会容易很多：
+
+* 类似为tiddler选择标签的一个小组件，这里用到的是tag-picker，但tag-picker的副作用就是

@@ -1,0 +1,126 @@
+created: 20240718035814561
+creator: uzvg
+modified: 20250317081611161
+modifier: uzvg
+tags: Python PermanentNotes
+title: Python函数的参数传递机制
+type: text/vnd.tiddlywiki
+
+!! 疑问：
+ 
+在Python官方[[函数参数传递机制的教程|https://docs.python.org/zh-cn/3/tutorial/controlflow.html#defining-functions]]中,有如下描述：
+
+> 在调用函数时会将实际参数（实参）引入到被调用函数的局部符号表中；因此，实参是使用按值调用来传递的（其中的值始终是对象的引用而不是对象的值）。 [1] 当一个函数调用另外一个函数时，会为该调用创建一个新的局部符号表。
+
+这个叙述是比较让我迷惑，既然是使用按值调用，但其中的值又是对象的引用，而不是对象的值，那到底是按值传递还是按引用传递？而各个ai的答案也是不尽相同。如果不明确某个编辑语言中参数的传递方式，会在之后的程序的编写过程中造成很大的麻烦。
+
+!! 答案：
+
+于是，在做了一番调查后，我得到了以下答案：
+
+Python函数实参的传递，本质上采用的是按引用传递的方式，但又因为Python语言的某些独特的机制，造成与传统语言的按引用传递的截然不同的结果，比如：在传统编程语言中，如果是采用按引用传递，那对函数体内部整形形参的修改，会同时影响到函数体外部实参的值，因为函数体内部的形参本质是上对实参的引用，修改形参，就相当于修改实参。但在Python中，并非如此，
+
+首先，Python中所有类型的变量，本质上都是对象，而对象又分为不可变对象跟可变对象，
+
+不可变对象包括：整型，元组，字符串。
+可变对象包括：列表，字典。
+
+如果参数传递的是不可变对象，为了维护它的“不可变”属性，函数内部不得不“重构”一个实参的副本。此时，实参的副本（即形参）和主调用函数提供的实参在内存中分处于不同的位置，因此对函数形参的修改，并不会对实参造成任何影响，在结果上看起来和传值一样。
+
+在函数内，当使用`=`将一个新的值赋值给形参时，形参会 函数内部创建一个变量，而非原先的变量。
+
+在函数内分配新值不会更改函数外的原始变量。
+https://youtu.be/Bz3ir-vKqkk?t=746
+
+
+
+```python
+def ModNum (num):
+    print("num未修改前，形参num的地址为", id(num))
+    print("num未修改前，形参num的值为", num)
+    num = num + 10
+    print("修改后，形参num的地址为", id(num))
+    print("修改后，形参num的值为", num)
+    print()
+
+def ModStr (somechar):
+    print("somechar未修改前，形参somechar的地址为", id(somechar))
+    print("somechar未修改前，形参somechar的值为", somechar)
+    somechar = somechar + " !"
+    print("修改后，形参somechar的地址为", id(somechar))
+    print("修改后，形参somechar的值为", somechar)
+    print()
+
+def ModList (list_a):
+    print("list_a未修改前，形参list_a的地址为", id(list_a))
+    print("list_a未修改前，形参list_a的值为", list_a)
+    list_a.append(999)
+    print("修改后，形参list_a的地址为", id(list_a))
+    print("修改后，形参list_a的值为", list_a)
+    print()
+
+number = 134
+print("函数外，实参number的地址为:", id(number))
+print("函数外，实参number的值为:", number)
+ModNum(number)
+print("函数外，调用函数后，实参number的地址为:", id(number))
+print("函数外，端用函数后，实参number的值为:", number)
+print("-----------------------------------------------")
+
+string = "make some test"
+print("函数外，实参string的地址为:", id(string))
+print("函数外，实参string的值为:", string)
+ModStr(string)
+print("函数外，调用函数后，实参string的地址为:", id(string))
+print("函数外，端用函数后，实参string的值为:", string)
+print("-----------------------------------------------")
+
+testlist = [1, 2, 3]
+print("函数外,testlist的地址为:", id(testlist))
+print("函数外，实参testlist的值为:", testlist)
+ModList(testlist)
+print("函数外，调用函数后，实参testlist的地址为:", id(testlist))
+print("函数外，端用函数后，实参testlist的值为:", testlist)
+print("-----------------------------------------------")
+
+
+```
+
+运行结果为：
+
+```python
+函数外，实参number的地址为: 140708003021768
+函数外，实参number的值为: 134
+num未修改前，形参num的地址为 140708003021768
+num未修改前，形参num的值为 134
+修改后，形参num的地址为 140708003022088
+修改后，形参num的值为 144
+
+函数外，调用函数后，实参number的地址为: 140708003021768
+函数外，端用函数后，实参number的值为: 134
+-----------------------------------------------
+函数外，实参string的地址为: 2119136249264
+函数外，实参string的值为: make some test
+somechar未修改前，形参somechar的地址为 2119136249264
+somechar未修改前，形参somechar的值为 make some test
+修改后，形参somechar的地址为 2119136298608
+修改后，形参somechar的值为 make some test !
+
+函数外，调用函数后，实参string的地址为: 2119136249264
+函数外，端用函数后，实参string的值为: make some test
+-----------------------------------------------
+函数外,testlist的地址为: 2119131958336
+函数外，实参testlist的值为: [1, 2, 3]
+list_a未修改前，形参list_a的地址为 2119131958336
+list_a未修改前，形参list_a的值为 [1, 2, 3]
+修改后，形参list_a的地址为 2119131958336
+修改后，形参list_a的值为 [1, 2, 3, 999]
+
+函数外，调用函数后，实参testlist的地址为: 2119131958336
+函数外，端用函数后，实参testlist的值为: [1, 2, 3, 999]
+-----------------------------------------------
+```
+
+参考链接：
+
+http://112.126.91.79/view/214.html

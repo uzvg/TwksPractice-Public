@@ -1,0 +1,22 @@
+created: 20240828151711000
+creator: uzvg
+description: 使flatpak应用遵守fontconfig配置
+modified: 20250317090326771
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: flatpak fontconfig PermanentNotes
+title: Flatpak Applications Apply Fontconfig
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Description:
+
+Flatpak applications in Gnome don't respect user fontconfig files in `$HOME/.config/fontconfig`
+
+!! Solution:
+
+# Use flatseal app
+# ➡ All applications
+# ➡ Other files
+# ➡ Add `xdg-config/fontconfig:ro`

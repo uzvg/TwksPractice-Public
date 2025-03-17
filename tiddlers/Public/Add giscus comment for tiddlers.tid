@@ -1,0 +1,34 @@
+created: 20241025022635786
+creator: uzvg
+description: 这个需求对我而言很有用，前提是要学JavaScript编程语言。
+modified: 20250317090326761
+modifier: uzvg
+progress: Researching
+tags: Giscus TWKS ProjectNotes
+title: Add giscus comment for tiddlers
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 现状：
+
+* tiddlywiki插件的现状是很多插件是无人维护的状态，而且插件的质量也是良莠不齐。
+* [[tw-cpl|https://tw-cpl.netlify.app/]]中虽然实现了类似giscus的功能，但没有做好跟tiddlywiki的接口，想要生效的话，需要手动改源代码修改配置。
+* tiddler后显示评论，也是用`iframe`框架来完成的。
+
+!! 开发条件：
+
+* 需要会JavaScript。👉[[快速学习javaScript]]
+* 需要读一些为tiddlywiki开发插件的文档，这个在tiddlywiki dev网站中有写。
+
+!! 先行测试：
+
+* 我自己不懂JavaScript，今天[[17th February 2025]]在[[Giscus test]]中试了一下，直接在tiddler中插入`<script>`代码似乎并不管用，报有如下错误：
+
+```
+An error occurred: giscus is not installed on this repository
+```
+
+* 根据tiddlywiki的说法是，已经禁止在tiddler中直接插入`<script>`标签。
+* 看来只能学JavaScript了。
+* giscus需要调用的js代码，不知道能不能以模块的方式直接保存在本地，加快插件加载的速度？
+* twcpl中实现了添加giscus的效果，只要需要做更进一步的适配👉[[TWCPL GISCUS]]

@@ -1,0 +1,11 @@
+created: 20250226025324928
+creator: uzvg
+modified: 20250317081611209
+modifier: uzvg
+tags: FleetingNotes chezmoi
+title: 如何使用chezmoi管理既需要加密，又需要从外部修改的文件？
+type: text/vnd.tiddlywiki
+
+像rime的自动词库，就是一个例子，这种情况，如何处理？
+
+首先

@@ -1,0 +1,24 @@
+created: 20241211090528176
+creator: uzvg
+modified: 20250317090326769
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: PermanentNotes CSS
+title: CSS选择器/组合选择器
+type: text/vnd.tiddlywiki
+visibility: Public
+
+| !名称 | !格式 | !功能 | !示例 |
+|!后代选择器 |`A B` |选择 `A` 元素的所有后代 `B` 元素（无论层级如何）。 |`div span`， 匹配所有位于任意 `<div>`元素之内的`<span>`元素。 |
+|!子代选择器 |`A > B` |选择 `A` 元素的直接子代 `B` 元素。 |`ul > li`， 匹配直接嵌套在 `<ul>` 元素内的所有 `<li>` 元素。 |
+|!相邻兄弟选择器 |`A + B` |选择紧接在 `A` 元素之后的兄弟元素 `B`。 |`h2 + p`，匹配紧邻在 `h2` 元素后的第一个 `<p>` 元素。 |
+|!通用兄弟选择器 |`A ~ B` |选择 `A` 元素后所有的兄弟元素 `B`。 |`p ~ span`，匹配同一父元素下，`<p>` 元素后的所有 `<span>` 元素。 |
+|!组选择器 |`A, B` |同时选择 `A` 和 `B` 元素。 |`h1, h2`，同时选中`h1` 和 `h2`选择器。|
+
+<<remembercz "20241211090221169"
+	"后代选择器的格式是：{`A B`}">>
+
+<<rememberq "20241211171641726"
+	"后代选择器的"
+	"A">>

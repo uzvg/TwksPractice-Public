@@ -1,0 +1,40 @@
+created: 20241210143212778
+creator: uzvg
+modified: 20250317081611160
+modifier: uzvg
+refexplorer-hide: 1
+tags: IndexNotes
+title: Prompts
+type: text/vnd.tiddlywiki
+
+!! Prompts：
+
+Here are some prompts for my personal use:
+
+<table class="tc-max-width">
+<tr>
+	<th style="width: 20%;">Title</th>
+	<th style="width: 20%;">Tags</th>
+	<th style="width: 50%;">Description</th>
+	<th>Copy</th>
+</tr>
+
+<$list filter="[tag[Prompts]]">
+	<tr>
+		<td><$link to=<<currentTiddler>>/></td>
+		<td>
+			<$list filter="[<currentTiddler>tags[]remove[Prompts]sort[]]" variable="currentTag">
+				<$macrocall $name="tag-pill" tag=<<currentTag>>/>&#32;
+			</$list>
+		</td>
+		<td> <$text text={{{ [<currentTiddler>get[description]] }}}/> </td>
+		<td style="text-align:center; vertical-align:middle;">
+			<$transclude
+				$variable="twks-copy-to-clipboard-button"
+				title=""
+				src={{{ [<currentTiddler>get[text]] }}}
+				tooltip="Copy the content of this prompt"/>
+		</td>
+	</tr>
+</$list>
+</table>

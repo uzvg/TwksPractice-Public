@@ -1,0 +1,11 @@
+audience: 初始zsh Shell开发人员
+context: 我对bash的语法有部分了解，但对zsh Shell独有的一些特性，尤其是变量拓展部分并不熟悉。
+created: 20250224000019947
+modified: 20250317081611186
+modifier: uzvg
+objective: 这是zimfw的主代码文件，请帮我分析它的代码结构，所实现的功能、实现原理，实现过程。
+style: 技术教程风格，简洁易懂
+tags: Prompts CO-STAR zimfw zsh
+title: zimfw主代码解析提示词
+tone: 简洁中性
+type: text/vnd.tiddlywiki

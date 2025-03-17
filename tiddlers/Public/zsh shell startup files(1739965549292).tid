@@ -1,0 +1,25 @@
+authors: unknown
+caption: zsh shell startup files
+created: 20250219114549292
+creator: uzvg
+description: zsh shell各个启动文件的作用
+medium: Website
+modified: 20250317090326803
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: LiteratureNotes
+title: zsh shell startup files(1739965549292)
+type: text/vnd.tiddlywiki
+url: https://zsh.sourceforge.io/Intro/intro_3.html
+visibility: Public
+year: 2025-02-19
+
+| !File Name | !When Sourced | !Usage and Content | !Special Notes |
+| `$ZDOTDIR/.zshenv` |On all invocations of the shell, unless the `-f` option is set |Contains commands to set the command search path and other important environment variables. Should not contain commands that produce output or assume the shell is attached to a tty. |If `ZDOTDIR` is not set, `HOME` value is used instead. |
+| `$ZDOTDIR/.zprofile` |Sourced before `.zshrc` |Similar to `.zlogin`, meant as an alternative to `.zlogin` for ksh fans. Can be used to set up initial configurations before the interactive shell setup. |Not intended to be used together with `.zlogin` (though it can be done if desired), and it's sourced before the interactive shell related `.zshrc`. |
+| `$ZDOTDIR/.zshrc` |In interactive shells |Contains commands to set up aliases, functions, options, key bindings, etc. |  |
+| `$ZDOTDIR/.zlogin` |In login shells |Contains commands that should be executed only in login shells. Should be used to set the terminal type and run a series of external commands (like `fortune`, `msgs`, etc). Should not be used for alias definitions, options, environment variable settings. |  |
+| `$ZDOTDIR/.zlogout` |When login shells exit |  |  |
+
+根据说明，一些重要的环境变量如`path`，`fpath`，`XDG`定义的标准路径，应该在`.zshenv`文件中定义。

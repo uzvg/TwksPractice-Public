@@ -1,0 +1,28 @@
+created: 20241224065407535
+modified: 20250317081611133
+modifier: uzvg
+tags: zsh FleetingNotes
+title: builtin emulate -L zsh
+type: text/vnd.tiddlywiki
+
+https://zsh.sourceforge.io/Doc/Release/Shell-Builtin-Commands.html
+
+emulate的作用是尽可能地模仿其他Shell的模式。
+
+* emulate 展示当前emulate的Shell类型
+* emulate 展示当并模拟的Shell类型，例如 emulate bash，就是模拟bash，当指定的Shell类型不能被emulate所识别的时候，默认模拟zsh，例如emulate fjidfdf，再使用emulate命令，还是zsh
+
+If the -R switch is given, all settable options are reset to their default value corresponding to the specified emulation mode, except for certain options describing the interactive environment; otherwise, only those options likely to cause portability problems in scripts and functions are altered. If the -L switch is given, the options LOCAL_OPTIONS, LOCAL_PATTERNS and LOCAL_TRAPS will be set as well, causing the effects of the emulate command and any setopt, disable -p or enable -p, and trap commands to be local to the immediately surrounding shell function, if any; normally these options are turned off in all emulation modes except ksh. The -L switch is mutually exclusive with the use of -c in flags.
+
+
+1. -R开关**：
+   - 当使用-R开关时，所有可设置的选项会被重置到与指定的仿真模式（emulation mode）相对应的默认值，但描述交互式环境的某些选项除外。
+   - 除此之外，只有那些可能导致脚本和函数在不同系统间移植时出现问题的选项会被修改。
+
+2. **-L开关**：
+   - 如果使用-L开关，LOCAL_OPTIONS、LOCAL_PATTERNS和LOCAL_TRAPS这三个选项会被设置。
+   - 这会导致emulate命令以及任何setopt、disable -p、enable -p和trap命令的效果仅限于当前正在执行的shell函数（如果有的话）。
+   - 通常，这些选项在除了ksh之外的所有仿真模式中都是关闭的。
+
+3. **-L和-c的互斥性**：
+   - -L开关与-c标志的使用是互斥的，也就是说，你不能同时使用-L和-c。

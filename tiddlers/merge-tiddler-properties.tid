@@ -1,0 +1,20 @@
+created: 20241206104708550
+creator: uzvg
+modified: 20250317081611157
+modifier: uzvg
+tags: test
+title: merge-tiddler-properties
+type: text/vnd.tiddlywiki
+
+\procedure merge-note-properties(destTiddler)
+<!--
+<$parameters sourceTiddler=<<currentTiddler>> destTiddler=<<sourceTiddler>>>
+-->
+<$parameters sourceTiddler=<<currentTiddler>>>
+	The source tiddler is <<sourceTiddler>>.
+	The destination tiddler is <<destTiddler>>.
+</$parameters>
+\end
+
+<<merge-note-properties destTiddler:"make some test">>
+<<merge-note-properties sourceTiddler:"good good morning">>

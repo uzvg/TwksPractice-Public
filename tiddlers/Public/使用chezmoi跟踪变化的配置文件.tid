@@ -1,0 +1,9 @@
+created: 20250220154405388
+modified: 20250317090326811
+modifier: uzvg
+tags: PermanentNotes chezmoi
+title: 使用chezmoi跟踪变化的配置文件
+type: text/vnd.tiddlywiki
+visibility: Public
+
+常规的chezmoi配置文件是通过`.chezmoi.config.toml`(chezmoi的配置文件)跟目标文件对应的`source state`中的文件计算得成的

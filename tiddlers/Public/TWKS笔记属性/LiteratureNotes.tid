@@ -1,0 +1,23 @@
+caption: LiteratureNotes
+created: 20241205074405992
+creator: uzvg
+description: TWKS中LiteratureNotes的笔记属性说明
+modified: 20250317090326797
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: $:/twks/Documents PermanentNotes
+title: TWKS笔记属性/LiteratureNotes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+| !属性 | !作用 |
+|`authors` |文献作者。 |
+|`caption` |文献标题。 |
+|`description` |文献的概括性描述。 |
+|`medium` |文献媒介形式。|
+|`progress` |文献笔记的处理进度。具体可看👉[[LiteratureNote的进度说明|TWKS笔记进度/LiteratureNotes]] |
+|`url` |文献阅读链接。 |
+|`source` |文献 |
+|`visibility` |文献笔记的可见性权限，有`public`跟`private`两种属性，使用者可根据实际需求和隐私、分享策略等来决定谁可以看到这份笔记。 |
+|`year` |记录文献发表、出版或者创作完成的年份，通过它可以从时间维度对文献进行定位，用于判断笔记内容是否过时，同时也有助于按照时间顺序对文献进行分类整理等。 |

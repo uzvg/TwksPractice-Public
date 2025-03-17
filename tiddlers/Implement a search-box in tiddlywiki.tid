@@ -1,0 +1,149 @@
+created: 20241221145933632
+modified: 20250317081611150
+modifier: uzvg
+tags: tiddlywiki ProjectNotes
+title: Implement a search-box in tiddlywiki
+type: text/vnd.tiddlywiki
+
+<!-- Search box requirements:
+* search and enter 👉 set the value of the specified field in the tiddler.
+
+<<twks-search-box
+	configTiddlerfilter:"[tag[tiddlywiki]tag<userinput>]"
+	tiddler:"[[helloworld]]"
+	field:"authors"
+	state:"$:/state/search-box">>
+-->
+
+\whitespace trim
+
+\procedure count-popup-button()
+\whitespace trim
+	<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
+	{{$:/core/images/down-arrow}}
+	<$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+		<$vars
+			userInput={{{ [<searchTiddler>get[text]] }}}
+			configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}] }}}
+			replaceRegexp="limit\[\d+\]">
+			<$vars
+				primaryListFilter={{{ [<configTiddler>get[first-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}}
+				secondaryListFilter={{{ [<configTiddler>get[second-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}}>
+			<$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] [subfilter<secondaryListFilter>]"/>""">
+			{{$:/language/Search/Matches}}
+			</$set>
+			</$vars>
+		</$vars>
+	</$list>
+</$button>
+\end
+
+\procedure search-results-list()
+\whitespace trim
+<$vars
+	userInput={{{ [<searchTiddler>get[text]] }}}
+	configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}] }}}>
+	<$list filter="[<userInput>minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+		<$list-empty>
+			<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>
+		</$list-empty>
+		<$tiddler tiddler=<<configTiddler>>>
+			{{$:/core/ui/SearchResults}}
+		</$tiddler>
+	</$list>
+</$vars>
+\end
+
+\procedure cancel-search-actions()
+<$list filter="[<searchTiddler>get[text]!match{$:/temp/search}]">
+	<$list-empty>
+		<$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>
+	</$list-empty>
+	<$action-setfield	$tiddler="$:/temp/search" text={{{ [<searchTiddler>get[text]] }}}/>
+	<$action-setfield $tiddler="$:/temp/search/refresh" text="yes"/>
+</$list>
+\end
+
+\procedure input-accept-actions()
+<$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]">
+	<$list-empty>
+		<$list filter="[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]">
+			<$action-navigate $to={{{ [<tiddler>get[text]] }}}/>
+		</$list>
+	</$list-empty>
+<$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>
+\end
+
+<div class="tc-sidebar-lists tc-sidebar-search">
+	<$vars
+		editTiddler=<<qualify "$:/temp/search-box">>
+		searchTiddler=<<qualify "$:/temp/search-box/input">>
+		searchListState=<<qualify "$:/state/search-box/search-list/selected-item">>>
+	<div class="tc-search">
+		<form class="tc-form-inline">
+			<$transclude
+				$variable="keyboard-driven-input"
+				tiddler=<<editTiddler>>
+				storeTitle=<<searchTiddler>>
+				selectionStateTitle=<<searchListState>>
+				refreshTitle="$:/temp/search/refresh"
+				type="search"
+				tag="input"
+				focus={{$:/config/Search/AutoFocus}}
+				focusPopup=<<qualify "$:/state/popup/search-dropdown">>
+				class="tc-tiny-gap-right tc-popup-handle"
+				filterMinLength={{$:/config/Search/MinLength}}
+				inputCancelActions=<<cancel-search-actions>>
+				inputAcceptActions=<<input-accept-actions>>
+				inputAcceptVariantActions=<<input-accept-variant-actions>>
+				cancelPopups="yes"
+				configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"/>
+		</form>
+		<!-- ========================= Search Result Is Non-empty ========================= -->
+		<$reveal state=<<searchTiddler>> type="nomatch" text="">
+			<!-- ========================= Advanced Search Button (Search Result is non-empty) ========================= -->
+			<$button
+				tooltip={{$:/language/Buttons/AdvancedSearch/Hint}}
+				aria-label={{$:/language/Buttons/AdvancedSearch/Caption}}
+				class="tc-btn-invisible">
+				<<advanced-search-actions>>
+				{{$:/core/images/advanced-search-button}}
+			</$button>
+
+			<!-- ========================= Cancel Search Button ========================= -->
+			<$button class="tc-btn-invisible">
+				<<cancel-search-actions>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
+				{{$:/core/images/close-button}}
+			</$button>
+
+			<!-- ========================= Count Popup Button ========================= -->
+			<<count-popup-button>>
+		</$reveal>
+
+			<!-- ========================= Search Result is empty ========================= -->
+		<$reveal state=<<searchTiddler>> type="match" text="">
+			<$button
+				to="$:/AdvancedSearch"
+				tooltip={{$:/language/Buttons/AdvancedSearch/Hint}}
+				aria-label={{$:/language/Buttons/AdvancedSearch/Caption}}
+				class="tc-btn-invisible">
+				{{$:/core/images/advanced-search-button}}
+			</$button>
+		</$reveal>
+	</div>
+
+	<!-- ========================= Search result dropdown list ========================= -->
+	<$reveal tag="div" class="tc-block-dropdown-wrapper" state=<<searchTiddler>> type="nomatch" text="">
+		<$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
+		<<search-results-list>>
+		</$reveal>
+	</$reveal>
+	</$vars>
+</div>
+
+|tc-max-width|k
+|! Variable | !Tiddler | !Function |
+|!tiddler |`$:/temp/advancedsearch/input` |使用上下arrow选中的tiddler |
+|!storeTitle |`$:/temp/advancedsearch` |文本框中输入的文本 |
+|!refreshTitle |`$:/temp/advancedsearch/refresh` | |
+|!selectionStateTitle |`$:/temp/advancedsearch/selected-item` |文本+后缀 |

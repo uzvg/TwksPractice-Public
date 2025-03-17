@@ -1,0 +1,25 @@
+created: 20240711060055649
+creator: uzvg
+modified: 20250317081611199
+modifier: uzvg
+status: pending
+tags: proxy v2ray vmess 网络基础
+title: 什么是vmess协议？
+type: text/vnd.tiddlywiki
+
+* 基于无状态的tcp协议
+* 所有字段都不是明文发送
+* 端口也会随机切换
+
+VMess 是一个基于 TCP 的协议，所有数据使用 TCP 传输。
+
+!! 通讯过程
+
+VMess 是一个无状态协议，即客户端和服务器之间不需要握手即可直接传输数据，每一次数据传输对之前和之后的其它数据传输没有影响。 VMess 的客户端发起一次请求，服务器判断该请求是否来自一个合法的客户端。如验证通过，则转发该请求，并把获得的响应发回给客户端。 VMess 使用非对称格式，即客户端发出的请求和服务器端的响应使用了不同的格式。
+
+链接：
+[[vmess协议|https://www.v2ray.com/developer/protocols/vmess.html]]
+
+👉 [[vmess的报文结构|https://www.bilibili.com/video/BV1Tf421Q7s9/]]
+
+👉 [[不良人：深入浅出VMESS+WS+TLS+WEB原理与搭建|https://youtu.be/y8s5UivMNcE]]

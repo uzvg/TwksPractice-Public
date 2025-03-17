@@ -1,0 +1,16 @@
+created: 20250307143542955
+modified: 20250317090326786
+modifier: uzvg
+progress: Paused
+tags: ProjectNotes TWKS
+title: Reorder tabs list
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Features:
+
+* Input the filter, Get the tiddler list of the filter.
+* Reorder the tiddler list by dragging and dropping.
+* Set the order for the tiddlers or just copy the tiddles list to the clipboard.
+
+👉 [[$:/uzvg/Procedures/tabsReorder]] ⏸️ [[7th March 2025]]

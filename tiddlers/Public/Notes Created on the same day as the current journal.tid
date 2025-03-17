@@ -1,0 +1,11 @@
+created: 20240914024605050
+creator: uzvg
+modified: 20250317090326783
+modifier: uzvg
+progress: Processing
+tags: tiddlywiki FleetingNotes
+title: Notes Created on the same day as the current journal
+type: text/vnd.tiddlywiki
+visibility: Public
+
+Add a tab to the Journal RefExplorer tabs. This tab will display the notes that wrere created on the same day as the journal entry.

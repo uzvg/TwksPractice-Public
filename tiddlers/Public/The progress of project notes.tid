@@ -1,0 +1,26 @@
+created: 20240914065233715
+creator: uzvg
+modified: 20250317090326788
+modifier: uzvg
+progress: Pending
+rating: Plain
+tags: PermanentNotes tiddlywiki
+title: The progress of project notes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+Designing the progress is the most challenging part for me when managing notes in the wikispace. In my view the meaning of progress management inherently is it told you what to do in a certain phase. 
+
+because you can easily modify the note in tiddlywiki, so 
+
+
+
+Below is the progress and its description for the project:
+
+|The progress of the ProjectNotes|c
+|!Pending |The project notes usually originates from a fleeting note. The '''pending''' progress means that this project has not started yet and is still under consideration. |
+|!WIP(Work In Progress) |When a project has been decided to be launched, The '''WIP''' progress indicates that the project is in execution is not yet completed. |
+|!OhHold(Work In Progress) |When a project has been decided to be launched, The '''WIP''' progress indicates that the project is in execution is not yet completed. |
+|!Terminated |The '''terminated''' progress means that this project has been temporarily abandoned for some reason. There is no need to delete this note, as it might be useful in the future. if you believe the project will be useless even in the future, you just delete it. |
+|Integrating |The '''integrating''' progress means that the project itself is complete, but there are still some notes originating from this project, such as question notes, permanent notes, or literature notes, that need to be interated into the entire 'wikispace'. Because |
+|Archived |Because The '''integrated''' progress means that this project is not only complete, but also that the notes originating from this project have been well integrated into the entire wikispace. |

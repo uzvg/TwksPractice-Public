@@ -1,0 +1,19 @@
+created: 20250226091815097
+modified: 20250317090326826
+modifier: uzvg
+progress: Paused
+rating: Plain
+tags: PermanentNotes zsh Shell
+title: 零输出执行命令
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在给tiddlywiki写一个简单的函数时，需要
+
+
+&!
+
+setsid
+
+zsh -c "command"
+

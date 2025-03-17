@@ -1,0 +1,33 @@
+created: 20240818125801193
+creator: uzvg
+modified: 20250317090326783
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki PermanentNotes Macros
+title: Macro/tabs
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!!! 作用：
+
+把选中一系列tiddler以tab的方式组织在一起。
+
+!!! 各个参数的作用：
+
+* `tabsList`：指定用于筛选tiddler的`filter`
+* `default`：用于指定哪个tiddler会被当作默认tab
+* `state`：指定保存当前选中的tab状态的tiddler的标题前缀，默认情况下为`$:/state/tab`
+* `class`：用于指定tab的css样式，默认情况下为横向tab，可以通过将其设置为`tc-vertical`来获得竖向样式的tablist
+
+!!! 使用未例：
+
+```
+<<tabs "[tag[sampletab]nsort[order]]" "SampleTabThree" "$:/state/tab3" "tc-vertical">>
+```
+
+---
+
+<<rememberq "20240819072336521"
+	"tabs宏怎么用？"
+	"""`<<tabs "[tag[sampletab]nsort[order]]" "SampleTabThree" "$:/state/tab3" "tc-vertical">>`""">>

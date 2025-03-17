@@ -1,0 +1,32 @@
+caption: 
+created: 20240819234823754
+creator: uzvg
+modified: 20250317081611159
+modifier: uzvg
+tags: tiddlywiki
+title: Pragma/procedure
+type: text/vnd.tiddlywiki
+
+; procedure的作用是什么？
+
+: 根据[[Macro pitfalls|https://tiddlywiki.com/#Macro%20Pitfalls]]，tiddlywiki中的macro一直因为其各种缺点跟孱弱的性能而饱受诟病，因此tiddlywiki在version5.3之后，引入了[[Functions|Pragma/function]]，[[Custom widgets|Pragma/widget]]，以及[[Procedures|Pragma/procedure]]。
+
+!!! 引入procedure的原因：
+
+主要是因为macro中的[[textual substitution|TextualSubstitution]]中的一系列缺陷。
+
+它跟function还有macro有什么不同？
+
+tiddlywiki为什么要引入procedure？
+
+`procedure`VS`macro`VS`function`:
+
+function用于生成一
+
+procedure的特点：
+
+* 可以相互嵌套
+* 可以指定需要计算的参数
+* 小心使用位置参数
+** 使用命名参数
+** 默认的位置参数语法最好不要跟`$parameters`组件一起用

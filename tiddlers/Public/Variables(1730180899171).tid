@@ -1,0 +1,139 @@
+authors: [[Ilya Kantor]]
+caption: Variables
+created: 20241025130446724
+creator: uzvg
+description: javaScript中的变量
+medium: Website
+modified: 20250317090326799
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: Variables(1730180899171)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/variables
+visibility: Public
+year: 2024/10/25
+
+!! 变量的声明：
+
+变量的声明用到的是`let`关键字，我们可以使用如下方式来同时声明多个变量：
+
+```javascript
+let user = 'John', age = 25, message = 'Hello';
+```
+
+但更推荐的写法是：
+
+```
+let user = 'John';
+let age = 25;
+let message = 'Hello';
+```
+
+!! 变量的命名：
+
+变量的命名有如下要求：
+
+# 变量名中只能有''字母''、''数字''、''$''或''_''符号。
+# 变量不能以数字开头。
+
+变量命名规范：
+
+# 一般使用camelCase为复杂变量命名。
+# 不能使用javaScript内置的关键字为变量命名，如`let`，`return`关键字。
+# 老式的javaScript代码中，可以直接使用类似`num=5`的方式直接声明一个变量并为其赋值，这在现代javaScript中(使用 `use strict;`)，是行不通的。
+
+!! 常量(constant)
+
+; 什么是常量？
+: 作为常量，就意味着，一旦被赋值，就不能被重新赋值，这样的变量，被叫做常量。
+
+; 常量的声明
+# 常量的声明用到的是`const`关键字，例如：`const myBirthday = '18.04.1982';`
+# 常量常用全部大写字母来命名，如下：
+
+```
+const COLOR_RED = "#F00";
+const COLOR_GREEN = "#0F0";
+const COLOR_BLUE = "#00F";
+const COLOR_ORANGE = "#FF7F00";
+```
+
+; 常量用于什么情景？
+: 常量一旦被赋值后，之后不再发生任何改变。常用于保存一些在整个运行过程中无需改变，但又要经常用到的变量值。在一定程度上，常量就相当于是对常量值的引用或者重命名。
+
+; 常量的赋值
+# const变量虽说是常量，但也可以通过计算来赋值，需要注意的是，常量一旦经过初次赋值，后续就不再接受其他赋值。
+# 而通过计算得到的const常量，其参数也必须是const常量，否则会类型错误，如下：
+
+```
+function calculateArea(radius) {
+    return Math.PI * radius * radius;
+}
+
+let radius = 5; // 使用 let 声明一个可以变化的变量
+area = calculateArea(radius); // 计算初始面积
+console.log(area); // 输出 78.53981633974483
+
+radius = 10; // 改变 radius 的值
+area = calculateArea(radius); // 重新计算面积
+console.log(area); // 输出 314.1592653589793
+```
+
+上述代码可以正常执行，但如果说：我们将`area`声明为一个`const`变量，如下：
+
+```
+function calculateArea(radius) {
+    return Math.PI * radius * radius;
+}
+
+let radius = 5; // 使用 let 声明一个可以变化的变量
+const area = calculateArea(radius); // 计算初始面积
+console.log(area); // 输出 78.53981633974483
+
+radius = 10; // 改变 radius 的值
+area = calculateArea(radius); // 重新计算面积
+console.log(area); // 输出 314.1592653589793
+```
+
+那么此时就会有如下报错：
+
+```
+Uncaught TypeError TypeError: Assignment to constant variable.
+```
+
+意思是说，类型错误，我们将一个值重新分配给了一个已经确定的常量。
+
+!! 变量命名
+
+除了变量的基本知识以外，作者还强调了给变量起一个好名字的重要性，一个好的名字，有利于代码的调试，更利于其他人阅读代码。
+
+作者还提到，有的程序员为了节省内存，不愿意声明多个变量，他们倾向于重复使用一个变量，好处是可以节省内存，但坏处是，这个变量像一个黑盒子一样，没人知道里面装的是什么，有什么用，结果极大地增加了代码调试的时间成本。所以作者说：''An extra variable is good, not evil''。告诫我们，不要怕多申请变量，这是好事，不是坏事。至于性能，现代的javaScript的ninifiers已经优化得很好了，多申请的变量反而有利于后台引擎优化代码，所以说，不要怕申请过多的变量。
+
+<<rememberq "20241029054512965"
+	"如何给变量命名？"
+	"使用`let`关键字。">>
+
+<<rememberq "20241029054745456"
+	"通常采用何种方式为复杂变量命名？"
+	"采用`CamelCase`的方式为复杂变量命名。">>
+
+<<rememberq "20241025134359310"
+	"什么是常量？"
+	"一旦被赋值，不会再接受二次赋值的变量叫做常量。">>
+
+<<rememberq "20241029054657500"
+	"常量的命名通常有什么特征？"
+	"常量往往以大写字母命名。">>
+
+<<rememberq "20241025134432243"
+	"常量的声明？"
+	"常量的声明用到`const`关键字，如：`const NUM=5`">>
+
+<<rememberq "20241025134511119"
+	"常量除了直接赋值，还有什么其他方式被赋值？"
+	"常量也可以通过计算来赋值，但需要注意的是，被传递给常量用于计算的参数，必须也是常量。否则会报错。">>
+
+<<rememberq "20241025134629317"
+	"变量的命名中，除了数字、字母以外，还有什么要求？"
+	"还可以包含`$`跟`_`符号，除此之外，变量名还不能以`数字`开头。">>

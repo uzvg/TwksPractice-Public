@@ -1,0 +1,32 @@
+created: 20240730054954898
+creator: uzvg
+modified: 20250317090326783
+modifier: uzvg
+progress: Building
+rating: Personal
+tags: Linux Shell zsh PermanentNotes
+title: nohup不返回进程号
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 引言：
+
+
+!! Description:
+
+在使用nohup启动tiddlywiki的进程时，有如下两个要求：
+* 进程在后台运行
+* 终端关闭进程不能关闭(使用`nohup`)
+* 不显示任何输出
+
+但即使是将命令的所有输出，全部重定向到`/dev/null`，使用nohup启动的程序还是会返回一个进程号，
+最终仍然会返回一个进程号，如果我不想要任何输出呢？怎么办？
+
+!! 方法：
+
+使用setsid的方法
+使用zsh -c的方法
+使用()的方法
+使用exec重定向的方法
+
+[[管理nohup进程]]

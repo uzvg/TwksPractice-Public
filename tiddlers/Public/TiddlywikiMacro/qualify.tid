@@ -1,0 +1,52 @@
+caption: qualify Macro
+created: 20240819062906617
+creator: uzvg
+description: qualify宏是tiddlywiki下StateMachanism实现机制的一部分，它会根据widget tree，返回一个独特的字符串
+modified: 20250317090326794
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: tiddlywiki PermanentNotes Macros
+title: TiddlywikiMacro/qualify
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!!! 概述：
+
+`qualify`是tiddlywiki中的[[StateMechanism]]实现的一部分，用于确保为每个tiddler生成一个独特的`StateTiddler`
+
+`qualify`宏的返回值，取决于它在转置栈中的位置。
+
+!!! 使用：
+
+`qualify`宏只有一个参数：”title“，用于指定返回的字符串的前缀，通常用于产生一个独特的，不会重复，但具有相同前缀的tiddler标题。
+
+
+
+!!! 使用示例：
+
+在[[$:/core/ui/EditTemplate]]中，有如下一段代码：
+
+```
+<$vars
+	storyTiddler=<<currentTiddler>>
+	newTagNameTiddler=<<qualify "$:/temp/NewTagName">>
+	newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">>
+	newFieldValueTiddlerPrefix=<<qualify "$:/temp/NewFieldValue">>
+	newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">>
+	newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">>
+	newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">>
+	newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">>
+	typeInputTiddler=<<qualify "$:/temp/Type/input">>
+	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
+...
+</$vars>
+```
+
+可以看到，`qualify`宏常用于产生一个独特的字符串，用于保存tiddlywiki下每个tiddler的字符值。
+
+<<rememberq "20240819065734769"
+	"qualify宏的作用是什么？"
+	"""用于确保为每个tiddler生成一个独特的`StateTiddler`，`<<qualify "baseTitle">>`用于生成一个以`baseTittle`为前缀的字符串，它的结果为：''<<qualify "baseTitle">>''，该生成的字符串，常用于保存tiddler的临时状态。""">>
+
+⚠️ qualify宏的具体实现机制，涉及到了tiddlywiki中的`widget tree`跟`transclusion`变量，这两个的相关内容并未在此完整说明。

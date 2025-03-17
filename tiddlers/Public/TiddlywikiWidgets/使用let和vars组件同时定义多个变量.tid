@@ -1,0 +1,61 @@
+caption: $let跟$vars的不同
+created: 20240818152531245
+creator: uzvg
+description: $let组件跟$vars组件的特性，决定了他们各自的适用范围，总的来说，$let组件适用于变量之间有相互嵌套跟依赖的情况，而$vars组件适用于定义独立变量的情况，比如用于保存配置或常量等数据的情况。
+modified: 20250317090326795
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: tiddlywiki PermanentNotes
+title: TiddlywikiWidgets/使用let和vars组件同时定义多个变量
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 引言:
+
+`$vars`组件跟`$let`组件都可以用于同时定义多个变量，它们各自有什么不同吗？
+
+* `$let`组件在定义多个变量的时候，同一个`$let`组件中，后定义的变量可以引用前一个变量的值，反之，就相当于，先前定义的变量，会影响后定义的变量的值，例子如下：
+
+```
+<$let currentTiddler="Widget/let" description={{!!caption}}>
+	the tiddler of currentTiddler is <<currentTiddler>>. <br>
+	And the description of currentTiddler is "''<<description>>''"
+</$let>
+```
+
+生成的结果如下：
+
+<$let currentTiddler="Widget/let" description={{!!caption}}>
+	the tiddler of currentTiddler is <<currentTiddler>>. <br>
+	And the description of currentTiddler is "''<<description>>''"
+</$let>
+
+
+* `$vars`也可以用于同时定义多个变量，但当多个变量同时在一个$vars组件中被定义时，变量之间不能互相引用，总的来说，就是属性值不会相互干扰。
+
+例子如下：
+
+```
+<$vars currentTiddler="Widget/let" description={{!!caption}}>
+	the tiddler of currentTiddler is <<currentTiddler>>. <br>
+	And the description of currentTiddler is "''<<description>>''"
+</$vars>
+```
+
+最后的结果是：
+
+<$vars currentTiddler="Widget/let" description={{!!caption}}>
+	the tiddler of currentTiddler is <<currentTiddler>>. <br>
+	And the description of currentTiddler is "''<<description>>''"
+</$vars>
+
+* 说明在vars组件中重新定义的`currentTiddler`的值，并没有影响到后续的`{{!!description}}`的取值。
+
+<<rememberq "20240818181704695"
+	"$vars组件跟$let组件有什么不同？"
+	"$let组件中定义的变量可以相互引用，后续定义的变量可以引用先前定义的变量，而$vars组件中的变量都是独立的，不存在相互引用的情况，也就无法相互干扰。">>
+
+<<rememberq "20240818181939488"
+	"$let组件跟$vars组件各自适用于什么样的场景？"
+	"$vars组件适用于定义多个独立变量的情况，如定义多个变量来存储一些配置值或常量。而$let组件适用于多个变量之间有依赖或嵌套关系的情况，例如，后定义的变量，需要引用之前定义的变量的值。">>

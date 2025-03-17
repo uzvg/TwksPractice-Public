@@ -1,0 +1,40 @@
+created: 20250224030215951
+modified: 20250317081611191
+modifier: uzvg
+tags: zsh PermanentNotes
+title: zsh参数扩展/字符串操作
+type: text/vnd.tiddlywiki
+
+| !参数扩展形式 | !作用说明 | !使用举例 |
+|`${#var}` |返回字符串变量`var`的长度。 |`str="hello";echo ${#str}`→输出`5`。 |
+|`${var:start:length}` |截取子字符串，从`start`位置开始，取`length`个字符（索引从`0`或`1`开始，取决于`zsh`配置）。 |`str="abcdef";echo ${str:1:3}`→输出`bcd`（默认索引从`1`开始）。 |
+|`${var:start}` |截取从`start`位置到字符串末尾的子字符串。 |`str="abcdef";echo ${str:3}`→输出`def`（默认索引从`1`开始）。 |
+|`${var#pattern}` |删除字符串''开头''匹配`pattern`的最短部分。 |`str="file.txt";echo ${str#*.}`→输出`txt`。 |
+|`${var##pattern}` |删除字符串''开头''匹配`pattern`的最长部分。 |`str="path/to/file.txt";echo ${str##*/}`→输出`file.txt`。 |
+|`${var%pattern}` |删除字符串''末尾''匹配`pattern`的最短部分。 |`str="file.txt";echo ${str%.*}`→输出`file`。 |
+|`${var%%pattern}` |删除字符串''末尾''匹配`pattern`的最长部分。 |`str="file.tar.gz";echo ${str%%.*}`→输出`file`。 |
+|`${var/pattern/repl}` |将字符串中''第一个''匹配`pattern`的部分替换为`repl`。 |`str="hello";echo ${str/l/L}`→输出`heLlo`。 |
+|`${var//pattern/repl}` |将字符串中''所有''匹配`pattern`的部分替换为`repl`。 |`str="a-b-c";echo ${str//-/}`→输出`abc`。 |
+|`${var:u}`或`${(U)var}` |将字符串转换为''全大写''。 |`str="Hello";echo ${str:u}`→输出`HELLO`。 |
+|`${var:l}`或`${(L)var}` |将字符串转换为''全小写''。 |`str="HELLO";echo ${str:l}`→输出`hello`。 |
+|`${var:q}` |对字符串进行引用转义（适合作为shell输入）。 |`str="a b";echo ${var:q}`→输出`'a b'`。 |
+|`${(j:sep:)array}` |将数组元素用`sep`连接成字符串（需配合数组变量）。 |`arr=("a" "b" "c");echo ${(j:-:)arr}`→输出`a-b-c`。 |
+|`${(s:sep:)var}` |将字符串按分隔符`sep`分割为数组。 |`str="a,b,c";echo ${(s:,:)str}`→输出数组`abc`（需用`echo`展示时需额外处理）。 |
+|`${var//[^A-Za-z]/}` |删除所有非字母字符（结合通配符模式）。 |`str="a1b2c3";echo ${var//[^A-Za-z]/}`→输出`abc`。 |
+|`${(r:width:)var}` |右对齐字符串并填充空格到指定宽度。 |`str="123";echo "${(r:10:)str}"`→输出`123       `。 |
+|`${(l:width::pad:)var}` |左对齐字符串并用`pad`字符填充到指定宽度。 |`str="123";echo "${(l:10::0:)str}"`→输出`0000000123`;echo `${(r:10::0:)str}`→输出`1230000000`。 |
+
+!! 关键说明：
+
+; 索引起始位置：
+* 默认情况下，`zsh` 字符串索引从 `1` 开始，但若设置 `setopt BSD_ECHO`，则从 `0` 开始。
+
+; 模式匹配语法：
+* `#` 和 `%` 操作符使用通配符模式（类似文件名匹配），而非正则表达式。
+
+; ''修饰符组合''：
+* 可通过括号组合多个修饰符，例如 `${(j:-:)${(s:,:)str}}` 先将字符串按逗号分割为数组，再用 `-` 连接。
+
+可通过 `man zshexpn` 查看官方文档的完整字符串操作修饰符列表。
+
+第12个q，有疑问，其他均已验证。

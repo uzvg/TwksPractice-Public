@@ -1,0 +1,232 @@
+created: 20240705125210778
+creator: uzvg
+modified: 20250317090326763
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: Linux Gnome Wayland NVIDIA ArchLinux PermanentNotes
+title: ArchLinux下Gnome桌面NVIDIA显卡开启Wayland
+type: text/vnd.tiddlywiki
+visibility: Public
+
+⚠️ 2024/11/16，最新版的ArchLinux安装NVIDIA驱动已经不用再修改内核参数，在gdm界面选择Wayland就能正常进入。
+
+Linux下Wayland协议虽说已经推了很长一段时间了，Fedora最新的Gnome发行版甚至说要默认取消xorg协议，但我的ArchLinux在NVIDIA显卡的环境下，还是默认总是进入xorg会话，所以今天就来给大家分享下我在ArchLinux下，如何开启Wayland的过程。
+
+!! 系统信息
+
+```
+OS: Arch Linux x86_64
+DE: Gnome 46.0
+Kernel: 6.8.1-zen1-1-zen
+GPU 1: NVIDIA GeForce RTX 3050 Ti Mobile
+```
+
+!! 准备工作
+
+准备工作要先确保自己安装了正确的NVIDIA驱动程序。
+
+首先查看当前系统使用的内核版本：
+
+```bash
+unmae -r
+```
+
+如果是使用的默认的Linux内核，则安装`nvdia`软件包：
+
+```bash
+sudo pacman -S nvidia nvidia-utils
+```
+
+如果使用的其他修改版的内核，如`Linux-zen`，则安装`nvidia-dkms`:
+
+```bash
+sudo pacman -S nvidia-dkms nvidia-utils
+```
+
+!! 具体步骤
+
+!!! 1. 修改 GDM 配置文件
+
+修改`gdm`的配置文件。打开终端，编辑 `/etc/gdm/custom.conf` 文件：
+
+```bash
+$ sudo gedit /etc/gdm/custom.conf
+```
+
+找到以下行：
+
+```bash
+#WaylandEnable=false
+```
+
+将其修改为：
+
+```bash
+WaylandEnable=true
+```
+
+保存并关闭文件。
+
+!!! 2. 更新 Mkinitcpio 模块
+
+编辑 `/etc/mkinitcpio.conf` 文件：
+
+```bash
+$ sudo vim /etc/mkinitcpio.conf
+```
+
+将 `MODULES=()` 替换为：
+
+```bash
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+```
+
+如果大家用的是`btrfs`文件系统，那么只需要在modules中的`btrfs`参数后，添加以上内容，如下：
+
+```
+MODULES=(btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+```
+
+保存，执行以下命令来重新生成`initramfs`镜像文件：
+
+```bash
+$ sudo mkinitcpio -P
+```
+
+`mkinitcpio`: `mkinitcpio` 是一个用于创建 initramfs 的工具。它负责收集和打包所需的文件、驱动程序和工具，以便它们在启动时可以被 Linux 内核加载。
+
+`-P`: `--allpresents`,选项表示重新生成 initramfs 文件。该选项会读取`/etc/mkinitcpio.d/`文件夹下的所有预设配置文件，并依此重新生成initramfs文件。如该文件夹下的`linux-zen.preset`文件：
+
+```bash
+# mkinitcpio preset file for the 'linux-zen' package
+
+ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="/boot/vmlinuz-linux-zen"
+
+# PRESETS=('default' 'fallback')
+PRESETS=('default')
+
+#default_config="/etc/mkinitcpio.conf"
+default_image="/boot/initramfs-linux-zen.img"
+#default_options=""
+
+#fallback_config="/etc/mkinitcpio.conf"
+fallback_image="/boot/initramfs-linux-zen-fallback.img"
+fallback_options="-S autodetect"
+```
+
+可以看到，默认情况下，通过preset文件，mkinitcpip会生成fallback备用镜像，但在添加NVIDIA内核模块后，通过`sudo mkinitcpio -P`产生的`initramfs`文件，即`/boot/initramfs-linux-zen.img`会明显增大，可能会造成`boot`分区的空间不足，如果遇到这种情况，我们就可以通过修改配置文件，禁止其生成fallback镜像。
+
+!!! 3. 添加内核参数
+
+根据你的启动管理器是 `systemd-boot` 还是 `grub`，你需要添加相应的内核参数。
+
+对于 `systemd-boot`，编辑 `/boot/loader/entries/arch.conf` 文件，并添加 `nvidia_drm.modeset=1` 到 `options` 字段：
+
+```bash
+title Arch Linux
+linux /vmlinuz-linux
+initrd /amd-ucode.img
+initrd /initramfs-linux.img
+options root=/dev/nvme1 rw nvidia_drm.modeset=1
+```
+
+更新启动配置：
+
+```bash
+$ sudo bootctl update
+```
+
+对于 `grub`，编辑 `/etc/default/grub` 文件，并添加 `nvidia-drm.modeset=1`：
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet nvidia_drm.modeset=1"
+```
+
+然后更新 grub 配置：
+
+```bash
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+对于使用uki(unified kernel image)的用户：
+
+* 先获取原先的内核参数：
+
+```bash
+cat /proc/cmdline
+root=PARTUUID=c78eb323-bc0d-4e3f-9ce6-2ee65ce475fe zswap.enabled=0 rootflags=subvol=root rw rootfstype=btrfs
+```
+
+* 添加nvidia内核参数
+
+```bash
+# 创建/etc/cmdline.d/nvidia.conf文件
+sudo mkdir /etc/cmdline.d
+cd /etc/cmdline.d
+sudo touch nvidia.conf
+# 编辑`nvidia.conf`:
+sudo nvim nvidia.conf
+# 在原先内核参数后添加nvidma-drm.modeset=1，如下：
+root=PARTUUID=c78eb323-bc0d-4e3f-9ce6-2ee65ce475fe zswap.enabled=0 rootflags=subvol=root rw rootfstype=btrfs nvidia-drm.modeset=1
+```
+
+* 重新生成统一内核镜像：
+```bash
+sudo mkinitcpio -P
+```
+
+!!! 4. 禁用 GDM udev 规则
+
+```bash
+$ sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+```
+
+该命令用于创建一个空的符号链接来禁用GDM的udev规则，这样做的目的是为了避免 GDM 强制使用 Xorg 作为显示服务器。通过禁用这些规则，用户可以在 GDM 登录界面选择使用 Wayland 或 X11 作为显示协议，从而提供了更多的灵活性和选择。这对于希望尝试或切换到 Wayland 显示协议的用户来说是有用的。
+
+!!! 5. 重启并选择Wayland
+
+配置完成后，重启电脑并进入gdm登录界面：会发现启动选择器的图形样式有所变化。你可以通过选择 GNOME 来启动 Wayland，或者通过选择 GNOME on Xorg 回到 X11。
+
+要确认你正在使用 Wayland，可以执行以下命令：
+
+```bash
+$ echo $XDG_SESSION_TYPE
+```
+
+!! 拓展：
+
+1. `initramfs`的作用是什么？
+
+    Linux中的`initramfs`是用于在启动Linux内核之前提供一个轻量级的临时文件系统，以支持加载必要的驱动程序和设置，特别是在引导过程中需要解密根文件系统或进行其他关键操作时。
+
+2. `/etc/mkinitcpio.conf`中各个选项的作用是什么？
+
+    `mkinitcpio.conf` 文件是 Arch Linux 中 `mkinitcpio` 工具的配置文件，用于生成初始 RAM 环境。以下是一些常见选项的解释：
+    * `MODULES`：指定要包括在初始 RAM 环境中的内核模块列表。这些模块通常是用于引导和初始化硬件设备的。
+
+    * `BINARIES`：列出要包含在初始 RAM 环境中的二进制文件。这些文件通常是用于初始化和挂载文件系统的工具。
+    * `FILES`：指定要包括在初始 RAM 环境中的其他文件。这可以包括自定义脚本、配置文件等。
+    * `HOOKS`：定义要执行的挂载点和动作。这些挂载点和动作按顺序执行，用于初始化和准备系统以引导。
+    * `COMPRESSION`：指定生成的初始 RAM 环境映像的压缩格式。通常是 gzip。
+    * `COMPRESSION_OPTIONS`：包含与压缩相关的选项。
+
+    这些选项允许你自定义生成的初始 RAM 环境，以适应特定的系统要求。你可以根据需要添加或删除内核模块、二进制文件和挂载点，以确保系统能够成功引导。
+
+3. `/etc/mkinitcpio.conf`文件中的`hooks`数组的作用：`HOOKS=(base udev autodetect keyboard keymap modconf block filesystems fsck)`
+
+    `mkinitcpio.conf` 文件中的 `HOOKS` 配置指定了用于生成初始 RAM 环境 (initramfs) 的一系列挂载点和动作。在你提供的示例中，以下是每个挂载点/动作的作用：
+
+    1. `base`：这是初始 RAM 环境的基础，包括内核模块的加载和文件系统的初始化。
+
+    2. `udev`：用于初始化 `udev`，这是 Linux 中的设备管理系统。它有助于检测和管理硬件设备。
+    3. `autodetect`：这个挂载点的作用是自动检测和加载所需的硬件驱动程序和内核模块。
+    4. `keyboard`：用于初始化键盘支持，确保在引导过程中能够与键盘进行交互。
+    5. `keymap`：加载键盘映射，以确保键盘的布局和字符映射正确。
+    6. `modconf`：这个挂载点用于自动检测并加载与硬件相关的内核模块。
+    7. `block`：用于初始化块设备支持，以便在引导过程中能够访问磁盘。
+    8. `filesystems`：加载文件系统支持，以便在引导后能够挂载根文件系统。
+    9. `fsck`：该挂载点用于文件系统检查，确保文件系统的完整性。
+
+总的来说，`HOOKS` 的配置确定了在初始 RAM 环境中执行的步骤，以便在引导过程中能够成功加载所需的驱动程序、初始化设备并准备文件系统。这个配置根据系统的需要可以进行自定义，以确保系统能够成功引导。

@@ -1,0 +1,9 @@
+created: 20240807144724117
+creator: uzvg
+modified: 20250317081611205
+modifier: uzvg
+tags: zsh
+title: 函数补全项目
+type: text/vnd.tiddlywiki
+
+[[plugins/coffee|https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/coffee]]

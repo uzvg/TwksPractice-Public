@@ -1,0 +1,28 @@
+created: 20240919045339245
+creator: uzvg
+modified: 20250317090326785
+modifier: uzvg
+progress: Archive
+tags: FleetingNotes CSS TWKS
+title: radio traffic lights simulation
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Backgounds:
+
+* 实现类似一个toggle switch开关，可以决定tiddler是否公开。
+* 该功能通过radio组件已经实现，效果一样，似乎无需重新实现。
+
+|!Visibility |<$radio field="visibility" value="public" class="radio-public"> Public</$radio>&nbsp;&nbsp;&nbsp; <$radio field="visibility" value="private" class="radio-private"> Private</$radio> |
+
+<style>
+	.radio-public input[type="radio"] {
+		apprearance: auto;
+<!--
+  	outline: 4px solid;
+-->
+
+}
+</style>
+
+I want to use radio buttons to create a button similar to a traffic light.

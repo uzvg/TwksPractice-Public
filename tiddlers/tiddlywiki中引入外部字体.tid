@@ -1,0 +1,10 @@
+created: 20240721032652038
+creator: uzvg
+modified: 20250317081611175
+modifier: uzvg
+tags: tiddlywiki
+title: tiddlywiki中引入外部字体
+type: text/vnd.tiddlywiki
+url: https://github.com/deajax/FontFace-CDN
+
+{{!!url}}

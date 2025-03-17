@@ -1,0 +1,22 @@
+created: 20250221065929153
+creator: uzvg
+modified: 20250317090326780
+modifier: uzvg
+progress: Archive
+tags: FleetingNotes TWKS
+title: Hide Private Tiddles Completely
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在构建公开版的TWKS时，彻底隐藏private tiddler，包括其标题信息。
+
+; 初步构想：
+* 通过tiddlywiki command 的子命令，set-field，将所有private tiddler的title字段，重命名为其标题的hash值。
+* 好像可以直接通过render命令就能完成。
+* 通过`sha256[13]`命令，将`private`tiddler，重命名。
+** [[private tiddler|64a0c90b2ed5a]]
+<<prvt "PrivateTiddlerRenameTest">>
+<$button>
+rename
+<$action-sendmessage $message="tm-rename-tiddler" from="PrivateTiddlerRenameTest" to={{{ [[64a0c90b2ed5a]sha256[13]] }}} />
+</$button>

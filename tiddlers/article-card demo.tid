@@ -1,0 +1,95 @@
+created: 20241107030607566
+creator: uzvg
+modified: 20250317081611131
+modifier: uzvg
+tags: 
+title: article-card demo
+type: text/vnd.tiddlywiki
+
+<div class="card-container">
+	<div class="card-caption">
+		<div id="card-caption-icon">
+			{{$:/uzvg/images/article}}
+		</div>
+		<div id="card-caption-text">
+			先用15-20小时建立初始印象
+		</div>
+		<div id="card-caption-button">
+			{{$:/uzvg/images/share}}
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="card-content">
+			<div id="card-body-description">
+				在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。
+				在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。
+			</div>
+			<div class="card-footer tc-subtitle">
+				<div class="Authors">Authors: uzvg </div>
+				<div class="created-time">Created at: 22:46 </div>
+				<div class="updated-time">Updated at: 22:46 </div>
+			</div>
+		</div>
+		<div id="card-body-cover">
+			<img src="https://www.ghibli.jp/gallery/kimitachi025.jpg"/>
+		</div>
+	</div>
+</div>
+
+在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。在学习一个新事物时，先找出要学习的基础知识，再制定个人学习计划，目标是成为真正的专家，然后在最初的15-20小时内全力赴，目的是建立深刻的初始印象，然后转入更持续的学习节奏。
+
+<style>
+	svg.tc-image-share,
+	svg.tc-image-article {
+		height: 25px;
+		width: 25px;
+		}
+	div.card-container {
+		width: 800px;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		margin:0 auto;
+		padding:1.25em;
+		background: <<colour page-background>>
+	}
+	div.card-caption {
+		display:flex;
+		gap:1em;
+	}
+	div.card-caption #card-caption-text {
+		flex-grow:1;
+		font-family:serif,"Noto Serif CJK SC","思源宋体","宋体";
+		font-size: 1em;
+		font-weight:bolder;
+	}
+	div.card-body {
+		display: grid;
+		grid-template-columns: 80% 20%;
+		grid-template-rows: 120px;
+	}
+	div.card-content {
+		display:flex;
+		flex-direction:column;
+		gap:1px;
+	}
+	div.card-body #card-body-description{
+		flex-grow:3;
+		text-overflow: ellipsis;
+	}
+	div.card-body #card-body-cover1{
+		flex-grow:1;
+		over-flow:hidden;
+		flex-basis: fit-content;
+	}
+	div.card-body #card-body-cover1 img{
+		width: 38%;
+		object-fit: cover;
+	}
+	div.card-footer {
+		display: flex;
+		flex-direction:row;
+		justify-content:flex-start;
+		gap: 1em;
+	}
+</style>

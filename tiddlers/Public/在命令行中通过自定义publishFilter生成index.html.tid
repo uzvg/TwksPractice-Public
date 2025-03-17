@@ -1,0 +1,38 @@
+created: 20240711162526257
+creator: uzvg
+modified: 20250317090326813
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: tiddlywiki PermanentNotes TiddlywikiCommand Tutorial(教程)
+title: 在命令行中通过自定义publishFilter生成index.html
+type: text/vnd.tiddlywiki
+visibility: Public
+
+相关链接：
+
+[[How to render index.html through customized publish filter?|https://talk.tiddlywiki.org/t/how-to-render-index-html-through-customized-publish-filter/10109]]
+
+虽然作者最后提供的方法有错，错误原因是`tw5.com`版本的tiddlywiki中根本没有给`publishFilter`留后门，但好在启发我找到了解决方案，解决方案如下：
+
+```
+~/D/w/WikiSpace ❯❯❯ tiddlywiki --render \                                                                                                  
+  '.' \
+  'index.html' \
+  'text/plain' \
+  '$:/plugins/tiddlywiki/tiddlyweb/save/offline' \
+  'publishFilter' \
+  '-[prefix[$:/plugin]]'
+```
+
+tiddlywiki的作者在回复中也提到了另外一种更底层的方法：
+
+```bash
+tiddlywiki editions/tw5.com --render \
+  '.' \
+  'index.html' \
+  'text/plain' \
+  '$:/core/templates/tiddlywiki5.html' \
+  'saveTiddlerFilter' \
+  '$:/core $:/library/sjcl.js $:/themes/tiddlywiki/snowwhite $:/themes/tiddlywiki/vanilla [tag[HelloThere]]'
+```

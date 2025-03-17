@@ -1,0 +1,66 @@
+created: 20240918111350740
+creator: uzvg
+modified: 20250317090326784
+modifier: uzvg
+progress: Pending
+rating: Doubtful
+tags: tiddlywiki PermanentNotes
+title: Pragma/parameters
+type: text/vnd.tiddlywiki
+visibility: Public
+
+\procedure usage(tiddler,field,splitChar)
+\parameters (tiddler:<<currentTiddler>>,field:"authors")
+The currentTiddler is <<tiddler>>.
+
+And the field value is <<field>>.
+
+And the split char is <<splitChar>>.
+
+\end
+
+!! parameters pragma的用法：
+
+`parameter`pragma是`parameters`widget的一种快捷写法，用于在tiddler内部、`procedure`内部声明参数以及为参数指定默认值。
+
+!!! 例子：
+
+首先定义如下procedure：
+
+```
+\procedure usage(tiddler,field,splitChar)
+\parameters (tiddler:"Tiddler tittle",field:"authors")
+The currentTiddler is <<tiddler>>.
+
+And the field value is <<field>>.
+
+And the split char is <<splitChar>>.
+
+\end
+```
+
+使用如下方法调用：
+
+```
+<$transclude $variable="usage" splitChar="|"/>
+```
+
+<$twks.detail summary="结果如下：" state="$:/state/detail">
+
+<$transclude $variable="usage" splitChar="|"/>
+
+</$twks.detail>
+
+* 在调用的过程中，虽然没有指定`tiddler`参数跟`field`参数的值，但可以看到，最终`tiddler`参数值为默认的`<<currentTiddler>>`，`field`参数的值为默认的`authors`，说明`\parameters`pragma起了作用。
+
+* ⚠️ 但又值得注意的是，如果我们此时将tiddler当作普通变量，即`<<tiddler>>`的形式，将其应用在`procedure`内部中，会发现其并不起作用，具体情况可参照👉[[]]，也正因如此，我对在`parameters`pragma中使用类似<<currentTiddler>>为参数赋值的方式保持疑问。
+
+* 如果想要以动态的方式，如transclude，即`{{}}`的方式，或者变量的方式，如`<<variableName>>`的方式，为`procedure`中的参数赋值，推荐使用[[Widget/parameters]]组件，更稳定，也更易理解。
+
+!! Questions:
+
+* [[parameters pragma和parameters widget处理参数的方式有何不同？]]
+
+!! 具体应用场景：
+
+* [[split-items]]

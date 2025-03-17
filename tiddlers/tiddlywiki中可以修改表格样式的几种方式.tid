@@ -1,0 +1,13 @@
+created: 20240904070729079
+creator: uzvg
+modified: 20250317081611175
+modifier: uzvg
+tags: tiddlywiki FleetingNotes
+title: tiddlywiki中可以修改表格样式的几种方式
+type: text/vnd.tiddlywiki
+
+官方的教程可以看[[Tables in WikiText CSS Utility Classes|https://tiddlywiki.com/static/Tables%2520in%2520WikiText%2520CSS%2520Utility%2520Classes.html]]
+
+还有一种可以直接应用css代码的方式，在tiddlywiki官方教程中有一个例子：
+
+https://tiddlywiki.com/#Demonstration%3A%20keyboard-driven-input%20Macro

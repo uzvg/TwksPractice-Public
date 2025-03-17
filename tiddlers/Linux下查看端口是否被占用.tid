@@ -1,0 +1,13 @@
+created: 20240805063618893
+creator: uzvg
+modified: 20250317081611156
+modifier: uzvg
+tags: command Linux Shell
+title: Linux下查看端口是否被占用
+type: text/vnd.tiddlywiki
+
+!! 使用`lsof`命令：
+
+```bash
+lsof -i :port
+```

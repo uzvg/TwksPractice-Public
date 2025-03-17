@@ -1,0 +1,12 @@
+created: 20241029035702824
+creator: uzvg
+modified: 20250317081611158
+modifier: uzvg
+refexplorer-hide: true
+tags: ModernJavaScript
+title: ObjectsBasics
+type: text/vnd.tiddlywiki
+
+This chapter mainly talks about the basics of the javaScript objects, and it's contents are as follows:
+
+<<list-links "[tag<currentTiddler>]">>

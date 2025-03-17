@@ -1,0 +1,20 @@
+created: 20250228165636282
+creator: uzvg
+modified: 20250317081611175
+modifier: uzvg
+tags: FleetingNotes TWKS
+title: tiddlywiki还欠完善的地方
+type: text/vnd.tiddlywiki
+
+1. Derivation完善
+2. Dashboard完善
+3. Synchronizer完善
+* source重命名，同步。
+
+
+<$twikoo
+  envId="https://wikispace.netlify.app/.netlify/functions/twikoo"
+  region="ap-guangzhou"
+  path={{!!title}}
+  lang="zh-CN"
+/>

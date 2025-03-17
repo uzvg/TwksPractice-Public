@@ -1,0 +1,19 @@
+caption: Books
+created: 20241205090133413
+creator: uzvg
+description: 书籍评价等级汇总
+modified: 20250317090326797
+modifier: uzvg
+progress: Completed
+tags: $:/twks/Documents
+title: TWKS笔记评价/Books
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+| !评价 | !说明 |
+|`Great` |常读常新，具有高度持久的价值，每次都有新的收获。 |
+|`Good` |适合精读，对现阶段具有明显帮助。 |
+|`Average` |内容中规中矩，能解决问题，但没有深刻独特的见解。|
+|`Skimmable` |内容平庸，少数章节有用，整体不值得深入阅读。 |
+|`Poor` |内容低质或对你的知识体系无助，几乎没有保留价值。 |

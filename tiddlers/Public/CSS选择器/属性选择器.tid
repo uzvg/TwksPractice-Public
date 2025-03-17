@@ -1,0 +1,14 @@
+created: 20241211090547025
+creator: uzvg
+modified: 20250317090326768
+modifier: uzvg
+progress: Pending
+rating: Plain
+tags: PermanentNotes CSS
+title: CSS选择器/属性选择器
+type: text/vnd.tiddlywiki
+visibility: Public
+
+{{{ [[a b]enlist-input[] +[join[,]] }}}
+
+{{{ [[a b]enlist-input[]join[, ]] }}}

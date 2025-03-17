@@ -1,0 +1,60 @@
+created: 20250221083254935
+description: 加密工具age中的armor选项的作用，以ASCII文本的方式，保存被保密的文件。
+modified: 20250317090326762
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes age加密 Encrypt(加密)
+title: age --armor选项的作用
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+`armor`在英文语境中的意思是`盔甲`、`装甲车`、`防御`的意思，但它却常在加密软件的参数中经常出现？它有什么含义？作用是什么？
+
+!! 作用：
+
+使用age加密文件时，在不使用`armor`参数的情况下生成的加密文件是`二进制`的，如下：
+
+```bash
+# 不带armor参数加密：
+$ age --encrypt --recipient "age12y7ag5s747nafmvtenpuqku0j7hk254hk8lzds6xln53t5stdg2qz9y05d" -o animals.age animals.txt
+
+# 查看文件类型：
+$ file -i animals.age.na
+animals.age.na: application/octet-stream; charset=binary
+```
+
+而当使用`--armor` 选项时，它的作用是将加密数据以 ASCII 形式（文本格式）输出，而不是''二进制格式''，如下：
+
+```
+# 使用armor参数加密文件：
+$ age --encrypt --armor --recipient "age12y7ag5s747nafmvtenpuqku0j7hk254hk8lzds6xln53t5stdg2qz9y05d" -o animals.age animals.txt
+# 查看文件类型：
+$ file -i animals.age
+animals.age: text/plain; charset=us-ascii
+```
+
+!! 历史渊源：
+
+; 为什么叫 armor（盔甲）？
+* `armor` 这个术语来源于''OpenPGP''（PGP 加密标准），在 PGP 里，"ASCII armor" 指的是把二进制数据转换成纯文本格式，以便在邮件、文本文件等环境中安全传输。
+* 比喻含义：盔甲（armor）是一种保护机制，可以让加密数据在不支持二进制格式的地方（如电子邮件、终端、JSON 配置文件等）仍然能安全传输。
+* 技术实现：通常使用''Base64 编码'' 来实现 ASCII armor。
+* 解密过程与普通加密文件相同，age能自动识别是否是armor格式。
+
+!! 应用场景：
+
+; 什么时候需要 `--armor`？
+
+| !场景 | !是否需要 `--armor` | !原因 |
+|存储到''本地文件'' |❌ 不需要 |二进制格式更紧凑，体积更小 |
+|通过电子邮件发送 |✅ 需要 |电子邮件可能会损坏二进制文件 |
+|粘贴到终端或 JSON 配置文件 |✅ 需要 |纯文本可读性更好 |
+|传输到支持二进制的系统（如 SSH 传输） |❌ 不需要 |直接传输二进制更高效 |
+
+!! 总结：
+* `--armor` 让加密文件以 ASCII 纯文本格式存储，方便在邮件、终端、文本文件等环境中使用。
+* 名字来源于 PGP，表示“用 Base64 盔甲保护二进制数据”，防止格式破坏。
+* 一般只在需要兼容文本环境时使用，否则默认二进制格式更高效。

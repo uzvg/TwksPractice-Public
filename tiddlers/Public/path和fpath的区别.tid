@@ -1,0 +1,12 @@
+created: 20250313044558597
+modified: 20250317090326783
+modifier: uzvg
+progress: Pending
+rating: Promising
+tags: PermanentNotes zsh Shell
+title: path和fpath的区别
+type: text/vnd.tiddlywiki
+visibility: Public
+
+放在path中在需要的时候执行的脚本，跟放在fpath中的，通过autoload -Uz <function>执行的脚本，在执行效率上有什么区别吗？
+

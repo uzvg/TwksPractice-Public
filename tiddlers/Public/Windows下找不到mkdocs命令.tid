@@ -1,0 +1,26 @@
+created: 20240705040827611
+creator: uzvg
+modified: 20250317090326801
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: pip mkdocs ArchLinux PermanentNotes Python
+title: Windows下找不到mkdocs命令
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 问题：mkdocs命令找不到
+
+windows下，已经使用`pip install mkdocs`命令安装好了`mkdocs`包，但直接在powershell中输入该命令时提示找不到该命令，需要使用`python -m mkdocs`命令才能正确执行该命令。
+
+!! 解决方案：
+
+原因是没有把使用pip安装的python包的路径没有添加到环境变量中。
+
+打开`edit the system environment virables`编辑框，编辑环境变量。在用户环境变量中为path环境添加如下值：
+
+```
+C:\Users\uzvg\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts
+```
+
+重启terminal，直接输入mkdocs，可正常执行。

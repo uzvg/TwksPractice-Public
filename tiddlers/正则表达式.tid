@@ -1,0 +1,31 @@
+created: 20240705130413107
+creator: uzvg
+list: 正则表达式/贪婪模式 正则表达式/零宽断言 正则表达式/分组和引用
+modified: 20250317081611218
+modifier: uzvg
+tags: PermanentNotes
+title: 正则表达式
+type: text/vnd.tiddlywiki
+
+!! 基础知识：
+
+* 👉[[维基百科:正则表达式|https://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F]]，大致了解一下正则表达式。
+* 👉[[regexlearn|https://regexlearn.com/zh-cn/learn/regex101]]，比较基础的练习，总共56道题，十几分钟就能做完，动画做得很直观，加深理解。
+* 👉[[regex101|https://regex101.com/quiz]]，总共28道测试题，有难度，我自己做到前9道。除了测验之外，正则表达式的所有内容基本都能在这个网站上找到，比较靠谱的一个网站。
+
+!! 正则表达式重难点：
+
+<<tabs
+	tabsList: "[list[正则表达式]]"
+	defalut: "[[正则表达式/贪婪模式]]"
+>>
+
+
+<<rememberq "20241121103502375"
+	"正则表达式中的*代表什么？"
+	"*代表量词，单个使用*是无效的。">>
+
+<<rememberq "20241121103542585"
+	"在有的时候，为什么要使用(.*)，而非直接使用(*)？"
+	"*是量词，并非一个有效的匹配字符，所以需要在它的前面指定一个任意字符，比如.">>
+

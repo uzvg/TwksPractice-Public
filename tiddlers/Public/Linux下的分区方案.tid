@@ -1,0 +1,15 @@
+created: 20241115141551957
+creator: uzvg
+modified: 20250317090326782
+modifier: uzvg
+progress: Archived
+tags: Linux [[分区(disk partition)]] PermanentNotes
+title: Linux下的分区方案
+type: text/vnd.tiddlywiki
+visibility: Public
+
+* 提前规划好`/boot`分区，大小`1G`为佳，如果是双系统的话，推荐先安装Linux，再安装Windows，因为Windows默认会将`esp`分区格式化为`256M`，后续安装NVIDIA显卡驱动时，会造成boot分区空间不够。
+* `/home` 分区需要一个单独分区，这样即使系统出了问题，需要重装系统，home分区中保存的个人文件也不需要转移备份
+* 需要一个swap分区，用于保存休眠后的内存数据，大小为32G，另请见👉[[Linux下swap分区容量]]。
+* 有没有必要使用btrfs?
+** 在没有备份系统需求的前提下，推荐使用ext4文件系统而非btrfs文件系统，前者在小文件处理上速度更快，btrfs的优势在于快照功能。

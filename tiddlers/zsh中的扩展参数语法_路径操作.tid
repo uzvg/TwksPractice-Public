@@ -1,0 +1,23 @@
+created: 20240807085851689
+creator: uzvg
+modified: 20250317081611190
+modifier: uzvg
+tags: zsh
+title: zsh中的扩展参数语法/路径操作
+type: text/vnd.tiddlywiki
+
+!! 概述：
+
+|`${var:A}`|将路径转换为绝对路径。|
+|`${var:h}`|获取路径的目录部分。|
+|`${var:t}`|获取路径的文件名部分。|
+|`${var:r}`|获取路径的文件名（不带扩展名）。|
+|`${var:e}`|获取路径的扩展名。|
+
+常见的用法有：
+
+```bash
+fpath+="${0:A:h}/src"
+```
+
+* 该代码源于`zsh-completions/zsh-completions.plugin.zsh`文件，作用是将该文件所在目录下的`src`目录添加到`fpath`环境变量中。

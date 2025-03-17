@@ -1,0 +1,21 @@
+caption: TWKS笔记可见性
+created: 20250228014913065
+description: TWKS的笔记可见性说明
+modified: 20250317090326796
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: $:/twks/Documents
+title: TWKS笔记可见性
+type: text/vnd.tiddlywiki
+visibility: Public
+
+TWKS中的可见性管理说明：
+
+在TWKS中添加了一个`visibility`属性用以管理所属tiddler的可见性，该属性有如下两个可选值：
+
+|!可见性|!说明|
+|`Public` |可以公开的笔记。 |
+|`Private` |仅私人可见，不能公开的笔记。 |
+
+通过笔记的`visibility`属性值，我们可以[[自定义tiddlywiki构建方案]]，很方便地控制笔记是否要被公开。

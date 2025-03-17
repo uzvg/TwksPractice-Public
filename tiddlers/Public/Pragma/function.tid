@@ -1,0 +1,65 @@
+created: 20240818110859913
+creator: uzvg
+modified: 20250317090326784
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: tiddlywiki PermanentNotes
+title: Pragma/function
+type: text/vnd.tiddlywiki
+visibility: Public
+
+格式：
+
+```
+\function <function-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
+<multiple-line-definition-text>
+\end [<function-name>]
+```
+
+作用：用于自定义函数，本质上是一种特殊的变量，跟普通变量不同之处在于处理参数的方式。
+
+例子：
+
+```
+\function my-function(parameter:"2")
+[<parameter>multiply[1.5]]
+\end
+```
+
+函数有如下几种可以被调用的方式：
+
+* 使用宏调用的方式，如：`<<myfn param:"value">>`
+* 通过`function`操作符，如：`[function[myfn],[value],...]`
+* 函数名中有`.`符号，会被视为自定义函数，可通过更简洁的方式来调用，如`[my.fn[value]]`或`[.myfn[value]]`
+
+<<rememberq "20240818113208733"
+	"function的作用是什么？"
+	"自定义函数，本质上是变量的特殊实现。"
+>>
+
+<<rememberq "20240818113240343"
+	"A specific example of function pragma in tiddlywiki"
+	"""
+		`\function my-function(parameter:"2")` <br>
+		`[<parameter>multiply[1.5]]` <br>
+		`\end` <br>
+	""">>
+
+<<rememberq "20240818122539558"
+	"通过Macro invoke的方式调用function"
+	"""
+	`<<myfn param:"value">>`
+	""">>
+
+<<rememberq "20240818122757083"
+	"通过operator的方式调用函数"
+	"`[function [myfn],[value],...]`">>
+
+<<rememberq "20240818122956697"
+	"在`\function`pragma中，如何定义一个自定义函数？"
+	"在函数中添加`.`符号，如`m2.public`">>
+
+<<rememberq "20240818122919185"
+	"函数名中带有`.`的自定义函数怎么调用？"
+	"`[my.fn[value]]`或`[.fn[value]]`">>

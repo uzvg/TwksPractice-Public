@@ -1,0 +1,16 @@
+created: 20250305053833107
+creator: uzvg
+modified: 20250317081611152
+modifier: uzvg
+tags: PermanentNotes jq Shell
+title: jq命令解析
+type: text/vnd.tiddlywiki
+
+!! jq 选项
+
+-r
+-c
+-s
+
+!! jq filter
+

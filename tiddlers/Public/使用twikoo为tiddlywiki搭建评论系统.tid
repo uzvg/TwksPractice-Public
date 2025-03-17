@@ -1,0 +1,15 @@
+created: 20250219102820383
+creator: uzvg
+modified: 20250317090326811
+modifier: uzvg
+progress: Capturing
+tags: FleetingNotes
+title: 使用twikoo为tiddlywiki搭建评论系统
+type: text/vnd.tiddlywiki
+visibility: Public
+
+看了一圈，giscus跟waline这两个评论系统，都使用了一部分的typescript语言来写，对于我这个要学习JavaScript来写tiddlywiki插件的人来说，增加了一定的成本。
+
+而twikoo的大部分用的是JavaScript，而且文档也很友好，工作量不是很大，很容易就能将其封装成tiddlywiki的widget。
+
+还有一个问题是，当tiddler被重命名后，如何将旧的tiddler的评论区，重新映射到对应的tiddler下？

@@ -1,0 +1,25 @@
+authors: [[Ilya Kantor]]
+caption: ConstructorAndOperatorNew
+created: 20241028085434068
+creator: uzvg
+description: javaScript中的构造函数
+medium: Website
+modified: 20250317090326767
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes ObjectsBasics
+title: ConstructorAndOperatorNew(1730174442880)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/constructor-new#summary
+visibility: Public
+year: 2024/10/28
+
+!! 构造函数：
+
+<<rememberq "20241028085506807"
+	"构造函数的作用是什么？"
+	"用于创建多个类似的对象。">>
+
+<<rememberq "20241028085847673"
+	"构造函数有什么特点？"
+	"构造函数的命名首字母大写。构造函数只有通过new关键字调用。">>

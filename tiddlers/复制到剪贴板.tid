@@ -1,0 +1,11 @@
+created: 20241205064404330
+creator: uzvg
+modified: 20250317081611208
+modifier: uzvg
+tags: FleetingNotes tiddlywiki
+title: 复制到剪贴板
+type: text/vnd.tiddlywiki
+
+实现一个常规博客中代码块中的复制粘贴。
+
+* 能一键把代码、提示词复制到剪贴板。

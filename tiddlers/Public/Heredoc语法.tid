@@ -1,0 +1,139 @@
+created: 20240730140230852
+creator: uzvg
+description: Shell Heredoc 语法详解。介绍了heredoc语法的历史背景、语法结构、应用案例、以及注意事项。
+modified: 20250317090326778
+modifier: uzvg
+progress: Completed
+rating: Personal
+tags: PermanentNotes Shell zsh heredoc
+title: Heredoc语法
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 历史背景：
+
+`Heredoc`（全称 Here Document）最早出现在 1978 年的 UNIX Version 7 Bourne shell 中，其设计初衷是为解决以下问题：
+
+* 在 Shell 脚本中处理多行文本输入时，避免频繁使用 `echo` 命令拼接字符串
+* 简化交互式命令的输入处理（如 `ftp`/`mysql` 等命令行工具）
+* 保持代码块的结构化排版，增强可读性
+
+现常用于配置文件生成、数据库批量操作、远程命令执行、代码文档嵌入等场景。
+
+!! 语法结构：
+
+; 基础语法结构：
+
+```bash
+command <<[-]DELIMITER
+    text content
+    ...
+DELIMITER
+```
+
+; 核心元素解析：
+
+|!元素|!说明|
+|`<<` |固定语法符号 |
+|`-`（可选） |支持缩进消除（仅当定界符左对齐时生效） |
+|`DELIMITER` |自定义终止标识符（推荐大写字母组合，如 EOF/END/MY\_MARKER 等） |
+| 文本块 | 支持变量扩展、命令替换、特殊符号（需考虑引号处理） |
+
+; 高级变体：
+
+```bash
+# 禁用变量扩展（类似单引号效果）
+cat <<'EOF'
+$var 不会展开
+EOF
+
+# 消除缩进（注意只能使用制表符）
+cat <<-EOF
+    ▏缩进内容（行首必须为 tab）
+EOF
+```
+
+!! 应用案例：
+
+; 1. 生成配置文件：
+
+```bash
+#!/bin/bash
+CONF_PATH="/etc/nginx/conf.d/app.conf"
+
+cat > $CONF_PATH <<NGINX_CONF
+server {
+    listen 80;
+    server_name ${HOSTNAME};
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host \$host;
+    }
+}
+NGINX_CONF
+
+echo "配置文件已生成：$CONF_PATH"
+```
+
+; 2：数据库批量操作：
+
+```bash
+mysql -u root -p"$DB_PASSWORD" <<SQL_QUERY
+USE inventory;
+UPDATE products 
+SET stock = stock - 5 
+WHERE category = 'electronics'
+    AND stock > 10;
+SQL_QUERY
+```
+
+; 3：远程命令执行：
+
+```bash
+ssh user@server.example.com <<REMOTE_CMD
+sudo systemctl stop nginx
+tar -czf /backup/nginx_$(date +%F).tar.gz /etc/nginx
+sudo systemctl start nginx
+REMOTE_CMD
+```
+
+!! 注意事项：
+
+; 终止符规范：
+* ''绝对唯一性''：确保文本块内不包含终止符
+* ''格式对齐''：终止符必须单独成行且左对齐（使用 `<<-` 时允许前置 tab）
+
+; 特殊字符处理：
+
+```bash
+# 错误示例：变量中的特殊字符
+cat <<EOF
+当前用户：$USER
+特殊符号：!@#$%^&*()
+EOF
+
+# 正确处理方案，为DELIMITER添加单引号
+cat <<'EOF'
+禁用变量：$USER
+安全显示：!@#$%^&*()
+EOF
+```
+
+; 性能优化：
+
+* 避免在循环中频繁使用 heredoc（每次都会创建临时文件）
+* 处理超长文本（超过管道缓冲大小 64KB）时优先使用临时文件
+
+; 调试技巧
+
+```bash
+# 显示实际执行的文本内容（调试变量展开）
+set -x
+cat <<EOF
+${HOSTNAME}
+EOF
+set +x
+```
+
+> 最佳实践建议：在需要保留原始格式（如代码块、配置模板）时优先选用 heredoc，对性能敏感场景评估使用临时文件的可行性。通过 `shellcheck` 工具可检测 heredoc 使用中的常见问题。

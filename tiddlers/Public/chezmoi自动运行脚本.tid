@@ -1,0 +1,122 @@
+created: 20250225064953819
+modified: 20250317090326766
+modifier: uzvg
+progress: Archived
+rating: Promising
+tags: PermanentNotes chezmoi
+title: chezmoi自动运行脚本
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 脚本类型与执行条件：
+
+| !脚本前缀 | !执行条件 | !适用场景 |
+|`run_` |''每次'' `chezmoi apply` 时执行。 |需持续运行的脚本（如定期清理缓存）。 |
+|`run_once_` |''仅执行一次''（基于脚本内容的 SHA256 哈希值，相同内容不重复执行，即使文件名不同）。 |初始化操作（如安装依赖包、创建目录结构）。 |
+|`run_onchange_` |仅当 ''脚本内容变化''（如模板渲染后的内容变更）时执行。 |响应文件变更（如配置文件更新后重新加载服务）。|
+
+!! 脚本管理规则：
+
+; 创建与命名：
+* ''手动创建''：在源目录（`chezmoi cd`）中创建以 `run_` 开头的文件（如 `run_install.sh`），''无需设置可执行权限''。
+* ''模板支持''：添加 `.tmpl` 后缀可将脚本作为模板（如 `run_install.sh.tmpl`），支持动态逻辑（如条件判断）。
+
+; 执行顺序：
+* 按 ''文件名字母顺序'' 执行。
+* 使用 `before_` 或 `after_` 属性控制执行时机（如 `run_once_before_install.sh` 在更新文件前执行）。
+
+; 环境变量：
+* ''内置变量''：chezmoi 自动注入 `CHEZMOI_OS`、`CHEZMOI_ARCH` 等（与模板变量相同）。
+* ''自定义变量''：在 `~/.config/chezmoi/chezmoi.toml` 的 `[scriptEnv]` 中设置：
+
+```toml
+[scriptEnv]
+   MY_VAR = "value"
+```
+
+!! 脚本编写注意事项：
+
+; 幂等性：
+* 所有脚本（包括 `run_once_` 和 `run_onchange_`）必须 ''可重复执行且结果一致''（例如：`mkdir -p` 代替 `mkdir`）。
+
+; 模板动态控制：
+* 若模板渲染结果为空或仅空格，脚本 ''不会执行''（用于条件禁用）：
+
+```bash
+{{ if eq .chezmoi.os "linux" }}
+#!/bin/sh
+apt install package
+{{ end }}
+```
+
+; 执行环境：
+* 脚本在 ''临时目录'' 生成并执行，需指定解释器（如 `#!/bin/sh`）或为二进制文件。
+* 工作目录设为目标目录的 ''首个存在的父目录''（如 `~/.config/app` 不存在时退至 `~/.config`）。
+
+!! 四、高级用法示例
+
+!!! 1. 安装软件包（条件判断）
+
+```bash
+# 文件：run_onchange_install-packages.sh.tmpl
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+sudo apt install ripgrep
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+brew install ripgrep
+{{ end -}}
+```
+
+* ''行为''：根据操作系统安装不同包，仅当脚本内容变化时执行。
+
+!!! ''2. 关联文件变更触发脚本''
+
+```bash
+# 文件：run_onchange_dconf-load.sh.tmpl
+#!/bin/bash
+# dconf.ini hash: {{ include "dconf.ini" | sha256sum }}
+dconf load / < {{ joinPath .chezmoi.sourceDir "dconf.ini" | quote }}
+```
+
+* ''行为''：当 `dconf.ini` 内容变化时，脚本哈希值变化，触发重新加载配置。
+* ''配套操作''：将 `dconf.ini` 加入 `.chezmoiignore` 避免复制到目标路径。
+
+
+!! 状态管理与调试
+
+!!! 清除脚本状态：
+
+; 重置 `run_once_` 脚本：
+
+```bash
+chezmoi state delete-bucket --bucket=scriptState
+```
+
+; ''重置 `run_onchange_` 脚本''：
+
+```bash
+chezmoi state delete-bucket --bucket=entryState
+```
+
+; 调试与日志：
+
+* ''预览脚本内容''：`chezmoi diff` 显示待执行脚本（默认包含，可通过配置排除）。
+* ''静默模式''：在 `chezmoi.toml` 中配置排除脚本输出.
+
+```toml
+[diff]
+	exclude = ["scripts"]
+[status]
+	exclude = ["scripts"]
+```
+
+* ''详细日志''：`chezmoi apply -v` 显示脚本内容；`--dry-run` 模拟运行（不实际执行）。
+
+!! 最佳实践
+
+* ''谨慎使用''：脚本破坏了 chezmoi 的声明式特性，应优先使用模板和符号链接。
+* ''最小化权限''：避免在脚本中使用 `sudo`，需确保用户有足够权限。
+* ''版本控制''：将脚本纳入 Git 管理，确保跨机器一致性。
+
+通过 `run_` 脚本，chezmoi 实现了对复杂初始化、动态响应和跨平台差异的灵活处理，但需严格遵循幂等性原则以确保系统状态可控。

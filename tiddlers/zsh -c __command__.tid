@@ -1,0 +1,13 @@
+created: 20240730061620225
+creator: uzvg
+modified: 20250317081611187
+modifier: uzvg
+tags: Shell exec
+title: zsh -c "<command>"
+type: text/vnd.tiddlywiki
+
+跟`(<command>)`有什么不同吗？
+跟exec命令有什么不同？
+使用 exec 启动的程序可能不会继承当前 shell 的环境变量，除非显式地设置它们。
+跟nohup命令有什么区别？
+

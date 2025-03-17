@@ -1,0 +1,50 @@
+created: 20240713072327981
+creator: uzvg
+description: tiddlywiki命令行中sub command save的使用解析
+modified: 20250317090326793
+modifier: uzvg
+progress: Archived
+rating: Promising
+tags: tiddlywiki PermanentNotes TiddlywikiCommand
+title: tiddlywiki save命令解析
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! save命令的作用：
+
+利用tiddlywiki的筛选操作符，将筛选出的tiddler导出为纯文本文件，比如`.tid`格式或`json`格式，或者二进制文件。
+
+!! 命令格式：
+
+```
+--save <tiddler-filter> <filename-filter>
+```
+
+* `<tiddler-filter>`：筛选出tiddler
+* `<filnename-filter>`： 将tiddler标题转化为文件名
+
+!! 使用范例：
+
+1. 导出所有非系统的图片tiddler，并用其`uri`化的标题作为导出的tiddler的文件名，最后将其保存到当前文件夹下的`tiddlers`文件夹中。
+
+```
+tiddlywiki --save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]" – saves all non-system image tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles
+```
+---
+
+2. 再比如：`index.html`文件中有如下名为`$:/blogsite/siteTweaks/ButtonAutoHide.css`的tiddler，该tiddler被打上了`$:/tags/Stylesheet`的标签，将其导出到`ButtonAutoHide.css.tid`的文件中，并放置到`siteTweaks`的文件夹中。 
+
+```
+tw --load index.html --save '[tag[$:/tags/Stylesheet]]' '[removeprefix[$:/blogsite/siteTweaks/]encodeuricomponent[]addprefix[siteTweaks/]]'
+```
+---
+
+3. 假如你在一个tiddlywiki.html文件中已经创建并保存了一个插件，如何将其批量导出到指定的文件夹？
+
+实际效果：将标题为`$:/plugins/uzvg/testSave/readme`的tiddler导出到当前工作目录的`plugins/test`文件夹中
+
+```
+tiddlywiki --load tiddlywiki.html --output plugins --save '[all[tiddlers]prefix[$:/plugins/uzvg/]]' '[removeprefix[$:/plugins/uzvg/saveTest/]encodeuricomponent[]addprefix[test/]]'
+
+```
+⚠️ 这里需要注意的是，`--output`参数要先于后面的`--save`参数，才会生效。

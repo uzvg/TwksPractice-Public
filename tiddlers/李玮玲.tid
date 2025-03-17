@@ -1,0 +1,17 @@
+created: 20241010072632874
+creator: uzvg
+modified: 20250317081611217
+modifier: uzvg
+tags: PAO
+title: 李玮玲
+type: text/vnd.tiddlywiki
+
+\function all-relations()
+[<storyTiddler>links[]]
+[<storyTiddler>backlinks[]!is[image]]
+[<storyTiddler>tagging[]]
+[<storyTiddler>has[authors]get[authors]enlist-input[]]
+[<storyTiddler>has[source]get[source]enlist-input[]]
+[all[tiddlers]contains:authors<storyTiddler>]
+[all[tiddlers]contains:source<storyTiddler>] +[!title<storyTiddler>sort[]]
+\end

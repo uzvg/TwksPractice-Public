@@ -1,0 +1,33 @@
+authors: 
+caption: ArchLinux boot process
+created: 20241116110941613
+creator: uzvg
+description: ArchLinux的引导过程
+medium: Wiki
+modified: 20250317090326763
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes ArchLinux
+title: ArchLinux boot process(1731801693143)
+type: text/vnd.tiddlywiki
+url: https://wiki.archlinux.org/title/Arch_boot_process
+visibility: Public
+year: 2024/11/16
+
+一直以来，都对Linux系统的启动过程不太清晰，在教科书上学了一大堆启动顺序什么的，但问题出在不能与现实很好地对应起来，又没有直接看源码的精力跟勇气，随着对ArchLinux越来越熟悉，英语阅读能力以及阅读ArchWiki的能力也显著提升，这帮了我的大忙。
+
+!! 什么是”固件“(firmware)？
+
+* 我们通常说的`bios`跟`uefi`，其实本质上说的就是固件。
+* 系统启动时，执行的第一个程序就是固件。
+; `uefi`固件的作用：
+* ''post''自检。 当计算机开机时，固件首先执行电源自检（Power-On Self-Test），检查硬件组件（如内存、CPU、硬盘等）是否正常工作。如果发现问题，固件会发出错误提示，阻止系统启动。
+* 初始化硬件。在POST完成后，固件会初始化系统硬件，配置硬件设备的基本设置，以确保它们能够正常工作。
+* 查找启动设备。固件会根据预设的启动顺序查找可引导的设备（如硬盘、USB驱动器、光盘等）。它会识别哪些设备上有可用的操作系统。
+* 加载引导加载程序(bootloader)。一旦找到可引导的设备，固件会加载引导加载程序（如GRUB或LILO）。引导加载程序是一个小型程序，负责进一步加载操作系统。
+* 传递控制权：固件将控制权交给引导加载程序，引导加载程序随后会加载Linux内核和必要的初始文件系统（initramfs），并将控制权传递给Linux内核。
+
+我们常说的systemd-boot，grub，它们其实是boot-loader的管理器，而非boot-loader本身，boot-loader，应该是以efi文件，这个理解对吗？
+
+!! boot-loader
+

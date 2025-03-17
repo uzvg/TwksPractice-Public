@@ -1,0 +1,108 @@
+created: 20250220072809618
+description: chezmoi中的modify script的用法
+modified: 20250317090326765
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: PermanentNotes chezmoi
+title: chezmoi modify_ 前缀脚本
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 工作原理：
+
+管理配置文件时，有一种情况是，我们只需要修改文件的一部分，不需要经过模板重新生成该文件。
+
+此时，原先作为目标文件(Target file)会被通过标准输入的方式传递给指定的脚本，该脚本文件名以`modify_`+`<targetFile>`(目标文件文件名)组成。经过脚本修改后，再通过标准输出重新保存到目标文件中。
+
+简单来说，就是`<targetFile>`➡`modify_<targetFile>`脚本修改➡被重新保存到`<targetFile>`中，其中，`<targetFile>`指的是目标文件的文件名。
+
+!! modify_脚本：
+
+使用`modify_`脚本修改目标文件，需要注意以下几点：
+
+* 必须以`modify_`开头。
+* 脚本必须正确映射到正确的目标文件。
+** 具体来说，就是目标文件被保存在什么目录下，就在chezmoi的`source directory`(通常是`.local/share/chezmoi`)下，找到对应的源文件的位置。
+** 例如：目标文件是`$HOME/.zshrc`，则该脚本文件所对应的源路径为`~/.local/share/chezmoi/`。
+** <<twks-tip "可以使用`chezmoi source-path '$HOME/.zshrc'来检查文件名是否正确映射到目标路径。">>
+* 如果脚本要修改的目标文件一个隐藏文件，则必须将其中的`.`替换为`dot_`。
+** 以`$HOME/.zshrc`为例，该`modify_`脚本的名称将会是`modify_dot_zshrc`。
+** 也就是说，`$HOME/.zshrc`所对应的`modify`脚本文件应该是`~/.local/share/chezmoi/modify_dot_zshrc`。
+* 脚本需要正确处理`stdin`或`stdout`。正如我们之前所说，目标文件是以`stdin`的方式被传递给`modify_`脚本处理的，而非我们常见的位置参数如`$1`，所以在脚本中处理文件内容时，需要确保脚本读取 `stdin`（用 cat 或重定向），并在需要时保留原始内容。
+
+; 以下是一个有效的脚本示例：
+
+```bash
+#!/bin/sh
+
+# 创建一个临时文件来存储 stdin 的内容
+tempfile=$(mktemp)
+trap 'rm -f "$tempfile"' EXIT  # 脚本退出时清理临时文件
+
+# 将标准输入（当前文件内容）写入临时文件
+cat > "$tempfile"
+
+# 输出临时文件内容（保留原始内容）
+cat "$tempfile"
+
+# 检查是否已存在 KEY=VALUE，如果不存在则添加
+if ! grep -q "^KEY=VALUE$" "$tempfile"; then
+    echo "KEY=VALUE"
+fi
+```
+
+脚本来源参考：<<rlink "github:Examples of modifying part of a file with chezmoi" "https://github.com/twpayne/chezmoi/discussions/1746">>
+
+<<twks-warning "记得使用`chmod +x`确保脚本拥有执行权限。">>
+
+; 脚本测试：
+* 使用`chezmoi cat <targetFile>`查看脚本生成的结果。
+* 或者使用`chezmoi diff`查看变更。
+* 如果正确，使用`chezmoi apply`执行脚本，生成目标文件。
+
+!! modify_模板：
+
+除了前缀为`modify_`的脚本文件，`modify_`模板是`chezmoi`另一种修改部分目标文件的方法。不同的是，这种方法可以很方便地使用go template，也即chezmoi用到的模板语法的本地特性，来对目标文件做部分修改。
+
+只要在`modify_scripts`中包含了`chezmoi:modify-template`字段(不论是在脚本的什么位置)，该脚本文件都会被当作目标文件的模板文件，与此同时，原目标文件会以`.chezmoi.stdin`这个特殊变量的形式，在模板文件中引用。生成的新内容，会替代原先的目标文件中的内容。
+
+; 常见的使用方式如下：
+
+* 要将文件中的字符串old替换为new，同时保持文件的其余部分不变，可做如下设置：
+
+```
+{{- /* chezmoi:modify-template */ -}}
+{{- .chezmoi.stdin | replaceAllRegex "old" "new" }}
+```
+
+* 要在JSON、JSONC、TOML和YAML文件中设置单个值，可以使用setValueAtPath模板函数，例如：
+
+```
+{{- /* chezmoi:modify-template */ -}}
+{{ fromJson .chezmoi.stdin | setValueAtPath "key.nestedKey" "value" | toPrettyJson }}
+```
+
+<<twks-warning "第二种使用模板方式的modify脚本，虽然使用了模板的语法，但''不能''以`.tmpl`作为文件后缀">>
+
+具体内容请参见[[Manage part, but not all, of a file|https://www.chezmoi.io/user-guide/manage-different-types-of-file/#manage-part-but-not-all-of-a-file]]
+
+<<rememberq "20250220152240591"
+	"chezmoi 中的modify脚本的执行过程是什么？"
+	"在chezmoi的source directory下的modify脚本，会在`chezmoi apply`的时候，会对该脚本文件所对应的目标文件做部分修改。">>
+
+<<rememberq "20250220152517548"
+	"使用modify脚本修改目标文件，跟其他的使用模板文件，重新生成目标文件，有什么不同吗？"
+	"普通的模板文件，会在`chezmoi apply`的时候，根据模板内容，生成新的目标文件，而modify脚本，是通过modify脚本中的自定义脚本，更灵活地对已有的目标文件做修改。">>
+
+<<rememberq "20250220152725309"
+	"modify脚本在处理目标文件时，需要注意什么？"
+	"modify脚本是以`标准输入`的方式，来接收目标文件的，而非常见的位置变量。这个在写脚本时需要注意。">>
+
+<<rememberq "20250220152907023"
+	"chezmoi如何检查目标文件所对应的源文件路径？"
+	"可以使用`chezmoi sourct-path <targetFile>`来查看。需要注意的是，只有被添加进chezmoi source directory的文件，才能使用该命令查看对应的目标文件的路径，不在source directory的文件，无法通过该方法查看对应的源文件的路径。">>
+
+<<rememberq "20250220153119082"
+	"chezoi如何查看modify脚本文件产生的结果？"
+	"有两种方式可以查看脚本执行产生的结果，一种是`chezmoi cat <targetFile>`；第二种是`chezmoi diff`查看`chezmo apply`产生的所有修改，第三种是`chezmoi apply --dry-run --verbose`来查看产生的结果，第三种跟第二种产生的结果本质上是相同的。">>

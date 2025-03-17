@@ -1,0 +1,40 @@
+created: 20240705120420363
+creator: uzvg
+icon: $:/core/images/home-button
+modified: 20250317081611149
+modifier: uzvg
+refexplorer-hide: yes
+refexplorer-starttab: Journal
+tags: 
+title: Home
+type: text/vnd.tiddlywiki
+
+<<twks-image "202503031313341.png" width:"100%">>
+
+!! 引言：
+
+欢迎来到我的`WikiSpace`！`Tiddly WikiSpace`是我使用`TiddlyWiki`的原生语言`wikitext`，结合`Zettelkasten`笔记管理方法，根据自己的笔记管理经验打造的个人知识管理系统，我将其称为`Tiddly WikiSpace`（简称`TWKS`），它的设计初衷是帮助我高效地记录、整理和深化思考。
+
+!! 设计理念：
+
+我遵循以下理念打造了`TWKS`的工作流程跟组织结构，希望让它成为一个自然、高效且专注的知识管理空间：
+
+1. ''无感知的工作流程''：理想的工作流程应当顺应人的直觉，让用户在记录和整理时无需刻意点击额外的元素，就能完成操作。
+
+2. ''保持界面简洁有序''：将功能直接融入到工作流程当中，过多的按钮、菜单和插件影响界面的美观，分散人的注意力。应该将操作直接融入到笔记流程中，减少界面元素的复杂性。
+
+3. ''笔记要流动起来''： 静止的笔记只是记录，流动的笔记才是思考。机械地堆积笔记效果有限，没有定期审查、删除无用内容，或整合新旧想法，这样的系统很难带来真正的价值。
+
+4. 完全掌控我的笔记系统：<<icon archlinux 10em>>
+
+<$let
+	tabsList="[all[tiddlers]!is[system]!is[draft]prefix[Home/]nsort[order]]"
+	MyDefaultTab={{{ [subfilter<tabsList>first[]] }}}>
+	<$macrocall $name="tabs"
+		tabsList=<<tabsList>>
+		default=<<MyDefaultTab>>
+		state="$:/state/HomeTab"
+	/>
+</$let>
+
+<img src="https://imagehost-tiddlywiki.oss-cn-shanghai.aliyuncs.com/uzvg/202503031313341.png" alt="Article cover image"/>

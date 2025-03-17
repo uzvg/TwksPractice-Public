@@ -1,0 +1,26 @@
+created: 20240805094155938
+creator: uzvg
+description: zsh中的autoload机制
+modified: 20250317090326763
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: zsh PermanentNotes Shell
+title: autoload -Uz命令
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在zsh脚本中，常见有如下用法：
+
+```bash
+autoload -Uz <functionName>
+```
+
+* `-U`：防止意外的函数重定义
+* `-z`：表示这是一个 Zsh 特有的命令。
+
+该命令的作用：
+
+当你使用 autoload 命令时，Zsh 会将指定的函数标记为“未加载”。这意味着 Zsh 不会立即读取函数的定义，而是将其存储在一个内部列表中。
+当你第一次调用这个函数时，Zsh 会查找 fpath 中的路径，找到对应的函数文件，并将其加载到当前的 shell 环境中。
+加载后，函数就可以像普通函数一样使用。

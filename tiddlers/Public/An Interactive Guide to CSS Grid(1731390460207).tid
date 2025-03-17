@@ -1,0 +1,32 @@
+authors: [[Josh WComeau]]
+caption: An Interactive Guide to CSS Grid
+created: 20241108055952317
+creator: uzvg
+description: 介绍css中的grip布局
+medium: Website
+modified: 20250317090326762
+modifier: uzvg
+progress: Extracting
+tags: LiteratureNotes CSS grid layout
+title: An Interactive Guide to CSS Grid(1731390460207)
+type: text/vnd.tiddlywiki
+url: https://www.joshwcomeau.com/css/interactive-guide-to-grid/
+visibility: Public
+year: 2024/9/13
+
+!! Alignment
+
+set on the grid parent and controls the alignment of all grid children
+
+justify-content align comumns
+justify-items align items
+align-content align stuff in the vertical direction
+align-items: vertical alignment of items inside their grid area.
+
+justify — deals with columns.
+align — deals with rows.
+content — deals with the grid structure.
+items — deals with the DOM nodes within the grid structure.
+
+
+

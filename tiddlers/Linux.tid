@@ -1,0 +1,35 @@
+created: 20240705125610009
+creator: uzvg
+icon: $:/uzvg/images/Linux
+modified: 20250317081611155
+modifier: uzvg
+tags: IndexNotes
+title: Linux
+type: text/vnd.tiddlywiki
+
+我的日常工作环境是在Linux下搭建的，以下是我的桌面环境跟系统信息：
+
+```bash
+ ❯❯❯ macc         
+                                                                                   
+        a8888b.         Host        ->  uzvg@ArchLinux                             
+       d888888b.        Machine     ->  Lenovo Legion R7000P2021                   
+       8P"YP"Y88        Kernel      ->  6.9.8-arch1-1                              
+       8|o||o|88        Distro      ->  Arch Linux                                 
+       8'    .88        DE          ->  GNOME                                      
+       8`._.' Y8.       Packages    ->  1121 (pacman), 22 (flatpak)                
+      d/      `8b.      Terminal    ->  flatpak-session                            
+     dP        Y8b.     Shell       ->  zsh                                        
+    d8:       ::88b.    Uptime      ->  11h 48m                                    
+   d8"         'Y88b    CPU         ->  AMD Ryzen 7 5800H with Radeon Graphics (16)
+  :8P           :888    Resolution  ->  1920x1080                                  
+   8a.         _a88P    Brightness  ->  100%                                       
+ ._/"Yaa     .| 88P|    CPU Load    ->  2%                                         
+ \    YP"    `|     `.  Memory      ->  4.5 GB/14.2 GB                             
+ /     \.___.d|    .'                                                              
+ `--..__)     `._.'             
+```
+
+可以看到我的
+
+<<tabs "[tag[Linux]]" class:"tc-vertical">>

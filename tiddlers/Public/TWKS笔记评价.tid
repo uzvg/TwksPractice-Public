@@ -1,0 +1,25 @@
+caption: TWKS笔记评价
+created: 20241205052320481
+creator: uzvg
+description: TWKS中各类笔记评价标准汇总
+modified: 20250317090326797
+modifier: uzvg
+progress: Building
+tags: $:/twks/Documents
+title: TWKS笔记评价
+type: text/vnd.tiddlywiki
+visibility: Public
+
+<$let
+	tabList="[prefix[TWKS笔记评价/]]"
+	myDefaultTab={{{ [subfilter<tabList>first[]] }}}
+>
+	<$macrocall
+		$name="tabs"
+		tabsList=<<tabList>>
+		default=<<myDefaultTab>>
+		class="tc-vertical"
+	/>
+</$let>
+
+<<twks-tip "其他类型的笔记，如FleetingNotes、IndexNotes现阶段看来，没必要添加评价维度。">>

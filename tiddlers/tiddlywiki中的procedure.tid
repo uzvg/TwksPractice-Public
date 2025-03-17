@@ -1,0 +1,15 @@
+created: 20240723204905239
+creator: uzvg
+modified: 20250317081611175
+modifier: uzvg
+tags: tiddlywiki
+title: tiddlywiki中的procedure
+type: text/vnd.tiddlywiki
+
+这是tiddlywiki中一个新的特性，主要有两个特点：
+
+* 所有参数被当做变量处理，而非以文本替换的方式处理
+* 如果prodecure被当做widget或者html中的元素属性使用时，procedure的调用结果不会被维基化。也就是说，参数不会被处理。
+**> The text of a procedure can be directly assigned to an attribute of a widget or HTML element. The result of the procedure is not wikified, which means that parameter handling does not take place.
+* procedure也可以被用于筛选器中，但是procedure调用的结果也不会被维基化，也就是说，参数不会被替换。
+**> Procedure calls can be used in filters. The text is not wikified which again means that the parameters will be ignored.

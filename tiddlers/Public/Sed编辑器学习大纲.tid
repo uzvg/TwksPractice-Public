@@ -1,0 +1,41 @@
+created: 20250224075925238
+description: Sed编辑器学习大纲
+modified: 20250317090326786
+modifier: uzvg
+progress: Building
+rating: Promising
+tags: PermanentNotes sed编辑器
+title: Sed编辑器学习大纲
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 基本格式：
+
+```
+sed [选项] '脚本命令' 输入文件
+```
+
+!! 选项说明：
+
+| !选项 | !英文助记 | !选项说明 | !应用举例 |
+|`-n` |''no-print'' |抑制默认输出（仅显示处理后的行，需配合 `p` 命令使用）。 |`sed -n '1,5p' file.txt`（仅输出第1到5行）      |
+|`-e` |''expression'' |指定要执行的脚本命令（允许多个 `-e` 串联多个命令）。 |`sed -e 's/foo/bar/' -e 's/hello/world/' file.txt`|
+|`-f`         |''file''            |从指定文件中读取脚本命令（适用于复杂脚本）。                              |`sed -f script.sed file.txt`                   |
+|`-i`         |''in-place''        |直接修改输入文件（默认不备份，可加扩展名备份原文件）。                    |`sed -i 's/foo/bar/g' file.txt`                |
+|`-r`/`-E`    |''extended-regex''  |启用扩展正则表达式（支持 `+`、`?`、`|` 等语法）。                         |`sed -r 's/[0-9]+/NUM/g' file.txt`             |
+|`-l`         |''line-length''     |指定换行长度（与 `l` 命令配合，控制行显示长度）。                         |`sed -l 50 'l' file.txt`                       |
+|`--version`  |''version''         |显示 `sed` 版本信息。                                                     |`sed --version`                                |
+|`--help`     |''help''            |显示帮助信息。                                                            |`sed --help`                                   |
+
+; 补充说明：
+* `-i` 的备份功能：
+
+```bash
+sed -i.bak 's/foo/bar/' file.txt 会生成备份文件 file.txt.bak。
+```
+
+* `-r` 与 `-E` 的区别：
+** GNU sed 使用 `-r`，BSD/macOS sed 使用 `-E` 启用扩展正则。
+* 多命令执行：
+** 可用分号分隔多个命令，如 `sed 's/foo/bar/; s/hello/world/' file.txt`。
+* 通过表格中的选项组合，可以灵活处理文本替换、删除、提取等操作。

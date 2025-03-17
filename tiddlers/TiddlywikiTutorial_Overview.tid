@@ -1,0 +1,70 @@
+created: 20250217031319658
+modified: 20250317081611174
+modifier: uzvg
+tags: tiddlywiki
+title: TiddlywikiTutorial/Overview
+type: text/vnd.tiddlywiki
+
+!! 基础使用：
+
+* Installation:
+** 介绍一些常见发行版，官方版和其他自定义版
+** 着重介绍nodejs版的使用，启动、关闭。
+** 如何查看本地的官方文档
+** 如何安装插件
+** 如何切换语言
+* Wikitext的基本使用
+** 一些样式的使用，如高亮
+** table的样式
+** 图片的插入
+** 外部链接
+** 内部链接以及重命名
+* 基本宏
+** list-links
+** Content
+** color
+* tiddlywiki中的一些基本原则
+** 一切皆tiddler，以site title为例演示
+** 学习tiddlywiki的本质就是读文档
+* tiddlywiki中的常见的文件结构
+** config
+** stylesheet
+* tag在tiddlywiki中的扮演的角色👉[[System tags in tiddlywiki(1729588843127)]]
+** 系统布局
+** 文件夹
+** 筛选器
+* 三种不同类型的tiddler
+** 用户tiddler
+** system tiddler
+** shadow tiddler
+* 推荐的tiddlywiki教程
+** grok tiddlywiki
+** 官方文档
+
+!! 进阶使用：
+
+* transclude和筛选器的基本语法
+* 筛选器的完整内容
+** filter run and filter step
+** filter operator, filter run prefix
+** 一些重点的filter operator和filter run prefix，如subfilter，cascade，reduce
+* 变量以及变量在筛选器中的应用
+* 编译预处理：
+** procedure
+** macro
+** function
+** widget
+* tiddlywiki 命令行的使用
+** 使用筛选器渲染指定的内容
+** 定制自己的构建方案
+
+* 官方原生：
+** nodejs tiddlywiki
+** tiddlyDesktop
+
+* 特色发行版：
+** tidgi
+** tzk
+** tiddlymemo
+** tiddly xp
+** twks

@@ -1,0 +1,26 @@
+created: 20241213114743642
+modified: 20250317081611175
+modifier: uzvg
+tags: FleetingNotes tiddlywiki
+title: tiddlywiki中如何传递跟接受不定参数？
+type: text/vnd.tiddlywiki
+
+遇到一个问题，在tiddlywiki中，如何传递和接收不定参数？
+
+<<initializer-box button1 button2 button3....>>
+
+把多个不变量传递到procedure内部？
+
+\procedure initializer-box()
+<$parameters $params="butons">
+<$list filter="[<params>get-indexes[]] "
+	
+</$list>
+</$parameters>
+
+\end
+
+
+https://talk.tiddlywiki.org/t/further-use-of-params-with-parameters-widget/7891/2
+这个贴子好像讲了一点，但我没想明白。
+

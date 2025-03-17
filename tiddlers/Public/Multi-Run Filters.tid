@@ -1,0 +1,21 @@
+created: 20240819200102992
+creator: uzvg
+description: tiddlywiki中的run跟step的区别
+modified: 20250317090326783
+modifier: uzvg
+progress: Pending
+rating: Plain
+tags: tiddlywiki PermanentNotes
+title: Multi-Run Filters
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!!! 作用：
+
+单独的filterRun只能执行一次具有多个FilterSteps的运行，而Multi-Run Filters，能让我们更加自由地组合多次FilterRun返回的结果。
+
+!!! 
+
+!!! Reference:
+
+Multi-run filter🔗：{{!!url}} https://groktiddlywiki.com/read/#Multi-Run%20Filters

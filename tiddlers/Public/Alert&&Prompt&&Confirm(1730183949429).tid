@@ -1,0 +1,83 @@
+authors: [[Ilya Kantor]]
+caption: Alert&&Prompt&&Confirm
+created: 20241026003446151
+creator: uzvg
+description: javaScript中的几种交互方式
+medium: Website
+modified: 20250317090326762
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: Alert&&Prompt&&Confirm(1730183949429)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/alert-prompt-confirm
+visibility: Public
+year: 2024/10/26
+
+!! alert
+
+alert会弹出一个模块(modal)窗口，该模块窗口有一个`OK`按钮，返回`undefined`。
+
+!! prompt
+
+`prompt`函数包括两个参数，参数一表示要显示的模块窗口中的文本，参数二表示的是要显示的模块窗口中的输入框中的默认值。
+
+`prompt`函数会弹出一个包含输入框、还有`OK`跟`CANCEL`按钮的模块窗口。
+
+* 点击`C`或者按下`ESC`键，则将`null`保存在变量中。
+* 点击`OK`则将输入的文本保存至变量中。
+* 不输入任何字符，且点击`OK`，则将一个空值`''`保存至变量中。
+
+```
+let age = prompt('How old are you?', 100);
+alert(`You are ${age} years old!`); // You are 100 years old!
+```
+
+!! confirm
+
+`confirm`函数如同其字面意思，用于询问用户是否确定，有两个按钮，一个`OK`，返回`true`，一个`CANCEL`，返回`false`。
+
+```
+let isBoss = confirm("Are you the boss?");
+alert( isBoss ); // true if OK is pressed
+```
+
+<<rememberq "20241026003620193"
+	"什么是模块(modal)窗口？"
+	"模块窗口表示一个弹出一个小窗口，用户必须处理这个窗口，否则就不能与网页中的其他内容进行交互。">>
+
+<<rememberq "20241026005030855"
+	"alert的模块窗口有哪些元素？"
+	"显示消息，只有Ok按钮">>
+
+<<rememberq "20241029063440764"
+	"alert的返回值是什么？"
+	"undefined">>
+
+<<rememberq "20241029063501704"
+	"prompt的模块窗口有哪些元素？"
+	"输入框、`OK`、`Cancel`。">>
+
+<<rememberq "20241029063544813"
+	"prompt模块窗口，点击cancel或者按esc，返回值是什么？"
+	"返回值为`null`">>
+
+<<rememberq "20241029063625849"
+	"prompt模块窗口，输入框不为空，且点击ok，返回值是什么？"
+	"输入的文本。">>
+
+<<rememberq "20241029063700569"
+	"prompt模块窗口，输入框为完，且点击ok，保存在变量中的值是什么？"
+	"为空字符，即`''`">>
+
+<<rememberq "20241026005241399"
+	"prompt函数参数的含义是什么？"
+	"第一个参数是title，表示要显示的输入框的标题。第二个参数是default，表示所设定的默认的文本输入框的值。">>
+
+<<rememberq "20241026005432386"
+	"confirm函数有哪些元素？"
+	"显示一个modal窗口，具有cancel跟ok按钮。">>
+
+<<rememberq "20241029063840860"
+	"confirm函数的返回值是什么？"
+	"ok则返回true，cancel则返回false。">>

@@ -1,0 +1,22 @@
+created: 20250221122931400
+description: age可以使用ssh的密钥来加密解密文件
+modified: 20250317090326762
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: PermanentNotes age加密 SSH
+title: age使用ssh秘钥
+type: text/vnd.tiddlywiki
+visibility: Public
+
+age甚至可以直接使用ssh的秘钥对进行加密解密，根据age的[[官方文档|https://github.com/FiloSottile/age?tab=readme-ov-file#ssh-keys]]：
+
+> As a convenience feature, age also supports encrypting to ssh-rsa and ssh-ed25519 SSH public keys, and decrypting with the respective private key file. (ssh-agent is not supported.)
+
+* age 支持使用ssh的`ssh-rsa`和`ssh-ed25519`公钥进行加密，以及其所对应的私钥来解密。
+
+```
+$ age -R ~/.ssh/id_ed25519.pub example.jpg > example.jpg.age
+$ age -d -i ~/.ssh/id_ed25519 example.jpg.age > example.jpg
+```
+

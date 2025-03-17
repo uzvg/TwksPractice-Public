@@ -1,0 +1,20 @@
+authors: unknown
+caption: 在chezmoi工具中使用age加密
+created: 20250221090241635
+creator: uzvg
+description: chezmoi工具中使用age加密工具
+medium: Website
+modified: 20250317090326813
+modifier: uzvg
+progress: Building
+rating: Personal
+tags: LiteratureNotes age加密 Encrypt(加密) chezmoi
+title: 在chezmoi工具中使用age加密(1740128561635)
+type: text/vnd.tiddlywiki
+url: https://www.chezmoi.io/user-guide/encryption/age/#builtin-age-encryption
+visibility: Public
+year: 2025-02-21
+
+chezmoi supports encrypting files with age and gpg.
+
+

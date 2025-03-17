@@ -1,0 +1,25 @@
+authors: Artoriuz
+caption: zswap vs zram in 2023
+created: 20241115031629803
+creator: uzvg
+description: reddit上的一个关于zswap跟zram的帖子
+medium: Website
+modified: 20250317090326806
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes
+title: zswap vs zram in 2023(1731641647241)
+type: text/vnd.tiddlywiki
+url: https://www.reddit.com/r/linux/comments/11dkhz7/zswap_vs_zram_in_2023_whats_the_actual_practical/
+visibility: Public
+year: 2022
+
+这是🐰Reddit上的一个关于zram跟zswap的帖子，从这个帖子中，我们可以得到如下信息：
+
+* Fedora跟Pop!_OS默认使用`zram`。
+* 而ArchLinux跟redhat的发行版默认使用`zswap`。
+* 两者都是试图通过减少跟磁盘的swap交换次数来提高性能。
+* `zswap`是通过动态压缩池(dynamically allocated RAM-based memory pool)的方式来保存被压缩后的交换数据。Zswap is a lightweight compressed cache for swap pages.
+* 而`zram`是建立独立的块设备(compressed block devices in RAM)来保存来保存交换数据。
+
+* [[zram的设计背景|https://pagure.io/fedora-workstation/issue/98]]是，它试图直接替换原本基于磁盘(disk-based)的交换机制，即我们常见的swap分区。认为传统的swap分区已经不符合现在Linux桌面的快速响应的需求。

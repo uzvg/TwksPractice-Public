@@ -1,0 +1,69 @@
+authors: EricSchmidt
+caption: Eric Schmidt Interview on AI Revolution
+created: 20241104022452936
+creator: uzvg
+description: 谷歌的前CEO EricSchmidt在斯坦福大学的一次关于AI革命的演讲
+medium: Video
+modified: 20250317090326770
+modifier: uzvg
+progress: Rethinking
+rating: Personal
+tags: LiteratureNotes AiRevolution
+title: Eric Schmidt Interview on AI Revolution(1730687268119)
+type: text/vnd.tiddlywiki
+url: https://www.youtube.com/watch?v=xv7oV1QD3sE
+visibility: Public
+year: 2024-08-18
+
+!! 介绍：
+
+谷歌前CEO [[EricSchmidt]] 在斯坦福大学的演讲，视频中的演讲不完整，录音文本被保存在 [[github|https://github.com/ociubotaru/transcripts/blob/main/Stanford_ECON295%E2%A7%B8CS323_I_2024_I_The_Age_of_AI%2C_Eric_Schmidt.txt]]，个人并不完全同意他的所有观点，我认为它们有待考证，但提供了一些特殊角度。
+
+!! 该卷还得卷：
+
+; 为什么谷歌创建了transformer，但却在AI领域输得一塌糊涂？
+
+* 因为谷歌觉得让员工尽早回家和平衡工作比赢得竞争更加重要。如果你的员工每个星期只来公司上一天班，你怎么可能比得过OpenAI或是Anthropic？
+
+; 时间对初创公司的重要性：
+* 对很多大公司而言，时间并不重要，比如：可口可乐、百事可乐还会存在，但初创公司的时间是非常有限的，要想生存下来，就要疯狂工作。
+
+; CEO的工作方式对公司成功的影响：
+* 马斯克、台积电，这些公司之所以成功，就是因为能够卷员工，你必须要把员工逼得够紧才能获胜。台积电会让物理学博士第一年下工厂干活，美国的博士生会去流水线吗？
+
+!! 国家层面的AI竞争：
+
+; 结论：
+* 美国已经领先，并将继续领先，在未来将会有更多的钱投入AI。
+* 除了中美，在AI领域，没有上得了台面的玩家。
+* 在芯片领域，美国领先中国10年。
+
+!! 知识的本质及其进化：
+
+; 理查德.费曼曾说过：“我无法创造我无法理解的东西”。但AI目前掌握了什么，人类并不知道，所以知识的本质是否发生了变化？
+* 用了一个很有有趣的例子来说明这个问题，teenager是人类，但他们在想什么，你根本想不到。
+* 所以，情况很有可能是，我们创造了我们无法完全描述的知识系统，但我们知道它们的界限，这可能是我们能得到的最好结果。通过不断的测试跟对抗测试，将能够在一定程度上控制AI的边界。
+
+* <<twks-tip "我们不知道AI掌握了什么，但我们能控制它的边界。">>
+
+!! 对其他国家的预测：
+
+* 来自中国的AI人才，美国已经彻底失动了他们。
+* 还有很多来自印度的AI人才，要把他们留在美国。
+* 布鲁塞尔（欧盟总部所在地）一直都在摧毁科技创新的机会，德国搞砸了，可能法国还有点希望，其他欧洲国家就更不用提了。
+
+!! 还有必要学编程吗？
+
+有必要，你需要去了解这些系统是如何工作的。
+
+而且，就目前来看，AI并不能完全取代高级编程人员，可以在一定程度上提高程序员的工作效率，但一个对编程一无所知的人，并不能直接用AI写代码。
+
+!! AI将加大发展差距：
+
+> The rich get richer. AI will widen wealth gaps and benefit resource-rich countries.
+
+> 事实上，这是富国之间的博弈，庞大的资本，大量的技术精英，政府的大力支持，这是强国之间的游戏，没有技术资源的国家需要加入强国供应链当中，否则也将错过盛宴。
+
+!! 后续：
+
+现在是[[6th March 2025]]，

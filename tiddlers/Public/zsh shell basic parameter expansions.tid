@@ -1,0 +1,82 @@
+created: 20240807072125734
+creator: uzvg
+modified: 20250317090326802
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: zsh PermanentNotes
+title: zsh shell basic parameter expansions
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 概述：
+
+| !参数扩展形式 | !作用说明 | !使用举例 |
+|`${var+word}` |若`var`''已定义''（即使为空），返回`word`，否则返回空。 |`echo ${name+"defined"}`→若`name`存在（包括空值），输出`defined`。 |
+|`${var-value}` |仅当`var`''未定义''（不包括空值）时返回`value`，否则返回`var`的值。 |`name="";echo ${name-"Anonymous"}`→输出空值（因为`name`已定义）。 |
+|`${var:-value}` |若`var`''未定义''或''为空''，返回`value`，但''不修改''`var`的值。 |`echo ${name:-"Guest"}`→若`name`未定义或为空，输出`Guest`。 |
+|`${var:=value}` |若`var`''未定义''或''为空''，将`value`''赋值''给`var`并返回。 |`echo ${count:=0}`→若`count`未定义或为空，赋值为`0`并输出`0`。 |
+|`${var::=value}` |''强制赋值''：无论`var`是否定义，直接将`value`赋值给`var`。 |`var="old";echo ${var::="new"}`→`var`变为`new`，输出`new`。 |
+|`${var:?error_msg}` |若`var`''未定义''或''为空''，输出`error_msg`并''终止脚本''。 |`echo ${path:?"Pathisunset"}`→若`path`未定义，报错并终止执行。 |
+|`${var:+replacement}` |若`var`''已定义且非空''，返回`replacement`，否则返回空。 |`echo ${DEBUG:+"Debugmode"}`→若`DEBUG`非空，输出`Debugmode`。 |
+|`${var=value}` |仅当`var`''未定义''（不包括空值）时赋值`value`并返回，否则返回原值。 |`name="";echo ${name="Guest"}`→`name`仍为空，输出空值。 |
+|`${var::=value}` |直接强制赋值（与`${var:=value}`不同，不检查是否为空）。 |`var="";echo ${var::="default"}`→`var`变为`default`，输出`default`。 |
+|`${var:offset:length}` |从`var`的字符串中截取子字符串（属于初始化中的字符串操作）。 |`str="abcdef";echo ${str:1:3}`→输出`bcd`。 |
+
+!! 关键区别说明：
+
+# ''`:-` vs `-`''
+#* `:-` 检查变量是否''未定义或为空''，`-` 仅检查是否''未定义''。
+# ''`:=` vs `=`''  
+#*   - `:=` 对未定义或空变量赋值，`=` 仅对未定义变量赋值。
+# ''`:+` vs `+`''  
+#* `:+` 要求变量非空才替换，`+` 只要变量存在（即使为空）就替换。
+
+可通过 `man zshexpn` 查看官方文档的详细说明。
+
+!!! 特点解析：
+
+符号特征：
+
+* 不带`:`号，只关注是否''被定义''
+* 带`:`号，要关注是否''为空''
+* `+`号，表示变量有内容则被替换
+* `-`号，表示变量没内容则被替换
+
+
+
+
+|!2 |`${var-str}`|若 var 未定义则返回 str，反之返回 $var|
+|!3 |`${var:-str}`|若 var 为空则返回 str，反之返回 $var|
+
+
+* `-`用于判断变量是否被定义，如果被定义，即使变量''值为空''，则返回变量自身的值，未被定义则返回`str`
+* `:-`的要求更高一点，要求变量值''非空''，如果''非空''，则返回变量自身的值，否则返回`str`
+
+`+`：非空则替换
+
+* `:`用于判断变量值为''空''
+** `:-`判断是否为空
+* `+`用于判断不为空
+
+!!! 1. `${+name}`
+
+用途：常用于判断变量是否
+
+* 变量存在，返回1，变量不存在，返回0。
+* 常用于判断变量是否定义：
+
+```bash
+# 用于判断pbzip2该命令是否存在
+if (( ${+commands[pbzip2]} )) alias bzip2=pbzip2
+if (( ${+commands[pbunzip2]} )) alias bunzip2=pbunzip2
+```
+
+* commands是[[zsh中的内置关联数组]]
+* ${+var}用于判断变量是否存在
+* 在zsh脚本中常用于判断命令是否存在，如：
+** `(( ${+commands[gh]} || ${+commands[asdf]} && ${+functions[_direnv_hook]} ))`
+* 存在返回1，不存在返回0
+* `(())`用于算术运算和算术条件判断
+** 需要注意的是，在该条件判断中，非零为真，零为假
+** 类似的例子

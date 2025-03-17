@@ -1,0 +1,26 @@
+caption: TWKS笔记属性
+created: 20241205065656875
+creator: uzvg
+description: TWKS中各种笔记的属性说明
+modified: 20250317090326796
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: $:/twks/Documents
+title: TWKS笔记属性
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在twks中，每类笔记，都有不同的属性，以下的每类笔记中各个属性的说明：
+
+<$let
+	tabList="[prefix[TWKS笔记属性/]]"
+	myDefaultTab={{{ [subfilter<tabList>first[]] }}}
+>
+	<$macrocall
+		$name="tabs"
+		tabsList=<<tabList>>
+		default=<<myDefaultTab>>
+		class="tc-vertical"
+	/>
+</$let>

@@ -1,0 +1,43 @@
+created: 20240716130030133
+creator: uzvg
+modified: 20250317090326766
+modifier: uzvg
+progress: Archived
+rating: Doubtful
+tags: proxy TroubleShooting PermanentNotes Git SSH
+title: clash-verge-rev开启tun模式后git无法克隆
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 故障描述：
+
+windows下，打开clash-verge-rev的tun模式后，使用`git clone`命令，发现如下报错：
+
+```
+Connection closed by 198.18.0.12 port 22
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+```
+
+!! 解决方案：
+
+解决方案是[[启用通过HTTPS的SSH连接|https://docs.github.com/zh/authentication/troubleshooting-ssh/using-ssh-over-the-https-port#enabling-ssh-connections-over-https]]
+
+在 `~/.ssh/config` 编辑该文件，并添加以下部分：
+
+```
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
+```
+
+!! 扩展：
+
+* [[无缝迁移SSH秘钥]]
+* [[使用ssh -vT调试GitHub SSH连接]]
+
+!! 补充：
+
+[[6th March 2025]]，虽然故障解决了，但具体问题没整理清楚，需要再梳理一下。

@@ -1,0 +1,19 @@
+created: 20240716134201388
+creator: uzvg
+modified: 20250317090326784
+modifier: uzvg
+progress: Archived
+rating: Plain
+status: pending
+tags: powershell PermanentNotes windows
+title: Powershell中的nohup
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 需求：
+
+偶尔在windows下使用powershell时，想要实现`nohup`指令在Linux下的效果，让服务在后台运行
+
+!! 方案：
+
+使用`Start-Job`命令

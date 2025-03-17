@@ -1,0 +1,10 @@
+created: 20240730165704046
+creator: uzvg
+modified: 20250317081611199
+modifier: uzvg
+tags: pts Linux Shell
+title: 什么是伪终端？
+type: text/vnd.tiddlywiki
+
+
+可以使用`tty`查看当前会话所在的伪终端设备号

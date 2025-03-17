@@ -1,0 +1,19 @@
+caption: PermanentNotes
+created: 20241205091758876
+creator: uzvg
+description: PermanentNotes笔记评价标准汇总
+modified: 20250317090326797
+modifier: uzvg
+progress: Completed
+tags: $:/twks/Documents
+title: TWKS笔记评价/PermanentNotes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+|!评价|!说明|
+|`Plain` |笔记内容无明显价值或启发性，缺乏深度和结构，大多数情况下，只是为了笔记的完整性而记录。 |
+|`Personal` |笔记内容对个人有一定意义或参考价值，仅供自己查阅或触发联想。  |
+|`Promising` |内容具有潜在价值，能引发进一步思考，但目前零散、不完整，后续加工后可能转化为适合分享的内容。  |
+|`Valuable` |内容清晰完整，具有明确的实用性或启发性，能够帮助他人解决问题或提供新视角。推荐分享给他人。 |
+|`Brilliant` |内容极具创造性或深刻洞察力，包含全新视角或重要突破，能够强烈吸引读者注意，具有广泛传播的潜力。 |

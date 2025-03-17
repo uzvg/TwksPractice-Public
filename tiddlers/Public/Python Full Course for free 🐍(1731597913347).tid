@@ -1,0 +1,237 @@
+authors: [[Bro Code]]
+caption: Python Full Course for free 🐍
+created: 20241113234046120
+creator: uzvg
+description: 
+medium: Video
+modified: 20250317090326785
+modifier: uzvg
+progress: Pending
+rating: Plain
+tags: LiteratureNotes Python
+title: Python Full Course for free 🐍(1731597913347)
+type: text/vnd.tiddlywiki
+url: https://www.youtube.com/watch?v=XKHEtdqhLK8&list=PLZPZq0r_RZON03iKBjYOsOKr1-TD7z2lH
+visibility: Public
+year: 2021/2/15
+
+我之前在一个[[先用15-20小时建立初始印象(1730691368436)]]
+用官方文档学习Python是一个非常痛苦的过程，这个12小时的视频不长不短，而且很难集中注意力，视频就好多了。
+
+!! variable
+
+检查变量所保存的数据类型： `print(type(name))`
+
+!!! string、integer、float, boolean
+
+当变量保存string类型的数据时，`+`号代表的是`联结符`
+
+当变量保存`int`类型的数据时，`+`号代表的是`数字运算符`
+
+Python中的str跟int无法直接联结
+
+如何使`string`跟`int`联结？
+
+str(age)，将age转换为一个string类型
+
+!!! float 数据类型 boolean 类型
+
+boolean 值有`True`跟`False`，没有引号
+
+print f-string, and 'f' means format.
+
+`print(f"Hello{first_name}")` format
+
+<<rememberq "20241114042019724"
+	"what's the variable?"
+	"The variable is a container for a value.">>
+
+<<rememberq "20241114041400361"
+	"Python中的f-string中的f，指的是什么意思？"
+	"format，格式化。">>
+
+<<rememberq "20241114041520283"
+	"Python中，如何在f-string中引用其他变量？"
+	"变量用`{}`包裹。如`{name}`,就是引用`name`变量">>
+
+!! type casting
+
+<<rememberq "20241114042113914"
+	"what's the type casting?"
+	"the process of converting a variable from one date type to another.">>
+
+`str()`,int(),float(),bool()
+
+string类型不能跟int类型联结
+
+非空字符串为空，进行布尔类型转事务，
+<<rememberq "20241114042152229"
+	"string类型不能跟int关于"
+	"A">>
+
+!! input
+
+<<rememberq "20241114042807906"
+	"input获取的数值会被保存为什么类型的数据？"
+	"string类型">>
+
+```
+name=input("what's your name?:")
+```
+
+!! arithmetic and math
+
+!!! arithmetic operators
+
+!!! math functions
+
+import math
+
+```
+result=round(x) # 四余五入
+result=abs(x) # 绝对值
+result=pow(4，3) # 4的三次方
+result= max(x，y,z) # 其中的最大值
+result= min(x，y,z) # 其中的最小值
+```
+
+!! if else
+
+```
+if <condition>:
+	statement;
+elif <condition>:
+	statement2;
+else:
+	statement;
+
+```
+
+!! logical operator
+
+or and not
+
+or: 只要有一个为真，则结果为真
+and: 只有有一个为假，则结果为假
+
+!! 条件表达式
+
+条件表达式是一个三元运算符
+
+X if (condition) else Y
+
+`result='EVEN' if num % 2 == 0 else "ODD"`
+
+!! string methods
+
+* `len()`: the length of the string
+* `find()`: find the first occurrence of a character.
+* `rfind()`: `r`means reverse, it means finding the last occurrence of a character. return `-1` if there are no results.
+* `capitalize()`: Only the first letter is capitalized.
+* `upper()`: all of the letters are uppercase.
+* `lower()`: all of the letters are lowercase.
+* `isdigit()`: return either true or false if a string contains only digits, the result is a boolean. ⚠️：判断的是，字符中是不是只有数字，而不是字符串或数字类型。
+* `isalpha()`: return either true or false if a string contains only alphabetical characters, the result is a boolean. ⚠️：判断的是，字符中是不是只有数字，而不是字符串或数字类型。
+* `count()`: `number.count("-")`，count how many characters are within a string.
+* `replace()`:`number.replace("-", " ")`,
+* `help(str)`: 获得更多的方法。
+
+!!! string indexes
+
+Accessing elements of a sequence using [start:end:step]
+
+* 索引从0开始
+* end 取不到
+* 索引从0开始时，0可以省略，如number[:4]
+* 一直取到索引结束，end可以省略
+* 负向索引，从下标`-1`开始。
+* [::2]是什么意思? 2指的是step
+* [::-1]是什么意思? reverse字符串中的所有字母
+* 对字符串进行切片时，如果起始索引大于结束索引，结果将是''一个空字符串''。
+
+!! format specifiers
+
+format specifiers={:flags} format a value based on what flags are inserted
+#.(number)f= round to that many decimal places(fixed point)
+#:(number)=allocate that many spaces
+#:03 =allocate and zero pad that many spaces
+#:<= left justify
+#:>= right justify
+#:^= center align
+# :+ = use a plus sign to indicate positive value or negative value.
+#:== place sign to leftmost position
+#:= insert a space before positive numbers
+#:，= comma separator, each thousand's place is now separated with a comma.
+
+可以同时将多个format specifier叠加在一起使用，使其同时产生效果。
+
+!! while loops
+
+''while''循环的格式：
+
+```
+while <condition>:
+	statements
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

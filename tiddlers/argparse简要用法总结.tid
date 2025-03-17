@@ -1,0 +1,11 @@
+created: 20241122022013759
+creator: uzvg
+modified: 20250317081611131
+modifier: uzvg
+tags: FleetingNotes Python
+title: argparse简要用法总结
+type: text/vnd.tiddlywiki
+
+argparse的用法总结：
+
+可以参照这篇文章的结构👉https://vra.github.io/2017/12/02/argparse-usage/

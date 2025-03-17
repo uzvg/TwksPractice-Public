@@ -1,0 +1,79 @@
+created: 20240805160949591
+creator: uzvg
+modified: 20250317081611131
+modifier: uzvg
+tags: zsh
+title: arguments函数
+type: text/vnd.tiddlywiki
+
+在 Zsh Shell 中， `_arguments` 函数是编写自定义补全函数的强大工具，它能够帮助你定义更复杂的参数解析逻辑，例如支持短选项、长选项、选项参数等。下面我将详细介绍如何使用 `_arguments` 函数编写补全函数：
+
+!!! 1. 基本语法：
+
+```bash
+_arguments [-C] [-s sep] [-S sep] spec...
+```
+
+* `-C`:  启用上下文相关的补全，这允许你在不同的参数或选项之后提供不同的补全选项。
+* `-s sep`: 设置选项和参数之间的分隔符，默认为空格。
+* `-S sep`: 设置多个参数之间的分隔符，默认为空格。
+* `spec...`:  一个或多个描述参数或选项的规范说明符。
+
+!!! 2. 规范说明符：
+
+每个规范说明符定义了一个参数或选项的补全规则，其格式如下:
+
+```bash
+'flag[:action][:description]'
+```
+
+* `flag`: 可以是以下几种类型：
+** 短选项：例如 `-a`。
+** 长选项：例如 `--all`。
+** 参数：用 `*` 表示任意参数。
+* `action`: 可选，用于指定当该选项或参数被选中时要执行的操作，例如：
+    ** `'::'`: 表示该选项或参数不需要额外的参数。
+    ** `':wordlist:'`:  表示该选项或参数需要一个从 `wordlist` 中选择的参数。
+    ** `':function:'`: 表示该选项或参数需要一个由 `function` 函数生成的动态参数列表。
+* `description`: 可选，用于在补全菜单中显示该选项或参数的描述信息。
+
+!!! 3. 示例：
+
+假设我们有一个命令 `mycommand`，它接受以下选项和参数:
+
+* `-a`:  启用 A 功能。
+* `-b`:  启用 B 功能。
+* `--file <file>`: 指定要处理的文件。
+* `--output <dir>`: 指定输出目录。
+
+我们可以编写以下补全函数:
+
+```zsh
+_mycommand() {
+  local context state state_descr line
+
+  _arguments \
+    '-a[启用 A 功能]' \
+    '-b[启用 B 功能]' \
+    '--file[指定要处理的文件]:filename:_files' \
+    '--output[指定输出目录]:directory:_files'
+}
+
+compdef _mycommand mycommand
+```
+
+!!! 4. 解释：
+
+* `_arguments` 函数定义了四个规范说明符，分别对应 `mycommand` 命令的四个选项和参数。
+* `-a` 和 `-b` 选项没有 `action`，表示它们不需要额外的参数。
+* `--file` 选项的 `action` 是 `:filename:_files`，表示它需要一个文件名作为参数，并且使用 `_files` 函数来补全文件名。
+* `--output` 选项的 `action` 是 `:directory:_files`，表示它需要一个目录名作为参数，并且使用 `_files` 函数来补全目录名。
+
+!!! 5.  其他技巧：
+
+* 你可以在 `action` 中使用自定义函数来生成更复杂的动态参数列表。
+* 可以使用 `$words` 数组来访问当前命令行中的所有单词，并根据已输入的参数来提供上下文相关的补全选项。
+
+!!! 总结：
+
+`_arguments` 函数是 Zsh 补全系统中非常强大的工具，它可以帮助你轻松地定义复杂的参数解析逻辑，并提供用户友好的补全体验。建议你多加练习，并参考 Zsh 官方文档以了解更多高级用法。 

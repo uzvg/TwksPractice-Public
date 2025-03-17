@@ -1,0 +1,41 @@
+caption: VarsWidget
+created: 20240818151306880
+creator: uzvg
+description: VarsWidget用于同时定义多个变量，但
+modified: 20250317081611185
+modifier: uzvg
+tags: tiddlywiki PermanentNotes
+title: Widget/vars
+type: text/vnd.tiddlywiki
+
+!!! 作用：
+
+跟[[$let|Widget/let]]一样，用于同时定义多个变量。
+
+!!! 使用示例：
+
+```
+\define helloworld() Hello world!
+<$vars greeting="Hi" me={{!!title}} sentence=<<helloworld>>>
+  <<greeting>>! I am <<me>> and I say: <<sentence>>
+</$vars>
+```
+!!! 特点：
+
+> Attributes will not interfere with the evaluation of other attributes. So if one attribute sets `currentTiddler`, and another attribute uses `currentTiddler` in its evaluation, it will use the value of `currentTiddler` that exists outside the widget's scope.
+
+* vars 组件的属性值之间不会相互干扰
+** 具体来说，即使vars组件中的一个属性值重新定义了`currentTiddler`，该变量本来是一个动态变量，用于引用当前tiddler，但如果此时，又有一个vars组件内的属性值重新引用了`<currentTiddler>`，它的值也不会受到此前重新定义的`currentTiddler`的值的影响，它会引用vars组件之外的`<currentTiddler>`的值。
+
+!!! 与[[$let|Widget/let]]的不同之处：
+
+[[TiddlywikiWidgets/使用let和vars组件同时定义多个变量]]
+
+<<rememberq "20240818164258669"
+	"$vars 组件的作用是什么？"
+	"用于同时创建多个变量">>
+
+<<rememberq "20240818164332346"
+	"$vars如何同时定义多个变量？"
+	""" `<$vars greeting="Hi," name=<<youname>>, sentence=<<helloworld> SENTENCE BETWEEN VARS WIDGET </$vars>` """
+>>

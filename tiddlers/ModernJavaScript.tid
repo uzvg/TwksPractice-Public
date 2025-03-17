@@ -1,0 +1,23 @@
+created: 20241029041102538
+creator: uzvg
+list: JavaScriptFundamentals CodeQuality ObjectsBasics
+modified: 20250317081611158
+modifier: uzvg
+refexplorer-hide: yes
+tags: IndexNotes
+title: ModernJavaScript
+type: text/vnd.tiddlywiki
+
+我自己不是搞前端的，学习javaScript的目的主要是给tiddlywiki写评论插件，因为我发现tiddlywiki下没有一个可以稳定使用的评论系统。
+
+我的时间有限，学习javaScript的动力目前也仅限限于为tiddlywiki制作插件，所以需要速战速决。
+
+根据
+
+<$macrocall
+	$name="toc-selective-expandable"
+	tag="ModernJavaScript"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+/>

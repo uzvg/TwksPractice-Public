@@ -1,0 +1,33 @@
+created: 20240812155802119
+creator: uzvg
+description: tiddlywiki中storyTiddler的作用以及它跟currentTiddler变量的不同之处
+modified: 20250317090326795
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: tiddlywiki PermanentNotes
+title: TiddlywikiVariable/storyTiddler
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 作用：
+
+确切地来说，`storyTiddler`指的是我们在tiddlywiki的`story river`中打开的tiddler。
+假如在tiddler中的组件中使用到了`storyTiddler`变量，通常指的是的当前正在编辑或查看的tiddler。
+
+!! 注意
+
+!!! 跟`currentTiddler`有什么不同吗？
+
+* 假如在当前tiddler的组件中用到了storyTiddler，`storyTiddler`指的是当前组件所在的tiddler
+* 假如在当前tiddler中的filter组件中用到了 `currentTiddler`，那在list组件内，每个`currentTiddler`的值，都会不断变化。
+
+<<rememberq "20240812155816980"
+	"`storyTiddler`变量的作用是什么？"
+	"保存使用它的组件所在的tiddler"
+>>
+
+<<rememberq "20240812160527415"
+	"storyTiddler跟currentTiddler变量有什么不同？"
+	"currentTiddler中保存的值，会不断变化；
+	而storyTiddler中将一直保存使用该变量的组件所在的tiddler">>

@@ -1,0 +1,38 @@
+created: 20240714052427821
+creator: uzvg
+modified: 20250317081611173
+modifier: uzvg
+tags: tiddlywiki
+title: tiddlywiki savewikifolder命令解析
+type: text/vnd.tiddlywiki
+
+!! 命令作用：
+
+常用于将单个tiddlywiki html文件转化为nodejs版的wiki文件夹的形式，包括tiddlers，plugins，configuration
+
+!! 命令格式：
+
+```
+tiddlywiki --savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
+```
+
+* 目标文件夹应该为空或者不存在
+* `<filter>`是可选的，指定了哪些tiddler应该被包含进来，默认情况下，相当于`[all[tiddlers]]`
+* 已经被安装的官方插件，会在`tiddllywiki.info`文件中记录，不会被导出额外的tid文件
+* 自定义的插件，会被打包到他们自己的文件夹
+** 默认情况下，应该为当前文件夹下的`plugins/<pluginName>`文件夹下
+* explodePlugins: 默认为"yes"
+** 如果默认为"yes"，则将插件文件保存到wiki文件夹下的`plugins`目录中
+** 如果设置为"no"，则将插件保存为tiddlers文件夹中的单个JSON文件
+
+
+!! 使用案例：
+
+```
+# 将mywiki.html转化到mywikifolder文件夹中的tid文件
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+
+# Save the plugin to the tiddlers directory of the target wiki folder:
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
+```
+

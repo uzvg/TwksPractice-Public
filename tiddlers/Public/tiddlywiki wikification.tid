@@ -1,0 +1,86 @@
+created: 20240709021406216
+creator: uzvg
+modified: 20250317090326794
+modifier: uzvg
+progress: pending
+tags: tiddlywiki PermanentNotes
+title: tiddlywiki wikification
+type: text/vnd.tiddlywiki
+visibility: Public
+
+When a transclusion or macro call is used as an HTML attribute, how many times does TiddlyWiki try to wikify it?
+
+A:
+Exactly once.
+
+!! wikify这个组件，解决的是什么问题？
+
+正常情况下，当一个变量引用或者宏调用被当作widget组件或者html元素的属性值时，如下：
+
+```
+<img src=<<imageUrl>> />
+```
+
+其中的`<<testVar>>`作为img的属性值，只能被展开一次，不会像正文中的其他文本，可以被递归地维基化。
+
+这也就是说，如果imageUrl的值是一个类似于“https://w.wallhaven.cc/full/2y/wallhaven-2yl6px.jpg”的文本链接，该文本没有任何被继续维基化的需要，这时，就没有使用wikify组件的必要。
+
+但当`imageUrl`是一个可以被继续维基化的文本，而且只有继续递归地维基化该文本，才能得正确的图片链接时，如下：
+
+```
+imageUrl变量中保存的值：
+
+https://imagehost-tiddlywiki.oss-cn-shanghai.aliyuncs.com/uzvgandcyco/1702479296847.webp
+
+https://{{!!bucket}}.{{!!region}}.aliyuncs.com/{{path}}{{!!title}}
+
+```
+!! 什么是tiddlywiki中的wikification？
+
+tiddlywiki中的wikification说的是把tiddlywiki中的wikitext翻译成浏览器可以直接读懂的html的一个过程，这里的wikitext中通常包括有各种：markup标记，widget，macro（宏），还有其他被转置（transclude）进来的tiddler。
+
+!! 我们为什么需要wikification这个语法？
+
+通常来说，tiddlywiki会把当前正在读取的的tiddler的正文当做wikitext来处理，而这些被当成wikitext被处理的文本，在tiddlywiki中通常有多个来源，比如：
+
+* 通过转录语法被嵌入的文本
+* 通过宏调用最终生成的文本
+* 被转录进来的其它tiddler及字段的值
+* 被tiddlywiki的标记语法所标记的文本
+* 其他正文
+
+这些通过tiddlywiki的各种语法生成的生文本（raw），不会直接被显示出来，而是会被递归地维基化，即如果经过wikify处理后的结果仍然包含可wikify的wikitext（例如，使用{{tiddler!!field}}转录语法，其结果是字段field中包含的wikitext），tiddlyWiki也会尝试再次wikify这部分内容，直到没有更多未wikify的wikitext，或者直到它检测到自己陷入了一个无限循环（比如自我转录的情况）。
+
+简单来说，TiddlyWiki在展示tiddler时会自动解析其中的wikitext，并递归地处理任何转录或宏调用的结果，直到所有文本都被正确解析，或者检测到无限循环为止。
+
+例如：
+
+```
+<$set name="testVar1" value="XYZ">
+<$set name="testVar2" value="<<testVar1>>">
+<$set name="testVar3" value="<<testVar2>>">
+<<testVar3>>
+</$set>
+</$set>
+</$set>
+```
+
+最终显示的结果是：XYZ
+
+而有一种例外的情况：那就是当我们调用宏、变量、或者说是字段值作为我们某个widget或者html元素的属性值时，tiddlywiki不会向其他正文文本那样递归地维基化，而是只执行一次，然后停止，如下：
+
+```
+<$set name="testVar1" value="XYZ">
+<$set name="testVar2" value="<<testVar1>>">
+  <$text text=<<testVar2>>/>
+</$set>
+</$set>
+```
+
+最终结果是： `<<testVar1>>`
+
+在这个例子中，`<<testVar2>>`作为`text`widget组件的`text`属性值，它只被解析一次，最终得到的结果是：“<<testVar1>>”，而不是像上面的例子一样，继续递归地维基化。
+
+
+
+tiddlywiki不会在正文中显示通过转录、宏调用、变量展开、

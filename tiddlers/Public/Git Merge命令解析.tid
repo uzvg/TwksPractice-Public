@@ -1,0 +1,23 @@
+created: 20250223084630777
+modified: 20250317090326772
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: PermanentNotes Git
+title: Git Merge命令解析
+type: text/vnd.tiddlywiki
+visibility: Public
+
+`git merge`命令在git常用于合并分支。
+
+; git merge冲突合并：
+
+* 如果在不同的分支上，对同一文件的同一行做出了不同的修改。
+* 那么在使用`git merge`命令合并分支时，就会出现合并冲突。
+
+; 操作办法是：
+
+* 手动编辑发生冲突的文件，解决发生冲突的文件。
+* 然后使用`git add`将该文件添加到`staging area`。
+* 再使用`git commit`命令提交此次修改。
+* 最后结果是，两分支合并且产生一个合并提交。

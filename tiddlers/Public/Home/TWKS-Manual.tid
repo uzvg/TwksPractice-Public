@@ -1,0 +1,25 @@
+caption: TWKS手册
+created: 20250227141216533
+description: TWKS的使用手册，系统阐述了TWKS的功能及其特性。
+modified: 20250317090326780
+modifier: uzvg
+progress: Building
+tags: $:/twks/Documents
+title: Home/TWKS-Manual
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!!! 管理笔记的四个维度：
+
+`TWKS`用以下四个维度来管理、分类、处理系统中的笔记：
+
+# [[笔记类型|TWKS笔记类型]]：将笔记分为`FleetingNotes`、`LiteratureNotes`、`PermanentNotes`等不同的类型。
+# [[笔记进度|TWKS笔记进度]]：为不同类型的笔记设计不同的进度属性。
+# [[笔记评分|TWKS笔记评价]]：为不同类型的笔记评分。
+# [[笔记可见性|TWKS笔记可见性]]：通过`visibility`属性，将笔记分为`public`和`private`两种类别，用以管理笔记的隐私部分。
+
+!!! TWKS笔记流程：
+
+!!! TWKS笔记属性：
+
+!!! TWKS笔记命名方式：

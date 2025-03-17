@@ -1,0 +1,78 @@
+created: 20241214053952789
+modified: 20250317081611142
+modifier: uzvg
+tags: ProjectNotes TWKS
+title: Generate clean url from dirty url
+type: text/vnd.tiddlywiki
+url: https://youtu.be/2pHz-UzFV9E?si=c8Vs5x1_nmh3M1gs
+
+<!-- ====================== Clean-url ====================== -->
+<!--
+* 中国在 GPT/LLM 大模型上是否已经实现了弯道超车？ - 天行者老孟的回答 - 知乎
+https://www.zhihu.com/question/659910649/answer/3557274294 ✅
+* https://www.bilibili.com/video/BV12hBMYMEQ2/?spm_id_from=333.1007.tianma.1-2-2.click&vd_source=e697cf41269630eb7dfc0dee0be17321 ✅
+* https://www.bilibili.com/video/BV1yCqBYmEPd?spm_id_from=333.1007.tianma.1-1-1.click✅
+* https://www.youtube.com/watch?v=2pHz-UzFV9E 
+* https://youtu.be/JV245Of8Jog?t=950 ✅
+* https://youtu.be/JV245Of8Jog  ✅
+* https://youtu.be/2pHz-UzFV9E?si=c8Vs5x1_nmh3M1gs
+* https://www.bilibili.com/video/BV1tSBTYTEjs?t=1092.9 ✅
+
+* 【阿根廷宣布改革胜利，全国一半人口，陷入贫困】 https://www.bilibili.com/video/BV12hBMYMEQ2/?share_source=copy_web&vd_source=082b238ea5542cac3c28719dcd5ac29b
+-->
+
+\procedure clean-url(urlText)
+<!-- 处理知乎回答的链接格式： -->
+<% if [<urlText>regexp[https:\/\/www\.zhihu\.com]] %>
+	{{{ [<urlText>search-replace::regexp[^.*\n(https:\/\/www\.zhihu\.com.*)],[$1]] }}}
+<!-- 处理哔哩哔哩的三种链接格式： -->
+<% elseif [<urlText>regexp[^https:\/\/www.bilibili.com/video\/.*\?t=.*]] %>
+	<<urlText>>
+<% elseif [<urlText>regexp[^https:\/\/www.bilibili.com/video\/.{12}\?spm_id_from=]] %>
+	{{{ [<urlText>search-replace::regexp[^(https:\/\/www\.bilibili\.com.*?)\?spm_id_from=.*$],[$1]] }}}
+<% elseif [<urlText>regexp[^.*\shttps:\/\/www\.bilibili\.com.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^.*\s(https:\/\/www\.bilibili\.com.*?)\/\?.*$],[$1]] }}}
+<!-- 处理youtube三种链接格式： -->
+<% elseif [<urlText>regexp[^(https:\/\/youtu\.be\/.{11})\?si=.*$]] %>
+	{{{ [<urlText>search-replace::regexp[^(https:\/\/youtu\.be\/.{11})\?si=.*$],[$1]] }}}
+<% elseif [<urlText>regexp[^https:\/\/youtu\.be\/.{11}(?:\t=\d+)?]] %>
+	<<urlText>>
+<% endif %>
+\end
+
+<$transclude $variable="clean-url" urlText="https://www.bilibili.com/video/BV1tSBTYTEjs?t=1092.9"/>
+
+---
+
+<$transclude $variable="clean-url" urlText="https://www.bilibili.com/video/BV1yCqBYmEPd?spm_id_from=333.1007.tianma.1-1-1.click"/>
+
+---
+<$transclude $variable="clean-url" urlText="【阿根廷宣布改革胜利，全国一半人口，陷入贫困】 https://www.bilibili.com/video/BV12hBMYMEQ2/?share_source=copy_web&vd_source=082b238ea5542cac3c28719dcd5ac29b"/>
+
+---
+<$transclude $variable="clean-url" urlText="https://youtu.be/JV245Of8Jog?t=950"/>
+
+---
+
+<$transclude $variable="clean-url" urlText="https://youtu.be/JV245Of8Jog"/>
+
+---
+
+<$transclude $variable="clean-url" urlText="https://youtu.be/2pHz-UzFV9E?si=c8Vs5x1_nmh3M1gs"/>
+
+---
+
+<$wikify name="clean-url" text="""
+	<$transclude $variable="clean-url" urlText={{!!url}}/>
+	""">
+	<<clean-url>>
+</$wikify>
+
+---
+<$wikify name="clean-url" text="""<$transclude $variable="clean-url" urlText={{!!url}}/>"""><$edit-text default="" placeholder=<<clean-url>> field="url" tag="input"/></$wikify>
+
+---
+
+<<clean-url>>
+
+项目已经完成，遇到的最大障碍在于wikify widget的作用跟使用方式。

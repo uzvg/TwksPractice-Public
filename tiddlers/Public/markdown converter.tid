@@ -1,0 +1,12 @@
+created: 20241122015402276
+creator: uzvg
+modified: 20250317090326783
+modifier: uzvg
+progress: Capturing
+tags: FleetingNotes tiddlywiki
+title: markdown converter
+type: text/vnd.tiddlywiki
+visibility: Public
+
+* 写一个插件，采用最简单的正则表达式，让用户自定义自己的替换方案。
+* 将markdown converter整合进initializer中，可以把ChatGpt的答案无缝粘贴进tiddlywiki中，并转换为wikitext格式的''fleetingNotes''。

@@ -1,0 +1,29 @@
+created: 20240807091525728
+creator: uzvg
+modified: 20250317090326799
+modifier: uzvg
+progress: Linking
+rating: Draft
+tags: zsh PermanentNotes
+title: typeset命令
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 概述：
+
+`typeset`是zsh中的一个内置命令，命令用于声明变量并设置其属性。
+
+!! 常用参数：
+
+| !Parameter |!Description|!Example|!Word for Description|
+|`-a`|声明一个数组变量|`typeset -a my_array`|array|
+|`-A`|声明一个关联数组（哈希表）|`typeset -A my_assoc_array`|associative(关联数组)|
+|`-i`|声明一个整数变量，该变量的值会被自动处理为整数|`typeset -i my_integer=5`|integer|
+|`-r`|声明一个只读变量，值不能被修改||readonly|
+|`-x`|声明一个环境变量，使其在子进程中可用|`typeset -x my_var='value'`|export|
+|`-l`|将变量的值转换为小写|`typeset -l my_var='HELLO'`，此时 `my_var` 的值将变为 `hello`|lowercase|
+|`-u`|将变量的值转换为大写|`typeset -u my_var='hello'`，此时 `my_var` 的值将变为 `HELLO`|uppercase|
+|`-p`|打印当前变量的属性和当前值|`typeset -p my_var`|print|
+|`-f`|用于声明函数，虽然在 zsh 中通常使用 `function` 或直接定义函数，但 `typeset -f` 也可以用于显示函数的定义||function|
+|`-n`|创建一个名为引用的变量，允许通过该变量名访问另一个变量|`typeset -n ref_var=my_var`，此时 `ref_var` 将引用 `my_var`|name|
+|`-g`|创建一个全局变量，该变量在全局范围内可用|`typeset -gr ZVM_NAME='zsh-vi-mode'`，创建一个全局只读变量，并将其值设置为 'zsh-vi-mode'|global|

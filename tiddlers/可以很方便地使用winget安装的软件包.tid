@@ -1,0 +1,19 @@
+created: 20240705042222114
+creator: uzvg
+modified: 20250317081611207
+modifier: uzvg
+tags: windows winget
+title: 可以很方便地使用winget安装的软件包
+type: text/vnd.tiddlywiki
+
+* git
+* goldendict-ng
+* yazi
+* code
+* neovim
+* nekoray
+* gdu
+* chezmoi
+* sharpkeys
+
+以上软件可以直接在powershell中安装并使用。

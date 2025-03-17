@@ -1,0 +1,69 @@
+created: 20250224093415597
+modified: 20250317081611163
+modifier: uzvg
+tags: PermanentNotes sed编辑器
+title: sed寻址方式
+type: text/vnd.tiddlywiki
+
+!! 单行寻址：
+
+|!类型|!语法示例|!说明|!应用场景|
+|绝对行号 |3|直接指定行号（如第3行）。	|`sed '3d' file`（删除第3行） |
+|正则匹配	|`/pattern/` |匹配包含指定模式的行。 |`sed '/error/p' file`（打印含 "error" 的行） |
+|特殊符号 |`$` |表示最后一行。 |`sed '$s/old/new/' file`（替换最后一行） |
+
+!! 范围寻址：
+
+|!类型|!语法示例|!说明|!应用场景|
+|行号范围 |`1,5` |指定从第1行到第5行。	|`sed '1,5s/foo/bar/g' file` |
+正则范围	/start/,/end/	匹配从 start 到 end 之间的所有行。	sed '/BEGIN/,/END/d' file（删除从 "BEGIN" 到 "END" 的行）
+混合范围	3,/pattern/	从第3行到匹配 pattern 的行。	sed '3,/stop/s/old/new/' file
+相对行号	N,+M	从第N行开始，向下操作M行。	sed '5,+3d' file（删除第5行及之后3行）
+
+!! 步进寻址：
+
+|!语法示例|!说明|!应用场景|
+|1~2	从第1行开始，每隔2行操作一次。	sed '1~2d' file（删除所有奇数行）
+|2~3	从第2行开始，每隔3行操作一次。	sed '2~3s/old/new/' file
+
+!! 否定寻址：
+
+|语法示例	说明	应用场景
+|!	对不匹配的行进行操作。	sed '3!d' file（仅保留第3行）
+/pattern/!	排除匹配 pattern 的行。	sed '/error/!d' file（仅保留含 "error" 的行）
+
+5. 组合寻址
+语法示例	说明	应用场景
+{命令1;命令2}	对同一地址执行多个命令。	sed '/error/{s/old/new/;p}' file（替换并打印匹配行）
+地址1,地址2!	对不在地址1到地址2之间的行操作。	sed '1,5!d' file（仅保留1-5行）
+6. 特殊寻址示例
+示例	说明
+0,/pattern/	从第1行到首次匹配 pattern 的行。
+/pattern/,+3	从匹配 pattern 的行开始，操作后续3行。
+/pattern/,/another/!d	仅保留从 pattern 到 another 之间的行。
+关键规则
+地址与命令顺序：
+
+[地址]命令   # 地址在前，命令在后
+例如：/error/d（删除含 "error" 的行）。
+默认行为：
+
+若省略地址，默认操作所有行（如 s/old/new/ 替换所有行的第一个匹配）。
+正则表达式分隔符：
+
+默认使用 /，但可替换为其他字符（如 #、|），避免与内容冲突：
+s#/usr/local#/opt#g   # 替换文件路径
+实用场景示例
+删除注释行：
+
+sed '/^#/d' file.conf    # 删除所有以 `#` 开头的行
+替换指定范围：
+
+sed '10,20s/foo/bar/g' file.txt   # 替换第10到20行的所有 "foo"
+步进删除偶数行：
+
+sed '0~2d' file.txt      # 从第0行开始每隔2行删除（实际从第2行开始）
+保留两个标记之间的内容：
+
+sed -n '/BEGIN/,/END/p' file.txt  # 仅打印 "BEGIN" 到 "END" 之间的行
+通过灵活组合寻址方式，可以精准控制 sed 的操作范围，实现复杂的文本处理逻辑。

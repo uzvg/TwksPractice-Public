@@ -1,0 +1,362 @@
+created: 20250304014533697
+creator: uzvg
+modified: 20250317081611177
+modifier: uzvg
+tags: TWKS ProjectNotes
+title: twks command line requirements
+type: text/vnd.tiddlywiki
+
+!! 一、工具概述
+
+''TWKS'' 是基于 TiddlyWiki 命令行工具和 Zsh Shell 的Wiki 管理工具，它提供了完整的 TiddlyWiki 全生命周期管理能力，支持多实例创建、维护、后台服务运行、状态监控等核心功能。通过标准化的环境变量、配置文件及命令接口，TWKS 显著简化了 TiddlyWiki 的创建、部署和维护流程。
+
+!! 二、核心组件
+
+!!! 1. 配置文件
+
+* ''路径'': `~/.config/twks/config.json`
+* ''格式'': JSON（易于程序解析，兼容`jq`工具处理）
+* ''配置结构'':
+
+```json
+{
+  "wikis": [
+    {
+      "name": "mywiki",           // Wiki唯一标识符，不可重复
+      "path": "/path/to/wiki",    // Wiki绝对路径
+      "edition": "server",        // TiddlyWiki版本类型
+      "port": 8080,               // 服务端口
+      "status": "inactive",       // 运行状态（active/inactive）
+      "pid": null,                // 进程PID（仅运行时有值）
+      "log_path": "/path/to/logs/wiki.log", // 日志文件绝对路径
+      "created_at": "2023-10-01"  // 创建时间
+    }
+  ],
+  "next_port": 8080,              // 自动分配端口起始值
+  "default_edition": "server",    // 默认Wiki版本
+  "backup_interval": 86400        // 配置文件备份间隔（秒）
+}
+```
+
+!!! 2. 环境变量
+
+* `TIDDLYWIKI_WIKI_PATH`: Wiki存储根目录（默认值: `~/Documents/wikis`）
+* `TWKS_CONFIG_PATH`: 配置文件路径（默认值: `~/.config/twks/config.json`）
+* `TWKS_LOG_DIR`: 日志文件存储目录（默认值: `~/.local/share/twks/logs`）
+* `TWKS_BACKUP_DIR`: 配置备份目录（默认值: `~/.config/twks/backups`）
+
+!! 三、命令详解
+
+!!! 1. `twks new`: 创建新Wiki
+
+```bash
+# 基本用法
+twks new <wikiname>                          # 创建同名文件夹，edition=server
+twks new --name demo --folder demo --edition static --port 9000
+
+# 随机生成（避免重复）
+twks new --random --edition server           # 生成唯一名称如"wiki-a1b2c3"
+```
+
+''功能逻辑'':
+
+# 检查依赖项: 验证`tiddlywiki`命令是否存在并可执行
+# 生成唯一路径: 若使用`--random`参数，则通过`uuidgen`生成唯一名称如`wiki-a1b2c3`
+# 初始化Wiki: 执行`tiddlywiki <path> --init <edition>`创建基础结构
+# 分配端口: 自动从`next_port`递增或使用`--port`指定值
+# 更新配置文件: 将新Wiki信息写入JSON配置文件
+# 创建日志目录: 确保日志路径存在并可写入
+
+!!! 2. `twks start`: 启动Wiki服务
+
+```bash
+twks start <wikiname>
+twks start --all                  # 启动所有已配置的Wiki
+twks start <wikiname> --debug     # 前台运行并输出调试信息
+```
+
+''实现逻辑'':
+
+# 状态检查: 验证Wiki是否已在运行（通过PID或端口占用检测）
+# 启动服务: 执行`nohup tiddlywiki <path> --listen port=<port> > $LOG_PATH 2>&1 &`
+# 获取PID: 记录后台进程PID
+# 更新状态: 修改配置文件中的`status`为`active`并记录PID
+# 输出访问URL: 显示`http://localhost:$PORT`供用户访问
+# 健康检查: 验证服务是否成功启动并响应HTTP请求
+
+!!! 3. `twks stop`: 停止服务
+
+```bash
+twks stop <wikiname> [--force]
+twks stop --all                   # 停止所有运行中的Wiki
+```
+
+''逻辑流程'':
+
+# PID查找: 从配置文件获取目标Wiki的PID
+# 优雅终止: 执行`kill -15 $PID`（SIGTERM信号）
+# 强制终止: 若使用`--force`参数或优雅终止超时，则执行`kill -9 $PID`（SIGKILL信号）
+# 端口释放验证: 确认端口已释放（使用`lsof -i :$PORT`）
+# 状态更新: 将配置文件中的`status`重置为`inactive`，`pid`设为`null`
+
+!!! 4. `twks remove`: 删除Wiki
+
+```bash
+twks remove <wikiname> [--force]
+twks remove <wikiname> --keep-files  # 仅从配置中移除，保留文件
+```
+
+''安全机制'':
+
+# 交互确认: 除非使用`--force`，否则提示"Delete wiki 'demo'? \[y/N]"
+# 服务停止: 若Wiki正在运行，先自动执行`twks stop <wikiname>`
+# 文件清理: 执行`rm -rf $WIKI_PATH`（除非使用`--keep-files`）
+# 配置更新: 从配置文件中移除对应Wiki条目
+# 日志归档: 将该Wiki日志移至备份目录
+
+!!! 5. `twks add`: 导入已有Wiki
+
+```bash
+twks add --name demo --path /existing/wiki --edition server [--port 8080]
+```
+
+''验证步骤'':
+
+# 路径验证: 检查指定路径是否存在`tiddlywiki.info`文件（确认是有效Wiki）
+# 名称检查: 验证名称是否唯一（避免配置冲突）
+# 端口分配: 自动选择可用端口或使用用户指定值
+# 配置同步: 将现有Wiki信息写入配置文件
+# 权限检查: 确认文件读写权限正确
+
+!!! 6. `twks list`: 列出Wiki状态
+
+```bash
+twks list --all                # 列出所有Wiki
+twks list --status active      # 仅显示运行中的实例
+twks list --format=json        # JSON格式输出
+twks list --format=csv         # CSV格式输出（便于脚本处理）
+```
+
+''表格化输出示例'':
+
+    | NAME   | EDITION | PORT  | STATUS   | PATH              | UPTIME    |
+    |--------|---------|-------|----------|-------------------|-----------|
+    | demo   | server  | 8080  | active   | /path/to/demo     | 2h 15m    |
+    | blog   | client  | 8081  | inactive | /path/to/blog     | -         |
+
+''实现细节'':
+
+# 数据收集: 遍历配置文件中的所有Wiki条目
+# 状态更新: 实时检查PID活跃状态确保显示最新状态
+# 格式转换: 根据`--format`参数选择输出格式
+# 过滤应用: 应用`--status`等过滤条件
+
+!!! 7. `twks restart`: 重启服务
+
+```bash
+twks restart <wikiname>
+twks restart --all              # 重启所有Wiki
+```
+
+''逻辑流程'':
+
+# 调用`twks stop <wikiname>`停止服务
+# 等待端口释放（通过循环检测`lsof -i :$PORT`直到端口可用）
+# 调用`twks start <wikiname>`启动服务（保持原配置不变）
+# 状态验证: 确认重启后服务正常响应
+
+!!! 8. `twks refresh`: 刷新状态
+
+```bash
+twks refresh
+```
+
+''实现方式'':
+
+# 遍历所有配置的Wiki
+# 检查PID存活状态（使用`ps -p $PID`）
+# 验证端口占用情况（使用`lsof -i :$PORT`）
+# 状态同步: 更新配置文件中的`status`字段
+# 清理无效记录: 若进程已终止但状态未更新，则修正配置
+
+!!! 9. `twks logs`: 查看日志
+
+```bash
+twks logs <wikiname> [--tail] [--follow]
+twks logs <wikiname> --lines 100  # 显示最后100行
+```
+
+''功能实现'':
+
+# 日志路径获取: 从配置文件中读取`log_path`
+# 日志显示: 使用`cat`或根据参数使用`tail`显示日志内容
+# 实时跟踪: 使用`--follow`参数时执行`tail -f $LOG_PATH`
+# 内容过滤: 支持通过管道传递给grep等工具进行内容过滤
+
+!!! 10. `twks backup`: 备份Wiki
+
+```bash
+twks backup <wikiname> [--destination /path/to/backup]
+twks backup --all               # 备份所有Wiki
+```
+
+''执行步骤'':
+
+# 服务检查: 若Wiki正在运行，建议用户先停止服务（可选）
+# 目录创建: 确保备份目录存在
+# 文件复制: 使用`tar`或`rsync`创建Wiki完整备份
+# 时间戳添加: 备份文件名包含创建时间戳
+# 备份验证: 检查备份文件完整性
+
+!! 四、关键技术实现
+
+!!! 1. 端口管理
+
+* ''自动分配机制'':
+* ```bash
+* function find_available_port() {
+*   local port=$1
+*   while lsof -i :$port >/dev/null 2>&1; do
+*     port=$((port + 1))
+*   done
+*   echo $port
+* }
+* ```
+
+* ''冲突处理策略'':
+* # 检测指定端口是否被占用
+* # 若被占用，提供选项: 自动分配新端口或报错退出
+* # 更新`next_port`值以避免未来冲突
+
+!!! 2. 进程管理
+
+* ''PID记录与验证'':
+* ```bash
+* function is_process_running() {
+*   local pid=$1
+*   [[ -n "$pid" ]] && ps -p $pid >/dev/null 2>&1
+* }
+* ```
+
+* ''日志轮转'':
+* # 实现基于大小的日志轮转（防止单个日志文件过大）
+* # 保留历史日志版本（如`wiki.log.1`, `wiki.log.2`等）
+* # 自动压缩历史日志节省空间
+
+!!! 3. 跨平台兼容
+
+* ''OS检测与适配'':
+* ```bash
+* function detect_os() {
+*   case "$(uname -s)" in
+*     Linux*)  echo "linux";;
+*     Darwin*) echo "macos";;
+*     *)       echo "unknown";;
+*   esac
+* }
+* ```
+
+* ''命令差异处理'':
+*# 适配不同系统的`netstat`/`ss`/`lsof`命令参数
+*# 使用`realpath`或等效命令标准化路径格式
+*# 处理Linux/macOS文件权限差异
+
+!!! 4. 依赖管理
+
+''必需工具检查'':
+```bash
+function check_dependencies() {
+
+   local deps=("jq" "lsof" "uuidgen" "tiddlywiki")
+   local missing=()
+   
+   for dep in "${deps[@]}"; do
+     command -v $dep >/dev/null 2>&1 || missing+=($dep)
+   done
+
+   if [[ ${#missing[@]} -gt 0 ]]; then
+     echo "Missing dependencies: ${missing[*]}"
+     # 提供安装指导（根据不同OS）
+     return 1
+   fi
+   
+   return 0
+}
+```
+
+* ''首次运行初始化'':
+* # 检查并创建必要目录结构
+* # 生成默认配置文件
+* # 设置适当的文件权限
+
+!! 五、使用示例
+
+!!! 基础工作流
+
+```bash
+# 1. 创建并启动新Wiki
+twks new myblog --edition static --port 3000
+twks start myblog
+# 输出: Wiki 'myblog' started successfully at http://localhost:3000
+
+# 2. 查看所有Wiki状态
+twks list --all
+
+# 3. 导入已有项目
+twks add --name oldwiki --path ~/old_wiki --edition server
+twks start oldwiki
+
+# 4. 查看运行日志
+twks logs myblog --tail 20
+twks logs oldwiki --follow
+
+# 5. 停止并移除Wiki
+twks stop myblog
+twks remove myblog
+```
+
+!!! 高级操作
+
+```bash
+# 1. 批量操作
+twks start --all
+twks stop --all
+
+# 2. 备份与恢复
+twks backup myblog --destination ~/backups
+# 假设添加了restore命令
+twks restore ~/backups/myblog-2023-10-01.tar.gz --name restored_wiki
+
+# 3. 端口管理
+twks config myblog --set port=8090
+twks restart myblog
+```
+
+!! 六、安全性与可靠性
+
+!!! 1. 数据安全
+
+* ''配置文件备份'':
+* # 自动创建定期备份（如`~/.config/twks/backups/config-YYYYMMDD.json`）
+* # 每次修改前创建临时备份，确保操作可回滚
+* ''删除保护机制'':
+* # 删除操作必须二次确认（除非使用`--force`）
+* # 关键操作记录历史日志，便于审计
+
+!!! 2. 错误处理
+
+* ''优雅失败'':
+* # 所有操作包含错误处理逻辑，避免部分成功状态
+* # 操作失败时自动回滚已完成的步骤
+* ''诊断信息'':
+* # 详细记录错误原因和上下文信息
+* # 提供`twks doctor`命令诊断系统状态
+
+!!! 3. 性能优化
+
+* ''并行处理'':
+* # 使用`zsh/zpty`模块或后台任务并行执行状态检测
+* # 批量操作时采用并行执行提高效率
+* ''缓存策略'':
+* # 内存缓存配置信息，减少文件IO
+* # 实现定时持久化减少写操作频率

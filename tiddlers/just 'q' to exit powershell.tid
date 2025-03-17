@@ -1,0 +1,27 @@
+created: 20240705044159866
+creator: uzvg
+modified: 20250317081611152
+modifier: uzvg
+tags: powershell windows
+title: just 'q' to exit powershell
+type: text/vnd.tiddlywiki
+
+使用如下命令编辑powershell的配置文件：
+
+```powershell
+code $PROFILE
+```
+作出如下修改：
+
+```
+New-Alias -Name q -Value q
+```
+退出后重新启动powershell，发现并不起作用
+
+解决方案：
+
+```powershell
+function q { exit }
+```
+
+写入如上配置，解决问题。

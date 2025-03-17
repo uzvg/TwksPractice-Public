@@ -1,0 +1,72 @@
+created: 20250316095919791
+description: zsh Shell中的各种扩展功能
+modified: 20250317090326803
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: zsh Shell PermanentNotes
+title: zshexpn
+type: text/vnd.tiddlywiki
+url: https://zsh.sourceforge.io/Doc/Release/Expansion.html#Expansion
+visibility: Public
+
+!! 引言：
+
+zsh的参数扩展是一个zsh的一个非常重要且非常强大的特性，我们可以通过`man zshexpn`命令随时查阅它们的特性，以下是我的学习笔记。
+
+!! zsh 扩展执行顺序：
+
+zsh Shell有以下几种类型的扩展，它们往往按照指定的顺序分五个步骤执行。
+
+!!! 1. [[历史扩展 (History Expansion)|zsh shell history expansion]]：
+
+* ''仅在交互式 Shell 中执行''
+* 处理命令行历史记录中的引用（如 `!cmd`、`!!` 等）。
+
+
+!!! 2. 别名扩展 (Alias Expansion)
+
+* ''在命令行解析前立即展开别名''
+* 替换命令行中定义的别名（如 `alias ll='ls -l'`）。
+
+!!! 3. [[五类基础扩展|zsh shell parameter expansion]]（按从左到右顺序执行）：
+
+; ''每个参数会依次完成以下所需步骤''：
+
+# 进程替换 (Process Substitution)
+#* 替换语法如 `<(command)` 或 `>(command)` 为临时文件路径。
+# 参数扩展 (Parameter Expansion)
+#* 替换变量（如 `$var`、`${var}`）和参数修饰符（如 `${var%suffix}`）。
+# 命令替换 (Command Substitution)
+#* 执行嵌入命令并替换其输出（如 `$(command)` 或 `` `command` ``）。
+# 算术扩展 (Arithmetic Expansion)
+#* 计算算术表达式并替换结果（如 `$((1+2))`）。
+# 花括号扩展 (Brace Expansion)
+#* 展开形如 `{a,b,c}` 或 `{1..5}` 的序列。
+
+; 清理阶段：
+* 扩展完成后，移除所有未被引用的反斜杠（`\`）、单引号（`'`）和双引号（`"`）。
+
+!!! 4. ''文件名扩展 (Filename Expansion)''
+
+; ''受 `SH_FILE_EXPANSION` 选项影响''：
+* ''默认行为''：在五类基础扩展之后执行。
+
+; ''若启用 `SH_FILE_EXPANSION`''：
+* 兼容 `sh`/`ksh`，文件名扩展会在''别名扩展之后''立即执行，早于五类基础扩展。
+
+!!! 5. ''文件名生成 (Filename Generation)''
+
+* ''即通配符扩展 (Globbing)''
+* 匹配文件路径模式（如 `*.txt`、`**/*.log`），''始终最后执行''。
+
+!! 关键注意事项
+
+* ''顺序敏感性''：
+** 每个步骤完成后才会执行下一步。例如，所有参数扩展完成后才会进行命令替换。
+* ''特殊选项的影响''：
+** `SH_FILE_EXPANSION` 会改变文件名扩展的顺序，需谨慎使用。
+* ''引用与转义''：
+** 使用引号（`"`, `'`）或反斜杠（`\`）可抑制特定扩展行为。
+
+此笔记以分层结构呈现扩展顺序，便于快速查阅和理解 zsh 的解析流程。

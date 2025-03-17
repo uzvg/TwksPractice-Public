@@ -1,0 +1,69 @@
+authors: [[Ilya Kantor]]
+caption: LogicOpeartors
+created: 20241026132304040
+creator: uzvg
+description: 
+medium: Website
+modified: 20250317090326782
+modifier: uzvg
+progress: Pending
+tags: LiteratureNotes JavaScriptFundamentals
+title: LogicOpeartors(1730174757758)
+type: text/vnd.tiddlywiki
+url: https://javascript.info/logical-operators
+visibility: Public
+year: 2022/7/5
+
+!! javaScript中的逻辑操作符
+
+<<rememberq "20241026132521415"
+	"javaScript中的逻辑操作符有哪些？"
+	"javaScript中有四种逻辑操作符，分别是：`||`,`&&`,`!`,`??`">>
+
+<<rememberq "20241026132621277"
+	"javaScript中的??符号代表什么操作符？"
+	"代表空值合并操作符。">>
+
+<<rememberq "20241026132746566"
+	"空值合并操作符的英文？"
+	"Nullish Coalescing">>
+
+<<rememberq "20241026132907171"
+	"coalesce"
+	"联合、合并">>
+
+!! or 逻辑操作符
+
+<<rememberq "20241026133116972"
+	"javaScript中or逻辑操作符的逻辑是什么？"
+	"有一个条件成立即为true，全假才为false。">>
+
+<<rememberq "20241026133201407"
+	"javaScript中的`||`操作符跟其他语言中的有什么不同？"
+	"javaScript中的`||`操作符可以先将两边的表达式转化为布尔类型的值，再进行运算。">>
+
+<<rememberq "20241026133454214"
+	"`||`操作符如何获得第一个为真的数值？"
+	"result = value1 || value2 || value3;">>
+
+<<rememberq "20241026134220198"
+	"讲解它的运算过程：result = value1 || value2 || value3;"
+	"从左向右计算；先将其转化成布尔类型的值；如果为假，则忽略，如果为真，停止运算并返回原值；如果所有为假，则返回最后一个操作数的值。">>
+
+<<rememberq "20241026134821330"
+	"javaScript中的or运算常被称为什么运算？"
+	"短路运算。因为只需要遇到一个为true的表达式，or运算就会停止继续往后运算。">>
+
+<<rememberq "20241026134856093"
+	"使用or运算需要注意什么？"
+	"当`||`两边不仅仅是值、变量，而是表达式，或者函数调用时，就会产生其他效果。">>
+
+!! and 操作符
+
+<<rememberq "20241026135136869"
+	"and运算符符号是什么？"
+	"&&">>
+
+<<rememberq "20241026135152728"
+	"and运算常被用于什么"
+	"A">>

@@ -1,0 +1,46 @@
+created: 20240728162544046
+creator: uzvg
+description: 管理使用nohup启动的进程
+modified: 20250317090326821
+modifier: uzvg
+progress: Completed
+rating: Promising
+tags: Linux PermanentNotes Shell tiddlywiki pgrep Process(进程)
+title: 管理nohup进程
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 前言：
+
+在Linux下使用tiddlywiki时，通过nohup启动tiddlywiki进程，就能在关闭终端后依然在后台保持运行，但要是想要关闭后台正在运行的tiddlywiki进程，又该如何做呢？
+
+!! 什么是nohup？
+
+> Nohup, short for no hang up is a command in Linux systems that keep processes running even after exiting the shell or terminal. Nohup prevents the processes or jobs from receiving the SIGHUP (Signal Hang UP) signal. This is a signal that is sent to a process upon closing or exiting the terminal. In this guide, we take a look at the nohup command and demonstrate how it can be used.
+
+`nohup`就是"no hang up"的意思，指的是在该终端/终端模拟器/会话中启动的远程，在终端退出或关闭后，不会挂断（hang up）通过该命令启动的进程。
+
+!! 如何找出使用`nohup`启动的进程？
+
+最方便的方式是使用`pgrep`命令：
+
+```bash
+$ pgrep -f "/usr/bin/tiddlywiki <wikiFolder> --listen port=8888"
+19303
+```
+
+其中，`<wikiFolder>`指的是tiddlywiki所在的工作目录，`-f`指的是匹配全部具体的命令行，最后会返回一个符合所查找命令行的进程号，即"19303"。
+
+找到进程号后就简单了，直接使用`kill`命令，就能关闭命令：
+
+```bash
+kill 19303
+```
+
+又或者，直接用一条命令就可以，如：
+
+```bash
+pgrep -f "/usr/bin/tiddlywiki <wikiFolder> --listen port=8888" | xargs kill
+```
+
+使用nohup启动的进程，仍然是当前Shell的子进程。

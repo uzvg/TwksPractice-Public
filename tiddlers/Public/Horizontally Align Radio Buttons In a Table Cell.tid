@@ -1,0 +1,23 @@
+created: 20250216155725747
+modified: 20250317090326780
+modifier: uzvg
+progress: Archived
+rating: Personal
+tags: PermanentNotes TWKS TroubleShooting
+title: Horizontally Align Radio Buttons In a Table Cell
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Trouble:
+
+* table cell 中的radio组件不能横向排列
+
+!! TroubleShooting:
+
+这个[[问题|https://talk.tiddlywiki.org/t/how-to-align-radio-buttons-horizontally-in-a-table/4661]]已经有人问过，解决办法如下：
+
+```
+.initializer-box input[type="radio"] {
+	width: unset;
+}
+```

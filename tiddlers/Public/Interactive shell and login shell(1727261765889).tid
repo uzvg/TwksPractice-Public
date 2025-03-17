@@ -1,0 +1,79 @@
+caption: Interactive shell and login shell
+created: 20240925105605889
+creator: uzvg
+description: 在Linux桌面环境下，使用
+medium: Website
+modified: 20250317090326781
+modifier: uzvg
+progress: Building
+rating: Brilliant
+tags: Linux Shell zsh LiteratureNotes
+title: Interactive shell and login shell(1727261765889)
+type: text/vnd.tiddlywiki
+url: https://zsh.sourceforge.io/Guide/zshguide02.html#l6
+visibility: Public
+year: 2024-12-24
+
+!! 交互式 Shell 与非交互式 Shell：
+
+''Shell'' 的基本职责是接收命令并执行它们。命令可以来源于文件，也可以直接在终端输入，其中：
+
+* ''交互式 Shell''：当用户在提示符下输入命令并等待执行结果时，Shell 是交互式的。
+* ''非交互式 Shell''：当 Shell 从文件中读取命令（如通过 zsh filename 执行脚本）时，它是非交互式的。
+
+执行脚本时，通常有两个 zsh 实例：一个是用户交互的交互式 Shell，另一个是运行脚本的非交互式 Shell。两者相互独立，非交互式 Shell 的变化不会影响交互式 Shell。
+
+!! 登录 Shell 与非登录 Shell：
+
+; 登录 Shell：
+* 用户登录系统后，启动的第一个Shell是 `登录 Shell`，同时它也是''交互式''的。
+* 在终端模拟器（如 `gnome-terminal` ）中，我们也可以通过运行 `zsh -l` 手动启动 `登录Shell`。
+* Linux桌面环境下，使用 `Ctrl+Alt+F2` 切换到非图形界面登录系统后，运行的是 `login Shell`。
+* <<twks-warning "但在Gnome桌面环境下，使用gdm(Gnome Display Manager)登录系统，运行的是non-login Shell"，可以通过`cat /etc/passwd | grep gdm`命令看到，gdm执行的是非一个`nonlogin`Shell，它使用的是gdm自定义的脚本文件来启动图形会话。>>
+
+; 非登录Shell：
+* 通过输入zsh启动的新Shell是''交互式''的，但不是 `登录 Shell`。
+* 在Linux桌面环境中，使用终端模拟器（如 `gnome-terminal` ）默认启动的Shell类型通常各不相同。
+** 以 `gnome-terminal` 为例，`gnome-terminal`默认启动的是 `non-login shell`，但我们可以在`Perferences➡Profiles➡Command` 选项卡中找到是否开启`login Shell`的选项。
+** 而在 `blackbox` 终端模拟器中，默认使用的是 `login Shell` 。
+
+!! 如果判断当前Shell是否为login Shell？
+
+有两种方式可以帮助我们判断当前Shell是否`登录 Shell`：
+
+!!! 第一种：
+
+```zsh
+if [[ -o login ]]; then; print yes; else; print no; fi
+```
+
+如果输出 yes，则当前是登录 Shell；否则是非登录 Shell。
+
+; 关键语法：
+* `[[ -o login ]]`：检查是否启用了 `login` 选项。
+
+!!! 第二种：
+
+在 `$HOME/.zlogin` 文件中写入：
+
+```zsh
+print 'A shell logined.' >> /tmp/login_shell_test
+```
+
+在 `$HOME/.zlogout` 文件中写入：
+
+```zsh
+print 'A shell logouted.' >> /tmp/login_shell_test
+```
+
+在新的终端会话中输入：
+
+```
+tail -f /tmp/login_shell_test
+```
+
+打开终端模拟器，使用 `exit` 命令退出终端器，就能看到文件是否被执行。
+
+<<rememberq "20241224043423321"
+	"How to read a dynamically changing file in Linux？"
+	"`tail -f <FileName>`">>

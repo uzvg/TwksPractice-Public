@@ -1,0 +1,111 @@
+authors: 
+caption: what to put in your startup files?
+created: 20241224044258724
+creator: uzvg
+description: 你的zsh Shell启动文件中应该写什么？
+medium: Website
+modified: 20250317090326800
+modifier: uzvg
+progress: Building
+rating: Valuable
+tags: LiteratureNotes zsh Shell
+title: what to put in your startup files?(1735015378724)
+type: text/vnd.tiddlywiki
+url: https://zsh.sourceforge.io/Guide/zshguide02.html#l6
+visibility: Public
+year: 2024-12-24
+
+!! Shell 类型：
+
+Shell在启动时读取文件的顺序与Shell的具体类型相关，在了解Shell的启动文件之前，需要先了解有哪些类型的Shell，这部分内容请看👉[[Interactive shell and login shell(1727261765889)]]。
+
+!! 启动文件与执行顺序：
+
+; Zsh 启动文件分为两类：
+* 全局文件（位于 `/etc` 目录）：系统管理员设置，适用于所有用户。
+* 用户文件（位于 `~` 或 `$ZDOTDIR`）：用户自定义，适用于当前用户。
+
+; 所有启动文件及其顺序：
+
+|tc-max-width|k
+| !文件路径         | !说明                     |
+|`/etc/zshenv`      |Always run for every zsh. |
+|`~/.zshenv`        |Usually run for every zsh (see below). |
+|`/etc/zprofile`    |Run for login shells.     |
+|`~/.zprofile`      |Run for login shells.     |
+|`/etc/zshrc`       |Run for interactive shells. |
+|`~/.zshrc`         |Run for interactive shells. |
+|`/etc/zlogin`      |Run for login shells.     |
+|`~/.zlogin`        |Run for login shells.     |
+|`~/.zlogout`        |Run for login shells.     |
+|`/etc/zlogout`        |Run for login shells.     |
+
+* `.zlogout`文件以及`/etc/logout`文件，会在我们使用`exit`命令退出登录时被执行。
+* 在被出登录时，`.zlogout`文件会比`/etc/logout`文件先执行，与登录时的`/etc/zlogin`文件跟`~/.zlogin`文件执行顺序刚好相反。
+* `~/.zprofile` 和 `~/.zlogin` 的区别：
+** `~/.zprofile` 在 `~/.zshrc` 执行前运行，适用于全局环境配置，比如提前进行一些用户特定的 `PATH` 环境变量扩展。
+** `~/.zlogin` 在 `~/.zshrc` 执行后运行，可用于登录后的个性化设置。
+
+; 文件读取时序图：
+
+<<twks-image "shell-startup.png" width:"100%">>
+
+<<twks-tip """
+* 红线：login & interactive shell。
+* 绿线：non-login & interactive shell。
+* 橙线：login & non-interactive shell。
+* 蓝线：non-login & non-interactive shell。
+""">>
+
+<<twks-note """
+* 大多数情况下，终端模拟器默认启用''非登录交互式''Shell，所以我们要关注绿线，来定制我们的zsh配置文件。
+* 大多数情况下，脚本使用''非登录非交互式''Shell执行脚本，所以我们要关注蓝线，用于关注我们的脚本执行环境。而脚本执行的具体要读取的zsh文件，跟执行脚本的方式有关，详细请见👉[[zsh中脚本执行方式对比]]。
+""">>
+
+<<twks-note """
+; 重要选项: `NO_RCS`
+* 设置 `NO_RCS` 选项（通过 `zsh -f`）后，除了 `/etc/zshenv` 外，其他启动文件都不会被执行。
+* 建议：避免在 `/etc/zshenv` 文件中设置过多内容，尤其是可能影响脚本行为的选项。
+* 如果必须设置选项，使用以下模式以确保兼容性：
+
+```zsh
+if [[ ! -o norcs ]]; then
+  # 在未设置 NO_RCS 时运行的命令
+	# 也就是说， 当使用`zsh -f`执行的脚本或命令，该判断语句内的内容，不会被执行。
+fi
+```
+""">>
+
+!! 结论：
+
+整理上述所有内容，我们可以得到以下可以应用于实践的结论：
+
+# `/etc/zshenv`文件和`~/.zshenv`文件，无论是否是交互式Shell或者是否是登录Shell，只要启动zsh，就会被所有Shell实例读取。
+# 避免在 `/etc/zshenv` 文件中设置过多内容，过多的环境变量定义会影响shell启动速度，有些环境变量可能不是每个zsh实例都需要的。
+# 在Linux桌面环境中，最好是在`.zshrc`文件中定义环境变量。
+# 如果需要经常在服务器和桌面环境之间切换，或者你的工作涉及复杂的环境变量设置，这时候可以考虑使用`.zprofile`来管理环境变量。
+## 👉具体请看：[[.zprofile文件跟.zlogin文件对比]]。
+
+<<rememberq "20241224175345403"
+	"如何终端模拟中启动一个login shell？"
+	"`zsh -l`或者`zsh --login`">>
+
+<<rememberq "20241225044027686"
+	"Gnome桌面环境下登录进入的是login shell还是non-login shell？"
+	"是`login` Shell。">>
+
+<<rememberq "20241225040357378"
+	"用户通过ssh登录远程Linux服务器，进入的是login Shell还是`non-login` shell?"
+	"进入的是`login` shell。">>
+
+<<rememberq "20241225040500890"
+	"使用gdm登录系统，`.zprofile`配置文件会不会被加载？"
+	"会。因为进入的是`login` shell，所以会被加载。">>
+
+<<rememberq "20241225040819657"
+	"`.zprofile`和`.zlogin`文件都被会被`login`shell加载，它们俩有什么不同吗？"
+	"`.zprofile`文件会在`.zshrc`前加载，而`.zlogin`文件会在`.zshrc`后被加载。">>
+
+<<rememberq "20241224175427500"
+	"在使用exit命令退出Shell时，`/etc/zlogout`文件和`~/.zlogout`文件，哪个先执行？"
+	"`~/.zlogout文件先执行。`">>

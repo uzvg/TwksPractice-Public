@@ -1,0 +1,31 @@
+created: 20240708081605830
+creator: uzvg
+modified: 20250317081611186
+modifier: uzvg
+tags: tiddlywiki
+title: zettelkasten在tiddlywiki中的应用
+type: text/vnd.tiddlywiki
+
+* 使用驼峰命名法
+* 链接是将idea串连到一起的关键
+* zettelkasten is really all about how things are related
+* 内容tiddler跟配置tiddlywiki的tiddler需要不同的版权
+* source跟idea分离
+* 不要用写博客的方式来使用zettelkasten
+* 不要吝啬你的tiddler，它多得是
+* 不需要在每个tiddler里面都写很多内容
+* index tiddler用来生成站点导航
+* 也可以专门用一个tiddler来跟踪相关的tiddler
+* 写一个publish checkbox，决定tiddler是否公开
+* 用zettelkasten的方式记录一个《时间地图》的笔记，要求如下：
+** 要为source、author、idea建立专门的tiddler，不要混在一起
+** 建立专门的tiddler来追踪与《时间地图——大历史》相关的所有tiddler
+** 建立专门的tiddler来追踪与《时间地图——大历史》相关的所有tiddler。
+
+* 在实际使用中，如果只是套用zettelkasten的固定流程会产生很多不必要的操作
+** 创建source模板
+*** book
+*** article
+*** 
+
+* 看一下作者是如何处理书籍笔记的

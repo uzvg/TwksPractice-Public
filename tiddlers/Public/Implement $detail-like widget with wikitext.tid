@@ -1,0 +1,66 @@
+created: 20240909071420803
+creator: uzvg
+modified: 20250317090326780
+modifier: uzvg
+progress: Capturing
+tags: FleetingNotes TWKS
+title: Implement $detail-like widget with wikitext
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! Source Code view:
+* [[$:/uzvg/Widgets/twks.detail]]
+
+!! 用到的知识：
+
+* [[widget/reveal组件]]
+* [[Macro/qualify宏]]
+
+!! Question:
+
+在设置`.twks-detail`跟`.twks-btn-detail`的css时，遇到如下问题：
+
+用于包装detail组件隐藏内容的div，当我将它的`padding-top`设置为`1px`，它反而跟上面的`twks-btn-detail`按钮贴在一起（看起来），但当我将其设置为`0px`时，反而产生了一定的距离。
+
+最终在AI的帮助下解决了该问题，问答如下：
+
+; 在css中，外部div元素的padding无法覆盖内部div元素的margin，怎么办？
+: 在CSS中，外部div元素的padding无法覆盖内部div元素的margin是因为margin和padding是两个不同的属性，具有不同的作用。margin是元素的外边距，用于控制元素与其他元素之间的距离。padding是元素的内边距，用于控制元素内容与元素边框之间的距离。
+如果你想让外部div元素的padding覆盖内部div元素的margin，可以尝试以下方法：
+
+# 使用overflow：你可以在外部div元素上设置overflow属性为hidden，这样可以隐藏内部div元素的margin。
+# 使用display：你可以在内部div元素上设置display属性为inline-block或flex，这样可以使内部div元素的margin失效。
+# 使用position：你可以在内部div元素上设置position属性为absolute或relative，这样可以使内部div元素脱离文档流，覆盖外部div元素的padding。
+# 使用margin负值：你可以在内部div元素上设置margin负值，这样可以使内部div元素的margin被外部div元素的padding覆盖。
+
+例如：
+
+```css
+外部div {
+  padding: 20px;
+  overflow: hidden; /* 使用overflow覆盖内部div的margin */
+}
+
+内部div {
+  margin: 20px;
+}
+```
+
+或者：
+
+```css
+外部div {
+  padding: 20px;
+}
+
+内部div {
+  display: inline-block; /* 使用display覆盖内部div的margin */
+  margin: 20px;
+}
+```
+
+!! Solution:
+
+在包裹`detail`内容的div的css文件中，添加`overflow:hidden;`属性，解决了问题。
+
+* [[css中overflow属性的作用跟应用场景是什么？]]

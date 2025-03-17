@@ -1,0 +1,20 @@
+created: 20241116142633328
+creator: uzvg
+modified: 20250317081611200
+modifier: uzvg
+tags: Linux ArchLinux FirmWare PermanentNotes
+title: 什么是固件(firmware)？
+type: text/vnd.tiddlywiki
+
+<<image "bios_chip_shown.jpg" width:"62%">>
+
+* 通常在设备启动时运行，是操作系统启动时运行的第一个程序。
+* 被保存在主板上的非易失性存储芯片上，而非硬盘上。
+* 固件本身通常由硬件厂商开发，而非操作系统开发商开发。
+** 比如我们常说的笔记本电脑的固件，就是由联想、戴尔开发，而非微软的Windows团队开发。
+* uefi固件的配置界面，其实就是我们常说的电脑的bios设置，尽管它与传统的BIOS（基本输入输出系统）有一些重要的区别。
+* 固件不是硬件，而是一种特殊类型的软件，被嵌入到硬件设备中。
+* 固件的作用是为硬件提供与操作系统或其他软件之间的接口。
+https://qr.ae/p26FGr
+
+<<image "202411162317873.jpeg">>

@@ -1,0 +1,7 @@
+created: 20240913014758877
+creator: uzvg
+first-search-filter: [!is[system]get[publisher]regexp<userInput>sort[]]
+modified: 20250317081611152
+modifier: uzvg
+title: kdi-demo-configtid
+type: text/vnd.tiddlywiki

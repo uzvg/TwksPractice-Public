@@ -1,0 +1,46 @@
+created: 20241113060024165
+creator: uzvg
+modified: 20250317090326800
+modifier: uzvg
+progress: Refining
+rating: Confident
+tags: PermanentNotes CSS position float
+title: What is the difference between float and absolute position?
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在我刚学习css中的`float`属性跟`absolute`定位的时候，它们两个给我一种可以类似的感觉，但这其实它们两个有截然不同的用法跟应用情景。
+
+!! 这种相似的感觉来自于什么？
+
+我想，可以是在刚学习css时，我们往往试图对css中的每个属性与现实中的某个具体的场景对应起来，而`float`属性跟`absolute`定位，就很容易被人''误解''为都是将元素放在不同的图层处理。比如`float`属性，可以让元素脱离正常文档流，横向自由移动；而`absolute`元素，也可以完全脱离其在文档流中的位置，而自由地调整其位置。
+
+我想，正是这种直观的简单地类比，使我对flaot属性跟absoute元素的作用产生了混淆，但其实他们两个的作用跟应用场景是完全不同。
+
+!! float vs absolute：
+
+;首先，`float`属性“人如其名”，其作用是让float元素从原本的文档流中''横向浮动''，在这个浮动的过程中：
+# `float` 属性用于将元素浮动到其包含块的左侧或右侧，使其''脱离''正常的文档流。
+# `float` 元素''仍然占据空间''，影响其他元素的布局，比如文本会环绕在浮动元素周围。
+
+;而`float`的作用是''脱离''正常文档流，而`absolute`的作用是直接在正常文档流中直接''去除''`absolute`定位元素，而且这两个属性是相互冲突的，一个元素不能同时被正确地应用这两种定位方式：
+# 当一个元素同时应用了 `float` 和 `position`: `absolute`; 时，`float` 属性会被忽略，元素会表现得好像只有 `position: absolute;` 被应用了一样。
+# 这是因为 position: absolute; 会将元素从文档流中移除，而 float 的效果依赖于元素在文档流中的位置。
+
+⚠️ 关于`float`属性，详见：[[如何理解css中的float属性？]]
+
+<<rememberq "20241113110804518"
+	"一个元素如何同时正确应用float属性跟absolute定位？"
+	"一个元素无法同时正确应用这两个属性。">>
+
+<<rememberq "20241113110854235"
+	"float属性的作用是什么？"
+	"使flaot元素脱离正常文档流，但其能在原先的文档流中自由地横向移动。">>
+
+<<rememberq "20241113111326488"
+	"float元素会覆盖其他元素吗？"
+	"不会。float元素确实会影响周围的其他元素在文档流中的布局，但却不会主动覆盖其他元素的内容。">>
+
+<<rememberq "20241113110946102"
+	"absolute定位的作用是什么？"
+	"使其所在元素从正常文档流中彻底去除。">>

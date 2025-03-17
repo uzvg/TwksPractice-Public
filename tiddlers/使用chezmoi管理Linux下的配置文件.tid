@@ -1,0 +1,44 @@
+created: 20250219064722999
+modified: 20250317081611202
+modifier: uzvg
+tags: PermanentNotes chezmoi Dotfiles(配置文件) Linux
+title: 使用chezmoi管理Linux下的配置文件
+type: text/vnd.tiddlywiki
+
+Linux下的配置文件主要分为这样几类：
+
+* alias文件
+* zimfw的配置文件
+* .ssh文件
+* 自定义的函数跟插件
+
+czm config file + sourdeDirectory = dotfiles
+
+其中，chezmoi的配置文件也是可以通过模板生成的，可以通过：
+
+```
+chezmoi edit-config-template
+```
+
+生成`~/.local/share/chezmoi/.chezmoi.toml.tmpl`文件
+
+通过该文件来编辑chezmoi配置文件的模板。
+
+重点是要掌握chezmoi的工作流程👉[[站在创造者的角度学习]]
+
+* 如何添加模板
+* 如何添加加密文件？
+* 如何把加密秘钥本身添加进去
+* 脚本的执行
+* 模板文件如何生成？
+* 如何管理动态变化的文件？
+
+1. 管理外部配置文件
+2. ignore文件格式
+3. run_script
+4. chezmoi apply时自动为age解密
+5. 像uggx这样的自动词库，既要加密，又要从外部链接，应该如何处理？
+
+1. quick start
+2. manual
+3. Reporitories managed by chezmoi 👉 <<rlink "chezmoi作者的dotfiles" "https://github.com/twpayne/dotfiles">>

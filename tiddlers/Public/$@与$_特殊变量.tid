@@ -1,0 +1,117 @@
+created: 20241222132820476
+description: 比较$@与$*这两个特殊变量在Shell中的异同
+modified: 20250317090326761
+modifier: uzvg
+progress: Completed
+rating: Valuable
+tags: zsh Variable PermanentNotes Shell
+title: $@与$*特殊变量
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 在bash中的表现：
+
+| !写法  | !行为  | !推荐使用  |
+|`for arg in $@`  |按空格分割，可能拆分包含空格的参数。  |不推荐  |
+|`for arg in "$@"` |每个参数完整保留，单独迭代。  |推荐  |
+|`for arg in $*`  |所有参数拼接成字符串，再按空格分割（受 IFS 影响，可能拆分参数）。  |不推荐  |
+|`for arg in "$*"` |所有参数拼接成一个整体字符串，默认用空格分隔，作为单个迭代项。  |不常用  |
+
+<$twks.details summary="有如下代码示例：" state="$:/state/detail">
+
+```bash
+#!/usr/bin/bash
+#
+set -- "arg1" "arg2 arg3" "arg4"
+
+# 不加引号
+echo "使用\$@："
+for arg in $@; do echo $arg; done
+# 输出：
+# arg1
+# arg2
+# arg3
+# arg4
+
+echo "使用\$*："
+for arg in $*; do echo $arg; done
+# 输出：
+# arg1
+# arg2
+# arg3
+# arg4
+
+set -- "arg1" "arg2 arg3" "arg4"
+
+# 加引号
+echo '使用"$@"：'
+for arg in "$@"; do echo $arg; done
+# 输出：
+# arg1
+# arg2 arg3
+# arg4
+
+echo '使用"$*"：'
+for arg in "$*"; do echo $arg; done
+# 输出：
+# arg1 arg2 arg3 arg4
+```
+
+</$twks.details>
+
+!! 在zsh中的表现：
+
+在`zsh`中，`$@`和`$*`无引号时默认的表现会和`"$@"`相同，这是因为`zsh`对参数处理方式更智能，确保传递的参数在大多数情况下不被错误拆分。
+
+; `zsh`的特殊性：
+* ''参数的自动保留''：`zsh`在未加引号时也能正确保留参数的边界，而不像`bash`那样直接展开参数并按空格拆分。
+* ''兼容性增强''：这种行为是`zsh`的一种特性，旨在减少参数分割引发的意外。
+因此，在你的实际观察中，无论是否加引号，`$@`和`$*`都会正确地保留参数边界，行为类似于`"$@"`。
+
+; 推荐写法
+尽管`zsh`的处理更智能，但为了兼容性和最佳实践，建议始终显式加引号并使用`"$@"`，确保脚本在其他`Shell（如`bash`或`dash）中也能正确运行。
+
+<$twks.details summary="有如下代码示例：" state="$:/state/detail/zsh">
+
+```
+#!/usr/bin/zsh
+#
+set -- "arg1" "arg2 arg3" "arg4"
+
+# 不加引号
+echo "使用\$@："
+for arg in $@; do echo $arg; done
+# 输出：
+# arg1
+# arg2 arg3
+# arg4
+
+echo "使用\$*："
+for arg in $*; do echo $arg; done
+# 输出：
+# arg1
+# arg2 arg3
+# arg4
+
+set -- "arg1" "arg2 arg3" "arg4"
+
+# 加引号
+echo '使用"$@"：'
+for arg in "$@"; do echo $arg; done
+# 输出：
+# arg1
+# arg2 arg3
+# arg4
+
+echo '使用"$*"：'
+for arg in "$*"; do echo $arg; done
+# 输出：
+# arg1 arg2 arg3 arg4
+
+```
+
+</$twks.details>
+
+!! 结论：
+
+无论是在bash，还是在zsh中，尽量使用`"$@"`。

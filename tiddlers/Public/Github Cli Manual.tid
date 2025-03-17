@@ -1,0 +1,128 @@
+created: 20241222025733564
+description: Github command line的常用操作，可以在不打开浏览器的情况下，使用命令行管理自己的远程仓库，主要操作包括了对远程仓库的增删改查，以及远程仓库与本地仓库的同步。
+modified: 20250317090326772
+modifier: uzvg
+progress: Rethinking
+rating: Valuable
+tags: Github gh Git PermanentNotes
+title: Github Cli Manual
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 为什么使用github cli？
+
+Github CommandLine能让我们在浏览器上零操作的情况下，轻易地完成如下操作：
+
+# 把本地创建的文件夹同步到远程Git仓库。
+# 在GitHub创建一个仓库，并将其拉取到本地。
+# 管理自己在Github上的仓库，譬如删除、重命名等操作。
+
+!!! 本地文件夹远程托管：
+
+; 需求详述：
+* 在本地有一个文件夹，此时该文件夹还尚未被git初始化。
+* 目标是使用git管理该文件夹，并在github创建一个远程仓库，将该文件夹同步到远程仓库
+
+; 使用示例：
+
+```bash
+cd <FileFolder>
+git init . # 初始化为git仓库
+git add . # 添加到git仓库
+git commit -m "First Commit"
+gh repo create <RepoName> --source=. --public --push
+# 或者也可以用：
+gh repo create <RepoName> -s=. --public --push
+```
+
+; `gh`命令参数解析：
+* `--source=.`：指定当前文件夹为仓库的来源。
+* `--public` 或 `--private`：定义创建的仓库是公开还是私有。
+* `--push`：在远程仓库创建完成后，自动将当前文件夹中的内容推送到远程仓库。
+
+<<twks-warning """
+需要注意的是，在最后使用`gh repo create <RepoName> --source=. --public --push`命令将本地文件夹push到远程仓库时，需要确保本地仓库至少有一次`commit`，否则会报错：
+
+```
+`--push` enabled but no commits found in <RepoPath>
+```
+""">>
+
+!! 创建远程仓库，并拉取到本地：
+
+; 需求详述：
+* 在github上创建一个新的远程仓库，并将其拉取到本地文件夹，直接进入文件夹，就能进行工作。
+
+```bash
+gh repo create <RepoName> --public -c
+```
+
+; `gh`命令参数解析：
+* `--public` 或 `--private`：定义创建的仓库是公开还是私有。
+* `-c`或`--clone`：在远程仓库创建完成后，自动将远程仓库拉取到本地。
+
+!! 管理远程仓库：
+
+管理远程仓库的操作无非''增删改查''四种操作：
+
+; 创建仓库（增）：
+
+```
+gh repo create <RepoName> --public -c  # 创建远程仓库并拉取到本地
+gh repo create <RepoName> --public -s=. --push  # 创建远程仓库并将本地文件夹上传到远程仓库
+```
+
+* 其他快捷参数：
+** `--add-readme`: 生成的仓库自带一个readmd文件。
+** `--gitignore`或`-g`: 生成的仓库自带指定模板的`.gitignore`文件。
+** `--description`: 为仓库生成description。
+** `--license`: 为项目指定开源协议，比如`Apache2.0`协议或者`Mit`协议。
+
+; 删除仓库(删)：
+
+```
+gh repo delete <RepoName> # 删除指定名称的远程仓库
+```
+
+; 重命名仓库(改)：
+
+```
+# Rename the current repository (foo/bar -> foo/baz)
+$ gh repo rename baz
+# Rename the specified repository (qux/quux -> qux/baz)
+$ gh repo rename -R qux/quux baz
+```
+
+; 仓库查看(查)：
+
+```bash
+gh repo list # 查看所有的远程仓库。
+gh repo view # 查看当前目录所对应的远程仓库的信息。
+```
+
+<<rememberq "20241222042031250"
+	"将本地文件夹上传到远程公开仓库用到的gh命令是什么？"
+	"`gh repo create <randomRepo> --public -s=. --push`">>
+
+<<remembercz "20241222042348362" """
+; `gh`命令参数解析：
+* `--source=.`：{指定当前文件夹为仓库的来源}。
+* `--public` 或 `--private`：{定义创建的仓库是公开还是私有}。
+* `--push`：{在远程仓库创建完成后，自动将当前文件夹中的内容推送到远程仓库}。
+""">>
+
+<<rememberq "20241222042527323"
+	"创建一个远程仓库并clone到本地文件夹："
+	"`gh repo create <RepoName> --public -c`">>
+
+<<rememberq "20241222042619532"
+	"删除远程仓库："
+	"`gh repo delete <RepoName>`">>
+
+<<rememberq "20241222043955851"
+	"使用gh工具将本地仓库push到远程仓库时，有什么要求？"
+	"需要local repo 需要至少有一个commit。">>
+
+<<rememberq "20241222094300839"
+	"如果查看本地仓库所对应的远程仓库的项目地址？"
+	"`git repo view`">>

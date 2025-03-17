@@ -1,0 +1,20 @@
+caption: LiteratureNotes
+created: 20241205090726654
+creator: uzvg
+description: LiteratureNotes笔记评价标准汇总
+modified: 20250317090326797
+modifier: uzvg
+progress: Completed
+tags: $:/twks/Documents
+title: TWKS笔记评价/LiteratureNotes
+type: text/vnd.tiddlywiki
+visibility: Public
+
+|tc-max-width|k
+| !评价 | !说明 |
+|`Doubtful` |笔记内容具有不确定性，不可靠，真实程度存疑。 |
+|`Plain` |笔记内容简单普通，没有特别之处。 |
+|`Personal` |笔记内容仅对个人有意义，对其他人不具有参考价值，不推荐给他人。 |
+|`Promising` |笔记内容目前比较简单，但在未来可能会有很大的潜力。 |
+|`Valuable` |笔记内容独到，对自己和他人都具有价值。 |
+|`Brilliant` |笔记内容精彩杰出，具有独到、深刻的见解。适合分享给他人。 |

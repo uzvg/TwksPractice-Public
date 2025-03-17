@@ -1,0 +1,47 @@
+created: 20240805081324172
+creator: uzvg
+modified: 20250317090326796
+modifier: uzvg
+progress: Capturing
+tags: tiddlywiki FleetingNotes
+title: twks命令行功能整理
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! twmm(tiddlywiki manage)
+
+TMWW is A scipt tool for managing tiddlywiki convinently.
+
+!!! new: create a new tiddlywiki folder
+** A default wiki folder for saving wiki. 👉 twmm.json
+** Generate a non-occupied port number for open tiddlywiki. 👉 functions
+** Generate a random 4-chars sting for random wiki folder name. 👉 functions
+
+* ''examples:''
+
+```bash
+twmm new --random # will create a new randown tiddlywiki folder with randow port number and print the url to open it, and saving the info into the `twmm.json` meanwhile.
+twmm new --directory(-d) <wikiFolder> --editions(-e) <tiddlywikiEdition> # Initiating a <wikiFolder> with tiddlywikiEdition.
+```
+
+* list: list all running tiddlywiki server
+* start: start tiddlywiki with specified port
+* stop: stop tiddlywiki server by specified working directory
+* restart: restart tiddlywiki server
+* delete: delete a tiddlywiki folder
+* info: open tiddlywiki info file with specified working directory
+* doc: open tiddlywiki official document
+* deploy: twmm --deploy $SPECIFIED_WIKI
+
+
+twmm.conf
+default directory
+Document/TWikis
+default port
+working directory
+port
+Remote
+RemoteDeployDirectory
+Index processes by port
+## References:
+## Solution:

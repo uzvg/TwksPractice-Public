@@ -1,0 +1,41 @@
+created: 20250226080044270
+modified: 20250317090326803
+modifier: uzvg
+progress: Archived
+rating: Plain
+tags: PermanentNotes Shell zsh TroubleShooting
+title: zsh Shell等式两边不能有空格
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在zsh Shell中，赋值表达式等号两边不能有空格，否则会被视为命令及其命令的参数，有如下例子：
+
+```
+#!/usr/bin/zsh
+#
+# redirecting input file descriptors
+# setopt XTRACE   # 开启跟踪（显示每条命令及其参数）
+exec 6<&0
+exec 0<testfile
+count = 1
+while read line
+do
+  echo "Line #$count: $line"
+  count=$[ $count + 1 ]
+done
+exec 0<&6
+read "answer?Are you done now? "
+case $answer in
+  Y|y) echo "Goodbye";;
+  N|n) echo "Sorry, this is the end.";;
+esac
+```
+
+* 虽然脚本看着没啥大问题，但还是出现了如下报错：
+
+```
+usage: count <expected line count>
+```
+
+; 解决方案：
+* 记得等号两边不能有空格。

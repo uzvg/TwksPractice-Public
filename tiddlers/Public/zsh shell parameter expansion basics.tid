@@ -1,0 +1,24 @@
+created: 20250317032613657
+modified: 20250317090326803
+modifier: uzvg
+progress: Completed
+rating: Plain
+tags: PermanentNotes zsh Shell 参数扩展(ParameterExpansion)
+title: zsh shell parameter expansion basics
+type: text/vnd.tiddlywiki
+visibility: Public
+
+Note in particular the fact that words of unquoted parameters are not automatically split on whitespace unless the option `SH_WORD_SPLIT` is set; see references to this option below for more details. This is an important difference from other shells. However, as in other shells, null words are elided from unquoted parameters’ expansions.
+
+With default options, after the assignments:
+
+```zsh
+array=("first word" "" "third word")
+scalar="only word"
+```
+
+then `$array` substitutes two words, ‘first word’ and ‘third word’, and `$scalar` substitutes a single word ‘only word’. Note that second element of array was elided. Scalar parameters can be elided too if their value is null (empty). To avoid elision, use quoting as follows: `"$scalar"` for scalars and `"${array[@]}"` or `"${(@)array}"` for arrays. (The last two forms are equivalent.)
+
+Parameter expansions can involve flags, as in ‘`${(@kv)aliases}`’, and other operators, such as ‘`${PREFIX:-"/usr/local"}`’. Parameter expansions can also be nested. These topics will be introduced below. The full rules are complicated and are noted at the end.
+
+In the expansions discussed below that require a pattern, the form of the pattern is the same as that used for filename generation; see Filename Generation. Note that these patterns, along with the replacement text of any substitutions, are themselves subject to parameter expansion, command substitution, and arithmetic expansion. In addition to the following operations, the colon modifiers described in Modifiers in History Expansion can be applied: for example, `${i:s/foo/bar/}` performs string substitution on the expansion of parameter `$i`.

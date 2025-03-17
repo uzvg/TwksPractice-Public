@@ -1,0 +1,130 @@
+created: 20241217053936673
+modified: 20250317090326767
+modifier: uzvg
+progress: Building
+rating: Plain
+tags: CSS PermanentNotes grid
+title: CSS grid布局对齐方式总结
+type: text/vnd.tiddlywiki
+visibility: Public
+
+在 CSS Grid 布局中，可以通过以下方式控制 ''网格内部的元素（子项）在网格中的对齐方式''。这些对齐属性允许我们调整子项在网格单元内的对齐位置，具体分为沿 ''水平轴（主轴）'' 和 ''垂直轴（交叉轴）'' 的对齐。
+
+!!! 1. 关键属性
+
+|tc-max-width|k
+|!属性 | !作用 | !应用范围 |
+|''`align-items`''    |控制所有子项在网格单元中的垂直对齐方式。       |网格容器     |
+|''`justify-items`''  |控制所有子项在网格单元中的水平对齐方式。       |网格容器     |
+|''`align-self`''     |控制单个子项在网格单元中的垂直对齐方式。       |网格子项     |
+|''`justify-self`''   |控制单个子项在网格单元中的水平对齐方式。       |网格子项     |
+
+!!! 2. 默认对齐方式
+
+* ''`align-items`'' 和 ''`justify-items`'' 的默认值均为 `stretch`。
+** ''默认行为''：子项会填满整个网格单元的宽度或高度。
+
+!!! 3. 可用值
+以下值适用于 `align-items`、`justify-items`、`align-self` 和 `justify-self`：
+
+|tc-max-width|k
+| !值          | !描述 |
+|''`start`''  |子项靠近网格单元的起始边对齐（水平为左，垂直为上）。 |
+|''`end`''    |子项靠近网格单元的结束边对齐（水平为右，垂直为下）。 |
+|''`center`'' |子项居中对齐。 |
+|''`stretch`''|子项拉伸以填满网格单元（默认值），但仅在网格单元有足够空间时适用。 |
+
+!!! 4. 使用示例
+
+!!!! ''(1) 全局对齐：容器对所有子项的对齐方式''
+
+```html
+<div class="grid-container">
+<div>Item 1</div>
+<div>Item 2</div>
+<div>Item 3</div>
+</div>
+
+<style>
+.grid-container {
+display: grid;
+grid-template-columns: 100px 100px 100px;
+grid-template-rows: 100px 100px;
+
+/* 设置所有子项在网格单元内居中对齐 */
+align-items: center;      /* 垂直方向居中 */
+justify-items: center;    /* 水平方向居中 */
+}
+</style>
+```
+
+''效果''：
+- 所有子项会在各自的网格单元中水平和垂直居中。
+
+!!!! ''(2) 单独对齐：某个子项的对齐方式''
+
+```html
+<div class="grid-container">
+<div>Item 1</div>
+<div style="align-self: end; justify-self: start;">Item 2</div>
+<div>Item 3</div>
+</div>
+
+<style>
+.grid-container {
+display: grid;
+grid-template-columns: 100px 100px 100px;
+grid-template-rows: 100px 100px;
+
+/* 全局对齐方式 */
+align-items: stretch;      
+justify-items: stretch;    
+}
+</style>
+```
+
+''效果''：
+- ''`Item 2`''：
+  - 垂直方向对齐到单元格的底部（`align-self: end`）。
+  - 水平方向对齐到单元格的左侧（`justify-self: start`）。
+- 其他子项保持默认拉伸填满。
+
+!!!! ''(3) 默认对齐：拉伸模式''
+
+```html
+<div class="grid-container">
+<div>Item 1</div>
+<div>Item 2</div>
+<div>Item 3</div>
+</div>
+
+<style>
+.grid-container {
+display: grid;
+grid-template-columns: 100px 100px 100px;
+grid-template-rows: 100px 100px;
+/* align-items 和 justify-items 的默认值是 stretch */
+}
+</style>
+```
+
+''效果''：
+- 所有子项会拉伸以填满网格单元的宽度和高度。
+
+!! 5. 特殊情况：网格容器对齐
+如果需要对整个网格容器中的网格整体对齐，可以使用以下属性：
+
+| 属性                 | 作用                                      | 应用范围       |
+| ''`align-content`''  | 控制网格整体在容器中的垂直对齐方式。            | 网格容器       |
+| ''`justify-content`''| 控制网格整体在容器中的水平对齐方式。            | 网格容器       |
+
+!!! ''6. 总结''
+
+- ''`align-items` 和 `justify-items`''：设置网格所有子项的默认对齐方式。
+- ''`align-self` 和 `justify-self`''：单独控制某个子项的对齐方式。
+- ''典型用法''：
+  - `center`：让子项在单元格中居中。
+  - `start` / `end`：控制子项对齐到网格单元的起始边或结束边。
+  - `stretch`：子项自动填满网格单元（默认值）。
+
+通过这些属性，你可以精确控制网格布局中每个子项的对齐效果。

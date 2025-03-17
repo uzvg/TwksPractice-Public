@@ -1,0 +1,57 @@
+!! 准备工作
+
+为了完成我的需求，请做如下准备工作：
+
+1. 确保你了解了supermemo的制卡原则，这部分内容不用显性输出。
+2. 了解tiddlyremember制作flashcards的格式，它的格式如下：
+
+```
+<<rememberq "20200523163414806"
+    "How do you create a question-and-answer pair in TiddlyRemember?"
+    "With the `rememberq` macro, inserted by clicking the white lightbulb icon on the edit toolbar."
+>>
+```
+
+解释： ”rememberq“是调用的一个tiddlywiki宏，这个宏的第一个参数，”20200523163414806“，指的是这个flashcard 的 uniqueid，第二个参数是问题，第三个参数是问题的答案，其中，问题的答案有可能是单行或多行，如果是单行，请为我提供类似如下格式的内容：
+
+```
+	"How do you create a question-and-answer pair in TiddlyRemember?"
+	"With the `rememberq` macro, inserted by clicking the white lightbulb icon on the edit toolbar."
+```
+
+而如果答案有多行，则：
+
+* 用三个引号(""")，将答案括起来，且在每个行后添加<br>换行符，用以表示换行。
+* 如果每个答案是多行，且有多个子项，则在每行前添加 ▪
+* 每个闪卡的问题跟答案，用分隔线分隔开。
+
+
+多行文本示例如下：
+
+```
+"词根的构词特征有哪些？"
+"""
+	▪ 不一定是原生单词，可以是不可独立存在的词素。<br>
+	▪ 是构词的最小单位，但本身不一定是单词。<br>
+	▪ 可通过添加前缀、后缀或其他修饰成分参与构词。<br>
+"""
+```
+
+⚠️ 注意：
+
+* 请确保你了解了tiddlyremember的制卡格式。
+* 你需要以如上格式为我提供每个闪卡的问题跟答案部分，不需要提供其他部分。
+
+!! 任务：
+
+在完成了准备工作基础上，我的要求如下：
+
+1. 总结我输入的文本内容，这部分需要显性输出，我需要阅读你的总结内容。
+2. 按照我的要求，用我之前指定的格式，输出所有闪卡。
+
+<!--
+2. 从你的总结内容中提炼出你认为值得了解的、值得记忆的、有价值的内容，用我指定的格式，输出所有闪卡。
+-->
+
+
+你明白了吗？

@@ -1,0 +1,89 @@
+created: 20250305013520222
+description: 使用zparseopts为zsh Shell命令解析选项及其参数
+modified: 20250317090326801
+modifier: uzvg
+progress: Completed
+rating: Promising
+tags: PermanentNotes zsh Shell
+title: zparseopts命令
+type: text/vnd.tiddlywiki
+visibility: Public
+
+!! 引言：
+
+写zsh函数时要处理选项及其对应的参数，这时就要用到`zparseopts`，它是zsh Shell的内置的功能，具体文档可以通过`man zmodules`，搜索`zparseopts`来查看，它常被用于处理函数的选项及其选项对应的参数。
+
+!! 命令格式：
+
+```zsh
+zparseopts [ -D -E -F -K -M ] [ -a array ] [ -A assoc ] [ - ] spec ...
+```
+
+* 其中，`[-]`之前的，是`zparseopts`自身的选项参数，而`[-]`之后的`spec`是对应的函数的选项规格。
+* Each spec describes one option and must be of the form ‘opt[=array]'.  If an option described by  opt  is found  in  the positional parameters it is copied into the array specified with the `-a` option;
+* if the optional ‘=array' is given, it is instead copied into that array, which should be declared as a normal array and  never as an associative array.
+
+!! 实际应用：
+
+`zparseopts`的文档写得不甚详细，很多功能不常用到，这里列举一些在实际应用中能用到的知识，有如下脚本：
+
+```
+#!/bin/zsh
+zparseopts -D -E -- -output:=output -user:=user -verbose=verbose -help=help o:=output v=verbose h=help
+
+[[ -n $output ]] && echo "Output: $output[2]"
+[[ -n $user ]] && echo "user: $user"
+[[ -n $verbose ]] && echo "verbose: Verbose mode ON"
+[[ -n $help ]] && echo "help: show help message"
+
+echo "Other args: $@"
+```
+
+* `--`用来分隔选项参数和位置参数，也就是说，在`--`之后的，属于`zparseopts`的位置参数，而位置参数本身的规格，则决定了`zparseopts`本身所处的命令、函数的选项规格。
+* `长命令选项`在前面加`-`，`短命令`不用。
+* 如果参数要取值，则使用`:=`，如果不取值，则用`=`。
+* 使用`-D`选项，会将解析成功的参数，从`${@}`中删除。
+
+将其保存为一个脚本`demo.zsh`，并执行：
+
+```zsh
+# 全部使用长命名参数：
+$ ./demo.zsh --output test_file.txt --verbose --help
+Output: test_file.txt
+verbose: Verbose mode ON
+help: show help message
+Other args: 
+
+# 长命名参数跟短命名参数混合使用：
+$ ./demo.zsh -o test_file.txt --verbose --help
+Output: -o test_file.txt
+verbose: Verbose mode ON
+help: show help message
+Other args: 
+
+# 全部使用短命名参数：
+$  ./demo.zsh -o test_file.txt -v -h
+Output: test_file.txt
+verbose: Verbose mode ON
+help: show help message
+Other args: 
+
+# 短命名参数连起来：
+$ ./demo.zsh -o test_file.txt -vh
+Output: test_file.txt
+verbose: Verbose mode ON
+help: show help message
+Other args: 
+
+# 传递错误参数：
+$ ./demo.zsh -o test_file.txt -vh nonsense argument
+Output: test_file.txt
+verbose: Verbose mode ON
+help: show help message
+Other args: nonsense argument
+```
+
+!! 补充：
+
+* 👉 [[更多zparseopts使用示例|https://gist.github.com/mattmc3/804a8111c4feba7d95b6d7b984f12a53]]
+* 👉 [[reddit论坛补充|https://www.reddit.com/r/zsh/comments/s09vot/using_zparseopts/?rdt=49099]]
